@@ -1,0 +1,151 @@
+<?php
+
+$label_valid = array (
+		'OLD'  => 'warning',
+		'INCOMING'   => 'danger',
+		'VALID'   => 'success'
+);
+
+if (! $this->anrproject instanceof Ccsd_Referentiels_AnrProject) {
+    $this->anrproject = (new Ccsd_Referentiels_Anrproject())->set($this->anrproject);
+}
+
+$this->element = 'anrProject';
+
+/* @var $plugin Aurehal_Acl_Plugin */
+$this->plugin = Zend_Controller_Front::getInstance()->getPlugin('Aurehal_Acl_Plugin');
+
+$row = "<blockquote>";
+
+$row .= "<div class='referentiel' style='margin-top: 10px;' ";
+
+if ($this->anrproject->ANRID != '') { 
+	$row .= "data-id='" . $this->anrproject->ANRID . "' "; 
+} 
+
+$row .= "id=" . Ccsd_Tools::ifsetor($this->identifier, '') . ">";
+
+$row .= "<div style='float: right;'>";
+
+if (isset($this->item) && !$this->anrproject->ANRID) {
+	$row .= "<a href='javascript:void(0);' onclick='" . $this->item->getEditFunction() . "' data-toggle='tooltip' data-placement='right' data-original-title='" . $this->translate("Modifier ce projet ANR") . "'><i class='glyphicon glyphicon-edit'></i></a>";
+}
+
+if (isset($this->item)) {
+	$row .= "<a href='javascript:void(0);' onclick='" . $this->item->getDeleteFunction() . "' data-toggle='tooltip' data-placement='right' data-original-title='" . $this->translate("Supprimer ce projet ANR") . "'><i class='glyphicon glyphicon-trash'></i></a>";
+}
+
+if (SPACE_NAME == 'AUREHAL' && $this->plugin->isAllowed((new Zend_Controller_Request_Http())->setControllerName('anrproject')->setActionName('modify')) && $this->options) {
+	$row .= "<a href='" . URL . "/anrproject/modify/id/" . $this->anrproject->ANRID . "'><i class='glyphicon glyphicon-edit'></i></a>";
+}
+
+$row .= "</div>";
+
+$row .= "<div>";
+
+if (SPACE_NAME == 'AUREHAL') {
+	$row .= "<i class='glyphicon glyphicon-ok-circle alert-" . $label_valid[$this->anrproject->VALID] . "' style='background:none;border:0;'></i>&nbsp;";
+}
+
+$row .= $this->anrproject->REFERENCE;
+
+if ($this->anrproject->ACRONYME != '') { 
+	$row .= " - " . $this->anrproject->ACRONYME; 
+} 
+
+if ($this->anrproject->TITRE != '') { 
+	$row .= " - " . $this->anrproject->TITRE; 
+} 
+
+if ($this->anrproject->ANNEE != '') { 
+	$row .= " (" . $this->anrproject->ANNEE . ")"; 
+
+}
+if (SPACE_NAME == 'AUREHAL' && $this->anrproject->ANRID != 0) {
+	$row .= "<span class='badge' style='margin-left:5px;'>" . $this->anrproject->ANRID . "</span>";
+}
+
+if ($this->anrproject->TITRE != '') { 
+	$row .= "<small>" . $this->anrproject->TITRE . "</small>"; 
+}
+
+if ($this->anrproject->INTITULE != '') { 
+	$row .= "<small>" . $this->anrproject->INTITULE . "</small>"; 
+}
+
+$row .= "</div>";
+
+if (isset($this->item)) {
+    $row .= "<div style='display:none'>";
+
+    if ($this->anrproject->ANRID != '') {
+        $row .= "<input type='hidden' name='" . $this->element . "[]' value='" . $this->anrproject->ANRID . "' />";
+    } else foreach($this->anrproject->getForm() as $element) {
+    	$element->helper = 'formHidden';
+        $element->setBelongsTo($this->element . "[" . $this->identifier . "]");
+        $row .= $element;
+    }
+
+    $row .= "</div>";
+}
+
+$row .= "</div>";
+
+if (SPACE_NAME == 'AUREHAL' && 'read' ==  Zend_Controller_Front::getInstance()->getRequest()->getActionName()) {
+	$row .= "<div class='row'>";
+	$row .= "<div class='col-md-12' style='padding-bottom: 15px; padding-top: 15px;'>";
+	$row .= "<a class='btn btn-primary' target='_blank' href='" . HALURL . "/search/index/q/*/anrProjectId_i/" . $this->anrproject->ANRID . "'>" . $this->translate("Voir les documents associés") . "</a>";
+	$row .= "&nbsp;";
+	//$row .= "<a class='btn btn-primary' target='_blank' href='" . HAL_API . "/ref/anrproject/?q=docid:" . $this->anrproject->ANRID . "&wt=xml&fl=*'>" . $this->translate("Exporter (xml)") . "</a>";
+    $row.= '<div class="btn-group">
+                <a class="btn btn-primary" href=' . HAL_API . '/ref/anrproject/?q=docid:' . $this->anrproject->ANRID . '&wt=xml&fl=* target="_blank">'
+                    . $this->translate("Exporter") .
+                '</a>
+                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret" style="border-top-color: #fff; border-bottom-color: #fff;"></span>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="' . HAL_API . '/ref/anrproject/?q=docid:' . $this->anrproject->ANRID . '&wt=xml&fl=*" target="_blank">'
+                           . $this->translate("Export XML") .
+                        '</a>
+                    </li>
+                    <li>
+                        <a href="' . AUREHAL_URL . '/anrproject/' . $this->anrproject->ANRID . '/rdf" target="_blank">'
+                            . $this->translate("Export RDF") .
+                        '</a>
+                    </li>
+                </ul>
+            </div>';
+    $row .= "</div>";
+	$row .= "</div>";
+}
+if (SPACE_NAME == 'AUREHAL' && 'replace' ==  Zend_Controller_Front::getInstance()->getRequest()->getActionName()) {
+	$this->prefix = "anrprojectId_i_";
+	$this->id =  $this->anrproject->ANRID;
+	$this->core = "anrproject";
+    if (!isset ($this->{"OBJID_" . $this->anrproject->ANRID})) {
+    	$row .= include __DIR__ . "/papers.phtml";
+    }
+}
+
+if (SPACE_NAME == 'AUREHAL') {
+	if ( 'replace' == Zend_Controller_Front::getInstance()->getRequest()->getActionName() ) {
+		$row .= "<div class='row'>";
+		$row .= "<div class='col-md-12'>";
+		$row .= "<div id='anrprojectId_i_" . $this->anrproject->ANRID . "'>";
+		if (isset ($this->{"OBJID_" . $this->anrproject->ANRID})) {
+			ob_start();
+			$this->documents ($this->anrproject->ANRID, "Ccsd_Referentiels_Anrproject");
+			$row .= ob_get_contents();
+			ob_end_clean();
+		}
+		$row .= "</div>";
+		$row .= "</div>";
+		$row .= "</div>";
+	}
+}
+
+$row .= "</blockquote>";
+
+echo $row;

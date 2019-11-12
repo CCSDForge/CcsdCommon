@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://datacite.org/schema/kernel-4" xsi:schemaLocation="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4.1/metadata.xsd">
+  <identifier identifierType="DOI">10.5281/ZENODO.1206264</identifier>
+  <creators>
+    <creator>
+      <creatorName>Bengfort, Benjamin</creatorName>
+      <givenName>Benjamin</givenName>
+      <familyName>Bengfort</familyName>
+      <affiliation>District Data Labs</affiliation>
+    </creator>
+    <creator>
+      <creatorName>Danielsen, Nathan</creatorName>
+      <givenName>Nathan</givenName>
+      <familyName>Danielsen</familyName>
+    </creator>
+    <creator>
+      <creatorName>Bilbro, Rebecca</creatorName>
+      <givenName>Rebecca</givenName>
+      <familyName>Bilbro</familyName>
+      <affiliation>District Data Labs</affiliation>
+    </creator>
+    <creator>
+      <creatorName>Gray, Larry</creatorName>
+      <givenName>Larry</givenName>
+      <familyName>Gray</familyName>
+    </creator>
+    <creator>
+      <creatorName>McIntyre, Kristen</creatorName>
+      <givenName>Kristen</givenName>
+      <familyName>McIntyre</familyName>
+    </creator>
+  </creators>
+  <titles>
+    <title>Yellowbrick V0.6</title>
+  </titles>
+  <publisher>Zenodo</publisher>
+  <publicationYear>2018</publicationYear>
+  <subjects>
+    <subject>matplotlib</subject>
+    <subject>sckit-learn</subject>
+    <subject>machine learning</subject>
+    <subject>visualization</subject>
+    <subject>python</subject>
+  </subjects>
+  <dates>
+    <date dateType="Issued">2018-03-17</date>
+  </dates>
+  <language>en</language>
+  <resourceType resourceTypeGeneral="Software"/>
+  <alternateIdentifiers>
+    <alternateIdentifier alternateIdentifierType="url">https://zenodo.org/record/1206264</alternateIdentifier>
+  </alternateIdentifiers>
+  <relatedIdentifiers>
+    <relatedIdentifier relatedIdentifierType="URL" relationType="IsSupplementedBy">https://github.com/DistrictDataLabs/yellowbrick/releases/tag/v0.6</relatedIdentifier>
+    <relatedIdentifier relatedIdentifierType="URL" relationType="IsDocumentedBy">http://www.scikit-yb.org/en/stable/</relatedIdentifier>
+    <relatedIdentifier relatedIdentifierType="DOI" relationType="IsVersionOf">10.5281/zenodo.1206239</relatedIdentifier>
+  </relatedIdentifiers>
+  <version>0.6</version>
+  <rightsList>
+    <rights rightsURI="http://www.opensource.org/licenses/Apache-2.0">Apache Software License 2.0</rights>
+    <rights rightsURI="info:eu-repo/semantics/openAccess">Open Access</rights>
+  </rightsList>
+  <descriptions>
+    <description descriptionType="Abstract">Yellowbrick is an open source, pure Python project that extends the scikit-learn API with visual analysis and diagnostic tools. The Yellowbrick API also wraps matplotlib to create publication-ready figures and interactive data explorations while still allowing developers fine-grain control of figures. For users, Yellowbrick can help evaluate the performance, stability, and predictive value of machine learning models and assist in diagnosing problems throughout the machine learning workflow.</description>
+  </descriptions>
+</resource>

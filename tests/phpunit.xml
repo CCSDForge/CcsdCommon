@@ -1,0 +1,17 @@
+<phpunit bootstrap="./bootstrap.php">
+    <testsuite name="Library Test Suite">
+        <directory>./Ccsd</directory>
+    </testsuite>
+    <php>
+      <!-- . pour trouver Ccsd_*  et library pour trouver Zend --> 
+      <includePath>..:library</includePath>
+    </php>
+    <filter>
+        <!-- If Zend Framework is inside your project's library, uncomment this filter -->
+        <!-- 
+        <whitelist>
+            <directory suffix=".php">../../library/Zend</directory>
+        </whitelist>
+        -->
+    </filter>
+</phpunit>

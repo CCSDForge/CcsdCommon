@@ -1,0 +1,159 @@
+<?xml version="1.0" ?>
+<!DOCTYPE pmc-articleset PUBLIC "-//NLM//DTD ARTICLE SET 2.0//EN" "https://dtd.nlm.nih.gov/ncbi/pmc/articleset/nlm-articleset-2.0.dtd">
+<pmc-articleset>
+    <article xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML" article-type="research-article">
+    <?properties open_access?>
+    <front>
+        <journal-meta>
+            <journal-id journal-id-type="nlm-ta">PLoS One</journal-id>
+            <journal-id journal-id-type="iso-abbrev">PLoS ONE</journal-id>
+            <journal-id journal-id-type="publisher-id">plos</journal-id>
+            <journal-id journal-id-type="pmc">plosone</journal-id>
+            <journal-title-group>
+                <journal-title>PLoS ONE</journal-title>
+            </journal-title-group>
+            <issn pub-type="epub">1932-6203</issn>
+            <publisher>
+                <publisher-name>Public Library of Science</publisher-name>
+                <publisher-loc>San Francisco, CA USA</publisher-loc>
+            </publisher>
+        </journal-meta>
+        <article-meta>
+            <article-id pub-id-type="pmid">25997164</article-id>
+            <article-id pub-id-type="pmc">4440767</article-id>
+            <article-id pub-id-type="doi">10.1371/journal.pone.0126420</article-id>
+            <article-id pub-id-type="publisher-id">PONE-D-15-00280</article-id>
+            <article-categories>
+                <subj-group subj-group-type="heading">
+                    <subject>Research Article</subject>
+                </subj-group>
+            </article-categories>
+            <title-group>
+                <article-title>A Multilaboratory Comparison of Calibration Accuracy and the Performance of External References in Analytical Ultracentrifugation</article-title>
+                <alt-title alt-title-type="running-head">Calibration Accuracy and External References in AUC</alt-title>
+            </title-group>
+            <contrib-group>
+                <contrib contrib-type="author">
+                    <name>
+                        <surname>Zhao</surname>
+                        <given-names>Huaying</given-names>
+                    </name>
+                    <xref ref-type="aff" rid="aff001">
+                        <sup>1</sup>
+                    </xref>
+                </contrib>
+                <contrib contrib-type="author">
+                    <name>
+                        <surname>Ghirlando</surname>
+                        <given-names>Rodolfo</given-names>
+                    </name>
+                    <xref ref-type="aff" rid="aff002">
+                        <sup>2</sup>
+                    </xref>
+                </contrib>
+                <contrib contrib-type="author">
+                    <name>
+                        <surname>Alfonso</surname>
+                        <given-names>Carlos</given-names>
+                    </name>
+                    <xref ref-type="aff" rid="aff003">
+                        <sup>3</sup>
+                    </xref>
+                </contrib>
+            </contrib-group>
+            <aff id="aff001">
+                <label>1</label>
+                <addr-line>Dynamics of Macromolecular Assembly Section, Laboratory of Cellular Imaging and Macromolecular Biophysics, National Institute of Biomedical Imaging and Bioengineering, National Institutes of Health, Bethesda, Maryland, 20892, United States of America</addr-line>
+            </aff>
+            <aff id="aff002">
+                <label>2</label>
+                <addr-line>Laboratory of Molecular Biology, National Institute of Diabetes and Digestive and Kidney Diseases, National Institutes of Health, Bethesda, Maryland, 20892, United States of America</addr-line>
+            </aff>
+            <aff id="aff003">
+                <label>3</label>
+                <addr-line>Analytical Ultracentrifugacion and Light Scattering Facility, Centro de Investigaciones Biológicas, CSIC, Madrid, 28040, Spain</addr-line>
+            </aff>
+            <author-notes>
+                <fn fn-type="COI-statement" id="coi001"><p><bold>Competing Interests: </bold>The authors have declared that no competing interests exist.</p></fn>
+                <fn fn-type="con" id="contrib001"><p>Conceived and designed the experiments: HZ RG PS. Performed the experiments: HZ CA FA IA DLB MMB DFB GJB A. Bekdemir TMDB CB CAB OB A. Bzowska JBC CTC HC KDC KAC UC TD WLD AID CE DME LEE EE PE CE JAF RF RMF WF JGT JG HG DH SEH JGHC ABH EEH RSI S-CJ DJ S-JK BK JAK D. Kosek EK D. Krzizike EAK HK AL TML AR APL HL KL JRL JM CAM ELM AM-W Y-FM NM LN-S GJN MN AN TO CKP J-KP PDP SJP MAP CLP MGP G. Piszczek G. Prag PEP BDER LR KR AER RR AJR ACR DJS JGS ASS RS DS CS KS HMS WWS JPS SGS RHS IT RTT AT S. Uchiyama SFWU S. Unzai AVG PHH C. Wandrey S-HW SEW BW-K C. Wolberger MW EW Y-SW JMW. Analyzed the data: HZ RG WB EEP PS. Contributed reagents/materials/analysis tools: HZ PS. Wrote the paper: HZ RG PS.</p></fn>
+                <fn fn-type="current-aff" id="currentaff001"><label>¤a</label><p>Current address: Functional Nanomaterials Labaoratory, 4700 King Abdullah University of Science &#38; Technology, Thuwal, 23955–6900, Kingdom of Saudi Arabia</p></fn>
+                <fn fn-type="current-aff" id="currentaff002"><label>¤b</label><p>Current address: Cincinnati Children's Hospital Medical Center, Divisions of Immunobiology &#38; Infectious Diseases, Cincinnati, Ohio, 45229, United States of America</p></fn>
+                <fn fn-type="current-aff" id="currentaff003"><label>¤c</label><p>Current address: U-Medico, Inc., 2–1 Yamadaoka, Suita, Osaka, 565–0871, Japan</p></fn>
+                <fn fn-type="current-aff" id="currentaff004"><label>¤d</label><p>Current address: Novozymes A/S, Krogshoejvej 36, Bagsvaerd, 2880, Denmark</p></fn>
+                <corresp id="cor001">* E-mail: <email>schuckp@mail.nih.gov</email></corresp>
+            </author-notes>
+            <pub-date pub-type="epub">
+                <day>21</day>
+                <month>5</month>
+                <year>2015</year>
+            </pub-date>
+            <pub-date pub-type="collection">
+                <year>2015</year>
+            </pub-date>
+            <volume>10</volume>
+            <issue>5</issue>
+            <elocation-id>e0126420</elocation-id>
+            <history>
+                <date date-type="received">
+                    <day>4</day>
+                    <month>1</month>
+                    <year>2015</year>
+                </date>
+                <date date-type="accepted">
+                    <day>2</day>
+                    <month>4</month>
+                    <year>2015</year>
+                </date>
+            </history>
+            <permissions>
+                <license xlink:href="https://creativecommons.org/publicdomain/zero/1.0/">
+                    <license-p>This is an open-access article distributed under the terms of the Creative Commons Public Domain declaration, which stipulates that, once placed in the public domain, this work may be freely reproduced, distributed, transmitted, modified, built upon, or otherwise used by anyone for any lawful purpose.</license-p>
+                </license>
+            </permissions>
+            <self-uri content-type="pdf" xlink:type="simple" xlink:href="pone.0126420.pdf"/>
+            <abstract>Analytical ultracentrifugation (AUC) is a first principles based method to determine absolute sedimentation coefficients and buoyant molar masses of macromolecules and their complexes, reporting on their size and shape in free solution.</abstract>
+            <funding-group>
+                <funding-statement>This work was supported by the Intramural Research Programs of the National Institute of Biomedical Imaging and Bioengineering, the National Heart, Lung, and Blood Institute, and the National Institute of Diabetes and Digestive and Kidney Diseases National Institutes of Health; the Max Planck Society; and the Rudolf Virchow Center for Experimental Biomedicine by the German Research Council (Deutsche Forschungsgemeinschaft, DFG) FZ 82. Further, this work was supported by National Cancer Institute grant CA35635, grants from the National Institute of General Medical Sciences (GM 095822, GM 109102, GM 094363, and P30GM103519), and by grant CTQ2012-33717 from MINECO-Spain/FEDER. The purchase of the XL-I AUC instrument for IIMCB Warsaw was supported by Centre for Preclinical Research and Technology (CePT) - European Union POIG.02.02.00-14-024/08-00 project. This work used the platforms of the Grenoble Instruct centre (ISBG; UMS 3518 CNRS-CEA-UJF-EMBL) with support from FRISBI (ANR-10-INSB-05-02) and GRAL (ANR-10-LABX-49-01) within the Grenoble Partnership for Structural Biology (PSB). This work was supported in part by NIH research grants GM-15792 and GM-29158 and by a Shared Instrument Proposal grant from NSF (P. H. von Hippel, Principle Investigator). The work in the Strasbourg centre was supported by the French Infrastructure for Integrated Structural Biology (FRISBI) ANR-10-INSB-05-01, and Instruct as part of the European Strategy Forum on Research Infrastructures (ESFRI). Some of the experiments in the present study were performed in the NanoFun laboratories co-financed by the European Regional Development Fund within the Innovation Economy Operational Program, Project No. POIG.02.02.00-00-025/09. S-JK acknowledges support from National Research Foundation of Korea (2011-0010437). LR acknowledges the receipt of EMBO long-term and Marie Curie IEF fellowships. DH acknowledges the receipt of an A.N.U. Senior Research Fellowship. DME and the University of Utah Protein Interaction Core Facility are supported by NIH Grant GM82545. KL acknowledges NIH grant GM067777, and DK acknowledges NIH grant F31GM105363. The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.</funding-statement>
+            </funding-group>
+            <counts>
+                <fig-count count="14"/>
+                <table-count count="0"/>
+                <page-count count="30"/>
+            </counts>
+            <custom-meta-group>
+                <custom-meta id="data-availability">
+                    <meta-name>Data Availability</meta-name>
+                    <meta-value>A spreadsheet containing all data analysis results, which provide the raw data for the statistical analyses presented in the manuscript is available as Supplementary Material. Raw AUC scan files and iButton traces from each laboratory contain identifiable sensitive information and cannot be provided to preserve the anonymity of the performance data from each laboratory. Raw AUC scan files and iButton traces shown in Figs <xref rid="pone.0126420.g002" ref-type="fig">2</xref>, <xref rid="pone.0126420.g006" ref-type="fig">6</xref>, and <xref rid="pone.0126420.g007" ref-type="fig">7</xref> are available on request to the corresponding author.</meta-value>
+                </custom-meta>
+            </custom-meta-group>
+        </article-meta>
+        <notes>
+            <title>Data Availability</title>
+            <p>A spreadsheet containing all data analysis results, which provide the raw data for the statistical analyses presented in the manuscript is available as Supplementary Material. Raw AUC scan files and iButton traces from each laboratory contain identifiable sensitive information and cannot be provided to preserve the anonymity of the performance data from each laboratory. Raw AUC scan files and iButton traces shown in Figs <xref rid="pone.0126420.g002" ref-type="fig">2</xref>, <xref rid="pone.0126420.g006" ref-type="fig">6</xref>, and <xref rid="pone.0126420.g007" ref-type="fig">7</xref> are available on request to the corresponding author.</p>
+        </notes>
+    </front>
+    <body>
+        <sec sec-type="intro" id="sec001">
+            <title>Introduction</title>
+            <p>As a first-principles based technique of physical chemistry, analytical ultracentrifugation (AUC) is capable of measuring absolute size and shape of particles, such as macromolecules and their complexes, free in solution [<xref rid="pone.0126420.ref001" ref-type="bibr">1</xref>]. The quantitative accuracy of physical parameters has been at the heart of the many advances facilitated by AUC throughout the last century. In the last few decades, progress in theory and computational analysis have afforded significantly enhanced resolution and precision of the derived macromolecular parameters, especially in sedimentation velocity (SV) analysis [<xref rid="pone.0126420.ref002" ref-type="bibr">2</xref>]. This is met by rapid developments of applications in different fields for which the quantitative aspect of AUC is critical, which include: improved capabilities of structure-based predictions of macromolecular shapes using hydrodynamic theory [<xref rid="pone.0126420.ref003" ref-type="bibr">3</xref>,<xref rid="pone.0126420.ref004" ref-type="bibr">4</xref>], as applied, for example, in the context of sophisticated data analysis in scattering techniques [<xref rid="pone.0126420.ref005" ref-type="bibr">5</xref>–<xref rid="pone.0126420.ref007" ref-type="bibr">7</xref>]; significant advances in techniques for studying membrane proteins by AUC [<xref rid="pone.0126420.ref008" ref-type="bibr">8</xref>]; and emerging applications in the characterization of nanoparticles [<xref rid="pone.0126420.ref009" ref-type="bibr">9</xref>,<xref rid="pone.0126420.ref010" ref-type="bibr">10</xref>] and biotechnology [<xref rid="pone.0126420.ref011" ref-type="bibr">11</xref>–<xref rid="pone.0126420.ref017" ref-type="bibr">17</xref>]. This is accompanied by a greatly extended concentration range for the application of AUC by fluorescence detection [<xref rid="pone.0126420.ref018" ref-type="bibr">18</xref>–<xref rid="pone.0126420.ref020" ref-type="bibr">20</xref>]. Thus, as the quantitative interpretation of sedimentation parameters is gaining in detail and applications, it is important to verify the basic accuracy of the AUC measurements. With view of biopharmaceutical applications of AUC, a number of recent studies have explored limits of detection and quantitation for trace aggregates of proteins [<xref rid="pone.0126420.ref013" ref-type="bibr">13</xref>,<xref rid="pone.0126420.ref014" ref-type="bibr">14</xref>,<xref rid="pone.0126420.ref016" ref-type="bibr">16</xref>,<xref rid="pone.0126420.ref021" ref-type="bibr">21</xref>–<xref rid="pone.0126420.ref023" ref-type="bibr">23</xref>], though not questioned the accuracy of basic data dimensions and sedimentation coefficients of the main components.</p>
+            <p>The question of calibration accuracy in AUC is not trivial and has a long history. Generally, the repeatability of <italic>s</italic>-values in the same instrument, as well as the reproducibility across different instruments and laboratories is considered to be better than 1% [<xref rid="pone.0126420.ref024" ref-type="bibr">24</xref>–<xref rid="pone.0126420.ref026" ref-type="bibr">26</xref>], and side-by-side measurements of samples in different rotor positions in the same run achieve an even higher precision of up to ≈0.1% in current instruments [<xref rid="pone.0126420.ref025" ref-type="bibr">25</xref>,<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>]. Unfortunately, these numbers do not bear on the accuracy. Due to the fact that systematic errors are not observable from repeat measurements in the same instrument (or even the same kind of instrument in the same or in another laboratory), systematic errors in any physical measurement are usually underestimated [<xref rid="pone.0126420.ref028" ref-type="bibr">28</xref>]. Yet, they may be the dominant source of error. For example, systematic discrepancies by as much as 10% between <italic>s</italic>-values measured in Svedberg’s oil turbine centrifuge and the early Spinco Model E were found and traced to errors of 4–5°C in the temperature calibration of the former [<xref rid="pone.0126420.ref024" ref-type="bibr">24</xref>,<xref rid="pone.0126420.ref026" ref-type="bibr">26</xref>,<xref rid="pone.0126420.ref029" ref-type="bibr">29</xref>,<xref rid="pone.0126420.ref030" ref-type="bibr">30</xref>]. The consequences of an unrecognized 10% error in s-values on their interpretation are drastic: for example, the 30S subunit of the 70S ribosome would appear to be a 33S subunit of a novel 77S particle; axial ratios estimated from hydrodynamic friction may appear to be 30% too small [<xref rid="pone.0126420.ref031" ref-type="bibr">31</xref>]; and even stronger error amplification can occur in the calculation of particle composition from <italic>s</italic>-values. This highlights the need for independent control experiments in ascertaining the true accuracy of AUC parameters, to detect calibration errors in basic data dimensions that otherwise may go unnoticed for a long time [<xref rid="pone.0126420.ref032" ref-type="bibr">32</xref>].</p>
+            <p>Concerns about the accuracy of sedimentation coefficients emerged again two years ago, when a ≈10% error in the elapsed time data was discovered in files produced by the manufacturer’s data acquisition software version 6.0 and associated firmware, which had been in wide-spread use for a period of nearly two years [<xref rid="pone.0126420.ref031" ref-type="bibr">31</xref>]. Subsequently, systematic time errors of between 0.1 to 2.0% were found in data going back more than a decade [<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>]. After discovery of the problem, the data acquisition software was quickly revised, but unfortunately this only restored the error to the level prior to version 6.0. Shortly after, a systematic examination of the accuracy of other data dimensions in eleven instruments revealed occurrences of temperature calibration errors by close to 3°C (which translates to a ≈7% error in <italic>s</italic>-values), and radial magnification errors in excess of 7% [<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>]. However, it was also shown that after simultaneous corrections for errors in time, radial magnification, and temperature, the range of <italic>s</italic>-values measured for bovine serum albumin (BSA) monomer was reduced 6-fold from 14.8% to 2.5%, and the standard deviation was improved 5-fold from 3.8% to 0.7% [<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>]. This is in satisfactory agreement with expectations and the demands for the technique in most current applications.</p><p>To make the required calibration measurements and corrections, the following external references were developed [<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>]: for the time dimension, a sufficiently accurate independent measurement is the time stamp when the data file was created, provided by the operating system of the data acquisition computer [<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>,<xref rid="pone.0126420.ref031" ref-type="bibr">31</xref>]; the rotor temperature can be logged in various configurations using miniature integrated circuits [<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>,<xref rid="pone.0126420.ref033" ref-type="bibr">33</xref>,<xref rid="pone.0126420.ref034" ref-type="bibr">34</xref>]; the radial magnification was measured with a precision mask installed in a cell assembly and scanned during the SV experiment [<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>]. To verify the mutual consistency of these calibration standards, SV experiments with a BSA sample were carried out using as a reference marker the <italic>s</italic>-value of the BSA monomer peak, which is baseline separated from oligomer peaks in <italic>c</italic>(<italic>s</italic>) analysis [<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>].</p>
+            <p>The goal of the present multi-laboratory benchmark study was to ascertain whether the observations made in the initial small calibration pilot study [<xref rid="pone.0126420.ref027" ref-type="bibr">27</xref>] are representative for all AUC instruments, and whether conclusions regarding the possibility of improving accuracy with external references are generally valid, widely applicable, and sufficient. For this purpose, three kits of calibration tools assembled at the National Institutes of Health were shipped to a total of 67 different laboratories, over the course of 9 months, to determine in 79 different instruments the accuracy of temperature, radial, and time calibration, and to determine the resulting distribution of <italic>s</italic>-values for the shared BSA reference sample. We asked whether the combination of correction factors from the external calibration references can improve the accuracy of sedimentation coefficients of BSA monomer. In addition, the comprehensive data set provided insight into several instrument performance parameters that are inaccessible from measurements in a single or a few instruments.</p>
+        </sec>
+    </body>
+    <back>
+        <ack><p>We thank Dr. Ozan Kumru, Ms. Andrea Balbo, and Dr. Abdussalam Azem for their help in facilitating part of this study.</p></ack>
+        <ref-list>
+            <title>References</title>
+            <ref id="pone.0126420.ref001"><label>1</label>
+                <mixed-citation publication-type="book">
+                    <name><surname>Svedberg</surname><given-names>T</given-names></name>, <name><surname>Pedersen</surname><given-names>KO</given-names></name>. <chapter-title>The ultracentrifuge</chapter-title><publisher-loc>London</publisher-loc>: <publisher-name>Oxford University Press</publisher-name>; <year>1940</year>.</mixed-citation>
+            </ref>
+            <ref id="pone.0126420.ref002"><label>2</label><mixed-citation publication-type="journal"><name><surname>Schuck</surname><given-names>P</given-names></name>. <article-title>Analytical ultracentrifugation as a tool for studying protein interactions</article-title>. <source>Biophys Rev</source>. <year>2013</year>; <volume>5</volume>: <fpage>159</fpage>–<lpage>171</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="http://dx.doi.org/10.1007/s12551-013-0106-2">10.1007/s12551-013-0106-2</ext-link></comment><pub-id pub-id-type="pmid">23682298</pub-id></mixed-citation>
+            </ref>
+            <ref id="pone.0126420.ref003"><label>3</label><mixed-citation publication-type="journal"><name><surname>Aragon</surname><given-names>SR</given-names></name>. <article-title>Recent advances in macromolecular hydrodynamic modeling</article-title>. <source>Methods. 2011</source>; <volume>54</volume>: <fpage>101</fpage>–<lpage>114</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="http://dx.doi.org/10.1016/j.ymeth.2010.10.005">10.1016/j.ymeth.2010.10.005</ext-link></comment></mixed-citation>
+            </ref>
+        </ref-list>
+    </back>
+</article>
+</pmc-articleset>

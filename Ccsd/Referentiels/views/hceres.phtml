@@ -1,0 +1,32 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: yannick
+ * Date: 06/12/2017
+ * Time: 11:07
+ */
+
+if (! $this->hceres instanceof Ccsd_Referentiels_Hceres) {
+    $this->hceres = (new Ccsd_Referentiels_Hceres())->set($this->hceres);
+}
+
+//$this->element = 'hceres_entite_local';
+
+$row = "<blockquote>";
+$row .= "<div class='referentiel' style='margin-top: 10px;' " . ($this->hceres->HCERESID != '' ? "data-id='" . $this->hceres->HCERESID . "' "  : "") . ">";
+$row .=     "<div style='float: right;'>";
+if (isset($this->item)) {
+    $row .= "<a href='javascript:void(0);' onclick='" . $this->item->getDeleteFunction() . "' data-toggle='tooltip' data-placement='right' data-original-title='" . $this->translate("Supprimer cette entité") . "'><i class='glyphicon glyphicon-trash'></i></a>";
+}
+$row .=     "</div>";
+$row .=     "<div>";
+$row .=         "<span class='badge' style='margin-bottom:5px;'>" . $this->hceres->HCERESID . "</span><br />";
+$row .=         "<strong>" . $this->hceres->NOM . "</strong><br />";
+$row .=         $this->hceres->IDENTIFIANT ;
+$row .=         "<input type='hidden' name='" . $this->element . "[]' value='" . $this->hceres->HCERESID . "' />";
+$row .=     "</div>";
+$row .= "</div>";
+$row .= "</blockquote>";
+
+
+echo $row;

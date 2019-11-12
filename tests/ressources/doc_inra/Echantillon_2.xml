@@ -1,0 +1,351 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:produits xmlns:ns2="http://record.prodinra.inra.fr">
+    <produit>
+        <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:article">
+            <identifier>444644</identifier>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Mougin</lastName>
+                    <firstName>Christian</firstName>
+                    <initial>C.</initial>
+                    <publicationName>Mougin</publicationName>
+                    <email>christian.mougin@inra.fr</email>
+                    <role>Auteur de correspondance</role>
+                    <inraIdentifier>10935L</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>16</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </name>
+                            <code>1402</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Ecologie fonctionnelle et écotoxicologie des
+                                agroécosystèmes , Thiverval-Grignon</laboratory>
+                            <city>Thiverval-Grignon</city>
+                            <country>FRA</country>
+                            <rnsr>201521783S</rnsr>
+                            <center>
+                                <code>11</code>
+                                <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                                <acronym>CR IdF-Versailles-Grignon</acronym>
+                            </center>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ECOSYS</acronym>
+                            <affiliationPartners>
+                                <name>Institut des sciences et industries du vivant et de
+                                    l'environnement</name>
+                                <acronym>AgroParisTech</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                    <externalAffiliation>
+                        <name>Université Paris Saclay</name>
+                        <identifier>314266</identifier>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Bouchez</lastName>
+                    <firstName>Agnes</firstName>
+                    <initial>A.</initial>
+                    <publicationName>Bouchez</publicationName>
+                    <email>agnes.bouchez@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>10241G</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>54</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Centre Alpin de Recherche sur les Réseaux Trophiques et les
+                                Ecosystèmes Limniques</name>
+                            <code>0042</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Centre Alpin de Recherche sur les Réseaux Trophiques
+                                et les Ecosystèmes Limniques, Thonon-Les-Bains</laboratory>
+                            <city>Thonon-Les-Bains</city>
+                            <country>FRA</country>
+                            <rnsr>196417921R</rnsr>
+                            <center>
+                                <code>23</code>
+                                <name>Centre de recherche Auvergne-Rhône-Alpes</name>
+                                <acronym>CR Auvergne-Rhône-Alpes</acronym>
+                            </center>
+                            <department>
+                                <code>54</code>
+                                <name>Ecologie des Forêts, Prairies et Milieux Aquatiques</name>
+                                <acronym>EFPA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>CARRTEL</acronym>
+                            <affiliationPartners>
+                                <name>Université Savoie Mont-Blanc</name>
+                                <acronym>USMB</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Denaix</lastName>
+                    <firstName>Laurence</firstName>
+                    <initial>L.</initial>
+                    <publicationName>Denaix</publicationName>
+                    <email>laurence.denaix@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>10707N</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Interaction Sol Plante Atmosphère</name>
+                            <code>1391</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Interaction Sol Plante Atmosphère, Villenave
+                                D'Ornon</laboratory>
+                            <city>Villenave D'Ornon</city>
+                            <country>FRA</country>
+                            <rnsr>201421781U</rnsr>
+                            <center>
+                                <code>22</code>
+                                <name>Centre de recherche Nouvelle-Aquitaine-Bordeaux</name>
+                                <acronym>CR Nouvelle-Aquitaine-Bordeaux</acronym>
+                            </center>
+                            <department>
+                                <code>54</code>
+                                <name>Ecologie des Forêts, Prairies et Milieux Aquatiques</name>
+                                <acronym>EFPA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ISPA</acronym>
+                            <affiliationPartners>
+                                <name>Bordeaux Sciences Agro</name>
+                                <acronym>Bordeaux Sciences Agro</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:externalAuthor">
+                    <lastName>Garric</lastName>
+                    <firstName>Jeanne</firstName>
+                    <initial>J.</initial>
+                    <publicationName>Garric</publicationName>
+                    <email/>
+                    <role/>
+                    <externalAffiliation>
+                        <name>Institut National de Recherche en Sciences et Technologies pour
+                            l'Environnement et l'Agriculture</name>
+                        <identifier>310879</identifier>
+                        <acronym>IRSTEA</acronym>
+                        <section>UR RIVERLY</section>
+                        <city>Villeurbanne</city>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Martin</lastName>
+                    <firstName>Fabrice</firstName>
+                    <initial>F.</initial>
+                    <publicationName>Martin-Laurent</publicationName>
+                    <email>fabrice.martin@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>18370S</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Agroécologie</name>
+                            <code>1347</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Agroécologie, Dijon</laboratory>
+                            <city>Dijon</city>
+                            <country>FRA</country>
+                            <rnsr>201220381F</rnsr>
+                            <center>
+                                <code>29</code>
+                                <name>Centre de recherche Bourgogne-Franche-Comté</name>
+                                <acronym>CR Bourgogne-Franche-Comté</acronym>
+                            </center>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>81</code>
+                                <name>Biologie et Amélioration des Plantes </name>
+                                <acronym>BAP</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>Agroécologie</acronym>
+                            <affiliationPartners>
+                                <name>Institut national supérieur des sciences agronomiques, de
+                                    l'alimentation et de l'environnement</name>
+                                <acronym>AgroSup Dijon</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Université Bourgogne - Franche-Comté</name>
+                                <acronym>UBFC</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Université de Bourgogne</name>
+                                <acronym>U. Bourgogne</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <title>ECOTOX, new questions for terrestrial and aquatic ecotoxicology</title>
+            <alternateTitle/>
+            <subTitle/>
+            <language>eng</language>
+            <year>2018</year>
+            <doi>10.1007/s11356-018-3179-4</doi>
+            <recordAccessCondition>Publique</recordAccessCondition>
+            <keywords/>
+            <targetAudience>Scientifique</targetAudience>
+            <itemType>ARTICLE</itemType>
+            <workflowStatus>validé</workflowStatus>
+            <creationDate>2018-09-20T07:12:55</creationDate>
+            <firstValidationDate>2018-09-20T08:10:23</firstValidationDate>
+            <validationDate>2018-09-20T08:10:23</validationDate>
+            <updateDate>2018-09-20T08:10:25</updateDate>
+            <depositor>
+                <lastName>Noé</lastName>
+                <firstName>Nicole</firstName>
+                <inraIdentifier>04356K</inraIdentifier>
+                <email>nicole.noe@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>15</code>
+                        <name>Environnement et Agronomie</name>
+                        <acronym>EA</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>16</code>
+                        <name>Santé des Plantes et Environnement</name>
+                        <acronym>SPE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>11</code>
+                        <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                        <acronym>CR IdF-Versailles-Grignon</acronym>
+                    </center>
+                    <unitName>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </unitName>
+                    <unitCode>1402</unitCode>
+                </affiliation>
+            </depositor>
+            <reviewer>
+                <lastName>Noé</lastName>
+                <firstName>Nicole</firstName>
+                <inraIdentifier>04356K</inraIdentifier>
+                <email>nicole.noe@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>15</code>
+                        <name>Environnement et Agronomie</name>
+                        <acronym>EA</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>16</code>
+                        <name>Santé des Plantes et Environnement</name>
+                        <acronym>SPE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>11</code>
+                        <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                        <acronym>CR IdF-Versailles-Grignon</acronym>
+                    </center>
+                    <unitName>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </unitName>
+                    <unitCode>1402</unitCode>
+                </affiliation>
+            </reviewer>
+            <firstReviewer>
+                <lastName>Noé</lastName>
+                <firstName>Nicole</firstName>
+                <inraIdentifier>04356K</inraIdentifier>
+                <email>nicole.noe@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>15</code>
+                        <name>Environnement et Agronomie</name>
+                        <acronym>EA</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>16</code>
+                        <name>Santé des Plantes et Environnement</name>
+                        <acronym>SPE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>11</code>
+                        <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                        <acronym>CR IdF-Versailles-Grignon</acronym>
+                    </center>
+                    <unitName>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </unitName>
+                    <unitCode>1402</unitCode>
+                </affiliation>
+            </firstReviewer>
+            <complements>PublicationType:FULL_TEXT; </complements>
+            <halSending>true</halSending>
+            <origin>CREATED</origin>
+            <pmid/>
+            <collection>
+                <idCollection>56169</idCollection>
+                <title>Environmental Science and Pollution Research</title>
+                <issn>0944-1344</issn>
+                <openAccess>false</openAccess>
+            </collection>
+            <articleInfos>
+                <articleType>Research article</articleType>
+                <articleNumber/>
+                <peerReviewed>true</peerReviewed>
+                <pagination/>
+            </articleInfos>
+            <experimentalUnit/>
+        </record>
+    </produit>
+</ns2:produits>

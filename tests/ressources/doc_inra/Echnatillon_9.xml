@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:produits xmlns:ns2="http://record.prodinra.inra.fr">
+    <produit>
+        <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:researchReport">
+            <identifier>426705</identifier>
+            <halClassification>
+                <code>SHS:GESTION</code>
+                <french>Gestion et management</french>
+                <english>Business administration</english>
+            </halClassification>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Temri</lastName>
+                    <firstName>Leila</firstName>
+                    <initial>L.</initial>
+                    <publicationName>Temri</publicationName>
+                    <email/>
+                    <role/>
+                    <inraIdentifier>122566Z</inraIdentifier>
+                    <peps>true</peps>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Marchés, Organisations, Institutions et Stratégies
+                                d'Acteurs</name>
+                            <code>1110</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Marchés, Organisations, Institutions et Stratégies
+                                d'Acteurs, Montpellier</laboratory>
+                            <city>Montpellier</city>
+                            <country>FRA</country>
+                            <rnsr>200017843Z</rnsr>
+                            <center>
+                                <code>24</code>
+                                <name>Centre de recherche Occitanie-Montpellier</name>
+                                <acronym>CR Occitanie-Montpellier</acronym>
+                            </center>
+                            <department>
+                                <code>50</code>
+                                <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                                    Environnement</name>
+                                <acronym>SAE 2</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>MOISA</acronym>
+                            <affiliationPartners>
+                                <name>Centre de Coopération Internationale en Recherche Agronomique
+                                    pour le Développement</name>
+                                <acronym>CIRAD</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Centre international d’études supérieures en sciences
+                                    agronomiques</name>
+                                <acronym>Montpellier SupAgro</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Centre International de Hautes Etudes Agronomiques
+                                    Méditerranéennes - Institut Agronomique Méditerranéen de
+                                    Montpellier</name>
+                                <acronym>CIHEAM</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                    <externalAffiliation>
+                        <name>Institut National d'Etudes Supérieures Agronomiques de
+                            Montpellier</name>
+                        <identifier>327107</identifier>
+                        <acronym>Montpellier SupAgro</acronym>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <title language="fra">L'innovation responsable</title>
+            <alternateTitle language="eng">Responsible Innovation</alternateTitle>
+            <subTitle/>
+            <language>fra</language>
+            <abstract language="fra">Cette communication a été présentée lors du Gala de
+                l’innovation « Innovation nouvelle vague », RRI (Réseau de Recherche sur
+                l’Innovation), Cité des Sciences et de l’Industrie, Paris (FRA), 11/12/2017 . Résumé
+                : L’objectif de ce papier est de réaliser un « état de l’art » portant sur le
+                concept d’ « innovation responsable » apparu au début des années 2000 et diffusé
+                notamment sous l’impulsion de la Commission Européenne. Nous présentons tout d’abord
+                les fondements, de ce concept, en lien avec l’approche philosophique de la
+                responsabilité des chercheurs et ingénieurs, d’une part, les questions relatives à
+                l’évaluation des techniques d’autre part. Puis nous exposons comment le concept de «
+                recherche et innovation responsables » s’est développé progressivement dans les
+                politiques européennes de recherche et d’innovation, afin de rapprocher la science
+                et l’innovation de la société. Enfin, nous relatons comment ce concept est décliné
+                dans les entreprises, en lien avec leur responsabilité sociétale.</abstract>
+            <abstract language="eng">The aim of this paper is to present an overview of the «
+                responsible innovation » concept. This concept was first defined at the beginning of
+                the 21st century. It then spread around the world, driven by the European
+                Commission. Firstly, we present the roots of this concept which are based on, on the
+                one hand, the philosophical approach of “researchers and engineers responsibility”,
+                and on the other hand, technological assessment. Then, we describe how the concept
+                of “responsible research and innovation” has grown progressively in European
+                research and innovation politics, in order to bring science and innovation closer to
+                society. Lastly, we describe how this concept is used in companies in connection
+                with their social responsibility.</abstract>
+            <year>2018</year>
+            <link>https://ideas.repec.org/p/umr/wpaper/201801.html</link>
+            <recordAccessCondition>Publique</recordAccessCondition>
+            <keywords/>
+            <thematic>
+                <identifier>1</identifier>
+                <name>Objet d'étude</name>
+                <inraClassification>
+                    <inraClassificationIdentifier>10060</inraClassificationIdentifier>
+                    <usedTerm>innovation sociale</usedTerm>
+                    <engTerm>social innovation</engTerm>
+                    <genericTerm>recherche sociale</genericTerm>
+                </inraClassification>
+            </thematic>
+            <thematic>
+                <identifier>6</identifier>
+                <name>Dispositif technique et méthode d'étude</name>
+                <inraClassification>
+                    <inraClassificationIdentifier>88830</inraClassificationIdentifier>
+                    <usedTerm>innovation technologique</usedTerm>
+                    <genericTerm>technologie</genericTerm>
+                </inraClassification>
+                <inraClassification>
+                    <inraClassificationIdentifier>45946</inraClassificationIdentifier>
+                    <usedTerm>recherche et développement</usedTerm>
+                </inraClassification>
+            </thematic>
+            <thematic>
+                <identifier>7</identifier>
+                <name>Composé chimique, Facteur du milieu</name>
+                <inraClassification>
+                    <inraClassificationIdentifier>72326</inraClassificationIdentifier>
+                    <usedTerm>responsabilité sociale de l'entreprise</usedTerm>
+                </inraClassification>
+            </thematic>
+            <targetAudience>Scientifique</targetAudience>
+            <itemType>RESEARCH_REPORT</itemType>
+            <workflowStatus>validé</workflowStatus>
+            <creationDate>2018-04-10T15:31:40</creationDate>
+            <firstValidationDate>2018-04-10T15:46:18</firstValidationDate>
+            <validationDate>2018-04-17T10:49:32</validationDate>
+            <updateDate>2018-04-17T10:49:33</updateDate>
+            <depositor>
+                <lastName>Schleich</lastName>
+                <firstName>Jean-Walter</firstName>
+                <inraIdentifier>24924R</inraIdentifier>
+                <email>schleich@supagro.inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>50</code>
+                        <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                            Environnement</name>
+                        <acronym>SAE 2</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>ADMIN</code>
+                        <name>Groupe des administrateurs</name>
+                        <acronym>ADMIN</acronym>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Marchés, Organisations, Institutions et Stratégies
+                        d'Acteurs</unitName>
+                    <unitCode>1110</unitCode>
+                </affiliation>
+            </depositor>
+            <reviewer>
+                <lastName>Schleich</lastName>
+                <firstName>Jean-Walter</firstName>
+                <inraIdentifier>24924R</inraIdentifier>
+                <email>schleich@supagro.inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>50</code>
+                        <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                            Environnement</name>
+                        <acronym>SAE 2</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Marchés, Organisations, Institutions et Stratégies
+                        d'Acteurs</unitName>
+                    <unitCode>1110</unitCode>
+                </affiliation>
+            </reviewer>
+            <firstReviewer>
+                <lastName>Schleich</lastName>
+                <firstName>Jean-Walter</firstName>
+                <inraIdentifier>24924R</inraIdentifier>
+                <email>schleich@supagro.inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>50</code>
+                        <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                            Environnement</name>
+                        <acronym>SAE 2</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Marchés, Organisations, Institutions et Stratégies
+                        d'Acteurs</unitName>
+                    <unitCode>1110</unitCode>
+                </affiliation>
+            </firstReviewer>
+            <complements/>
+            <halSending>false</halSending>
+            <origin>CREATED</origin>
+            <researchReportType>Working paper</researchReportType>
+            <order>
+                <backer>
+                    <identifier>304340</identifier>
+                </backer>
+            </order>
+            <reportNumber/>
+            <publishing/>
+            <collection>
+                <idCollection>60216</idCollection>
+                <title>Working Paper MOISA</title>
+                <issue>
+                    <volume>1</volume>
+                </issue>
+            </collection>
+            <experimentalUnit/>
+            <documentLocation>
+                <libraryName>Documentation P. Bartoli</libraryName>
+                <libraryClassificationMark>S WPM 2018-1</libraryClassificationMark>
+                <libraryUnit>UMR 1110 MOISA Marchés, Organisations, Institutions et Stratégies
+                    d'Acteurs</libraryUnit>
+                <libraryCenter>Montpellier</libraryCenter>
+            </documentLocation>
+            <pages>15 p.</pages>
+        </record>
+        <ns2:attachment>
+            <attachmentId>{886E831A-EFEF-43A1-A14A-A1D7AC166994}</attachmentId>
+            <accessCondition>Publique</accessCondition>
+            <title>2018_Temri_Working_Paper_Moisa_1.pdf</title>
+            <fileName>2018_Temri_Working_Paper_Moisa_1.pdf</fileName>
+            <fileSize>183939.0</fileSize>
+            <fileMimeType>application/pdf</fileMimeType>
+            <original>true</original>
+        </ns2:attachment>
+    </produit>
+</ns2:produits>

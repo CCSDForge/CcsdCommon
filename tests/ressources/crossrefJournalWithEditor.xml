@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doi_records>
+  <doi_record owner="10.1371" timestamp="2019-08-18 00:31:30">
+    <crossref>
+      <journal>
+        <journal_metadata language="en">
+          <full_title>PLoS ONE</full_title>
+          <abbrev_title>PLoS ONE</abbrev_title>
+          <issn media_type="electronic">1932-6203</issn>
+        </journal_metadata>
+        <journal_issue>
+          <publication_date media_type="online">
+            <month>12</month>
+            <day>4</day>
+            <year>2014</year>
+          </publication_date>
+          <journal_volume>
+            <volume>9</volume>
+          </journal_volume>
+          <issue>12</issue>
+        </journal_issue>
+        <journal_article publication_type="full_text">
+          <titles>
+            <title>A Modeling Framework for System Restoration from Cascading Failures</title>
+          </titles>
+          <contributors>
+            <person_name contributor_role="author" sequence="first">
+              <given_name>Chaoran</given_name>
+              <surname>Liu</surname>
+            </person_name>
+            <person_name contributor_role="author" sequence="additional">
+              <given_name>Daqing</given_name>
+              <surname>Li</surname>
+            </person_name>
+            <person_name contributor_role="author" sequence="additional">
+              <given_name>Enrico</given_name>
+              <surname>Zio</surname>
+            </person_name>
+            <person_name contributor_role="author" sequence="additional">
+              <given_name>Rui</given_name>
+              <surname>Kang</surname>
+            </person_name>
+            <person_name contributor_role="editor" sequence="first">
+              <given_name>Zhen</given_name>
+              <surname>Wang</surname>
+            </person_name>
+          </contributors>
+          <publication_date media_type="online">
+            <month>12</month>
+            <day>4</day>
+            <year>2014</year>
+          </publication_date>
+          <pages>
+            <first_page>e112363</first_page>
+          </pages>
+          <publisher_item>
+            <item_number>10.1371/journal.pone.0112363</item_number>
+          </publisher_item>
+          <crossmark>
+            <crossmark_version>1</crossmark_version>
+            <crossmark_policy>10.1371/journal.pone.corrections_policy</crossmark_policy>
+            <crossmark_domains>
+              <crossmark_domain>
+                <domain>www.plosone.org</domain>
+              </crossmark_domain>
+            </crossmark_domains>
+            <crossmark_domain_exclusive>false</crossmark_domain_exclusive>
+            <custom_metadata>
+              <program name="AccessIndicators">
+                <license_ref>http://creativecommons.org/licenses/by/4.0/</license_ref>
+              </program>
+            </custom_metadata>
+          </crossmark>
+          <doi_data>
+            <doi>10.1371/journal.pone.0112363</doi>
+            <timestamp>20170311082405</timestamp>
+            <resource>https://dx.plos.org/10.1371/journal.pone.0112363</resource>
+            <collection property="crawler-based">
+              <item crawler="iParadigms">
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363</resource>
+              </item>
+            </collection>
+          </doi_data>
+          <citation_list>
+            <citation key="ref1">
+              <journal_title>Proc Natl Acad Sci USA</journal_title>
+              <author>DJ Watts</author>
+              <volume>99</volume>
+              <first_page>5766</first_page>
+              <cYear>2002</cYear>
+              <doi provider="crossref">10.1073/pnas.082090499</doi>
+              <article_title>A simple model of global cascades on random networks</article_title>
+            </citation>
+            <citation key="ref2">
+              <doi provider="crossref">10.1007/978-0-85729-655-9</doi>
+              <unstructured_citation>Kröger W, Zio E (2011) Vulnerable systems. London: Springer.</unstructured_citation>
+            </citation>
+            <citation key="ref3">
+              <journal_title>PloS one</journal_title>
+              <author>KM Lee</author>
+              <volume>6</volume>
+              <first_page>e18443</first_page>
+              <cYear>2011</cYear>
+              <doi provider="crossref">10.1371/journal.pone.0018443</doi>
+              <article_title>Impact of the topology of global macroeconomic network on the spreading of economic crises</article_title>
+            </citation>
+            <citation key="ref4">
+              <journal_title>Nature</journal_title>
+              <author>SV Buldyrev</author>
+              <volume>464</volume>
+              <first_page>1025</first_page>
+              <cYear>2010</cYear>
+              <doi provider="crossref">10.1038/nature08932</doi>
+              <article_title>Catastrophic cascade of failures in interdependent networks</article_title>
+            </citation>
+            <citation key="ref5">
+              <journal_title>PloS one</journal_title>
+              <author>C Barrett</author>
+              <volume>7</volume>
+              <first_page>e45406</first_page>
+              <cYear>2012</cYear>
+              <doi provider="crossref">10.1371/journal.pone.0045406</doi>
+              <article_title>Human initiated cascading failures in societal infrastructures</article_title>
+            </citation>
+            <citation key="ref6">
+              <journal_title>Chaos</journal_title>
+              <author>I Dobson</author>
+              <volume>17</volume>
+              <first_page>026103</first_page>
+              <cYear>2007</cYear>
+              <doi provider="crossref">10.1063/1.2737822</doi>
+              <article_title>Complex systems analysis of series of blackouts: Cascading failure, critical points, and self-organization</article_title>
+            </citation>
+            <citation key="ref7">
+              <doi provider="crossref">10.1016/j.physrep.2014.07.001</doi>
+              <unstructured_citation>Boccaletti S, Bianconi G, Criado R, del Genio CI, Gómez-Gardeñes J, et al. (2014) The structure and dynamics of multilayer networks. Physics Reports. doi:&lt;ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="http://dx.doi.org/10.1016/j.physrep.2014.07.001" xlink:type="simple"&gt;10.1016/j.physrep.2014.07.001&lt;/ext-link&gt;.</unstructured_citation>
+            </citation>
+            <citation key="ref8">
+              <doi provider="crossref">10.1109/ICIINFS.2009.5429818</doi>
+              <unstructured_citation>Atputharajah A, Saha TK (2009) Power system blackouts-literature review. In: Proc Int Conf Industrial and Information Systems (ICIIS). 460–465.</unstructured_citation>
+            </citation>
+            <citation key="ref9">
+              <journal_title>Journal of Control Theory and Applications</journal_title>
+              <author>X Weng</author>
+              <volume>4</volume>
+              <first_page>235</first_page>
+              <cYear>2006</cYear>
+              <doi provider="crossref">10.1007/s11768-006-5082-7</doi>
+              <article_title>Failure analysis on China power grid based on power law</article_title>
+            </citation>
+            <citation key="ref10">
+              <journal_title>Int J Critical Infrastructures</journal_title>
+              <author>C Balderer</author>
+              <volume>5</volume>
+              <first_page>51</first_page>
+              <cYear>2009</cYear>
+              <doi provider="crossref">10.1504/IJCIS.2009.022849</doi>
+              <article_title>Repair strategies for minimising the risk of cascading failures in electricity networks</article_title>
+            </citation>
+            <citation key="ref11">
+              <journal_title>Rel Eng Syst Safety</journal_title>
+              <author>R Francis</author>
+              <volume>121</volume>
+              <first_page>90</first_page>
+              <cYear>2014</cYear>
+              <doi provider="crossref">10.1016/j.ress.2013.07.004</doi>
+              <article_title>A metric and frameworks for resilience analysis of engineered and infrastructure systems</article_title>
+            </citation>
+            <citation key="ref12">
+              <journal_title>PloS one</journal_title>
+              <author>A Asztalos</author>
+              <volume>9</volume>
+              <first_page>e84563</first_page>
+              <cYear>2014</cYear>
+              <doi provider="crossref">10.1371/journal.pone.0084563</doi>
+              <article_title>Cascading failures in spatially-embedded random networks</article_title>
+            </citation>
+            <citation key="ref13">
+              <journal_title>PloS one</journal_title>
+              <author>SO Caballero Morales</author>
+              <volume>8</volume>
+              <first_page>e59039</first_page>
+              <cYear>2013</cYear>
+              <doi provider="crossref">10.1371/journal.pone.0059039</doi>
+              <article_title>Economic Statistical Design of Integrated X-bar-S Control Chart with Preventive Maintenance and General Failure Distribution</article_title>
+            </citation>
+            <citation key="ref14">
+              <journal_title>Nature</journal_title>
+              <author>R Albert</author>
+              <volume>406</volume>
+              <first_page>378</first_page>
+              <cYear>2000</cYear>
+              <doi provider="crossref">10.1038/35019019</doi>
+              <article_title>Error and attack tolerance of complex networks</article_title>
+            </citation>
+            <citation key="ref15">
+              <journal_title>PloS one</journal_title>
+              <author>A Gutfraind</author>
+              <volume>5</volume>
+              <first_page>e13448</first_page>
+              <cYear>2010</cYear>
+              <doi provider="crossref">10.1371/journal.pone.0013448</doi>
+              <article_title>Optimizing topological cascade resilience based on the structure of terrorist networks</article_title>
+            </citation>
+            <citation key="ref16">
+              <journal_title>Scientific reports</journal_title>
+              <author>Q Jin</author>
+              <volume>4</volume>
+              <first_page>4095</first_page>
+              <cYear>2014</cYear>
+              <doi provider="crossref">10.1038/srep04095</doi>
+              <article_title>Spontaneous symmetry breaking in interdependent networked game</article_title>
+            </citation>
+            <citation key="ref17">
+              <journal_title>PloS one</journal_title>
+              <author>C Liu</author>
+              <volume>9</volume>
+              <first_page>e97822</first_page>
+              <cYear>2014</cYear>
+              <doi provider="crossref">10.1371/journal.pone.0097822</doi>
+              <article_title>Particle Swarm Optimization with Scale-Free Interactions</article_title>
+            </citation>
+            <citation key="ref18">
+              <journal_title>Physica A</journal_title>
+              <author>WB Du</author>
+              <volume>392</volume>
+              <first_page>3505</first_page>
+              <cYear>2013</cYear>
+              <doi provider="crossref">10.1016/j.physa.2013.03.032</doi>
+              <article_title>Effective usage of shortest paths promotes transportation efficiency on scale-free networks</article_title>
+            </citation>
+            <citation key="ref19">
+              <journal_title>Phys Rev E</journal_title>
+              <author>AE Motter</author>
+              <volume>66</volume>
+              <first_page>065102</first_page>
+              <cYear>2002</cYear>
+              <doi provider="crossref">10.1103/PhysRevE.66.065102</doi>
+              <article_title>Cascade-based attacks on complex networks</article_title>
+            </citation>
+            <citation key="ref20">
+              <journal_title>PloS one</journal_title>
+              <author>Q Shuang</author>
+              <volume>9</volume>
+              <first_page>e88445</first_page>
+              <cYear>2014</cYear>
+              <doi provider="crossref">10.1371/journal.pone.0088445</doi>
+              <article_title>Performance and Reliability Analysis of Water Distribution Systems under Cascading Failures and the Identification of Crucial Pipes</article_title>
+            </citation>
+            <citation key="ref21">
+              <journal_title>Nature</journal_title>
+              <author>D Helbing</author>
+              <volume>497</volume>
+              <first_page>51</first_page>
+              <cYear>2013</cYear>
+              <doi provider="crossref">10.1038/nature12047</doi>
+              <article_title>Globally networked risks and how to respond</article_title>
+            </citation>
+            <citation key="ref22">
+              <journal_title>Rel Eng Syst Safety</journal_title>
+              <author>F Cadini</author>
+              <volume>95</volume>
+              <first_page>173</first_page>
+              <cYear>2010</cYear>
+              <doi provider="crossref">10.1016/j.ress.2009.09.007</doi>
+              <article_title>Optimal expansion of an existing electrical power transmission network by multi-objective genetic algorithms</article_title>
+            </citation>
+            <citation key="ref23">
+              <journal_title>Power Systems, IEEE Transactions on</journal_title>
+              <author>H Ren</author>
+              <volume>23</volume>
+              <first_page>1217</first_page>
+              <cYear>2008</cYear>
+              <doi provider="crossref">10.1109/TPWRS.2008.926417</doi>
+              <article_title>Long-term effect of the n-1 criterion on cascading line outages in an evolving power transmission grid</article_title>
+            </citation>
+            <citation key="ref24">
+              <journal_title>Elect J</journal_title>
+              <author>SN Talukdar</author>
+              <volume>16</volume>
+              <first_page>25</first_page>
+              <cYear>2003</cYear>
+              <doi provider="crossref">10.1016/j.tej.2003.09.003</doi>
+              <article_title>Cascading failures: survival versus prevention</article_title>
+            </citation>
+            <citation key="ref25">
+              <unstructured_citation>Peças Lopes JA, Moreira CL, Resende FO (2005) Microgrids black start and islanded operation. In: Proc 15th PSCC.</unstructured_citation>
+            </citation>
+            <citation key="ref26">
+              <journal_title>Power Systems, IEEE Transactions on</journal_title>
+              <author>CL Moreira</author>
+              <volume>22</volume>
+              <first_page>395</first_page>
+              <cYear>2007</cYear>
+              <doi provider="crossref">10.1109/TPWRS.2006.888989</doi>
+              <article_title>Using low voltage microgrids for service restoration</article_title>
+            </citation>
+            <citation key="ref27">
+              <journal_title>PloS one</journal_title>
+              <author>G Yadav</author>
+              <volume>7</volume>
+              <first_page>e41827</first_page>
+              <cYear>2012</cYear>
+              <doi provider="crossref">10.1371/journal.pone.0041827</doi>
+              <article_title>NEXCADE: Perturbation Analysis for Complex Networks</article_title>
+            </citation>
+            <citation key="ref28">
+              <journal_title>PloS one</journal_title>
+              <author>W Quattrociocchi</author>
+              <volume>9</volume>
+              <first_page>e87986</first_page>
+              <cYear>2014</cYear>
+              <doi provider="crossref">10.1371/journal.pone.0087986</doi>
+              <article_title>Self-healing networks: redundancy and structure</article_title>
+            </citation>
+            <citation key="ref29">
+              <journal_title>Power Systems, IEEE Transactions on</journal_title>
+              <author>M Adibi</author>
+              <volume>2</volume>
+              <first_page>271</first_page>
+              <cYear>1987</cYear>
+              <doi provider="crossref">10.1109/TPWRS.1987.4335118</doi>
+              <article_title>Power system restoration-a task force report</article_title>
+            </citation>
+            <citation key="ref30">
+              <journal_title>Power Systems, IEEE Transactions on</journal_title>
+              <author>MM Adibi</author>
+              <volume>2</volume>
+              <first_page>927</first_page>
+              <cYear>1987</cYear>
+              <doi provider="crossref">10.1109/TPWRS.1987.4335278</doi>
+              <article_title>Power system restoration-the second task force report</article_title>
+            </citation>
+            <citation key="ref31">
+              <journal_title>Rel Eng Syst Safety</journal_title>
+              <author>E Zio</author>
+              <volume>103</volume>
+              <first_page>72</first_page>
+              <cYear>2012</cYear>
+              <doi provider="crossref">10.1016/j.ress.2012.03.007</doi>
+              <article_title>Optimizing protections against cascades in network systems: A modified binary differential evolution algorithm</article_title>
+            </citation>
+            <citation key="ref32">
+              <journal_title>In: Proc Eur Safety Rel Conf (ESREL</journal_title>
+              <author>E Zio</author>
+              <volume>2011)</volume>
+              <first_page>2515</first_page>
+              <cYear>2011</cYear>
+              <article_title>Optimization of electrical grid protection by a differential evolution algorithm</article_title>
+            </citation>
+            <citation key="ref33">
+              <doi provider="crossref">10.1109/PES.2008.4596495</doi>
+              <unstructured_citation>Adibi MM, Martins N (2008) Power system restoration dynamics issues,” In: Proc IEEE PES General Meeting. 1–8.</unstructured_citation>
+            </citation>
+            <citation key="ref34">
+              <journal_title>Power Systems, IEEE Transactions on</journal_title>
+              <author>LH Fink</author>
+              <volume>10</volume>
+              <first_page>745</first_page>
+              <cYear>1995</cYear>
+              <doi provider="crossref">10.1109/59.387912</doi>
+              <article_title>From generic restoration actions to specific restoration strategies</article_title>
+            </citation>
+            <citation key="ref35">
+              <journal_title>IEEE Power Energy Mag</journal_title>
+              <author>MM Adibi</author>
+              <volume>4</volume>
+              <first_page>68</first_page>
+              <cYear>2006</cYear>
+              <doi provider="crossref">10.1109/MPAE.2006.1687819</doi>
+              <article_title>Overcoming restoration challenges associated with major power system disturbances-Restoration from cascading failures</article_title>
+            </citation>
+            <citation key="ref36">
+              <doi provider="crossref">10.1109/PESGM.2012.6345165</doi>
+              <unstructured_citation>Henderson M, Rappold E, Feltes J, Grande-Moran C, Durbak D, et al. (2012) Addressing restoration issues for the ISO New England system. In: Proc IEEE PES General Meeting. 1–5.</unstructured_citation>
+            </citation>
+            <citation key="ref37">
+              <doi provider="crossref">10.1109/PESMG.2013.6672795</doi>
+              <unstructured_citation>Vaiman M, Hines P, Jiang J, Norris S, Papic M, et al. (2013) Mitigation and prevention of cascading outages: Methodologies and practical applications. In: Proc IEEE PES General Meeting. 1–5.</unstructured_citation>
+            </citation>
+            <citation key="ref38">
+              <journal_title>In: Proc IREP Symposium–Bulk Power System Dynamics and Control–</journal_title>
+              <author>S Koch</author>
+              <volume>VIII</volume>
+              <first_page>1</first_page>
+              <cYear>2010</cYear>
+              <article_title>Mitigation of cascading failures by real-time controlled islanding and graceful load shedding</article_title>
+            </citation>
+            <citation key="ref39">
+              <journal_title>Power Systems, IEEE Transactions on</journal_title>
+              <author>MQ Ahsan</author>
+              <volume>27</volume>
+              <first_page>198</first_page>
+              <cYear>2012</cYear>
+              <doi provider="crossref">10.1109/TPWRS.2011.2158594</doi>
+              <article_title>Technique to Develop Auto Load Shedding and Islanding Scheme to Prevent Power System Blackout</article_title>
+            </citation>
+            <citation key="ref40">
+              <unstructured_citation>Zima M, Andersson G (2004) Wide area monitoring and control as a tool for mitigation of cascading failures. In: Proc Int Conf Probabilistic Methods Applied to Power Systems. 663–669.</unstructured_citation>
+            </citation>
+            <citation key="ref41">
+              <doi provider="crossref">10.1109/TDC.2006.1668608</doi>
+              <unstructured_citation>Zhang N, Kezunovic M (2006) Improving real-time fault analysis and validating relay operations to prevent or mitigate cascading blackouts. In: Proc IEEE PES Transm Distrib Conf. 847–852.</unstructured_citation>
+            </citation>
+            <citation key="ref42">
+              <doi provider="crossref">10.1017/CBO9780511780356</doi>
+              <unstructured_citation>Cohen R, Havlin S (2010) Complex networks: Structure, Robustness and Function. Cambridge. England: Cambridge University Press.</unstructured_citation>
+            </citation>
+            <citation key="ref43">
+              <doi provider="crossref">10.1109/HICSS.2002.993975</doi>
+              <unstructured_citation>Dobson I, Chen J, Thorp JS, Carreras BA, Newman DE (2002) Examining criticality of blackouts in power system models with cascading events. In: Proc 35th Hawaii Int Conf Syst Sci. 10.</unstructured_citation>
+            </citation>
+            <citation key="ref44">
+              <journal_title>Probab Eng Inf Sci</journal_title>
+              <author>I Dobson</author>
+              <volume>19</volume>
+              <first_page>15</first_page>
+              <cYear>2005</cYear>
+              <doi provider="crossref">10.1017/S0269964805050023</doi>
+              <article_title>A loading-dependent model of probabilistic cascading failure</article_title>
+            </citation>
+            <citation key="ref45">
+              <doi provider="crossref">10.1109/HICSS.2004.1265185</doi>
+              <unstructured_citation>Dobson I, Carreras BA, Newman DE (2004) A branching process approximation to cascading load-dependent system failure. In: Proc 37th Hawaii Int Conf Syst Sci. 10.</unstructured_citation>
+            </citation>
+            <citation key="ref46">
+              <journal_title>Nature</journal_title>
+              <author>DJ Watts</author>
+              <volume>393</volume>
+              <first_page>440</first_page>
+              <cYear>1998</cYear>
+              <doi provider="crossref">10.1038/30918</doi>
+              <article_title>Collective dynamics of ‘small-world’ networks</article_title>
+            </citation>
+          </citation_list>
+          <component_list>
+            <component parent_relation="isPartOf">
+              <description />
+              <doi_data>
+                <doi>10.1371/journal.pone.0112363.g001</doi>
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363.g001</resource>
+              </doi_data>
+            </component>
+            <component parent_relation="isPartOf">
+              <description />
+              <doi_data>
+                <doi>10.1371/journal.pone.0112363.g002</doi>
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363.g002</resource>
+              </doi_data>
+            </component>
+            <component parent_relation="isPartOf">
+              <description />
+              <doi_data>
+                <doi>10.1371/journal.pone.0112363.g003</doi>
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363.g003</resource>
+              </doi_data>
+            </component>
+            <component parent_relation="isPartOf">
+              <description />
+              <doi_data>
+                <doi>10.1371/journal.pone.0112363.g004</doi>
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363.g004</resource>
+              </doi_data>
+            </component>
+            <component parent_relation="isPartOf">
+              <description />
+              <doi_data>
+                <doi>10.1371/journal.pone.0112363.g005</doi>
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363.g005</resource>
+              </doi_data>
+            </component>
+            <component parent_relation="isPartOf">
+              <description />
+              <doi_data>
+                <doi>10.1371/journal.pone.0112363.g006</doi>
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363.g006</resource>
+              </doi_data>
+            </component>
+            <component parent_relation="isPartOf">
+              <description />
+              <doi_data>
+                <doi>10.1371/journal.pone.0112363.g007</doi>
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363.g007</resource>
+              </doi_data>
+            </component>
+            <component parent_relation="isPartOf">
+              <description />
+              <doi_data>
+                <doi>10.1371/journal.pone.0112363.g008</doi>
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363.g008</resource>
+              </doi_data>
+            </component>
+            <component parent_relation="isPartOf">
+              <description />
+              <doi_data>
+                <doi>10.1371/journal.pone.0112363.g009</doi>
+                <resource>http://dx.plos.org/10.1371/journal.pone.0112363.g009</resource>
+              </doi_data>
+            </component>
+          </component_list>
+        </journal_article>
+      </journal>
+    </crossref>
+  </doi_record>
+</doi_records>

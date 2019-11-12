@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<records xmlns="http://ads.harvard.edu/schema/abs/1.1/abstracts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ads.harvard.edu/schema/abs/1.1/abstracts http://ads.harvard.edu/schema/abs/1.1/abstracts.xsd" retrieved="1" start="1" selected="1">
+    <record refereed="true" article="true" type="ARTICLE">
+        <bibcode>2013JLwT...31..830B</bibcode>
+        <title>Single-Mode, Large Mode Area, Solid-Core Photonic BandGap Fiber With Hetero-Structured Cladding</title>
+        <author>Baz, Assaad</author>
+        <author>Bigot, Laurent</author>
+        <author>Bouwmans, Géraud</author>
+        <author>Quiquempois, Yves</author>
+        <journal>Journal of Lightwave Technology, vol. 31, issue 5, pp. 830-835</journal>
+        <volume>31</volume>
+        <pubdate>Mar 2013</pubdate>
+        <page>830</page>
+        <lastpage>835</lastpage>
+        <origin>CROSSREF</origin>
+        <link type="EJOURNAL">
+            <name>Electronic On-line Article (HTML)</name>
+            <url>http://cdsads.u-strasbg.fr/cgi-bin/nph-data_query?bibcode=2013JLwT...31..830B&#38;link_type=EJOURNAL</url>
+        </link>
+        <link type="REFERENCES">
+            <name>References in the Article</name>
+            <url>http://cdsads.u-strasbg.fr/cgi-bin/nph-data_query?bibcode=2013JLwT...31..830B&#38;link_type=REFERENCES</url>
+            <count>17</count>
+        </link>
+        <link type="CITATIONS">
+            <name>Citations to the Article</name>
+            <url>http://cdsads.u-strasbg.fr/cgi-bin/nph-data_query?bibcode=2013JLwT...31..830B&#38;link_type=CITATIONS</url>
+            <count>16</count>
+        </link>
+        <link type="REFCIT">
+            <name>Refereed Citations to the Article</name>
+            <url>http://cdsads.u-strasbg.fr/cgi-bin/nph-data_query?bibcode=2013JLwT...31..830B&#38;link_type=REFCIT</url>
+        </link>
+        <link type="OPENURL">
+            <name>Library Link Server</name>
+            <url>http://cdsads.u-strasbg.fr/cgi-bin/nph-data_query?bibcode=2013JLwT...31..830B&#38;link_type=OPENURL</url>
+        </link>
+        <url>http://cdsads.u-strasbg.fr/abs/2013JLwT...31..830B</url>
+        <score>1.000</score>
+        <citations>16</citations>
+        <abstract>Not Available</abstract>
+        <DOI>10.1109/JLT.2012.2237542</DOI>
+    </record>
+</records>

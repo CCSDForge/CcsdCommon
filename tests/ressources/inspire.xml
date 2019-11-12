@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection>
+    <dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:invenio="http://invenio-software.org/elements/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+        <dc:creator>Gouteraux, B.</dc:creator>
+        <dc:creator>Kiritsis, E.</dc:creator>
+        <dc:title>Quantum critical lines in holographic phases with (un)broken symmetry</dc:title>
+        <dc:subject>General Physics</dc:subject>
+        <dc:subject>Theory-HEP</dc:subject>
+        <journal>
+            <publication>JHEP 1304 (2013) 053</publication>
+        </journal>
+        <dc:identifier>http://inspirehep.net/record/1206913/files/Bifurcation.png</dc:identifier>
+        <dc:identifier>http://inspirehep.net/record/1206913/files/arXiv:1212.2625.pdf</dc:identifier>
+        <dc:identifier>http://inspirehep.net/record/1206913/files/ParSpace-delta=2.png</dc:identifier>
+        <dc:identifier>http://inspirehep.net/record/1206913/files/ParSpace-zeta=-1.png</dc:identifier>
+        <dc:description>All possible scaling IR asymptotics in homogeneous, translation invariant holographic phases preserving or breaking a U(1) symmetry in the IR are classified. Scale invariant geometries where the scalar extremizes its effective potential are distinguished from hyperscaling violating geometries where the scalar runs logarithmically. It is shown that the general critical saddle-point solutions are characterized by three critical exponents (θ, z, ζ). Both exact solutions as well as leading behaviors are exhibited. Using them, neutral or charged geometries realizing both fractionalized or cohesive phases are found. The generic global IR picture emerging is that of quantum critical lines, separated by quantum critical points which correspond to the scale invariant solutions with a constant scalar.</dc:description>
+        <dc:description>All possible scaling IR asymptotics in homogeneous, translation invariant holographic phases preserving or breaking a U(1) symmetry in the IR are classified. Scale invariant geometries where the scalar extremizes its effective potential are distinguished from hyperscaling violating geometries where the scalar runs logarithmically. It is shown that the general critical saddle-point solutions are characterized by three critical exponents ($\theta, z, \zeta$). Both exact solutions as well as leading behaviors are exhibited. Using them, neutral or charged geometries realizing both fractionalized or cohesive phases are found. The generic global IR picture emerging is that of quantum critical lines, separated by quantum critical points which correspond to the scale invariant solutions with a constant scalar.</dc:description>
+        <dc:date>2012-12-10T23:00:00Z</dc:date>
+        <dc:source>http://inspirehep.net/record/1206913</dc:source>
+    </dc:dc>
+</collection>

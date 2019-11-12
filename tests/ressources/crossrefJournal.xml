@@ -1,0 +1,84 @@
+<doi_records>
+    <doi_record owner="10.1016" timestamp="2017-06-20 04:02:29">
+        <crossref><journal><journal_metadata language="en">
+            <full_title>Experimental Cell Research</full_title>
+            <abbrev_title>Experimental Cell Research</abbrev_title>
+            <issn media_type="print">00144827</issn>
+        </journal_metadata>
+            <journal_issue>
+                <publication_date media_type="print">
+                    <month>1</month>
+                    <year>2012</year>
+                </publication_date>
+                <journal_volume>
+                    <volume>318</volume>
+                </journal_volume>
+                <issue>1</issue>
+            </journal_issue>
+            <journal_article publication_type="full_text">
+                <titles>
+                    <title>Hirudin and heparin enable efficient megakaryocyte differentiation of mouse bone marrow progenitors</title>
+                </titles>
+                <contributors>
+                    <person_name contributor_role="author" sequence="first">
+                        <given_name>Catherine</given_name>
+                        <surname>Strassel</surname>
+                        <ORCID>http://orcid.org/0000-0002-7915-1666</ORCID>
+                    </person_name>
+                    <person_name contributor_role="author" sequence="additional">
+                        <given_name>Anita</given_name>
+                        <surname>Eckly</surname>
+                    </person_name>
+                    <person_name contributor_role="author" sequence="additional">
+                        <given_name>Catherine</given_name>
+                        <surname>Léon</surname>
+                    </person_name>
+                    <person_name contributor_role="author" sequence="additional">
+                        <given_name>Sylvie</given_name>
+                        <surname>Moog</surname>
+                    </person_name>
+                    <person_name contributor_role="author" sequence="additional">
+                        <given_name>Jean-Pierre</given_name>
+                        <surname>Cazenave</surname>
+                    </person_name>
+                    <person_name contributor_role="author" sequence="additional">
+                        <given_name>Christian</given_name>
+                        <surname>Gachet</surname>
+                    </person_name>
+                    <person_name contributor_role="author" sequence="additional">
+                        <given_name>François</given_name>
+                        <surname>Lanza</surname>
+                    </person_name>
+                </contributors>
+                <publication_date media_type="print">
+                    <month>1</month>
+                    <year>2012</year>
+                </publication_date>
+                <pages>
+                    <first_page>25</first_page>
+                    <last_page>32</last_page>
+                </pages>
+                <publisher_item>
+                    <item_number item_number_type="sequence-number">S0014482711003971</item_number>
+                    <identifier id_type="pii">S0014482711003971</identifier>
+                </publisher_item>
+                <program name="AccessIndicators">
+                    <license_ref applies_to="tdm">http://www.elsevier.com/tdm/userlicense/1.0/</license_ref>
+                </program>
+                <doi_data>
+                    <doi>10.1016/j.yexcr.2011.10.003</doi>
+                    <resource>http://linkinghub.elsevier.com/retrieve/pii/S0014482711003971</resource>
+                    <collection property="text-mining">
+                        <item>
+                            <resource mime_type="text/xml">http://api.elsevier.com/content/article/PII:S0014482711003971?httpAccept=text/xml</resource>
+                        </item>
+                        <item>
+                            <resource mime_type="text/plain">http://api.elsevier.com/content/article/PII:S0014482711003971?httpAccept=text/plain</resource>
+                        </item>
+                    </collection>
+                </doi_data>
+            </journal_article>
+        </journal>
+        </crossref>
+    </doi_record>
+</doi_records>

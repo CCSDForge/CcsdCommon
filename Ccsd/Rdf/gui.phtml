@@ -1,0 +1,814 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: zahen malla osman
+ * Date: 08/06/17
+ * Time: 16:48
+ */
+
+/**
+ * =============================================== DESCRIPTION =================================================
+ * Shared Rdf Gui for Hal and AuréHal
+ * =============================================================================================================
+ */
+
+// Hal url - in case that it is not the same in hal, aurehal
+$hal_url = (APPLICATION_ENV == 'development') ? "http://hal-local.ccsd.cnrs.fr"     : (defined('HAL_URL') ? HAL_URL : HALURL);
+$aurehal = (APPLICATION_ENV == 'development') ? "http://aurehal-local.ccsd.cnrs.fr" : AUREHAL_URL;
+
+// General libraries
+$this->headLink(['rel'=>'icon', 'type'=>'type/png', 'href'=>(file_exists(SPACE . 'public/favicon.png') ? SPACE_URL . 'favicon.png' : '/img/favicon.png')]);
+$this->jQuery()
+    // Default js
+    ->addJavascriptFile($hal_url . "/js/translations.php?lang=" . Zend_Registry::get('lang'))
+    ->addJavascriptFile(CCSDLIB ."/v3/js/bootstrap.min.js")
+    ->addJavascriptFile($hal_url . "/js/utile.js")
+    // D3 js
+    ->addJavascriptFile($hal_url . "/js/d3/d3.v4.min.js")
+    ->addJavascriptFile($hal_url . "/js/d3/d3tip.js")
+    // Default CSS
+    ->addStylesheet(CCSDLIB . '/css/custom-theme/jquery-ui-1.10.0.custom.css')
+    ->addStylesheet(CCSDLIB . '/v3/css/bootstrap.min.css')
+    ->addStylesheet(CCSDLIB . '/css/ccsd.css')
+    // Interface rdf css
+    ->addStylesheet($hal_url . '/css/rdf_gui.css');
+echo $this->jQuery()->setLocalPath(CCSDLIB . '/js/jquery/min.1.9.1.js')->enable()->setUiLocalPath(CCSDLIB . '/js/jquery/ui/min.1.10.3.js')->UiEnable();
+
+// Main variables
+if($this->document) {
+    $rdf_url = $hal_url . "/" . $this->document->getIdFromDocid($this->document->getDocid()) . "/" . "rdf";
+    $partial_url = "docid/" . $this->document->getDocid();
+    $main_title = $this->document->getMainTitle();
+    $type = "Document";
+} else if ($this->author) {
+    $rdf_url = $aurehal . "/author/" . $this->author->getAuthorid() . "/" . "rdf";
+    $partial_url = "author_id/" . $this->author->getAuthorid();
+    $main_title = $this->author->getFullName(true);
+    $type = $this->translate('Auteur');
+} else if ($this->structure) {
+    $rdf_url = $aurehal . "/structure/" . $this->structure->getStructid() . "/" . "rdf";
+    $partial_url = "structure_id/" . $this->structure->getStructid();
+    $main_title = $this->structure->getStructname();
+    $type = 'Structure';
+} else if ($this->subject_code) {
+    $rdf_url = $aurehal . "/subject/" . $this->subject_code . "/" . "rdf";
+    $partial_url = "subject_code/" . $this->subject_code;
+    $main_title = $this->subject_code;
+    $type = $this->translate('Domaine');
+} else if ($this->journal) {
+    $journal_data = $this->journal->toArray();
+    $rdf_url = $aurehal . "/journal/" . $journal_data["JID"] . "/" . "rdf";
+    $partial_url = "journal_id/" . $journal_data["JID"];
+    $main_title = $journal_data["JNAME"];
+    $type = 'Journal';
+} else if ($this->anrproject) {
+    $anrproject_data = $this->anrproject->toArray();
+    $rdf_url = $aurehal . "/anrproject/" . $anrproject_data["ANRID"] . "/" . "rdf";
+    $partial_url = "anrproject_id/" . $anrproject_data["ANRID"];
+    $main_title = $anrproject_data["ACRONYME"];
+    $type = $this->translate('Projet ANR');
+} else if ($this->europeanproject) {
+    $europeanproject_data = $this->europeanproject->toArray();
+    $rdf_url = $aurehal . "/europeanproject/" . $europeanproject_data["PROJEUROPID"] . "/" . "rdf";
+    $partial_url = "europeanproject_id/" . $europeanproject_data["PROJEUROPID"];
+    $main_title = $europeanproject_data["ACRONYME"];
+    $type = $this->translate('Projet Européen');
+}
+?>
+
+<script>
+    // To check the screen resolution on client device
+    function checkScreenSize() {
+        if (window.innerWidth < 1000 || window.innerHeight < 600) {
+            document.write("<?php echo $this->translate("La résolution de votre écran n'est pas compatible avec notre interface graphique ! Pour pouvoir utiliser cette interface, vous devez augmenter la résolution de votre écran (au minimum 1000x600 px)");?>");
+        }
+    }
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GUI/RDF">
+    <title>GUI -> <?php echo $main_title; ?></title>
+</head>
+<body onload="checkScreenSize()">
+    <div class="interface">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="col-md-12">
+                    <!-- Interface header -->
+                    <div class="interface-header text-center">
+                        <h3 class="title-interface-header"><?php echo $this->translate('Représentation graphique des données RDF');?></h3>
+                        <p class="subtitle-interface-header"><?php echo $type . " / " . $main_title; ?></p>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row-fluid">
+                <!-- Main SVG -->
+                <div class="col-md-8">
+                    <div class="main"></div>
+                </div>
+                <div class="col-md-4">
+                    <!-- Interface tools -->
+                    <div class="tools">
+                        <!-- Title section -->
+                        <h2 class="title"><?php echo $this->translate('Outils d\'interface');?></h2>
+                        <!-- Body section -->
+                        <div class="body">
+                            <!-- Search zone -->
+                            <div class="input-group">
+                                <input id="search-zone" type="text" class="form-control" placeholder="<?php echo $this->translate('Rechercher par nom de noeud');?>"/>
+                                <span class="input-group-btn">
+                                <button id="search-button" type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                    <?php echo $this->translate('Chercher');?>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- Two buttons inline : expand ans collapse nodes -->
+                            <div class="input-group">
+                                <div class="btn-group" role="group">
+                                    <button id="expandAll" class="btn btn-default" type="button">
+                                        <i class="glyphicon glyphicon-resize-full"></i>
+                                        <?php echo $this->translate('Déplier les noeuds');?>
+                                    </button>
+                                    <button id="collapseAll" class="btn btn-default" type="button">
+                                        <i class="glyphicon glyphicon-resize-small"></i>
+                                        <?php echo $this->translate('Plier les noeuds');?>
+                                    </button>
+                                </div>
+                            </div>
+                            <?php
+                            if ($this->author) { ?>
+                            <!-- Travaux author -->
+                            <a id="author-list" class="btn btn-default button" type="button" target="_blank" href="<?php echo $aurehal; ?>/view/rdf/author_id/<?php echo $this->author->getAuthorid();?>?worklist">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                                <?php echo $this->translate('Voir liste compléte des travaux d\'auteur');?>
+                            </a>
+                            <?php } ?>
+                            <!-- Export the main interface as SVG or PNG -->
+                            <div class="input-group export">
+                                <div class="btn-group" role="group">
+                                    <button id="save" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                        <i class="glyphicon glyphicon-download"></i>
+                                        <?php echo $this->translate('Exporter');?>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a id="export-xml" href="<?php echo $rdf_url;?>" target="_blank"><?php echo $this->translate('au format XML/RDF');?></a></li>
+                                        <li><a id="export-svg" href="#"><?php echo $this->translate('au format SVG');?></a></li>
+                                        <li><a id="export-png" href="#"><?php echo $this->translate('au format PNG');?></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Interface description -->
+                    <div class="description">
+                        <!-- Title section -->
+                        <h2 class="title">Description</h2>
+                        <!-- Body section -->
+                        <div class="body">
+                            <span class="help">
+                                <?php echo $this->translate('Sélectionner un element dans la visualisation');?>
+                            </span>
+                            <!-- Name of selected node -->
+                            <span class="node-name-label">
+                                <i class="glyphicon glyphicon-minus"></i>
+                                <?php echo $this->translate('Nom de noeud');?> :&nbsp;<span class="node-name"></span>
+                            </span>
+                            <!--- Value of selected node -->
+                            <span class="node-value-label">
+                                <i class="glyphicon glyphicon-minus"></i>
+                                <?php echo $this->translate('Valeur de noeud');?> :&nbsp;<span class="node-value"></span>
+                            </span>
+                            <!-- Values of attributes -->
+                            <span class="node-attributes-label">
+                                <i class="glyphicon glyphicon-minus"></i>
+                                <?php echo $this->translate('Attributs');?> :&nbsp;<span class="node-attributes"></span>
+                            </span>
+                            <!-- Button redirect to AureHal -->
+                            <div class="text-center">
+                                <a id="node-gui" class="btn btn-default button" type="button" target="_blank">
+                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                    <?php echo $this->translate('Voir GUI');?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Global Variables
+        var w = $(".main").width();
+        var h = $(".main").height();
+        var nodes;
+        var links;
+        var svg = d3.select(".main")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h)
+            .attr("class", "main-svg")
+            .on("dblclick.zoom", null)
+            .append("g");
+        var tip = d3.tip()
+            .offset([0, 0])
+            .direction('s');
+
+        // Calculate text width in pixels
+        function textWidth (text, font) {
+            var fakeEl = $('<span>').hide().appendTo(document.body);
+            fakeEl.text(text || this.val() || this.text()).css('font', font || this.css('font'));
+            return fakeEl.width();
+        }
+
+        // Get sub string after delimiter by shift : getSubString('exemple', 'm', 1) => ple
+        function getSubString (string, delimiter, shift) {
+            var pos = string.indexOf(delimiter);
+            if (pos != -1) {
+                return string.substr(pos + shift);
+            }
+            return string;
+        }
+
+        // Check if a string is an url
+        function isURL (str) {
+            var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+            return pattern.test(str);
+        }
+
+        // Show desciption-help
+        $(".interface .description .body .help").css("display", "block");
+
+        // Show additional-info
+        $(".interface .tools .additional-info-label").css("display", "block");
+
+        // Getting the RDF file and convert it to JSON
+        <?php
+        // Get .rdf file
+        $xmlString = file_get_contents($rdf_url);
+        // Convert XML dom document => PHP array => enocode it in JSON
+        $root = new Ccsd_DOMDocument('1.0', 'UTF-8');
+        $root->loadXML($xmlString);
+        $domdocument = new Ccsd_DOMDocument('1.0', 'UTF-8');
+        $json = json_encode($domdocument->XmlToGroupedArray($root->documentElement));
+        ?>
+
+        // Assign the JSON content to data
+        var data = '<?php echo $json; ?>';
+
+        // Mesures for the tree simualtion
+        var margin = { top: 20, right: 0, bottom: 0, left: 10 };
+        var i = 0,
+            barHeight = 40,
+            barWidth = textWidth('ABCDEFGHIJKLMNOPQRSTUVWXYZABCD', '14px sans serif'), // the length of 30 characters
+            duration = 300;
+        var nodeEnter;
+
+        // Translate the position of the graph to top left
+        d3.select('g')
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+        // Construct a root node from the specified hierarchical data
+        var root = d3.hierarchy(JSON.parse(data));
+
+        // Invoke tree
+        var tree = d3.tree()
+            .size(100, barWidth)
+            .nodeSize([50, 75]);
+
+        // Hide Children on start
+        moveChildren(root);
+
+        // Update function
+        update(root);
+
+        // Update function
+        function update(source)
+        {
+            // Return a single node with the properties of d3.tree()
+            nodes = tree(root);
+
+            nodesSort = [];
+
+            // Transition to make svg looks smoother
+            d3.select("svg").transition()
+                .duration(duration);
+
+            // Return all nodes and each descendant in pre-order traversal (sort)
+            nodes.eachBefore(function (n) {
+                nodesSort.push(n);
+            });
+
+            // Compute the "layout"
+            nodesSort.forEach(function (n,i) {
+                n.x = i * barHeight;
+            });
+            // Update the nodes…
+            var node = svg.selectAll("g.node")
+                .data(nodesSort, function(d) { return d.id || (d.id = ++i); }); // Assigning id for each node
+
+            nodeEnter = node.enter().append("g")
+                .attr("class", "node")
+                .attr("id", function(d) {return d.id;})
+                .attr("transform", function(d) {  return "translate(" + source.y + "," + source.x + ")"; })
+                .style("opacity", 1e-6);
+
+            // Enter any new nodes at the parent's previous position
+            nodeEnter.append("rect")
+                .attr("class", 'rect')
+                .attr("y", -barHeight / 2)
+                .attr("height", barHeight)
+                .attr("width", barWidth)
+                .on("mouseover", mouseover)
+                .on("mouseout", mouseout)
+                .on("click", click)
+                .attr("fill", color);
+
+            // Labels
+            nodeEnter.append("text")
+                .attr("class", "label-text")
+                .attr("dy", 3.5)
+                .attr("dx", 5.5)
+                .attr("fill", "#E7E7DE") // Text label
+                .style("font-weight", "bold") // Bold
+                .style("pointer-events", 'none')
+                .text(function (d) {
+                    var data;
+                    data = (d.data.name).toUpperCase();
+                    if (d.data.name == 'text') {
+                        if (d.data.content.toUpperCase().length > 30) {
+                            data = d.data.content.toUpperCase().substring(0, 30) + ' ...';
+                        } else {
+                            data = d.data.content.toUpperCase();
+                        }
+                    }
+                    return d.data.children ? data : data;
+                });
+
+            // Glyphicon on rectangle
+            nodeEnter.append('text')
+                .attr("dy", 5)
+                .attr("dx", barWidth - 20)
+                .attr("fill", "#E7E7DE")
+                .attr('class', 'glyphicon')
+                .attr('id', function (d) { return "glyphicon_" + d.id; })
+                .style('display', 'block')
+                .text(function (d) {
+                    if (d.data.children)
+                        return '\ue250';
+                });
+
+            // If has attributes, and this attribute is an url, make a circle url
+            nodeEnter.filter(function (d) {
+                if (d.data.attributes) {
+                    if (typeof(Object.values(d.data.attributes)[0]) != 'object') {
+                        if (isURL(Object.values(d.data.attributes))) {
+                            // Create circle
+                            d3.select(this).append("circle")
+                                .attr("class", 'circle-url')
+                                .attr("cx", barWidth + 25)
+                                .attr("r", 20)
+                                .attr("fill", "#E87E04")
+                                .on("mouseover", mouseover)
+                                .on("mouseout", mouseout)
+                                .on('click', urlCircleClick);
+                            // Create Glyphicon on circle
+                            d3.select(this).append('text')
+                                .attr("dy", 6)
+                                .attr("dx", barWidth + 18)
+                                .attr("fill", "#565656")
+                                .attr('class', 'glyphicon glyphicon-circle')
+                                .style('display', 'block')
+                                .style("pointer-events", 'none')
+                                .text('\ue164');
+                        }
+                    }
+                }
+            });
+
+            // When clicking on the circle next to the rectangle of node
+            function urlCircleClick (d) {
+                window.open(attributeToUrl(d), "_blank");
+            }
+
+            // Transition nodes to their new position
+            nodeEnter.transition()
+                .duration(duration)
+                .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+                .style("opacity", 1);
+
+            node.transition()
+                .duration(duration)
+                .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+                .style("opacity", 1)
+                .select("rect")
+                .style("fill", color);
+
+            // Transition exiting nodes to the parent's new position
+            node.exit().transition()
+                .duration(duration)
+                .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+                .style("opacity", 1e-6)
+                .remove();
+
+            // Update links …
+            var link = svg.selectAll('.link')
+                .data(nodes.descendants().slice(1), function(d) { return d.id; });
+
+            var linkEnter = link.enter().insert('path', "g")
+                .attr("class", "link")
+                .attr('d', function(d){
+                    return diagonal(d)
+                });
+
+            // Updating
+            var linkUpdate = linkEnter.merge(link);
+
+            // Transition back to the parent element position
+            linkUpdate.transition()
+                .duration(duration)
+                .attr('d', function(d){ return diagonal(d) });
+
+            // Remove any exiting links
+            var linkExit = link.exit().transition()
+                .duration(duration)
+                .attr('d', function(d) {
+                    return diagonal(d)
+                })
+                .remove();
+
+            nodes.eachBefore(function (d) {
+                d.x0 = d.x;
+                d.y0 = d.y
+            });
+
+            // Resizing
+            // Dynamic resize for the svg
+            window.setTimeout(function() {
+                // Get the max position between nodes
+                var max = d3.max(nodesSort, function(d) {
+                    return d.x;
+                });
+                //set the max of the group
+                if (h < max + 100) {
+                    d3.select(".main")
+                        .transition()
+                        .duration(duration)
+                        .style("height", max + 100)
+                    d3.select(".main-svg")
+                        .transition()
+                        .duration(duration)
+                        .attr("height", max + 100)
+                } else {
+                    d3.select(".main")
+                        .transition()
+                        .duration(duration)
+                        .style("height", h)
+                    d3.select(".main-svg")
+                        .transition()
+                        .duration(duration)
+                        .attr("height", h)
+                }
+                d3.select('g')
+                    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+            }, 0);
+
+            window.addEventListener('resize', function() {
+                d3.select('.main').style('width', 'auto');
+                //d3.select('.main-svg').attr('width', 'auto');
+                d3.select('g')
+                    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+            });
+
+            // Mouse over
+            function mouseover (d) {
+                if (this.nodeName == 'rect') {
+                    // Manage glyphicon
+                    manageGlyphicon(this, d);
+                    // Manage color of rect
+                    d3.select(this)
+                        .transition()
+                        .duration(duration)
+                        .style("fill", "#647387")
+                        .style('cursor', 'pointer');
+                    // TIP
+                    tip.offset([0, 0]).direction('e');
+                    tip.attr('class', 'd3-tip');
+                    svg.call(tip);
+                    var nodeValue = "";
+                    var attrs = "";
+                    if (d.data.name == 'text') {
+                        nodeValue = d.data.content + '<br />';
+                    }
+                    if (d.data.attributes) {
+                        $.each(d.data.attributes, function (key, value) {
+                            if (typeof(value) == 'object') {
+                                $.each(value, function(k, v) {
+                                    attrs += ' ' + '<span class="glyphicon glyphicon-asterisk"></span> ' + k + ' => ' + v + '<br/>';
+                                });
+                            } else {
+                                attrs += ' ' + '<span class="glyphicon glyphicon-asterisk"></span> ' + key + ' => ' + value;
+                            }
+                        });
+                    }
+                    if (nodeValue != "" || attrs != "") {
+                        tip.html(nodeValue + attrs);
+                        tip.show();
+                        $(".d3-tip").addClass("animate");
+                    }
+
+                    // Styling
+                    $(".interface .description .body .help").css("display", "none");
+                    $(".interface .description .body .node-name-label").css("display", "none");
+                    $(".interface .description .body .node-name").css("display", "none");
+                    $(".interface .description .body .node-value-label").css("display", "none");
+                    $(".interface .description .body .node-value").css("display", "none");
+                    $(".interface .description .body .node-attributes-label").css("display", "none");
+                    $(".interface .description .body .node-attributes").css("display", "none");
+                    $(".interface .description .body #node-gui").css("display", "none");
+
+                    // Node Name
+                    $(".interface .description .body .node-name-label").css("display", "block");
+                    $(".interface .description .body .node-name")
+                        .css("display", "inline-block")
+                        .html((getSubString(d.data.name, ":", 1)) + "<br/>");
+                    // Node value
+                    if (d.data.name == 'text') {
+                        $(".interface .description .body .node-value-label").css("display", "block");
+                        var nodeValue = d.data.content;
+
+                        $(".interface .description .body .node-value")
+                            .css("display", "inline-block")
+                            .html(nodeValue + "<br/>");
+                    }
+                    if (d.data.attributes) {
+                        var attrs = "";
+                        $.each(d.data.attributes, function (key, value) {
+                            if (typeof(value) == 'object') {
+                                $.each(value, function(k, v) {
+                                    if (isURL(v)) {
+                                        v    = '<a href="' + v + '" target="_blank">' + v + '</a>';
+                                    }
+                                    attrs += '&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;' + "<i>" + k + '&nbsp;<i class="glyphicon glyphicon-arrow-right"></i>&nbsp;' + v + "</i><br />";
+                                });
+                            } else {
+                                var attributeValue = value;
+                                if (isURL(attributeValue)) {
+                                    attributeValue = '<a href="' + attributeValue + '" target="_blank">' + attributeValue + '</a>';
+                                }
+                                attrs += '&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;' + "<i>" + key + '&nbsp;<i class="glyphicon glyphicon-arrow-right"></i>&nbsp;' + attributeValue + "</i><br />";
+                            }
+                        });
+                        $(".interface .description .body .node-attributes-label").css("display", "block");
+                        $(".interface .description .body .node-attributes")
+                            .css("display", "block")
+                            .html(attrs);
+                    }
+                } else if (this.nodeName == 'circle') {
+                    d3.select(this)
+                        .transition()
+                        .duration(duration)
+                        .style("fill", "#27C5F4")
+                        .style('cursor', 'pointer');
+                    tip.offset([0, 5]).direction('e');
+                    tip.attr('class', 'd3-tip-url');
+                    svg.call(tip);
+                    var url = attributeToUrl(d);
+                    tip.html(url);
+                    tip.show();
+                    $(".d3-tip-url").addClass("animate");
+                }
+            }
+
+            // Mouse out
+            function mouseout (d) {
+                if (this.nodeName == 'rect') {
+                    // Manage glyphicon
+                    manageGlyphicon(this, d);
+                    // Manage color
+                    d3.select(this)
+                        .transition()
+                        .duration(duration)
+                        .style("fill", color);
+                } else if (this.nodeName == 'circle') {
+                    d3.select(this)
+                        .transition()
+                        .duration(duration)
+                        .style("fill", "#E87E04");
+                }
+                // Hide tip
+                tip.hide();
+                $(".d3-tip-url").removeClass("animate");
+            }
+
+            // Mouse click
+            function click (d) {
+                // Manage glyphicon
+                manageGlyphicon(this, d);
+                // Manage children hide and show
+                if (d.children) {
+                    d._children = d.children;
+                    d.children = null;
+                } else {
+                    d.children = d._children;
+                    d._children = null;
+                }
+                // Updating
+                update(d);
+            }
+        }
+
+        // Transform attribute to Url
+        function attributeToUrl (d) {
+            var url = ""
+            if (d.data.attributes) {
+                $.each(d.data.attributes, function (key, value) {
+                    if (typeof(value) == 'object') {
+                        $.each(value, function(k, v) {
+                            if (v.includes("aurehal")) {
+                                if (v.includes("author")) {
+                                    url = "<?php echo $aurehal; ?>/view/rdf/author_id/" + getSubString(v, "author/", 7);
+                                } else if (v.includes("structure")) {
+                                    url = "<?php echo $aurehal; ?>/view/rdf/structure_id/" + getSubString(v, "structure/", 10);
+                                } else if (v.includes("subject")) {
+                                    url = "<?php echo $aurehal; ?>/view/rdf/subject_code/" + getSubString(v, "subject/", 8);
+                                } else if (v.includes("journal")) {
+                                    url = "<?php echo $aurehal; ?>/view/rdf/journal_id/" + getSubString(v, "journal/", 8);
+                                } else if (v.includes("revue")) {
+                                    url = "<?php echo $aurehal; ?>/view/rdf/journal_id/" + getSubString(v, "revue/", 6);
+                                } else if (v.includes("anrproject")) {
+                                    url = "<?php echo $aurehal; ?>/view/rdf/anrproject_id/" + getSubString(v, "anrproject/", 11);
+                                } else if (v.includes("europeanproject")) {
+                                    url = "<?php echo $aurehal; ?>/view/rdf/europeanproject_id/" + getSubString(v, "europeanproject/", 16);
+                                }
+                            }
+                        });
+                    } else {
+                        if (value.includes("aurehal")) {
+                            if (value.includes("author")) {
+                                url = "<?php echo $aurehal; ?>/view/rdf/author_id/" + getSubString(value, "author/", 7);
+                            } else if (value.includes("structure")) {
+                                url = "<?php echo $aurehal; ?>/view/rdf/structure_id/" + getSubString(value, "structure/", 10);
+                            } else if (value.includes("subject")) {
+                                url = "<?php echo $aurehal; ?>/view/rdf/subject_code/" + getSubString(value, "subject/", 8);
+                            } else if (value.includes("journal")) {
+                                url = "<?php echo $aurehal; ?>/view/rdf/journal_id/" + getSubString(value, "journal/", 8);
+                            } else if (value.includes("revue")) {
+                                url = "<?php echo $aurehal; ?>/view/rdf/journal_id/" + getSubString(value, "revue/", 6);
+                            } else if (value.includes("anrproject")) {
+                                url = "<?php echo $aurehal; ?>/view/rdf/anrproject_id/" + getSubString(value, "anrproject/", 11);
+                            } else if (value.includes("europeanproject")) {
+                                url = "<?php echo $aurehal; ?>/view/rdf/europeanproject_id/" + getSubString(value, "europeanproject/", 16);
+                            }
+                        }
+                        else {
+                            url = value;
+                        }
+                    }
+                });
+            }
+            return url;
+        }
+
+        // Search
+        $("#search-zone").keyup(function(event){
+            if(event.keyCode == 13){
+                $("#search-button").click();
+            }
+        });
+        $('#search-button').on("click", function () {
+            svg.selectAll(".node, .link")
+                .interrupt()
+                .transition()
+                .style("opacity", 1);
+            var selectedVal = (document.getElementById('search-zone').value).trim().toLowerCase();
+            svg.selectAll(".node")
+                .filter(function (d) {return (d.data.name).toLowerCase() != selectedVal;})
+                .style("opacity", 0.05)
+                .transition()
+                .duration(3000)
+                .style("opacity", 1);
+            svg.selectAll(".link")
+                .style("opacity", 0.05)
+                .transition()
+                .duration(3000)
+                .style("opacity", 1);
+        });
+
+        // Expand and collapse all nodes
+        function expand(d){
+            var children = (d.children)? d.children : d._children;
+            if (d._children) {
+                d.children = d._children;
+                d._children = null;
+            }
+            if(children)
+                children.forEach(expand);
+        }
+        function collapse(d) {
+            if (d.children) {
+                d._children = d.children;
+                d._children.forEach(collapse);
+                d.children = null;
+            }
+        }
+        $('#expandAll').on("click", function () {
+            expand(root);
+            update(root);
+        });
+        $('#collapseAll').on("click", function () {
+            //root.children.forEach(collapse);
+            collapse(root);
+            update(root);
+        });
+
+        // Color the graph
+        function color(d)
+        {
+            return d._children ? "#565656" : // closed parent
+                d.children ? "#777777" :     // opened parent
+                    "#999999";               // child
+        }
+
+        // Color the graph
+        function manageGlyphicon(node, d)
+        {
+            var id = d3.select(node.parentNode).select('.glyphicon').attr('id');
+            if (d._children) {
+                $("#" + id).html('\ue250');
+            } else if (d.children) {
+                $("#" + id).html('\ue252');
+            }
+        }
+
+        // Hide children on start
+        function moveChildren(node)
+        {
+            if(node.children) {
+                node.children.forEach(function(c) { moveChildren(c); });
+                node._children = node.children;
+                node.children = null;
+            }
+        }
+
+        // Create a curved (diagonal) path from parent to the child nodes
+        function diagonal(d)
+        {
+            return "M" + d.y + "," + d.x
+                + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+                + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+                + " " + d.parent.y + "," + d.parent.x;
+        }
+
+        // Download
+        // as svg
+        d3.select("#export-svg").on("click", function() {
+            var html = d3.select("svg")
+                .attr("version", 1.1)
+                .attr("xmlns", "http://www.w3.org/2000/svg")
+                .node().parentNode.innerHTML;
+            var imgsrc = 'data:image/svg+xml;base64,'+ btoa(unescape(encodeURIComponent(html)));
+            var img = '<img src="'+imgsrc+'">';
+            d3.select("#svgdataurl").html(img);
+            var a = document.createElement('a');
+            a.download = "image.svg";
+            a.href = imgsrc;
+            document.body.appendChild(a);
+            a.click();
+        });
+        // as png
+        d3.select("#export-png").on("click", function() {
+            var html = d3.select("svg")
+                .attr("version", 1.1)
+                .attr("xmlns", "http://www.w3.org/2000/svg")
+                .node().parentNode.innerHTML;
+            var imgsrc = 'data:image/svg+xml;base64,'+ btoa(unescape(encodeURIComponent(html)));
+            var img = '<img src="'+imgsrc+'">';
+            d3.select("#svgdataurl").html(img);
+            var image = new Image;
+            image.src = imgsrc;
+            image.onload = function() {
+                var canvas = document.createElement('canvas');
+                canvas.width = image.width;
+                canvas.height = image.height;
+                var context = canvas.getContext('2d');
+                context.drawImage(image, 0, 0);
+                var a = document.createElement('a');
+                a.download = "image.png";
+                a.href = canvas.toDataURL('image/png');
+                document.body.appendChild(a);
+                a.click();
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+    "core": "ref_domain",
+    "sortFields": {
+    	"nom complet": "code_s"
+    },
+    "filterFields": {
+    },
+    "nbResultats": 10
+ }       

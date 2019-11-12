@@ -1,0 +1,82 @@
+<?php 
+
+if ($this->journal->SHERPA_DATE != '' && $this->journal->SHERPA_DATE != '0000-00-00') {
+	$sherpa = $this->translate('SHERPA/RoMEO');
+
+    if ($this->journal->ISSN != '') {
+    	$sherpa = '<a href="http://www.sherpa.ac.uk/romeo/search.php?jrule=ISSN&search=' . $this->journal->ISSN . '" target="_blank">' . $sherpa . '</a>';;
+    }
+
+    $sherpaInfo = array(
+    	'SHERPA_PREPRINT'   =>  $this->translate("Author's Pre-print"),
+    	'SHERPA_PRE_REST'   =>  '',
+    	'SHERPA_POSTPRINT'  =>  $this->translate("Author's Post-print"),
+    	'SHERPA_POST_REST'  =>  '',
+    	'SHERPA_COND'       =>  $this->translate("General Conditions"),
+    	'SHERPA_DATE'       =>  $this->translate("Updated"),
+    );
+
+	$row .= "<h6 style='margin-top: 25px;'>" . $sherpa;
+	$row .= "<span class='label sherpa-" . $this->journal->SHERPA_COLOR . "'>" . $this->journal->SHERPA_COLOR  . " : " . $this->translate('sherpa-' . $this->journal->SHERPA_COLOR . "-desc") . "</span>";
+    $row .= "</h6>";
+
+    $row .= "<table class='table' style='margin-left: 10px;'>";
+   	$row .= "<thead>";
+    $row .= "<tr>";
+    $row .= "<th></th>";
+    $row .= "<th>" . $this->journal->JNAME . "</th>";
+    $row .= "</tr>";
+    $row .= "</thead>";
+    $row .= "<tbody>";
+
+    foreach ($sherpaInfo as $info => $label) {
+    	if ($this->journal->{$info} == '' || $this->journal->{$info} == '[]') continue;
+        $row .= "<tr>";
+        $row .= "<td>" . $label . "</td>";
+        $row .= "<td class='text-left'>" . str_replace(array('][', '[', ']'), array('<br />','',''), $this->journal->{$info}) . "</td>";
+        $row .= "</tr>";
+	}
+
+    $row .= "</tbody>";
+    $row .= "</table>";
+}
+
+if ('read' ==  Zend_Controller_Front::getInstance()->getRequest()->getActionName()) {
+    $row .= "<div class='row'>";
+    $row .= "<div class='col-md-12' style='padding-bottom: 15px; padding-top: 15px;'>";
+    $row .= "<a class='btn btn-primary' target='_blank' href='" . HALURL . "/search/index/q/*/journalId_i/" . $this->journal->JID . "'>" . $this->translate("Voir les documents associés") . "</a>";
+    $row .= "&nbsp;";
+    //$row .= "<a class='btn btn-primary' target='_blank' href='" . HAL_API . "/ref/journal/?q=docid:" . $this->journal->JID . "&wt=xml&fl=*'>" . $this->translate("Exporter (xml)") . "</a>";
+    $row.= '<div class="btn-group">
+                <a class="btn btn-primary" href=' . HAL_API . '/ref/journal/?q=docid:' . $this->journal->JID . '&wt=xml&fl=* target="_blank">'
+                    . $this->translate("Exporter") .
+                '</a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret" style="border-top-color: #fff; border-bottom-color: #fff;"></span>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="' . HAL_API . '/ref/journal/?q=docid:' . $this->journal->JID . '&wt=xml&fl=*" target="_blank">'
+                             . $this->translate("Export XML") .
+                        '</a>
+                    </li>
+                    <li>
+                        <a href="' . AUREHAL_URL . '/journal/' . $this->journal->JID . '/rdf" target="_blank">'
+                             . $this->translate("Export RDF") .
+                        '</a>
+                    </li>
+                </ul>
+            </div>';
+    $row .= "</div>";
+    $row .= "</div>";
+}
+
+if ('replace' ==  Zend_Controller_Front::getInstance()->getRequest()->getActionName()) {
+	$this->prefix = "journalId_i_";
+	$this->id =  $this->journal->JID;
+	$this->core = "journal";
+
+    if (!isset ($this->{"OBJID_" . $this->journal->JID})) {
+    	$row .= include __DIR__ . "/papers.phtml";
+    }
+}

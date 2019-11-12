@@ -1,0 +1,7 @@
+{
+   "core": "ref_projanr",
+    "filterFields": {
+        "valide": "valid_s:VALID"
+    },
+    "nbResultats": 10
+ }

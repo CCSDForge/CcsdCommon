@@ -1,0 +1,10 @@
+{
+    "core": "ref_structure",
+    "sortFields": {
+    	"nom complet": "name_s"
+    },
+    "filterFields": {
+    	"valide": "valid_s:VALID"
+    },
+    "nbResultats": 10
+ }       

@@ -1,0 +1,405 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:produits xmlns:ns2="http://record.prodinra.inra.fr">
+    <produit>
+        <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:paper">
+            <identifier>433978</identifier>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Voylokov</lastName>
+                    <firstName>Polina</firstName>
+                    <initial>P.</initial>
+                    <publicationName>Voylokov</publicationName>
+                    <email>polina.voylokov@inra.fr</email>
+                    <role>Présentateur</role>
+                    <inraIdentifier>146193F</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </name>
+                            <code>1402</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Ecologie fonctionnelle et écotoxicologie des
+                                agroécosystèmes , Thiverval-Grignon</laboratory>
+                            <city>Thiverval-Grignon</city>
+                            <country>FRA</country>
+                            <rnsr>201521783S</rnsr>
+                            <center>
+                                <code>11</code>
+                                <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                                <acronym>CR IdF-Versailles-Grignon</acronym>
+                            </center>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ECOSYS</acronym>
+                            <affiliationPartners>
+                                <name>Institut des sciences et industries du vivant et de
+                                    l'environnement</name>
+                                <acronym>AgroParisTech</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                    <externalAffiliation>
+                        <name>Université Paris Saclay</name>
+                        <identifier>314266</identifier>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Loubet</lastName>
+                    <firstName>Benjamin</firstName>
+                    <initial>B.</initial>
+                    <publicationName>Loubet</publicationName>
+                    <email>Benjamin.Loubet@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>18186S</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </name>
+                            <code>1402</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Ecologie fonctionnelle et écotoxicologie des
+                                agroécosystèmes , Thiverval-Grignon</laboratory>
+                            <city>Thiverval-Grignon</city>
+                            <country>FRA</country>
+                            <rnsr>201521783S</rnsr>
+                            <center>
+                                <code>11</code>
+                                <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                                <acronym>CR IdF-Versailles-Grignon</acronym>
+                            </center>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ECOSYS</acronym>
+                            <affiliationPartners>
+                                <name>Institut des sciences et industries du vivant et de
+                                    l'environnement</name>
+                                <acronym>AgroParisTech</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                    <externalAffiliation>
+                        <name>Université Paris Saclay</name>
+                        <identifier>314266</identifier>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Houot</lastName>
+                    <firstName>Sabine</firstName>
+                    <initial>S.</initial>
+                    <publicationName>Houot</publicationName>
+                    <email>sabine.houot@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>10920V</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </name>
+                            <code>1402</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Ecologie fonctionnelle et écotoxicologie des
+                                agroécosystèmes , Thiverval-Grignon</laboratory>
+                            <city>Thiverval-Grignon</city>
+                            <country>FRA</country>
+                            <rnsr>201521783S</rnsr>
+                            <center>
+                                <code>11</code>
+                                <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                                <acronym>CR IdF-Versailles-Grignon</acronym>
+                            </center>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ECOSYS</acronym>
+                            <affiliationPartners>
+                                <name>Institut des sciences et industries du vivant et de
+                                    l'environnement</name>
+                                <acronym>AgroParisTech</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                    <externalAffiliation>
+                        <name>Université Paris Saclay</name>
+                        <identifier>314266</identifier>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Savoie</lastName>
+                    <firstName>Antoine</firstName>
+                    <initial>A.</initial>
+                    <publicationName>Savoie</publicationName>
+                    <email>antoine.savoie@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>106318N</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>17</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Unité Expérimentale de Physiologie Animale de l'Orfrasière</name>
+                            <code>1297</code>
+                            <type>UE</type>
+                            <laboratory>UE : Unité Expérimentale de Physiologie Animale de
+                                l'Orfrasière, Nouzilly</laboratory>
+                            <city>Nouzilly</city>
+                            <country>FRA</country>
+                            <rnsr>200817787D</rnsr>
+                            <center>
+                                <code>32</code>
+                                <name>Centre de recherche Val de Loire</name>
+                                <acronym>CR Val de Loire</acronym>
+                            </center>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>UE PAO</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Genermont</lastName>
+                    <firstName>Sophie</firstName>
+                    <initial>S.</initial>
+                    <publicationName>Genermont</publicationName>
+                    <email>Sophie.Genermont@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>10979J</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </name>
+                            <code>1402</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Ecologie fonctionnelle et écotoxicologie des
+                                agroécosystèmes , Thiverval-Grignon</laboratory>
+                            <city>Thiverval-Grignon</city>
+                            <country>FRA</country>
+                            <rnsr>201521783S</rnsr>
+                            <center>
+                                <code>11</code>
+                                <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                                <acronym>CR IdF-Versailles-Grignon</acronym>
+                            </center>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ECOSYS</acronym>
+                            <affiliationPartners>
+                                <name>Institut des sciences et industries du vivant et de
+                                    l'environnement</name>
+                                <acronym>AgroParisTech</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                    <externalAffiliation>
+                        <name>Université Paris Saclay</name>
+                        <identifier>314266</identifier>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <title language="eng">Comparing ammonia volatilisation of livestock effluents having
+                undergone different treatments in field conditions </title>
+            <alternateTitle/>
+            <subTitle/>
+            <language>eng</language>
+            <year>2018</year>
+            <link>https://workshop.inra.fr/nitrogenworkshop2018/</link>
+            <recordAccessCondition>Publique</recordAccessCondition>
+            <keywords/>
+            <targetAudience>Scientifique</targetAudience>
+            <itemType>PAPER</itemType>
+            <halIdentifier>hal-01826832</halIdentifier>
+            <workflowStatus>validé</workflowStatus>
+            <creationDate>2018-06-29T10:53:37</creationDate>
+            <firstValidationDate>2018-06-29T14:01:21</firstValidationDate>
+            <validationDate>2018-06-29T14:01:21</validationDate>
+            <updateDate>2018-08-01T12:05:46</updateDate>
+            <depositor>
+                <lastName>Noé</lastName>
+                <firstName>Nicole</firstName>
+                <inraIdentifier>04356K</inraIdentifier>
+                <email>nicole.noe@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>15</code>
+                        <name>Environnement et Agronomie</name>
+                        <acronym>EA</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>16</code>
+                        <name>Santé des Plantes et Environnement</name>
+                        <acronym>SPE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>11</code>
+                        <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                        <acronym>CR IdF-Versailles-Grignon</acronym>
+                    </center>
+                    <unitName>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </unitName>
+                    <unitCode>1402</unitCode>
+                </affiliation>
+            </depositor>
+            <reviewer>
+                <lastName>Noé</lastName>
+                <firstName>Nicole</firstName>
+                <inraIdentifier>04356K</inraIdentifier>
+                <email>nicole.noe@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>15</code>
+                        <name>Environnement et Agronomie</name>
+                        <acronym>EA</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>16</code>
+                        <name>Santé des Plantes et Environnement</name>
+                        <acronym>SPE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>11</code>
+                        <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                        <acronym>CR IdF-Versailles-Grignon</acronym>
+                    </center>
+                    <unitName>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </unitName>
+                    <unitCode>1402</unitCode>
+                </affiliation>
+            </reviewer>
+            <firstReviewer>
+                <lastName>Noé</lastName>
+                <firstName>Nicole</firstName>
+                <inraIdentifier>04356K</inraIdentifier>
+                <email>nicole.noe@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>15</code>
+                        <name>Environnement et Agronomie</name>
+                        <acronym>EA</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>16</code>
+                        <name>Santé des Plantes et Environnement</name>
+                        <acronym>SPE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>11</code>
+                        <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                        <acronym>CR IdF-Versailles-Grignon</acronym>
+                    </center>
+                    <unitName>Ecologie fonctionnelle et écotoxicologie des agroécosystèmes </unitName>
+                    <unitCode>1402</unitCode>
+                </affiliation>
+            </firstReviewer>
+            <complements/>
+            <halSending>true</halSending>
+            <origin>CREATED</origin>
+            <event>
+                <name>20th N Workshop and Side event</name>
+                <meeting>
+                    <city>Rennes</city>
+                    <country>FRA</country>
+                    <period>
+                        <startDate>2018-06-25</startDate>
+                        <endDate>2018-06-27</endDate>
+                    </period>
+                </meeting>
+            </event>
+            <paperType>Poster</paperType>
+            <invitedConference>false</invitedConference>
+            <peerReviewed>true</peerReviewed>
+            <pages/>
+            <paperNumber>Session III: Local process studies</paperNumber>
+            <experimentalUnit/>
+        </record>
+        <ns2:attachment>
+            <attachmentId>{2BD1A13B-4F23-4F16-AEB1-75D0CBBD06DA}</attachmentId>
+            <accessCondition>Publique</accessCondition>
+            <title>20thNworkshop_template_VOYLOKOV_final_version.pdf</title>
+            <fileName>20thNworkshop_template_VOYLOKOV_final_version.pdf</fileName>
+            <fileSize>90855.0</fileSize>
+            <fileMimeType>application/pdf</fileMimeType>
+            <rights>CC-BY-SA</rights>
+            <original>false</original>
+        </ns2:attachment>
+        <ns2:attachment>
+            <attachmentId>{2BD1A13B-4F23-4F16-AEB1-75D0CBBD06DA}</attachmentId>
+            <accessCondition>Publique</accessCondition>
+            <title>20thNworkshop_template_VOYLOKOV_final_version.docx</title>
+            <fileName>20thNworkshop_template_VOYLOKOV_final_version.docx</fileName>
+            <fileSize>90855.0</fileSize>
+            <fileMimeType>application/vnd.openxmlformats-officedocument.wordprocessingml.document</fileMimeType>
+            <rights>CC-BY-SA</rights>
+            <original>true</original>
+        </ns2:attachment>
+    </produit>
+</ns2:produits>

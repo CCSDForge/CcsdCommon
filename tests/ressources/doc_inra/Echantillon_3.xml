@@ -1,0 +1,428 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:produits xmlns:ns2="http://record.prodinra.inra.fr">
+    <produit>
+        <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:proceedingPaper">
+            <identifier>444647</identifier>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Raynal</lastName>
+                    <firstName>Helene</firstName>
+                    <initial>H.</initial>
+                    <publicationName>Raynal</publicationName>
+                    <email>helene.raynal@inra.fr</email>
+                    <role>Auteur de correspondance</role>
+                    <inraIdentifier>14928B</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Mathématiques et Informatique Appliquées Toulouse </name>
+                            <code>0875</code>
+                            <type>UR</type>
+                            <laboratory>UR : Mathématiques et Informatique Appliquées Toulouse ,
+                                Auzeville</laboratory>
+                            <city>Auzeville</city>
+                            <country>FRA</country>
+                            <rnsr>198717966P</rnsr>
+                            <center>
+                                <code>31</code>
+                                <name>Centre de recherche Occitanie-Toulouse</name>
+                                <acronym>CR Occitanie-Toulouse</acronym>
+                            </center>
+                            <department>
+                                <code>60</code>
+                                <name>Mathématiques et Informatique Appliquées</name>
+                                <acronym>MIA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>MIAT</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:externalAuthor">
+                    <lastName>Salva</lastName>
+                    <firstName>Hélène</firstName>
+                    <initial>H.</initial>
+                    <publicationName>Salva</publicationName>
+                    <email/>
+                    <role/>
+                    <externalAffiliation>
+                        <name>Ecole d'Ingénieurs de Purpan</name>
+                        <identifier>318039</identifier>
+                        <acronym>INPT - EI Purpan</acronym>
+                        <city>Toulouse</city>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Casellas</lastName>
+                    <firstName>Eric</firstName>
+                    <initial>E.</initial>
+                    <publicationName>Casellas</publicationName>
+                    <email>eric.casellas@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>100027A</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>60</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Mathématiques et Informatique Appliquées Toulouse </name>
+                            <code>0875</code>
+                            <type>UR</type>
+                            <laboratory>UR : Mathématiques et Informatique Appliquées Toulouse ,
+                                Auzeville</laboratory>
+                            <city>Auzeville</city>
+                            <country>FRA</country>
+                            <rnsr>198717966P</rnsr>
+                            <center>
+                                <code>31</code>
+                                <name>Centre de recherche Occitanie-Toulouse</name>
+                                <acronym>CR Occitanie-Toulouse</acronym>
+                            </center>
+                            <department>
+                                <code>60</code>
+                                <name>Mathématiques et Informatique Appliquées</name>
+                                <acronym>MIA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>MIAT</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Chabrier</lastName>
+                    <firstName>Patrick</firstName>
+                    <initial>P.</initial>
+                    <publicationName>Chabrier</publicationName>
+                    <email>patrick.chabrier@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>15754Z</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>60</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Mathématiques et Informatique Appliquées Toulouse </name>
+                            <code>0875</code>
+                            <type>UR</type>
+                            <laboratory>UR : Mathématiques et Informatique Appliquées Toulouse ,
+                                Auzeville</laboratory>
+                            <city>Auzeville</city>
+                            <country>FRA</country>
+                            <rnsr>198717966P</rnsr>
+                            <center>
+                                <code>31</code>
+                                <name>Centre de recherche Occitanie-Toulouse</name>
+                                <acronym>CR Occitanie-Toulouse</acronym>
+                            </center>
+                            <department>
+                                <code>60</code>
+                                <name>Mathématiques et Informatique Appliquées</name>
+                                <acronym>MIA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>MIAT</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Couture</lastName>
+                    <firstName>Stéphane</firstName>
+                    <initial>S.</initial>
+                    <publicationName>Couture</publicationName>
+                    <email>stephane.couture@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>19265Q</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>50</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Mathématiques et Informatique Appliquées Toulouse </name>
+                            <code>0875</code>
+                            <type>UR</type>
+                            <laboratory>UR : Mathématiques et Informatique Appliquées Toulouse ,
+                                Auzeville</laboratory>
+                            <city>Auzeville</city>
+                            <country>FRA</country>
+                            <rnsr>198717966P</rnsr>
+                            <center>
+                                <code>31</code>
+                                <name>Centre de recherche Occitanie-Toulouse</name>
+                                <acronym>CR Occitanie-Toulouse</acronym>
+                            </center>
+                            <department>
+                                <code>60</code>
+                                <name>Mathématiques et Informatique Appliquées</name>
+                                <acronym>MIA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>MIAT</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:externalAuthor">
+                    <lastName>Chaïb</lastName>
+                    <firstName>Karim</firstName>
+                    <initial>K.</initial>
+                    <publicationName>Chaïb</publicationName>
+                    <email/>
+                    <role/>
+                    <externalAffiliation>
+                        <name>Ecole d'Ingénieurs de Purpan</name>
+                        <identifier>318039</identifier>
+                        <acronym>INPT - EI Purpan</acronym>
+                        <city>Toulouse</city>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Bergez</lastName>
+                    <firstName>Jacques-Eric</firstName>
+                    <initial>J.-E.</initial>
+                    <publicationName>Bergez</publicationName>
+                    <email>jacques-eric.bergez@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>18197E</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>AGroécologie, Innovations, teRritoires</name>
+                            <code>1248</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : AGroécologie, Innovations, teRritoires,
+                                Auzeville</laboratory>
+                            <city>Auzeville</city>
+                            <country>FRA</country>
+                            <rnsr>200317643U</rnsr>
+                            <center>
+                                <code>31</code>
+                                <name>Centre de recherche Occitanie-Toulouse</name>
+                                <acronym>CR Occitanie-Toulouse</acronym>
+                            </center>
+                            <department>
+                                <code>51</code>
+                                <name>Sciences pour l'Action et le Développement</name>
+                                <acronym>SAD</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>AGIR</acronym>
+                            <affiliationPartners>
+                                <name>Ecole Nationale Supérieure Agronomique de Toulouse</name>
+                                <acronym>INPT-ENSAT</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Ecole supérieure d'Agriculture de Purpan</name>
+                                <acronym>INPT-EI-Purpan</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <title language="eng">Using crop simulation for bio-economic evaluation of innovative
+                cropping systems</title>
+            <alternateTitle/>
+            <subTitle/>
+            <language>eng</language>
+            <abstract language="eng">With the increasing scarcity of natural resources, the
+                unsustainability of the conventional and intensive agriculture and the need of food
+                security, agronomy engineering is facing a serious challenge. In this context,
+                different projects aim to design and evaluate innovative cropping systems in order
+                to increase the productivity of agro-ecosystems while preserving the diverse
+                ecosystem services they provide or support. Simulation can help agronomists to test
+                the robustness of field experiments results by testing various soil and climate
+                conditions. While there are already crop models that simulate correctly crop
+                development, there are few models that simulate the way farmer conduct their
+                cropping systems. Yet, it is a key challenge because innovative cropping systems are
+                often based on new farming practices, which take more into account the state of the
+                crop and of the environment than conventional cropping systems. In addition, the use
+                of “fixed dates” in simulations for farming practices is not adapted because it is
+                important to take into account weather variations, which have a strong effect on the
+                dates of farming operations. Therefore, the evaluation of innovative cropping
+                systems by simulation requires building decision model that mimic farmers’
+                decision-making, and help in analyzing impacts of farmers’ practices on the
+                sustainability of the cropping system. The modelling and simulation platform
+                dedicated to the study of agro-ecosystems RECORD (J-E. Bergez et al., 2013) has been
+                developed at INRA (French national institute for agricultural research). One of the
+                objectives of the RECORD project was to help modelers in developing decision models
+                and in coupling them to crop models. A generic conceptual decision-modelling
+                framework (Bergez et al., 2016) has been proposed. It allows to design flexible
+                management plan of activities using the concepts of a directed multigraph without
+                loops and of a knowledge base. In the context of cropping system modelling, the
+                graph of activities represents the farmer’s work plan and relies on the knowledge
+                base to activate or disable technical operations. The knowledge base evolves all
+                along the simulation collecting information provided by the biophysical model, as
+                the farmer does when monitoring and observing the environment. Based on this
+                conceptual decision-modelling framework an original graphical plugin “Decision”
+                (Bergez et al., 2016) has been developed. It helps agronomist modelers in sketching
+                and implementing their decision models and in linking them with biophysical models.
+                The plugin allows defining activities (tasks), relation between activities and
+                decision rules to trigger the different tasks. As the RECORD platform is based on
+                DEVS (Discrete Event System Specification) formalism (Zeigler et al., 2000), the
+                software implementation of the plugin is expressed in this formalism. We have
+                applied this decision-modelling framework to the context of an ongoing project whose
+                issue is bio economic evaluation of innovative cropping systems compared to
+                conventional ones. To produce simulation results required by this project, a coupled
+                model has been designed following the conceptual approach that an agricultural
+                system can be divided into three sub-systems: Agent, Operating, and Biophysical (Le
+                Gal et al. 2009; Martin-Clouaire and Rellier 2009). The model couples the crop model
+                STICS (Brisson et al., 1998, J-E. Bergez et al., 2014), to a decision model using
+                the Decision plugin and to a climate series reader. The model is generic because
+                STICS can simulate the behavior of soil–crop systems for a large range of crops, and
+                because the decision model is parametrable. It is used for different species
+                commonly cultivated in south west of France (maize, sunflower, wheat, sorghum …),
+                for different years (1982-2012), for two ways of farming practices: conventional
+                (what do farmers commonly use) and innovative which are currently tested in
+                experimental fields.</abstract>
+            <year>2017</year>
+            <link>http://www.efita2017.org/proceedings/</link>
+            <contactAuthor>Hélène Raynal</contactAuthor>
+            <recordAccessCondition>Publique</recordAccessCondition>
+            <keywords>
+                <keyword>decision</keyword>
+                <keyword>crop management</keyword>
+                <keyword>modelling</keyword>
+                <keyword>bio-economic evaluation</keyword>
+            </keywords>
+            <targetAudience>Scientifique</targetAudience>
+            <itemType>PROCEEDING_PAPER</itemType>
+            <workflowStatus>validé</workflowStatus>
+            <creationDate>2018-09-20T08:20:43</creationDate>
+            <firstValidationDate>2018-09-20T08:29:31</firstValidationDate>
+            <validationDate>2018-09-20T08:29:31</validationDate>
+            <updateDate>2018-09-20T08:29:32</updateDate>
+            <depositor>
+                <lastName>Raynaud</lastName>
+                <firstName>Christelle</firstName>
+                <inraIdentifier>18650X</inraIdentifier>
+                <email>christelle.raynaud@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>MICS</code>
+                        <name>Direction de l'Immobilier et de la Coordination des Services
+                            Déconcentrés d'Appui à la Recherche</name>
+                        <acronym>DICSDAR</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Services déconcentrés d'appui à la recherche
+                        Occitanie-Montpellier</unitName>
+                    <unitCode>0378</unitCode>
+                </affiliation>
+            </depositor>
+            <reviewer>
+                <lastName>Raynaud</lastName>
+                <firstName>Christelle</firstName>
+                <inraIdentifier>18650X</inraIdentifier>
+                <email>christelle.raynaud@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>MICS</code>
+                        <name>Direction de l'Immobilier et de la Coordination des Services
+                            Déconcentrés d'Appui à la Recherche</name>
+                        <acronym>DICSDAR</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Services déconcentrés d'appui à la recherche
+                        Occitanie-Montpellier</unitName>
+                    <unitCode>0378</unitCode>
+                </affiliation>
+            </reviewer>
+            <firstReviewer>
+                <lastName>Raynaud</lastName>
+                <firstName>Christelle</firstName>
+                <inraIdentifier>18650X</inraIdentifier>
+                <email>christelle.raynaud@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>MICS</code>
+                        <name>Direction de l'Immobilier et de la Coordination des Services
+                            Déconcentrés d'Appui à la Recherche</name>
+                        <acronym>DICSDAR</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Services déconcentrés d'appui à la recherche
+                        Occitanie-Montpellier</unitName>
+                    <unitCode>0378</unitCode>
+                </affiliation>
+            </firstReviewer>
+            <complements/>
+            <halSending>false</halSending>
+            <origin>DUPLICATED</origin>
+            <event>
+                <name>2017 EFITA WCCA Congress</name>
+                <type>Congrès</type>
+                <meeting>
+                    <city>Montpellier</city>
+                    <country>FRA</country>
+                    <period>
+                        <startDate>2017-07-02</startDate>
+                        <endDate>2017-07-06</endDate>
+                    </period>
+                </meeting>
+            </event>
+            <invitedConference>false</invitedConference>
+            <paperProceedingsType/>
+            <paperNumber>97</paperNumber>
+            <pagination>99-100</pagination>
+            <peerReviewed>true</peerReviewed>
+            <proceedingsTitle>Abstract. 2017 EFITA CONGRESS. European conference dedicated to the
+                future use of ICT in the agri - food sector, bioresource and biomass
+                sector</proceedingsTitle>
+            <proceedingsType>Book of abstracts</proceedingsType>
+            <pages>254 p.</pages>
+            <publishing>
+                <published>true</published>
+                <publication>
+                    <idPublisher>13861</idPublisher>
+                    <publisherName>IRSTEA</publisherName>
+                    <publisherCity>Montpellier</publisherCity>
+                    <publisherCountry>FRA</publisherCountry>
+                    <isbn>978-2-85362-686-6</isbn>
+                </publication>
+            </publishing>
+            <experimentalUnit/>
+        </record>
+    </produit>
+</ns2:produits>

@@ -1,0 +1,136 @@
+<?php
+/** @var Hal_View $view */
+$label = array (
+	'regroupinstitution'  => 'rgpinst',
+	'institution'  => 'danger',
+	'regrouplaboratory'   => 'rgplabo',
+	'laboratory'   => 'warning',
+	'department'   => 'success',
+	'researchteam' => 'primary'
+);
+
+$label_valid = array (
+	'OLD'  => 'warning',
+	'INCOMING'   => 'danger',
+	'VALID'   => 'success'
+);
+
+$row 		= array ();
+$indice     = 0;
+
+if ($view->deep) {
+
+	for ($indice; $indice < $view->deep; $indice++) {
+
+		$row[$indice]  = "<div class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>";
+		$row[$indice] .= "<div class='bounds b_vertical b_vertical_" . $indice  . ($view->deep-1 == $indice ? " b_last " : "") . "' " . ($indice+1 != $view->deep ? "style='display: none;'" : "") . "></div>";
+
+		$row[$indice] .= "<div class='bounds b_horizontal b_horizontal_" . $indice  . ($view->deep-1 == $indice ? " b_last " : "") . "' " . ($indice+1 != $view->deep ? "style='display: none;'" : "") . ">";
+
+		if ($indice+1 == $view->deep) {
+			$row[$indice] .= "<i class='glyphicon glyphicon-play play-arrow'></i>";
+
+			if (isset ($view->structure['code']) && $view->structure['code']) {
+				$row[$indice] .= "<span class='label label-default code' >" . $view->structure['code'] . "</span>";
+			}
+		}
+
+		$row[$indice] .= "</div>";
+		$row[$indice] .= "</div>";
+
+	}
+
+	$indice++;
+
+}
+
+$row[$indice]  = "<div data-rank='" . (12 - $view->deep) . "' class='col-xs-" . (12 - $view->deep) . " col-sm-" . (12 - $view->deep) . " col-md-" . (12 - $view->deep) . " col-lg-" . (12 - $view->deep) . "' data-category='" . $view->structure['struct']->getTypestruct() . "'>";
+
+$row[$indice] .= "<blockquote class='structure-element-" . $view->structure['struct']->getTypestruct() . "' style=\"border: 5px solid #eeeeee;";
+
+if ($view->options) {
+	$row[$indice] .= "cursor: pointer;\" onclick=\"link('/structure/read/id/" . $view->structure['struct']->getStructid() . "');";
+}
+
+$row[$indice] .= "\">";
+
+$row[$indice] .= "<h6>";
+$row[$indice] .= "<i style='background:none;border:0;' class='glyphicon glyphicon-ok-circle alert-" . $label_valid[$view->structure['struct']->getValid()] . "'></i>&nbsp;";
+$row[$indice] .= $view->structure['struct']->getStructname() . "&nbsp;<span class='label label-" . $label[$view->structure['struct']->getTypestruct()] . "'>" . $view->translate($view->structure['struct']->getTypestruct()) . "</span>";
+if ($view->structure['struct']->getStructId() != 0) {
+	$row[$indice] .= "<span class='badge' style='margin-left:5px;'>" . $view->structure['struct']->getStructId() . "</span>";
+}
+
+$row[$indice] .= "</h6>";
+$row[$indice] .= "<div>";
+
+if ($view->structure['struct']->getSigle()) {
+	$row[$indice] .= "<small>" . $view->structure['struct']->getSigle() . "</small>";
+}
+
+if ($view->structure['struct']->getAddress()) {
+	$row[$indice] .= "<small>" . $view->structure['struct']->getAddress() . "</small>";
+}
+
+if ($view->structure['struct']->getIdext()) {
+    foreach ($view->structure['struct']->getIdextLink() as $server => $data) {
+        $row[$indice] .= "<small><strong>" . $server . " : </strong><a href='" . $data['url'] . "' target='_blank'></a>" . $data['id'] . "</small>";
+    }
+}
+
+if ($view->structure['struct']->getPaysid()) {
+	$territory = Zend_Locale::getTranslationList('territory', null);
+	$row[$indice] .= "<small>" . array_key_exists(strtoupper($view->structure['struct']->getPaysid()), $territory) ? $territory[strtoupper($view->structure['struct']->getPaysid())] : strtoupper($view->structure['struct']->getPaysid()) . "</small>";
+}
+
+if ($view->structure['struct']->getUrl()) {
+	$row[$indice] .= "<small><a target='_blank'  href='" . $view->structure['struct']->getUrl() . "'>" . $view->structure['struct']->getUrl() . "</a></small>";
+}
+
+if ($view->structure['struct']->getSdate() && $view->structure['struct']->getSdate()!= '0000-00-00') {
+	$row[$indice] .= "<small>" . $view->translate("Date de création : ") . (new Zend_Date())->set($view->structure['struct']->getSdate(), 'yyyy-MM-dd')->get(Zend_Date::DATE_FULL) . "</small>";
+}
+
+if ($view->structure['struct']->getEdate() && $view->structure['struct']->getEdate()!= '0000-00-00') {
+	$row[$indice] .= "<small>" . $view->translate("Date de fermeture/fusion : ") . (new Zend_Date())->set($view->structure['struct']->getEdate(), 'yyyy-MM-dd')->get(Zend_Date::DATE_FULL) . "</small>";
+}
+
+if (Hal_Auth::isAdminStruct()  || Hal_Auth::hasAdministratorRole()) {
+    $view->structure['struct']->setAdminStruct();
+
+    $res = $view->structure['struct']->getAdminStruct();
+    $liste="";
+    if (count($res)) {
+        foreach ($res as $admin) {
+            if (isset($admin)) {
+                if ($admin->getEmail()) {
+                    $liste .= " <a href='mailto:". $admin->getEmail() . "'>".$admin->getFullname()."</a>, ";
+                }
+                else {
+                    $liste .= $admin->getFullname();
+                }
+            }
+        }
+        $liste = rtrim($liste, ", ");
+        $row[$indice] .= "<small>Référents de la structure : " . $liste ."</small>";
+    }
+}
+
+if ($view->structure['struct']->getLocked()){
+    $row[$indice] .= "<small><i class='glyphicon glyphicon-lock'></i> Structure verrouillée</small>";
+}
+
+$row[$indice] .= "</div>";
+
+if (SPACE_NAME != 'AUREHAL' || (!Hal_Auth::canModifyStructLock($view->structure['struct']->getStructid()) && $view->structure['struct']->getLocked() == 1)) {
+    $row[$indice] .= "<a href='#' alt='".$view->translate('Structure verrouillée')."' title='".$view->translate('Structure verrouillée')."' style='position: absolute; top: 10px; right: 25px; font-size: inherit;'><i class='glyphicon glyphicon-lock'></i></a>";
+} else if ($view->plugin->isAllowed((new Zend_Controller_Request_Http())->setControllerName('structure')->setActionName('modify')->setParam('id',$view->structure['struct']->getStructid())) && $view->parents && $view->options) {
+	$row[$indice] .= "<a href='" . URL . "/structure/modify/id/" . $view->structure['struct']->getStructid() . "' style='position: absolute; top: 10px; right: 25px; font-size: inherit;'><i class='glyphicon glyphicon-edit'></i></a>";
+} else if ($view->plugin->isAllowed((new Zend_Controller_Request_Http())->setControllerName('structure')->setActionName('transfer')->setParam('id',$view->structure['struct']->getStructid()))){
+    $row[$indice] .= "<a href='" . URL . "/structure/browse?critere=parentDocid_i%3A". $view->structure['struct']->getStructid() . "&category=*' data-toggle='tooltip' title='Voir les sous structures' target='_blank' style='position: absolute; top: 10px; right: 25px; font-size: inherit;'><i class='glyphicon glyphicon-th-list'></i></a>";
+}
+
+$row[$indice] .= "</blockquote>";
+$row[$indice] .= "</div>";
+
+$view->row[] = $row;

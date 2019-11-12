@@ -1,0 +1,10 @@
+{
+    "core": "ref_journal",
+    "sortFields": {
+    	"nom complet": "title_s"
+    },
+    "filterFields": {
+    	"valide": "valid_s:VALID"
+    },
+    "nbResultats": 10
+ }       

@@ -1,0 +1,55 @@
+<?php 
+if ($this->journal->SHERPA_DATE != '' && $this->journal->SHERPA_DATE != '0000-00-00') {
+	$sherpa = $this->translate('SHERPA/RoMEO');
+            
+	if ($this->journal->ISSN != '') {
+    	$sherpa = '<a href="http://www.sherpa.ac.uk/romeo/search.php?jrule=ISSN&search=' . $this->journal->ISSN . '" target="_blank">' . $sherpa . '</a>';
+    } 
+    
+    $row .= "<small>" . $sherpa;
+    
+    if ($this->journal->SHERPA_COLOR) {
+    	$row .= " : ";
+	    $row .= "<span class='label sherpa-" . $this->journal->SHERPA_COLOR . " sherpa-popover' role='button' style='cursor: pointer;'>" . $this->journal->SHERPA_COLOR . "</span>";
+	    $row .= $this->translate("sherpa-" . $this->journal->SHERPA_COLOR . "-desc");
+        $row .= "<span class='label sherpa-" . $this->journal->SHERPA_COLOR . " sherpa-popover-left' role='button' style='cursor: pointer;'>" . $this->translate("(Plus d'info sur ce journal)") . "</span>";
+    }
+    
+    $row .= "</small>";
+	
+    $sherpaInfo = array(
+		'SHERPA_PREPRINT'   =>  $this->translate("Author's Pre-print"),
+		'SHERPA_PRE_REST'   =>  '',
+		'SHERPA_POSTPRINT'  =>  $this->translate("Author's Post-print"),
+		'SHERPA_POST_REST'  =>  '',
+		'SHERPA_COND'       =>  $this->translate("General Conditions"),
+		'SHERPA_DATE'       =>  $this->translate("Updated"),
+    );
+    
+	$row .= "<div class='sherpa-description' style='display:none;'>";
+    $row .= "<table class='table'>";
+    $row .= "<thead>";
+    $row .= "<tr>";
+    $row .= "<th></th>";
+    $row .= "<th>" . $this->journal->JNAME . "</th>";
+    $row .= "</tr>";
+    $row .= "</thead>";
+    $row .= "<tbody>";
+    
+	foreach ($sherpaInfo as $info => $label) {
+        if ($this->journal->{$info} == '' || $this->journal->{$info} == '[]') continue;
+		$row .= "<tr>";
+		$row .= "<td>" . $label . "</td>";
+		$row .= "<td class='text-left'>" . str_replace(array('][', '[', ']'), array('<br />','',''), $this->journal->{$info}) . "</td>";
+		$row .= "</tr>";
+	}
+                    
+	$row .= "</tbody>";
+    $row .= "</table>";
+    $row .= "</div>";
+	
+    $row .= "<script language='JavaScript'>";
+	$row .= "$('.sherpa-popover').popover({ 'html' :  true, 'content' :  $('.sherpa-popover').parent().next('.sherpa-description').html()});";
+    $row .= "$('.sherpa-popover-left').popover({ 'html' :  true, 'placement' : 'bottom', 'content' :  $('.sherpa-popover').parent().next('.sherpa-description').html()});";
+    $row .= "</script>";
+}

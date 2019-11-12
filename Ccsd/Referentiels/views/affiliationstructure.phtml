@@ -1,0 +1,39 @@
+<?php
+if (! $this->o instanceof Ccsd_Referentiels_Structure) {
+    $this->o = (new Ccsd_Referentiels_Structure)->set($this->o);
+}
+$this->element  = 'affiliation';
+?>
+<div style='margin-top: 10px;' <?php if ($this->o->STRUCTID != '') { echo 'data-id="' . $this->o->STRUCTID . '"'; } ?> >
+    <a href="javascript:void(0);" class="close" onclick='$(this).parent().remove();' style="font-size:12px;"><i class='glyphicon glyphicon-trash'></i></a>
+    <blockquote>
+        <?php echo  $this->o->STRUCTNAME; ?>
+        <?php echo '<small>' . $this->o->TYPESTRUCT . '</small>'; ?>
+        <?php if (count($this->o->getParents()) > 0 ){?>
+        <ul class="list-unstyled">
+        <?php
+            foreach ( $this->o->getParents() as $parent ) {
+            // Affichage des affiliation
+                $structParent = new Ccsd_Referentiels_Structure($parent['PARENTID']);
+                echo '<li><small>' . $structParent->STRUCTNAME . ' <i>(id=' . $structParent->STRUCTID . ')</i></small></li>';
+            }
+         }?>
+        </ul>       
+        <?php if ($this->o->SIGLE != '') { echo '<small>' . $this->o->SIGLE . '</small>'; } ?>
+        <?php if ($this->o->URL != '') { echo '<small>' . $this->o->URL . '</small>'; } ?>
+        <?php if ($this->o->ADDRESS != '') { echo '<small>' . $this->o->ADDRESS . '</small>'; } ?>
+        <!-- A améliorer avec un echo de la structure -->
+        <!-- Mis dans le controlleur A améliorer avec un lien -->
+     </blockquote>
+    <div style="display:none">
+        <?php  if ($this->o->STRUCTID != '') { //Stockage des données dans des elements hidden ?>
+            <input type="hidden" name="<?php echo $this->element?>[]" value="<?php echo $this->o->STRUCTID;?>" />
+        <?php } else {
+            foreach($this->o->getForm() as $element) {
+                $element->helper = 'formHidden';
+                $element->setBelongsTo($this->element);
+                echo $element;
+            }
+        } ?>
+    </div>
+</div>

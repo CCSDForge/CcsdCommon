@@ -1,0 +1,22 @@
+<?php  
+    $this->jQuery()->addJavascriptFile(CCSDLIB . "/js/referentiel_papers.js");
+?>
+
+<?php 
+$paper = "<div class='row'>";
+$paper .="    <div class='col-md-12' style='padding-bottom: 15px; padding-top: 15px;'>";
+if (!isset ($this->{"OBJID_" . $this->id}) && !isset($this->no_displaying_documents)) { 
+    $panel = (isset($this->panel[$this->id]) && $this->panel[$this->id]);
+    $paper .= "<script type='text/javascript'>";
+    $paper .= "$(document).ready(function() {";
+    $paper .= "     load_document(this, ";
+    $paper .= "        '". $this->prefix.$this->id." ', ";
+    $paper .= "        '/".$this->core."/ajaxloaddocument/obj/".ucfirst($this->core)."/id/".$this->id."');";
+    $paper .= "});";
+    $paper .= "</script>";
+}
+$paper .= "    </div>";
+$paper .= " </div>";
+
+ return $paper;
+?>

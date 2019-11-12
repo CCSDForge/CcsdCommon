@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:produits xmlns:ns2="http://record.prodinra.inra.fr">
+    <produit>
+        <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:article">
+            <identifier>444645</identifier>
+            <halClassification>
+                <code>SDV:MP</code>
+                <french>Microbiologie et Parasitologie</french>
+                <english>Microbiology and Parasitology</english>
+            </halClassification>
+            <creator>
+                <author xsi:type="ns2:externalAuthor">
+                    <lastName>Sereno</lastName>
+                    <firstName>Denis</firstName>
+                    <initial>D.</initial>
+                    <publicationName>Sereno</publicationName>
+                    <email/>
+                    <role/>
+                    <externalAffiliation>
+                        <name>Institut de Recherche pour le Développement</name>
+                        <identifier>311174</identifier>
+                        <acronym>IRD</acronym>
+                        <section>InterTryp</section>
+                        <city>Montpellier</city>
+                        <country>FRA</country>
+                        <partners>
+                            <identifier>311730</identifier>
+                            <name>Université de Montpellier</name>
+                            <acronym>UM</acronym>
+                            <country>FRA</country>
+                        </partners>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Dorkeld</lastName>
+                    <firstName>Franck</firstName>
+                    <initial>F.</initial>
+                    <publicationName>Dorkeld</publicationName>
+                    <email>franck.dorkeld@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>20891H</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>16</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Centre de Biologie pour la Gestion des Populations</name>
+                            <code>1062</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Centre de Biologie pour la Gestion des Populations,
+                                Montferrier Sur Lez</laboratory>
+                            <city>Montferrier Sur Lez</city>
+                            <country>FRA</country>
+                            <rnsr>199817893M</rnsr>
+                            <center>
+                                <code>24</code>
+                                <name>Centre de recherche Occitanie-Montpellier</name>
+                                <acronym>CR Occitanie-Montpellier</acronym>
+                            </center>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>54</code>
+                                <name>Ecologie des Forêts, Prairies et Milieux Aquatiques</name>
+                                <acronym>EFPA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>CBGP</acronym>
+                            <affiliationPartners>
+                                <name>Centre de Coopération Internationale en Recherche Agronomique
+                                    pour le Développement</name>
+                                <acronym>CIRAD</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Centre international d’études supérieures en sciences
+                                    agronomiques</name>
+                                <acronym>Montpellier SupAgro</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut de Recherche pour le Développement</name>
+                                <acronym>IRD</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:externalAuthor">
+                    <lastName>Akhoundi</lastName>
+                    <firstName>Mohammad</firstName>
+                    <initial>M.</initial>
+                    <publicationName>Akhoundi</publicationName>
+                    <email/>
+                    <role/>
+                    <externalAffiliation>
+                        <name>Avicenne Hospital</name>
+                        <identifier>331642</identifier>
+                        <section>Parasitology-Mycology Department</section>
+                        <city>Bobigny</city>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:externalAuthor">
+                    <lastName>Perrin</lastName>
+                    <firstName>Pascale</firstName>
+                    <initial>P.</initial>
+                    <publicationName>Perrin</publicationName>
+                    <email/>
+                    <role/>
+                    <externalAffiliation>
+                        <name>Centre National de la Recherche Scientifique</name>
+                        <identifier>311417</identifier>
+                        <acronym>CNRS</acronym>
+                        <section> UMR5290 Maladies Infectieuses et Vecteurs : Ecologie, Génétique,
+                            Evolution et Contrôle (MIVEGEC)</section>
+                        <city>Montpellier</city>
+                        <country>FRA</country>
+                        <partners>
+                            <identifier>311730</identifier>
+                            <name>Université de Montpellier</name>
+                            <acronym>UM</acronym>
+                            <country>FRA</country>
+                        </partners>
+                        <partners>
+                            <identifier>311174</identifier>
+                            <name>Institut de Recherche pour le Développement</name>
+                            <acronym>IRD</acronym>
+                            <country>FRA</country>
+                        </partners>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <title language="eng">Pathogen Species Identification from Metagenomes in Ancient
+                Remains: The Challenge of Identifying Human Pathogenic Species of Trypanosomatidae
+                via Bioinformatic Tools</title>
+            <alternateTitle/>
+            <subTitle/>
+            <language>eng</language>
+            <abstract language="">Accurate species identification from ancient DNA samples is a
+                difficult task that would shed light on the evolutionary history of pathogenic
+                microorganisms. The field of palaeomicrobiology has undoubtedly benefited from the
+                advent of untargeted metagenomic approaches that use next-generation sequencing
+                methodologies. Nevertheless, assigning ancient DNA at the species level is a
+                challenging process. Recently, the gut microbiome analysis of three pre-Columbian
+                Andean mummies (Santiago-Rodriguez et al., 2016) has called into question the
+                identification of Leishmania in South America. The accurate assignment would be
+                important because it will provide some key elements that are linked to the
+                evolutionary scenario for visceral leishmaniasis agents in South America. Here, we
+                recovered the metagenomic data filed in the metagenomics RAST server (MG-RAST) to
+                identify the different members of the Trypanosomatidae family that have infected
+                these ancient remains. For this purpose, we used the ultrafast metagenomic sequence
+                classifier, based on an exact alignment of k-mers (Kraken) and Bowtie2, an ultrafast
+                and memory-efficient tool for aligning sequencing reads to long reference sequences.
+                The analyses, which have been conducted on the most exhaustive genomic database
+                possible on Trypanosomatidae, show that species assignments could be biased by a
+                lack of some genomic sequences of Trypanosomatidae species (strains). Nevertheless,
+                our work raises the issue of possible co-infections by multiple members of the
+                Trypanosomatidae family in these three pre-Columbian mummies. In the three mummies,
+                we show the presence of DNA that is reminiscent of a probable co-infection with
+                Leptomonas seymouri, a parasite of insect's gut, and Lotmaria.</abstract>
+            <year>2018</year>
+            <doi>10.3390/genes9080418</doi>
+            <utKey>000443615400048</utKey>
+            <recordAccessCondition>Publique</recordAccessCondition>
+            <keywords>
+                <keyword>Trypanosomatidae</keyword>
+                <keyword>kraken taxonomic assignment tool</keyword>
+                <keyword>bowtie2 fast short reads aligner</keyword>
+                <keyword>ancient DNA</keyword>
+                <keyword>parasitome</keyword>
+                <keyword>co-infection</keyword>
+            </keywords>
+            <targetAudience>Scientifique</targetAudience>
+            <itemType>ARTICLE</itemType>
+            <workflowStatus>validé</workflowStatus>
+            <creationDate>2018-09-20T08:04:10</creationDate>
+            <firstValidationDate>2018-09-20T08:18:46</firstValidationDate>
+            <validationDate>2018-09-20T08:18:46</validationDate>
+            <updateDate>2018-09-20T08:18:48</updateDate>
+            <depositor>
+                <lastName>Rocher</lastName>
+                <firstName>Michele</firstName>
+                <inraIdentifier>13180B</inraIdentifier>
+                <email>michele.rocher@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>MICS</code>
+                        <name>Direction de l'Immobilier et de la Coordination des Services
+                            Déconcentrés d'Appui à la Recherche</name>
+                        <acronym>DICSDAR</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Services déconcentrés d'appui à la recherche
+                        Occitanie-Montpellier</unitName>
+                    <unitCode>0378</unitCode>
+                </affiliation>
+            </depositor>
+            <reviewer>
+                <lastName>Rocher</lastName>
+                <firstName>Michele</firstName>
+                <inraIdentifier>13180B</inraIdentifier>
+                <email>michele.rocher@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>MICS</code>
+                        <name>Direction de l'Immobilier et de la Coordination des Services
+                            Déconcentrés d'Appui à la Recherche</name>
+                        <acronym>DICSDAR</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Services déconcentrés d'appui à la recherche
+                        Occitanie-Montpellier</unitName>
+                    <unitCode>0378</unitCode>
+                </affiliation>
+            </reviewer>
+            <firstReviewer>
+                <lastName>Rocher</lastName>
+                <firstName>Michele</firstName>
+                <inraIdentifier>13180B</inraIdentifier>
+                <email>michele.rocher@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>MICS</code>
+                        <name>Direction de l'Immobilier et de la Coordination des Services
+                            Déconcentrés d'Appui à la Recherche</name>
+                        <acronym>DICSDAR</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Services déconcentrés d'appui à la recherche
+                        Occitanie-Montpellier</unitName>
+                    <unitCode>0378</unitCode>
+                </affiliation>
+            </firstReviewer>
+            <complements>Version Number : 1.0 Publication Name : GENES Reprint Adress : Sereno, D
+                (reprint author), Montpellier Univ, IRD, InterTryp, F-34394 Montpellier, France.;
+                Perrin, P (reprint author), Montpellier Univ, CNRS, IRD, MIVEGEC, F-34394
+                Montpellier, France. E-mail Adress : denis.sereno@ird.fr; franck.dorkeld@inra.fr;
+                m.akhoundi@yahoo.com; pascale.perrin@umontpellier.fr Publisher Adress : ST
+                ALBAN-ANLAGE 66, CH-4052 BASEL, SWITZERLAND Web of Science Category : Genetics &amp;
+                Heredity Subject Category : Genetics &amp; Heredity Z9 : 0 U1 : 0 U2 : 0 OA : gold
+                DA : 2018-09-20</complements>
+            <halSending>false</halSending>
+            <origin>IMPORTED</origin>
+            <pmid>30127280</pmid>
+            <collection>
+                <idCollection>50130</idCollection>
+                <title>Genes</title>
+                <issn>2073-4425</issn>
+                <issue>
+                    <number>8</number>
+                    <volume>9</volume>
+                </issue>
+                <openAccess>true</openAccess>
+            </collection>
+            <articleInfos>
+                <articleType>Research article</articleType>
+                <articleNumber>418</articleNumber>
+                <peerReviewed>true</peerReviewed>
+                <pagination/>
+            </articleInfos>
+            <documentLocation>
+                <libraryName>Erist</libraryName>
+                <libraryClassificationMark>Publis 18-cbgp-056</libraryClassificationMark>
+                <libraryCenter>Montpellier</libraryCenter>
+            </documentLocation>
+            <experimentalUnit/>
+        </record>
+        <ns2:attachment>
+            <attachmentId>{B7EDB729-48D5-4886-8D8F-9ED8A8C6A9A6}</attachmentId>
+            <accessCondition>Publique</accessCondition>
+            <version>Version éditeur</version>
+            <title>Publis18-cbgp-056_sereno_pathogen.pdf</title>
+            <fileName>Publis18-cbgp-056_sereno_pathogen.pdf</fileName>
+            <fileSize>2520872.0</fileSize>
+            <fileMimeType>application/pdf</fileMimeType>
+            <rights>CC-BY</rights>
+            <original>true</original>
+        </ns2:attachment>
+    </produit>
+</ns2:produits>

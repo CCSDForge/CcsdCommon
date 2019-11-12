@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection>
+    <dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:invenio="http://invenio-software.org/elements/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+        <dc:identifier>doi:10.5170/CERN-2007-001.302</dc:identifier>
+        <dc:language>eng</dc:language>
+        <dc:creator>Cachemiche, Jean Pierre</dc:creator>
+        <dc:creator>Aslanides, E</dc:creator>
+        <dc:creator>Cogan, J</dc:creator>
+        <dc:creator>Duval, P Y</dc:creator>
+        <dc:creator>Le Gac, R</dc:creator>
+        <dc:creator>Leroy, O</dc:creator>
+        <dc:creator>Liotard, P L</dc:creator>
+        <dc:creator>Marin, F</dc:creator>
+        <dc:creator>Favard, S</dc:creator>
+        <dc:creator>Tsaregorodtsev, A</dc:creator>
+        <dc:title>The Level-0 muon trigger for the LHCb experiment</dc:title>
+        <dc:subject>Detectors and Experimental Techniques</dc:subject>
+        <dc:description>The Level-0 Muon Trigger looks for straight tracks crossing the five muon stations of the LHCb muon detector and measures their transverse momentum. The tracking uses a road algorithm relying on the projectivity of the muon detector. The architecture of the Level-0 muon trigger is pipeline and massively parallel. Receiving 130 GBytes/s of input data, it reconstructs muon candidates for each bunch crossing (25 ns) in less than 1.2 μs. It relies on an intensive use of high speed multigigabit serial links where high speed serializers/deserializers are embedded in Field Programmable Gate Arrays (FPGAs).</dc:description>
+        <dc:publisher/>
+        <dc:publisher>CERN</dc:publisher>
+        <dc:date>2007</dc:date>
+        <dc:source>http://cds.cern.ch/record/1027481</dc:source>
+        <dc:doi>10.5170/CERN-2007-001.302</dc:doi>
+        <dc:identifier>http://cds.cern.ch/record/1027481</dc:identifier>
+        <dc:identifier>oai:cds.cern.ch:1027481</dc:identifier>
+    </dc:dc>
+</collection>

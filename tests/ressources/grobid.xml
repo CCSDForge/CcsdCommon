@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid-0.5.1/grobid-home/schemas/xsd/Grobid.xsd" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <teiHeader xml:lang="en">
+        <encodingDesc>
+            <appInfo>
+                <application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-09-14T09:16+0000">
+                    <ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
+                </application>
+            </appInfo>
+        </encodingDesc>
+        <fileDesc>
+            <titleStmt>
+                <title level="a" type="main">Simple rules can guide whether land-or ocean-based conservation will best benefit marine ecosystems</title>
+            </titleStmt>
+            <publicationStmt>
+                <publisher/>
+                <availability status="unknown">
+                    <licence/>
+                </availability>
+                <date type="published" when="2017-09-06">Published: September 6, 2017</date>
+            </publicationStmt>
+            <sourceDesc>
+                <biblStruct>
+                    <analytic>
+                        <author role="corresp">
+                            <persName
+                                    xmlns="http://www.tei-c.org/ns/1.0">
+                                <forename type="first">Megan</forename>
+                                <forename type="middle">I</forename>
+                                <surname>Saunders</surname>
+                            </persName>
+                            <email>m.saunders1@uq.edu.au</email>
+                            <affiliation key="aff0">
+                                <orgName type="department">Centre for Biodiversity and Conservation Science</orgName>
+                                <orgName type="institution">The University of Queensland</orgName>
+                                <address>
+                                    <settlement>St. Lucia</settlement>
+                                    <country key="AU">Australia</country>
+                                </address>
+                            </affiliation>
+                            <affiliation key="aff1">
+                                <orgName type="laboratory">Australian Research Council (ARC) Centre of Excellence in Environmental Decisions</orgName>
+                                <orgName type="institution">University of Queensland</orgName>
+                                <address>
+                                    <settlement>St. Lucia</settlement>
+                                    <country key="AU">Australia</country>
+                                </address>
+                            </affiliation>
+                            <affiliation key="aff2">
+                                <orgName type="department">School of Earth and Environmental Sciences</orgName>
+                                <orgName type="institution">The University of Queensland</orgName>
+                                <address>
+                                    <settlement>St. Lucia</settlement>
+                                    <country key="AU">Australia</country>
+                                </address>
+                            </affiliation>
+                            <affiliation key="aff3">
+                                <orgName type="institution" key="instit1">The Global Change Institute</orgName>
+                                <orgName type="institution" key="instit2">The University of Queensland</orgName>
+                                <address>
+                                    <settlement>St. Lucia</settlement>
+                                    <country key="AU">Australia</country>
+                                </address>
+                            </affiliation>
+                            <affiliation key="aff4">
+                                <orgName type="department">School of Chemical Engineering</orgName>
+                                <orgName type="institution">The University of Queensland</orgName>
+                                <address>
+                                    <settlement>St. Lucia</settlement>
+                                    <country key="AU">Australia</country>
+                                </address>
+                            </affiliation>
+                        </author>
+                        <author>
+                            <persName
+                                    xmlns="http://www.tei-c.org/ns/1.0">
+                                <forename type="first">Michael</forename>
+                                <surname>Bode</surname>
+                            </persName>
+                            <affiliation key="aff1">
+                                <orgName type="laboratory">Australian Research Council (ARC) Centre of Excellence in Environmental Decisions</orgName>
+                                <orgName type="institution">University of Queensland</orgName>
+                                <address>
+                                    <settlement>St. Lucia</settlement>
+                                    <country key="AU">Australia</country>
+                                </address>
+                            </affiliation>
+                            <affiliation key="aff5">
+                                <orgName type="laboratory">Australian Research Council Centre of Excellence for Coral Reef Studies</orgName>
+                                <orgName type="institution">James Cook University</orgName>
+                                <address>
+                                    <settlement>Townsville</settlement>
+                                    <country key="AU">Australia</country>
+                                </address>
+                            </affiliation>
+                        </author>
+                        <title level="a" type="main">Simple rules can guide whether land-or ocean-based conservation will best benefit marine ecosystems</title>
+                    </analytic>
+                    <monogr>
+                        <imprint>
+                            <date type="published" when="2017-09-06">Published: September 6, 2017</date>
+                        </imprint>
+                    </monogr>
+                    <note type="submission">Received: December 24, 2016 Accepted: July 20, 2017</note>
+                    <note>RESEARCH ARTICLE OPEN ACCESS Citation: Saunders MI, Bode M, Atkinson S, Klein CJ, Metaxas A, Beher J, et al. (2017) Simple rules can guide whether land-or ocean-based conservation will best benefit marine ecosystems. PLoS Biol 15(9): e2001886. https://doi.org/ 10.1371/journal.pbio.2001886 Academic Editor: Georgina Mace, University College London, United Kingdom of Great Britain and Northern Ireland Copyright: Data Availability Statement: Relevant data are within the paper and its Supporting Information files. The model uses outputs from Saunders et al. 2013. The specific values are available in the supplemental materials, and the data underpinning the model in Saunders et al. 2013 can be found in the following public repositories: https://doi. pangaea.de/10.1594/PANGAEA.841223; https:// www.deepreef.org/; https://doi.pangaea.de/10. 1594/PANGAEA.846270; https://data.qld.gov.au/ dataset/moreton-bay-broadscale-habitats-2008.</note>
+                </biblStruct>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <abstract>
+                <p>Coastal marine ecosystems can be managed by actions undertaken both on the land and in the ocean. Quantifying and comparing the costs and benefits of actions in both realms is therefore necessary for efficient management. Here, we quantify the link between terrestrial sediment runoff and a downstream coastal marine ecosystem and contrast the cost-effectiveness of marine-and land-based conservation actions. We use a dynamic land-and sea-scape model to determine whether limited funds should be directed to 1 of 4 alternative conservation actions-protection on land, protection in the ocean, restoration on land, or restoration in the ocean-to maximise the extent of light-dependent marine benthic habitats across decadal timescales. We apply the model to a case study for a seagrass meadow in Australia. We find that marine restoration is the most cost-effective action over decadal timescales in this system, based on a conservative estimate of the rate at which seagrass can expand into a new habitat. The optimal decision will vary in different social-ecological contexts , but some basic information can guide optimal investments to counteract land-and ocean-based stressors: (1) marine restoration should be prioritised if the rates of marine ecosystem decline and expansion are similar and low; (2) marine protection should take precedence if the rate of marine ecosystem decline is high or if the adjacent catchment is relatively intact and has a low rate of vegetation decline; (3) land-based actions are optimal when the ratio of marine ecosystem expansion to decline is greater than 1:1.4, with terrestrial restoration typically the most cost-effective action; and (4) land protection should be prioritised if the catchment is relatively intact but the rate of vegetation decline is high. These PLOS Biology | https://doi.org/10.1371/journal.pbio.</p>
+            </abstract>
+        </profileDesc>
+        <revisionDesc>
+            <date type="submission" when="2001886-9-6" />
+        </revisionDesc>
+    </teiHeader>
+    <text xml:lang="en"></text>
+</TEI>
+

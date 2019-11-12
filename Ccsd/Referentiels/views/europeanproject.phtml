@@ -1,0 +1,153 @@
+<?php
+
+$label_valid = array (
+		'OLD'  => 'warning',
+		'INCOMING'   => 'danger',
+		'VALID'   => 'success'
+);
+
+if (! $this->europeanproject instanceof Ccsd_Referentiels_Europeanproject) {
+    $this->europeanproject = (new Ccsd_Referentiels_Europeanproject())->set($this->europeanproject);
+}
+
+$this->element = 'europeanProject';
+
+/* @var $plugin Aurehal_Acl_Plugin */
+$this->plugin = Zend_Controller_Front::getInstance()->getPlugin('Aurehal_Acl_Plugin');
+
+$row = "<blockquote>";
+
+$row .= "<div class='referentiel' style='margin-top: 10px;' ";
+
+if ($this->europeanproject->PROJEUROPID != '') {
+	$row .= "data-id='" . $this->europeanproject->PROJEUROPID . "' ";
+}
+
+$row .= "id=" . Ccsd_Tools::ifsetor($this->identifier, '') . ">";
+
+$row .= "<div style='float: right;'>";
+
+if (isset($this->item) && !$this->europeanproject->PROJEUROPID) {
+	$row .= "<a href='javascript:void(0);' data-toggle='tooltip' data-placement='right' data-original-title='" . $this->translate('Modifier ce projet européen') . "' onclick='" . $this->item->getEditFunction() . "'><i class='glyphicon glyphicon-edit'></i></a>";
+}
+
+if (isset($this->item)) {
+	$row .= "<a href='javascript:void(0);' data-toggle='tooltip' data-placement='right' data-original-title='" . $this->translate('Supprimer ce projet européen') . "' onclick='" . $this->item->getDeleteFunction() . "'><i class='glyphicon glyphicon-trash'></i></a>";
+}
+
+if (SPACE_NAME == 'AUREHAL' && $this->plugin->isAllowed((new Zend_Controller_Request_Http())->setControllerName('europeanproject')->setActionName('modify')) && $this->showOptions) {
+	$row .= "<a href='" . URL . "europeanproject/modify/id/" . $this->europeanproject->PROJEUROPID . "'><i class='glyphicon glyphicon-edit'></i></a>";
+}
+
+$row .= "</div>";
+
+$row .= "<div>";
+
+if (SPACE_NAME == 'AUREHAL') {
+	$row .= "<i class='glyphicon glyphicon-ok-circle alert-" . $label_valid[$this->europeanproject->VALID] . "' style='background:none;border:0;'></i>&nbsp;";
+}
+
+$row .= $this->europeanproject->ACRONYME;
+
+if ($this->europeanproject->TITRE != '') { 
+	$row .= " - " . $this->europeanproject->TITRE; 
+}
+
+if (SPACE_NAME == 'AUREHAL' && $this->europeanproject->PROJEUROPID != 0) {
+	$row .= "<span class='badge' style='margin-left:5px;'>" . $this->europeanproject->PROJEUROPID . "</span>";
+}
+
+if ($this->europeanproject->NUMERO != '') {
+	$row .= "<small>" . $this->translate('Numéro CORDIS') . " : " . $this->europeanproject->NUMERO . "</small>"; 
+} 
+
+if (SPACE_NAME == 'AUREHAL') {
+    if ( ($this->europeanproject->SDATE != '') || ($this->europeanproject->SDATE != '') ){
+        $this->europeanproject->EDATE = ( $this->europeanproject->EDATE != '' ) ? $this->europeanproject->EDATE : "?";
+        $this->europeanproject->SDATE = ( $this->europeanproject->SDATE != '' ) ? $this->europeanproject->SDATE : "?";
+        $row .= "<small>" . $this->translate('Valide') . " : " . $this->europeanproject->SDATE . " / " . $this->europeanproject->EDATE . "</small>";    
+    }
+    if ($this->europeanproject->FUNDED != '') {
+        $row .= "<small>" . $this->translate('Financé par') . " : " . $this->europeanproject->FUNDED . "</small>";
+    }
+    if ($this->europeanproject->CALLID != '') {
+        $row .= "<small>" . $this->translate('Identifiant Projet') . " : " . $this->europeanproject->CALLID . "</small>";
+    }
+}    
+
+$row .= "</div>";
+
+if (isset($this->item)) {
+	$row .= "<div style='display:none'>";
+	
+    if ($this->europeanproject->PROJEUROPID != '') {
+    	$row .= "<input type='hidden' name='" . $this->element . "[]' value='" . $this->europeanproject->PROJEUROPID . "' />";
+    } else foreach($this->europeanproject->getForm() as $element) {
+        $element->helper = 'formHidden';
+        $element->setBelongsTo($this->element . "[" . $this->identifier . "]");
+        $row .= $element;
+    } 
+    
+	$row .= "</div>";
+}
+
+$row .= "</div>";
+
+if (SPACE_NAME == 'AUREHAL'  && 'read' ==  Zend_Controller_Front::getInstance()->getRequest()->getActionName()) {
+	$row .= "<div class='row'>";
+	$row .= "<div class='col-md-12' style='padding-bottom: 15px; padding-top: 15px;'>";
+	$row .= "<a class='btn btn-primary' target='_blank' href='" . HALURL . "/search/index/q/*/europeanProjectId_i/" . $this->europeanproject->PROJEUROPID . "'>" . $this->translate("Voir les documents associés") . "</a>";
+	$row .= "&nbsp;";
+	//$row .= "<a class='btn btn-primary' target='_blank' href='" . HAL_API . "/ref/europeanproject/?q=docid:" . $this->europeanproject->PROJEUROPID . "&wt=xml&fl=*'>" . $this->translate("Exporter (xml)") . "</a>";
+    $row.= '<div class="btn-group">
+                <a class="btn btn-primary" href=' . HAL_API . '/ref/europeanproject/?q=docid:' . $this->europeanproject->PROJEUROPID . '&wt=xml&fl=* target="_blank">'
+                    . $this->translate("Exporter") .
+                '</a>
+                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret" style="border-top-color: #fff; border-bottom-color: #fff;"></span>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="' . HAL_API . '/ref/europeanproject/?q=docid:' . $this->europeanproject->PROJEUROPID . '&wt=xml&fl=*" target="_blank">'
+                           . $this->translate("Export XML") .
+                        '</a>
+                    </li>
+                    <li>
+                        <a href="' . AUREHAL_URL . '/europeanproject/' . $this->europeanproject->PROJEUROPID . '/rdf" target="_blank">'
+                            . $this->translate("Export RDF") .
+                        '</a>
+                    </li>
+                </ul>
+            </div>';
+
+    $row .= "</div>";
+	$row .= "</div>";
+}
+if (SPACE_NAME == 'AUREHAL' && 'replace' ==  Zend_Controller_Front::getInstance()->getRequest()->getActionName()) {
+	$this->prefix = "europeanprojectId_i_";
+	$this->id =  $this->europeanproject->PROJEUROPID;
+	$this->core = "europeanproject";
+    if (!isset ($this->{"OBJID_" . $this->europeanproject->PROJEUROPID})) {
+    	$row .= include __DIR__ . "/papers.phtml";
+    }
+}
+
+if (SPACE_NAME == 'AUREHAL') {
+	if ( 'replace' == Zend_Controller_Front::getInstance()->getRequest()->getActionName() ) {
+		$row .= "<div class='row'>";
+		$row .= "<div class='col-md-12'>";
+		$row .= "<div id='europeanprojectId_i_" . $this->europeanproject->PROJEUROPID . "'>";
+		if (isset ($this->{"OBJID_" . $this->europeanproject->PROJEUROPID})) {
+			ob_start();
+			$this->documents ($this->europeanproject->PROJEUROPID, "Ccsd_Referentiels_Europeanproject");
+			$row .= ob_get_contents();
+			ob_end_clean();
+		}
+		$row .= "</div>";
+		$row .= "</div>";
+		$row .= "</div>";
+	}
+}
+$row .= "</blockquote>";
+
+echo $row;

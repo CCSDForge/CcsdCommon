@@ -1,0 +1,10 @@
+public/cartohal
+.idea/*
+tests/library
+tests/config/pwd.json
+*~
+*.save
+*.new
+*.old
+\#*
+TAGS

@@ -1,0 +1,84 @@
+<?php
+/**
+ * ================================================= CREDIT ====================================================
+ * Created by PhpStorm In CNRS-CCSD
+ * User: Zahen
+ * Date: 25/04/2017
+ * Time: 14:30
+ * =============================================================================================================
+ */
+
+/**
+ * =============================================== DESCRIPTION =================================================
+ * works list of an author
+ * =============================================================================================================
+ */
+
+$hal_url = (APPLICATION_ENV == 'development') ? "http://hal-local.ccsd.cnrs.fr"     : (defined('HAL_URL') ? HAL_URL : HALURL);
+
+$aurehal = (APPLICATION_ENV == 'development') ? "http://aurehal-local.ccsd.cnrs.fr" : AUREHAL_URL;
+
+$this->headLink(['rel'=>'icon', 'type'=>'type/png', 'href'=>(file_exists(SPACE . 'public/favicon.png') ? SPACE_URL . 'favicon.png' : '/img/favicon.png')]);
+
+$this->jQuery()
+    // Default js
+    ->addJavascriptFile($hal_url . "/js/translations.php?lang=" . Zend_Registry::get('lang'))
+    ->addJavascriptFile(CCSDLIB ."/v3/js/bootstrap.min.js")
+    ->addJavascriptFile($hal_url . "/js/utile.js")
+
+    // Default CSS
+    ->addStylesheet(CCSDLIB . '/css/custom-theme/jquery-ui-1.10.0.custom.css')
+    ->addStylesheet(CCSDLIB . '/v3/css/bootstrap.min.css')
+    ->addStylesheet(CCSDLIB . '/css/ccsd.css')
+
+    // Interface rdf css
+    ->addStylesheet($hal_url . '/css/rdf_gui.css');
+
+echo $this->jQuery()->setLocalPath(CCSDLIB . '/js/jquery/min.1.9.1.js')->enable()->setUiLocalPath(CCSDLIB . '/js/jquery/ui/min.1.10.3.js')->UiEnable();
+
+// Processing according to the type (author, structure, journal, Anr Project, european Project)
+$main_title = "";
+if ($this->author) {
+    $rdf_url = $aurehal . "/author/" . $this->author->getAuthorid() . "/" . "rdf";
+    $main_title = $this->author->getFullName(true);
+    $SOLR_Request = 'q=authId_i:' . $this->author->getAuthorid() . '&fq=status_i:11&fl=halId_s&fl=docType_s&fl=label_s&fl=uri_s&sort=' . urlencode('docType_s asc') . '&wt=phps';
+    $res = unserialize(Ccsd_Tools::solrCurl($SOLR_Request));
+}
+?>
+<!-- HTML -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GUI/RDF">
+
+    <title><?php echo $main_title; ?></title>
+</head>
+<body>
+<div class="list">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-md-12">
+                <h2 class="title"><?php echo $this->translate('Liste compléte des travaux d\'auteur');?></h2>
+                <div class="main">
+                    <?php
+                    if (isset($res["response"]["numFound"]) && $res["response"]["numFound"] > 0) {
+                        $type = $res["response"]["docs"][0]['docType_s'];
+                        echo "<div class='list-part-head'>" . $this->translate('typdoc_' . $type) . "</div>";
+                        foreach ($res["response"]["docs"] as $d) {
+                            if ($type != $d['docType_s']) {
+                                echo "<div class='list-part-head'>" . $this->translate('typdoc_' . $d['docType_s']) . "</div>";
+                                $type = $d['docType_s'];
+                            }
+                            echo "<div class='list-part-body'>" . $d['label_s'] . "<br /><a class='uri' target='_blank' href='" . $d['uri_s'] . "'>" .  $d['uri_s'] . "</a></div>";
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

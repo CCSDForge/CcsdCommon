@@ -1,0 +1,226 @@
+<style type='text/css'>
+
+    .structure-element-researchteam:hover {
+        background-color: #d9edf7;
+        border-color: #bce8f1;
+    }
+
+    .structure-element-researchteam:hover h6 {
+        color: #31708f;
+    }
+
+    .structure-element-department:hover {
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+    }
+
+    .structure-element-department:hover h6 {
+        color: #3c763d;
+    }
+
+    .structure-element-laboratory:hover {
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+    }
+
+    .structure-element-laboratory:hover h6 {
+        color: #8a6d3b;
+    }
+
+    .structure-element-institution:hover {
+        background-color: #f2dede;
+        border-color: #ebccd1;
+    }
+
+    .structure-element-institution:hover h6 {
+        color: #a94442;
+    }
+
+    .bounds {
+        content: " ";
+        height: 40px;
+        right: 0px;
+        padding-right: 0px;
+        padding-left : 0px;
+        margin-left  : 0px;
+        margin-right : 0px;
+    }
+
+    .b_vertical {
+        position: absolute;
+        border-left: 3px solid rgb(51, 51, 51);
+        left: 30px;
+    }
+
+    .b_horizontal {
+        position: absolute;
+        border-bottom: 3px solid rgb(51, 51, 51);
+        left: 30px;
+    }
+
+    .play-arrow {
+        top: 30px;
+        font-size: 9px;
+    }
+
+    .code {
+        position: absolute;
+        top: 30px;
+    }
+
+</style>
+
+<?php
+/* @var $plugin Aurehal_Acl_Plugin
+   @var Hal_View $this
+ */
+$this->plugin = Zend_Controller_Front::getInstance()->getPlugin('Aurehal_Acl_Plugin');
+
+if (!$this->structure instanceof Ccsd_Referentiels_Structure) {
+    $this->structure = (new Ccsd_Referentiels_Structure)->set($this->structure);
+}
+
+$this->structure = array('struct' => $this->structure, 'code' => '');
+
+$structid = $this->structure['struct']->getStructid();
+
+$this->row = array();
+
+$typestruct = $this->structure['struct']->getTypestruct();
+?>
+
+<div class='structure-arborescence'>
+
+        <?php
+    $view = $this;
+
+include __DIR__ . "/structure-element.phtml";
+
+if ($this->parents) {
+
+    if (!function_exists('render')) {
+
+        function render($view, $structure, $d = 0) {
+            $parents = $structure['struct']->getParents();
+
+            if (!empty($parents))
+                $d++;
+
+            while (!empty($parents)) {
+                $parent = array_shift($parents);
+
+                $view->structure = $parent;
+                $view->deep = $d;
+
+                include __DIR__ . "/structure-element.phtml";
+
+                render($view, $parent, $d);
+            }
+        }
+
+    }
+
+    render($this, $this->structure);
+}
+
+foreach ($this->row as $r) {
+    echo "<div class='row'>";
+    for ($i = 0; $i <= count($r); $i++) {
+        if (isset($r[$i]))
+            echo $r[$i];
+    }
+    echo "</div>";
+}
+
+if ($this->parents /* && 'read' ==  Zend_Controller_Front::getInstance()->getRequest()->getActionName() */) {
+    ?>
+        </div>
+        <script type='text/javascript'>
+
+                $(document).ready(function () {
+                $.each($(".structure-arborescence"), function () {
+                    $.each($(this).find("div[data-category]").closest('.row').get().reverse(), function (i) {
+                        patch_category(this, $(this).prev());
+                    });
+
+                        $(this).find(".play-arrow").each(function (i) {
+                        $(this).css('left', (parseInt($(this).parent().css('width'), 10) - 2) + 'px');
+                    });
+
+                        $(this).find(".code").each(function (i) {
+                        w = parseInt($(this).css('width'), 10) / 2, y = parseInt($(this).parent().css('width'), 10);
+
+                            if ((w + 10) >= y) {
+                            w = w + y / 2;
+                        }
+
+                            $(this).css('left', "-" + w + 'px');
+                    });
+                });
+
+
+
+                    function patch_category(r, s)
+                {
+                    if (0 == s.length)
+                        return;
+
+                        var t = $(r).find("> div:not([data-category])"), u = $(s).find("> div:not([data-category])");
+
+                        if (0 == t.length)
+                        return;
+
+                        if (u.length >= t.length) {
+                        var i = t.length - 1;
+                        //console.log($(u).closest('.row').height());
+                        $(u).find('.b_vertical_' + i).css('height', ($(u).closest('.row').height() + 4) + 'px').show();
+                    }
+
+            $($(t).find('.b_vertical')).each(function (i) {
+                    if ($(this).is(':visible')) {
+                        $(u).find('.b_vertical_' + i).css('height', ($(u).closest('.row').height() + 4) + 'px').show();
+                    }
+                });
+            }
+        });
+        </script>
+
+            <div class='row'>
+            <?php if ($this->options) { ?>
+                <div class="col-md-12" style="padding-bottom: 15px; padding-top: 15px;">
+                    <a class='btn btn-primary' target='_blank' href='<?php echo HALURL ?>/search/index/q/*/structId_i/<?php echo $structid ?>'><?php echo $this->translate("Voir les documents associés") ?></a>
+                    &nbsp;
+                    <a class='btn btn-primary' target='_blank' href='<?php echo URL ?>/structure/browse?critere=parentDocid_i%3A<?php echo $structid ?>&category=*'><?php echo $this->translate("Voir les sous structures") ?></a>
+                    &nbsp;
+                    <?php if (Hal_Auth::isAdministrator() && ($typestruct == Ccsd_Referentiels_Structure::TYPE_INSTITUTION || $typestruct == Ccsd_Referentiels_Structure::TYPE_REGROUPINSTITUTION)){?>
+                    <a class='btn btn-primary' href='<?php echo URL ?>/structure/transfer/row/<?php echo $structid ?>'><?php echo $this->translate("Fermer et remplacer par") ?></a>
+                    <?php }?>
+                    &nbsp;
+                    <div class="btn-group">
+                        <a class="btn btn-primary" target="_blank" href="<?php echo HAL_API ?>/ref/structure/?q=docid:<?php echo $structid ?>&wt=xml&fl=*"><?php echo $this->translate("Exporter") ?></a>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <?php
+                            foreach (['json', 'xml', 'xml-tei', 'csv'] as $format) {
+                                echo '<li><a target="_blank" href="' . HAL_API . '/ref/structure/?q=docid:' . $structid . '&wt=' . $format . '&fl=*">' . $this->translate("Export") . ' ' . strtoupper($format) . '</a></li>';
+                            }
+                            ?>
+                            <li>
+                                <a href="<?php echo AUREHAL_URL ?>/structure/<?php echo $structid ?>/rdf" target="_blank">
+                                    <?php echo $this->translate('Export RDF');?>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            <?php } ?>
+            <?php
+        }
+        ?>
+
+</div>
+

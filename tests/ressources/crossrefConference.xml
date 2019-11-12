@@ -1,0 +1,57 @@
+<doi_records>
+    <doi_record owner="10.1109" timestamp="2017-03-14 16:52:37">
+        <crossref>
+            <conference>
+                <event_metadata>
+                    <conference_name>18th International Conference on Pattern Recognition (ICPR'06)</conference_name>
+                    <conference_location>Hong Kong, China</conference_location>
+                </event_metadata>
+                <proceedings_metadata>
+                    <proceedings_title>18th International Conference on Pattern Recognition (ICPR'06)</proceedings_title>
+                    <publisher>
+                        <publisher_name>IEEE</publisher_name>
+                    </publisher>
+                    <publication_date>
+                        <year>2006</year>
+                    </publication_date>
+                    <isbn media_type="print">0-7695-2521-0</isbn>
+                </proceedings_metadata>
+                <conference_paper>
+                    <contributors>
+                        <person_name sequence="first" contributor_role="author">
+                            <given_name>H.</given_name>
+                            <surname>Mouchere</surname>
+                        </person_name>
+                        <person_name sequence="additional" contributor_role="author">
+                            <given_name>E.</given_name>
+                            <surname>Anquetil</surname>
+                            <ORCID>http://orcid.org/0000-0002-0396-3190</ORCID>
+                        </person_name>
+                    </contributors>
+                    <titles>
+                        <title>A Unified Strategy to Deal with Different Natures of Reject</title>
+                    </titles>
+                    <publication_date>
+                        <year>2006</year>
+                    </publication_date>
+                    <pages>
+                        <first_page>792</first_page>
+                        <last_page>795</last_page>
+                    </pages>
+                    <publisher_item>
+                        <item_number item_number_type="sequence-number">1699324</item_number>
+                    </publisher_item>
+                    <doi_data>
+                        <doi>10.1109/ICPR.2006.193</doi>
+                        <resource>http://ieeexplore.ieee.org/document/1699324/</resource>
+                        <collection property="crawler-based">
+                            <item crawler="iParadigms">
+                                <resource>http://xplorestaging.ieee.org/ielx5/11159/35818/01699324.pdf?arnumber=1699324</resource>
+                            </item>
+                        </collection>
+                    </doi_data>
+                </conference_paper>
+            </conference>
+        </crossref>
+    </doi_record>
+</doi_records>

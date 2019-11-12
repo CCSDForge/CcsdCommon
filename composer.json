@@ -1,0 +1,16 @@
+{
+  "require-dev": {
+  },
+
+  "require": {
+    "php": ">=7.0",
+
+    "ext-xml": "*",
+    "ext-dom": "*",
+    "ext-ssh2": "*"
+  },
+  "autoload": {
+    "classmap": [ "Ccsd"
+    ]
+  }
+}

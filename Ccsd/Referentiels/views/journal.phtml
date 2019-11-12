@@ -1,0 +1,139 @@
+<?php
+/** @var Hal_View $this */
+$label_valid = array (
+    '0'    => 'danger',
+	'OLD'  => 'warning',
+	'INCOMING'   => 'danger',
+	'VALID'   => 'success'
+);
+
+if (! $this->journal instanceof Ccsd_Referentiels_Journal) {
+    $this->journal = (new Ccsd_Referentiels_Journal())->set($this->journal);
+}
+
+/* @var $plugin Aurehal_Acl_Plugin */
+$this->plugin = Zend_Controller_Front::getInstance()->getPlugin('Aurehal_Acl_Plugin');
+
+$row = "<blockquote>";
+
+$row .= "<div class='referentiel' style='margin-top: 10px;' ";
+
+if ($this->journal->JID != '') { 
+	$row .='data-id="' . $this->journal->JID . '"';
+}
+
+if (isset($this->item)) {
+	$row .= "id=" . Ccsd_Tools::ifsetor($this->identifier, '');
+}
+
+$row .= ">";
+
+$row .= "<div style='float: right;'>";
+if (isset($this->item) && !$this->journal->JID) {
+	$row .= "<a href='javascript:void(0);' data-toggle='tooltip' data-placement='right' data-original-title='" . $this->translate('Modifier cette revue') . "' onclick='" . $this->item->getEditFunction() . "' style='font-size:12px;'><i class='glyphicon glyphicon-edit'></i></a>";
+}
+
+if (isset($this->item)) {
+	$row .= "<a href='javascript:void(0);' data-toggle='tooltip' data-placement='right' data-original-title='" . $this->translate('Supprimer cette revue') . "' onclick='" . $this->item->getDeleteFunction() . "' style='font-size:12px;'><i class='glyphicon glyphicon-trash'></i></a>";
+} 
+
+$row .= "</div>";
+
+$row .= "<div>";
+
+
+$row .= "<i class='glyphicon glyphicon-ok-circle alert-" . $label_valid[$this->journal->VALID] . "' style='background:none;border:0;'></i>&nbsp;";	
+
+if ($this->journal->SHORTNAME != '') { 
+	$row .= $this->journal->SHORTNAME . ' - '; 
+}
+
+$row .= $this->journal->JNAME;
+
+if (SPACE_NAME == 'AUREHAL' && $this->journal->JID != 0) {
+	$row .= "<span class='badge' style='margin-left:5px;'>" . $this->journal->JID . "</span>";
+}
+
+if ($this->journal->ISSN != '' || $this->journal->EISSN != '') {
+	$id = array();
+	
+    if ($this->journal->ISSN != '') {
+    	$id[] = $this->translate('ISSN') . ' : ' . $this->journal->ISSN;
+    }
+            
+    if ($this->journal->EISSN != '') {
+        $id[] = $this->translate('ESSN') . ' : ' . $this->journal->EISSN;
+    }
+
+    $row .= "<span style='font-size:small;'>&nbsp;(" . implode(', ', $id) . ")</span>";
+} 
+
+if ($this->journal->PUBLISHER != '') {
+	$publisher = $this->journal->PUBLISHER;
+   
+    if (isset($this->journal->URL) && $this->journal->URL != '') {
+		$publisher = '<a href="' . $this->journal->URL . '" target="_blank">' . $publisher . '</a>';
+	} 
+
+	$row .= "<small>" . $this->translate('Published by') . ' ' . $publisher . "</small>";
+} 
+
+if ($this->journal->URL != '') {
+	$url = $this->journal->URL;
+	
+    if ($url) {
+    	$url = '<a href="' . $this->journal->URL . '" target="_blank">' . $this->journal->URL . '</a>';
+	}
+
+    $row .= "<small>" . $url . "</small>";
+} 
+
+include __DIR__ . "/" . (SPACE_NAME == 'AUREHAL' && !$this->hideSHERPA ? "journal-aurehal.phtml" : "journal-hal.phtml");
+
+$row .= "</div>";
+
+if ($this->options && isset($this->plugin) && $this->plugin->isAllowed((new Zend_Controller_Request_Http())->setControllerName('journal')->setActionName('modify'))) {
+	$row .= "<a href='" . URL . "/journal/modify/id/" . $this->journal->JID . "'";
+	$row .= " style='position: absolute; top: 10px; right: 25px; font-size: inherit;'><i class='glyphicon glyphicon-edit'></i></a>";
+}
+
+if (isset($this->item)) {
+
+    $row .= "<div style='display:none;'>";
+    	
+    if ($this->journal->JID != '') { 
+    	$row .= "<input type='hidden' name='" . $this->item->getName() . "' value='" . $this->journal->JID . "' />";
+    } else foreach($this->journal->getForm() as $element) {
+        /** @var Ccsd_Form_Element $element */
+		$element->setAttrib('readonly', 'readonly');
+		$row .= $this->formHidden($element->getName(), $element->getValue(), $element->getAttribs());
+		$element->setAttrib('readonly', null);
+		$element->setBelongsTo($this->item->getName());
+		$row .= $this->formHidden($element->getFullyQualifiedName(), $element->getValue(), $element->getAttribs());
+	}
+        
+    $row .= "</div>";
+}
+
+$row .= "</div>";
+
+if (SPACE_NAME == 'AUREHAL') {
+	if ( 'replace' == Zend_Controller_Front::getInstance()->getRequest()->getActionName() ) {
+		$row .= "<div class='row'>";
+	    $row .= "<div class='col-md-12'>";
+	    $row .= "<div id='journalId_i_" . $this->journal->JID . "'>";
+	    if (isset ($this->{"OBJID_" . $this->journal->JID})) {
+	    	ob_start();
+			$this->documents ($this->journal->JID, "Ccsd_Referentiels_Journal");
+			$row .= ob_get_contents();
+			ob_end_clean();
+		}
+		$row .= "</div>";
+	    $row .= "</div>";
+		$row .= "</div>";
+	}	
+}
+
+$row .= "</blockquote>";
+
+echo $row;

@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type='text/xsl' href='/oai2.xsl' ?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2018-09-13T15:04:53Z</responseDate>
+    <request verb="GetRecord" identifier="oai:oatao.univ-toulouse.fr:10031" metadataPrefix="oai_dc">http://oatao.univ-toulouse.fr/cgi/oai2</request>
+    <GetRecord>
+        <record>
+            <header>
+                <identifier>oai:oatao.univ-toulouse.fr:10031</identifier>
+                <datestamp>2017-10-10T17:33:07Z</datestamp>
+                <setSpec>7374617475733D707562</setSpec>
+                <setSpec>7375626A656374733D535049:5350495F5349474E414C</setSpec>
+                <setSpec>74797065733D636F6E666572656E63655F6974656D</setSpec>
+                <setSpec>696E737469743D4F524752454348:434E5253</setSpec>
+                <setSpec>696E737469743D696E737469745F746F756C6F757365:494E5054</setSpec>
+                <setSpec>696E737469743D696E737469745F746F756C6F757365:49534145</setSpec>
+                <setSpec>696E737469743D696E737469745F746F756C6F757365:555053</setSpec></header>
+            <metadata>
+                <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <dc:title>Evaluation of microplasma discharges as active components for reconfigurable antennas</dc:title>
+                    <dc:creator>Pizarro, Francisco</dc:creator>
+                    <dc:creator>Pascaud, Romain</dc:creator>
+                    <dc:creator>Pascal, Olivier</dc:creator>
+                    <dc:creator>Callegari, Thierry</dc:creator>
+                    <dc:creator>Liard, Laurent</dc:creator>
+                    <dc:contributor>Centre National de la Recherche Scientifique - CNRS (FRANCE)</dc:contributor>
+                    <dc:contributor>Institut National Polytechnique de Toulouse - INPT (FRANCE)</dc:contributor>
+                    <dc:contributor>Institut Supérieur de l'Aéronautique et de l'Espace - ISAE-SUPAERO (FRANCE)</dc:contributor>
+                    <dc:contributor>Université Toulouse III - Paul Sabatier - UPS (FRANCE)</dc:contributor>
+                    <dc:subject>Traitement du signal et de l'image</dc:subject>
+                    <dc:subject>Plasma discharge</dc:subject>
+                    <dc:subject>RF/microplasma interaction</dc:subject>
+                    <dc:description>This paper presents an experimental setup for the wideband RF characterization of plasma Micro Hollow Cathode Sustained Discharge (MHCD). This microdischarge is studied as a candidate for integrated active component in antennas, using the change of permittivity caused by the presence of plasma. The measurement setup consists of a 50 Ω microstrip line with a single MHCD placed in its center. The measurement of the scattering parameters of the experimental device permits the evaluation of the complex permittivity and conductivity of the MHCD.</dc:description>
+                    <dc:date>2012</dc:date>
+                    <dc:type>Conference or Workshop Item</dc:type>
+                    <dc:type>PeerReviewed</dc:type>
+                    <dc:format>application/pdf</dc:format>
+                    <dc:identifier>http://oatao.univ-toulouse.fr/10031/1/Pascaud_10031.pdf</dc:identifier>
+                    <dc:language>en</dc:language>
+                    <dc:contributor>Département d'Electronique, Optronique et Signal - DEOS (Toulouse, France)</dc:contributor>
+                    <dc:contributor>Laboratoire Plasma et Conversion d'Energie - LAPLACE (Toulouse, France)</dc:contributor>
+                    <dc:identifier>HAL : hal-00905021</dc:identifier>
+                    <dc:type>info:eu-repo/semantics/conferenceObject</dc:type>
+                    <dc:rights>info:eu-repo/semantics/openAccess</dc:rights>
+                    <dc:identifier>  Pizarro, Francisco and Pascaud, Romain and Pascal, Olivier and Callegari, Thierry and Liard, Laurent.    Evaluation of microplasma discharges as active components for reconfigurable antennas.    (2012)    In: Antennas and Propagation (EuCAP), 2012 6th European Conference on, 26 March 2012 - 30 March 2012  (Prague, Czech Republic).     </dc:identifier>
+                    <dc:relation>http://dx.doi.org/10.1109/EuCAP.2012.6206117</dc:relation>
+                    <dc:relation>http://oatao.univ-toulouse.fr/10031/</dc:relation>
+                </oai_dc:dc>
+            </metadata>
+        </record>
+    </GetRecord>
+</OAI-PMH>

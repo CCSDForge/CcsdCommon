@@ -1,0 +1,549 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:produits xmlns:ns2="http://record.prodinra.inra.fr">
+    <produit>
+        <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:proceedingPaper">
+            <identifier>442047</identifier>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Jouany</lastName>
+                    <firstName>Claire</firstName>
+                    <initial>C.</initial>
+                    <publicationName>Jouany</publicationName>
+                    <email>claire.jouany@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>10121B</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>AGroécologie, Innovations, teRritoires</name>
+                            <code>1248</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : AGroécologie, Innovations, teRritoires,
+                                Auzeville</laboratory>
+                            <city>Auzeville</city>
+                            <country>FRA</country>
+                            <rnsr>200317643U</rnsr>
+                            <center>
+                                <code>31</code>
+                                <name>Centre de recherche Occitanie-Toulouse</name>
+                                <acronym>CR Occitanie-Toulouse</acronym>
+                            </center>
+                            <department>
+                                <code>51</code>
+                                <name>Sciences pour l'Action et le Développement</name>
+                                <acronym>SAD</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>AGIR</acronym>
+                            <affiliationPartners>
+                                <name>Ecole Nationale Supérieure Agronomique de Toulouse</name>
+                                <acronym>INPT-ENSAT</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Ecole supérieure d'Agriculture de Purpan</name>
+                                <acronym>INPT-EI-Purpan</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Jourdan</lastName>
+                    <firstName>Christophe</firstName>
+                    <initial>C.</initial>
+                    <publicationName>Jourdan</publicationName>
+                    <email>jourdan@supagro.inra.fr</email>
+                    <role/>
+                    <inraIdentifier>114357B</inraIdentifier>
+                    <peps>true</peps>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Ecologie Fonctionnelle et Biogéochimie des Sols et Agrosystèmes </name>
+                            <code>1222</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Ecologie Fonctionnelle et Biogéochimie des Sols et
+                                Agrosystèmes , Montpellier</laboratory>
+                            <city>Montpellier</city>
+                            <country>FRA</country>
+                            <rnsr>199917859W</rnsr>
+                            <center>
+                                <code>24</code>
+                                <name>Centre de recherche Occitanie-Montpellier</name>
+                                <acronym>CR Occitanie-Montpellier</acronym>
+                            </center>
+                            <department>
+                                <code>54</code>
+                                <name>Ecologie des Forêts, Prairies et Milieux Aquatiques</name>
+                                <acronym>EFPA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>Eco&amp;Sol</acronym>
+                            <affiliationPartners>
+                                <name>Centre de Coopération Internationale en Recherche Agronomique
+                                    pour le Développement</name>
+                                <acronym>CIRAD</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Centre international d’études supérieures en sciences
+                                    agronomiques</name>
+                                <acronym>Montpellier SupAgro</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut de Recherche pour le Développement</name>
+                                <acronym>IRD</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>RUFFE</lastName>
+                    <firstName>Lysiane</firstName>
+                    <initial>L.</initial>
+                    <publicationName>Ruffe</publicationName>
+                    <email>lysiane.ruffe@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>164894H</inraIdentifier>
+                    <peps>true</peps>
+                    <fundingDepartment>51</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>AGroécologie, Innovations, teRritoires</name>
+                            <code>1248</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : AGroécologie, Innovations, teRritoires,
+                                Auzeville</laboratory>
+                            <city>Auzeville</city>
+                            <country>FRA</country>
+                            <rnsr>200317643U</rnsr>
+                            <center>
+                                <code>31</code>
+                                <name>Centre de recherche Occitanie-Toulouse</name>
+                                <acronym>CR Occitanie-Toulouse</acronym>
+                            </center>
+                            <department>
+                                <code>51</code>
+                                <name>Sciences pour l'Action et le Développement</name>
+                                <acronym>SAD</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>AGIR</acronym>
+                            <affiliationPartners>
+                                <name>Ecole Nationale Supérieure Agronomique de Toulouse</name>
+                                <acronym>INPT-ENSAT</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Ecole supérieure d'Agriculture de Purpan</name>
+                                <acronym>INPT-EI-Purpan</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Furget Bretagnon</lastName>
+                    <firstName>Clément</firstName>
+                    <initial>C.</initial>
+                    <publicationName>Furget Bretagnon</publicationName>
+                    <email/>
+                    <role/>
+                    <inraIdentifier>167043T</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Ecologie Fonctionnelle et Biogéochimie des Sols et Agrosystèmes </name>
+                            <code>1222</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Ecologie Fonctionnelle et Biogéochimie des Sols et
+                                Agrosystèmes , Montpellier</laboratory>
+                            <city>Montpellier</city>
+                            <country>FRA</country>
+                            <rnsr>199917859W</rnsr>
+                            <center>
+                                <code>24</code>
+                                <name>Centre de recherche Occitanie-Montpellier</name>
+                                <acronym>CR Occitanie-Montpellier</acronym>
+                            </center>
+                            <department>
+                                <code>54</code>
+                                <name>Ecologie des Forêts, Prairies et Milieux Aquatiques</name>
+                                <acronym>EFPA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>Eco&amp;Sol</acronym>
+                            <affiliationPartners>
+                                <name>Centre de Coopération Internationale en Recherche Agronomique
+                                    pour le Développement</name>
+                                <acronym>CIRAD</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Centre international d’études supérieures en sciences
+                                    agronomiques</name>
+                                <acronym>Montpellier SupAgro</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut de Recherche pour le Développement</name>
+                                <acronym>IRD</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Gavaland</lastName>
+                    <firstName>André</firstName>
+                    <initial>A.</initial>
+                    <publicationName>Gavaland</publicationName>
+                    <email>andre.gavaland@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>13996N</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Domaine Expérimental d'Auzeville</name>
+                            <code>0802</code>
+                            <type>UE</type>
+                            <laboratory>UE : Domaine Expérimental d'Auzeville,
+                                Auzeville</laboratory>
+                            <city>Auzeville</city>
+                            <country>FRA</country>
+                            <rnsr>198617741Z</rnsr>
+                            <center>
+                                <code>31</code>
+                                <name>Centre de recherche Occitanie-Toulouse</name>
+                                <acronym>CR Occitanie-Toulouse</acronym>
+                            </center>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>81</code>
+                                <name>Biologie et Amélioration des Plantes </name>
+                                <acronym>BAP</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>AUZEVILLE</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Bertrand</lastName>
+                    <firstName>Isabelle</firstName>
+                    <initial>I.</initial>
+                    <publicationName>Bertrand</publicationName>
+                    <email>isabelle.bertrand@inra.fr</email>
+                    <role>Auteur de correspondance</role>
+                    <inraIdentifier>18765X</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Ecologie Fonctionnelle et Biogéochimie des Sols et Agrosystèmes </name>
+                            <code>1222</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Ecologie Fonctionnelle et Biogéochimie des Sols et
+                                Agrosystèmes , Montpellier</laboratory>
+                            <city>Montpellier</city>
+                            <country>FRA</country>
+                            <rnsr>199917859W</rnsr>
+                            <center>
+                                <code>24</code>
+                                <name>Centre de recherche Occitanie-Montpellier</name>
+                                <acronym>CR Occitanie-Montpellier</acronym>
+                            </center>
+                            <department>
+                                <code>54</code>
+                                <name>Ecologie des Forêts, Prairies et Milieux Aquatiques</name>
+                                <acronym>EFPA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>Eco&amp;Sol</acronym>
+                            <affiliationPartners>
+                                <name>Centre de Coopération Internationale en Recherche Agronomique
+                                    pour le Développement</name>
+                                <acronym>CIRAD</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Centre international d’études supérieures en sciences
+                                    agronomiques</name>
+                                <acronym>Montpellier SupAgro</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut de Recherche pour le Développement</name>
+                                <acronym>IRD</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Hinsinger</lastName>
+                    <firstName>Philippe</firstName>
+                    <initial>P.</initial>
+                    <publicationName>Hinsinger</publicationName>
+                    <email>philippe.hinsinger@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>10390T</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Ecologie Fonctionnelle et Biogéochimie des Sols et Agrosystèmes </name>
+                            <code>1222</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Ecologie Fonctionnelle et Biogéochimie des Sols et
+                                Agrosystèmes , Montpellier</laboratory>
+                            <city>Montpellier</city>
+                            <country>FRA</country>
+                            <rnsr>199917859W</rnsr>
+                            <center>
+                                <code>24</code>
+                                <name>Centre de recherche Occitanie-Montpellier</name>
+                                <acronym>CR Occitanie-Montpellier</acronym>
+                            </center>
+                            <department>
+                                <code>54</code>
+                                <name>Ecologie des Forêts, Prairies et Milieux Aquatiques</name>
+                                <acronym>EFPA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>Eco&amp;Sol</acronym>
+                            <affiliationPartners>
+                                <name>Centre de Coopération Internationale en Recherche Agronomique
+                                    pour le Développement</name>
+                                <acronym>CIRAD</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Centre international d’études supérieures en sciences
+                                    agronomiques</name>
+                                <acronym>Montpellier SupAgro</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut de Recherche pour le Développement</name>
+                                <acronym>IRD</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <title language="eng">Root traits of durum wheat vary with the level of soil phosphorus
+                availability in a long term fertilization experiment</title>
+            <alternateTitle/>
+            <subTitle/>
+            <language>eng</language>
+            <abstract language="eng">Root traits play a key role in soil exploration and belowground
+                resource acquisition. However, in situ measured traits remain scarce due to
+                methodological challenges. In this study, we hypothesized that changes in soil
+                available and total P contents would impact durum wheat root traits. We expected
+                specific root length (SRL), root length density (RLD) and fine roots proportion
+                (FRP) to increase with soil fertility while root tissue density would decrease. The
+                study was performed in 2016 on durum wheat (cv. Isildur) grown on the long term
+                field experiment at INRA-Auzeville (France). Since 1968, this experiment tests 4 P
+                regimes arranged in 8 randomized repetition blocks with P0 (no P), P1, P2, and P4
+                levels, respectively 11, 22 and 33 kg P ha-1 year-1. Soil and roots were sampled at
+                flowering stage with a hydraulic soil core of 5 cm in diameter, at two depths (0-30
+                cm and 30-60 cm). Three cores were collected per horizon for each plot, leading to
+                96 samples by depth thus a total of 192 soil cores. Roots were washed, scanned and
+                analyzed using WinRhizo software then analyzed for C, N and P concentration. One
+                additional sample per treatment and depth was collected for soil solution C, N and P
+                analyses Results showed that durum wheat root system was modified by soil P
+                availability at the two soil depths. As hypothesized, SRL and RLD increased between
+                P0 and P4 treatments while FRP was higher in the upper soil horizon as related to
+                higher soil plant available P content. Root N content did not change across
+                treatment while root P content was significantly affected by P fertilization rate
+                leading to a significant relationship between the root N/P and soil available N/P
+                ratios.</abstract>
+            <year>2018</year>
+            <link>https://events.eventact.com/ProgramView2/Agenda/Lecture?id=175378&amp;code=3212528</link>
+            <recordAccessCondition>Publique</recordAccessCondition>
+            <keywords>
+                <keyword>wheat</keyword>
+                <keyword>root traits</keyword>
+                <keyword>soil</keyword>
+                <keyword>phosphorus</keyword>
+                <keyword>field experiment</keyword>
+            </keywords>
+            <targetAudience>Scientifique</targetAudience>
+            <itemType>PROCEEDING_PAPER</itemType>
+            <workflowStatus>validé</workflowStatus>
+            <creationDate>2018-08-29T16:49:39</creationDate>
+            <transmissionDate>2018-08-29T16:56:02</transmissionDate>
+            <firstValidationDate>2018-08-30T10:07:39</firstValidationDate>
+            <validationDate>2018-08-30T10:07:39</validationDate>
+            <updateDate>2018-08-30T10:07:41</updateDate>
+            <depositor>
+                <lastName>Jouany</lastName>
+                <firstName>Claire</firstName>
+                <inraIdentifier>10121B</inraIdentifier>
+                <email>claire.jouany@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>51</code>
+                        <name>Sciences pour l'Action et le Développement</name>
+                        <acronym>SAD</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>15</code>
+                        <name>Environnement et Agronomie</name>
+                        <acronym>EA</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>31</code>
+                        <name>Centre de recherche Occitanie-Toulouse</name>
+                        <acronym>CR Occitanie-Toulouse</acronym>
+                    </center>
+                    <unitName>AGroécologie, Innovations, teRritoires</unitName>
+                    <unitCode>1248</unitCode>
+                </affiliation>
+            </depositor>
+            <reviewer>
+                <lastName>Raynaud</lastName>
+                <firstName>Christelle</firstName>
+                <inraIdentifier>18650X</inraIdentifier>
+                <email>christelle.raynaud@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>MICS</code>
+                        <name>Direction de l'Immobilier et de la Coordination des Services
+                            Déconcentrés d'Appui à la Recherche</name>
+                        <acronym>DICSDAR</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Services déconcentrés d'appui à la recherche
+                        Occitanie-Montpellier</unitName>
+                    <unitCode>0378</unitCode>
+                </affiliation>
+            </reviewer>
+            <firstReviewer>
+                <lastName>Raynaud</lastName>
+                <firstName>Christelle</firstName>
+                <inraIdentifier>18650X</inraIdentifier>
+                <email>christelle.raynaud@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>MICS</code>
+                        <name>Direction de l'Immobilier et de la Coordination des Services
+                            Déconcentrés d'Appui à la Recherche</name>
+                        <acronym>DICSDAR</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>24</code>
+                        <name>Centre de recherche Occitanie-Montpellier</name>
+                        <acronym>CR Occitanie-Montpellier</acronym>
+                    </center>
+                    <unitName>Services déconcentrés d'appui à la recherche
+                        Occitanie-Montpellier</unitName>
+                    <unitCode>0378</unitCode>
+                </affiliation>
+            </firstReviewer>
+            <complements/>
+            <halSending>false</halSending>
+            <origin>CREATED</origin>
+            <event>
+                <name>10. Symposium of the International Society of Root Research (ISRR10)</name>
+                <type>Symposium</type>
+                <meeting>
+                    <city>Jérusalem</city>
+                    <country>ISR</country>
+                    <period>
+                        <startDate>2018-07-08</startDate>
+                        <endDate>2018-07-12</endDate>
+                    </period>
+                </meeting>
+            </event>
+            <invitedConference>false</invitedConference>
+            <paperProceedingsType>Présentation orale</paperProceedingsType>
+            <paperNumber/>
+            <pagination/>
+            <peerReviewed>true</peerReviewed>
+            <proceedingsTitle>ISRR-10. Exposing the Hidden Half. Root Research at the Forefront of
+                Science International Symposium. 8-12 July 2018, Yearim Hotel,
+                Israel</proceedingsTitle>
+            <proceedingsType/>
+            <pages/>
+            <publishing/>
+            <experimentalUnit/>
+        </record>
+        <ns2:attachment>
+            <attachmentId>{78D75D75-D24B-467A-BACB-268D29365665}</attachmentId>
+            <accessCondition>Publique</accessCondition>
+            <version>Version éditeur</version>
+            <title>ISRR 2018 Flexstoechio</title>
+            <fileName>ISRR 2018 Flexstoechio</fileName>
+            <fileSize>93632.0</fileSize>
+            <fileMimeType>application/pdf</fileMimeType>
+            <original>true</original>
+        </ns2:attachment>
+    </produit>
+</ns2:produits>

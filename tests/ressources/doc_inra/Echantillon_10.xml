@@ -1,0 +1,391 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:produits xmlns:ns2="http://record.prodinra.inra.fr">
+    <produit>
+        <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:researchReport">
+            <identifier>427906</identifier>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Sierra</lastName>
+                    <firstName>Jorge</firstName>
+                    <initial>J.</initial>
+                    <publicationName>Sierra</publicationName>
+                    <email>jorge.sierra@inra.fr</email>
+                    <inraIdentifier>18221F</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut national de la recherche agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Agrosystèmes tropicaux</name>
+                            <code>1321</code>
+                            <type>UR</type>
+                            <laboratory>UR : Agrosystèmes tropicaux, Petit-Bourg</laboratory>
+                            <city>Petit-Bourg</city>
+                            <country>FRA</country>
+                            <rnsr>201119636A</rnsr>
+                            <center>
+                                <code>41</code>
+                                <name>Centre de recherche Antilles-Guyane</name>
+                                <acronym>CR Antilles-Guyane</acronym>
+                            </center>
+                            <department>
+                                <code>50</code>
+                                <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                                    Environnement</name>
+                                <acronym>SAE 2</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>81</code>
+                                <name>Biologie et Amélioration des Plantes </name>
+                                <acronym>BAP</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ASTRO</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Blazy</lastName>
+                    <firstName>Jean-Marc</firstName>
+                    <initial>J.-M.</initial>
+                    <publicationName>Blazy</publicationName>
+                    <email>jean-marc.blazy@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>95244B</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>50</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Agrosystèmes tropicaux</name>
+                            <code>1321</code>
+                            <type>UR</type>
+                            <laboratory>UR : Agrosystèmes tropicaux, Petit-Bourg</laboratory>
+                            <city>Petit-Bourg</city>
+                            <country>FRA</country>
+                            <rnsr>201119636A</rnsr>
+                            <center>
+                                <code>41</code>
+                                <name>Centre de recherche Antilles-Guyane</name>
+                                <acronym>CR Antilles-Guyane</acronym>
+                            </center>
+                            <department>
+                                <code>50</code>
+                                <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                                    Environnement</name>
+                                <acronym>SAE 2</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>81</code>
+                                <name>Biologie et Amélioration des Plantes </name>
+                                <acronym>BAP</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ASTRO</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:externalAuthor">
+                    <lastName>Paul</lastName>
+                    <firstName>Jacky</firstName>
+                    <initial>J.</initial>
+                    <publicationName>Paul</publicationName>
+                    <email/>
+                    <role/>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Causeret</lastName>
+                    <firstName>François</firstName>
+                    <initial>F.</initial>
+                    <publicationName>Causeret</publicationName>
+                    <email>francois.causeret@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>13039Y</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>50</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Agrosystèmes tropicaux</name>
+                            <code>1321</code>
+                            <type>UR</type>
+                            <laboratory>UR : Agrosystèmes tropicaux, Petit-Bourg</laboratory>
+                            <city>Petit-Bourg</city>
+                            <country>FRA</country>
+                            <rnsr>201119636A</rnsr>
+                            <center>
+                                <code>41</code>
+                                <name>Centre de recherche Antilles-Guyane</name>
+                                <acronym>CR Antilles-Guyane</acronym>
+                            </center>
+                            <department>
+                                <code>50</code>
+                                <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                                    Environnement</name>
+                                <acronym>SAE 2</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>81</code>
+                                <name>Biologie et Amélioration des Plantes </name>
+                                <acronym>BAP</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ASTRO</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Guinde</lastName>
+                    <firstName>Loic</firstName>
+                    <initial>L.</initial>
+                    <publicationName>Guinde</publicationName>
+                    <email>loic.guinde@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>18917M</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>50</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Agrosystèmes tropicaux</name>
+                            <code>1321</code>
+                            <type>UR</type>
+                            <laboratory>UR : Agrosystèmes tropicaux, Petit-Bourg</laboratory>
+                            <city>Petit-Bourg</city>
+                            <country>FRA</country>
+                            <rnsr>201119636A</rnsr>
+                            <center>
+                                <code>41</code>
+                                <name>Centre de recherche Antilles-Guyane</name>
+                                <acronym>CR Antilles-Guyane</acronym>
+                            </center>
+                            <department>
+                                <code>50</code>
+                                <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                                    Environnement</name>
+                                <acronym>SAE 2</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>81</code>
+                                <name>Biologie et Amélioration des Plantes </name>
+                                <acronym>BAP</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ASTRO</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Moulla</lastName>
+                    <firstName>Sarah</firstName>
+                    <initial>S.</initial>
+                    <publicationName>Moulla</publicationName>
+                    <email>sarah.moulla@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>122853L</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>15</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Agrosystèmes tropicaux</name>
+                            <code>1321</code>
+                            <type>UR</type>
+                            <laboratory>UR : Agrosystèmes tropicaux, Petit-Bourg</laboratory>
+                            <city>Petit-Bourg</city>
+                            <country>FRA</country>
+                            <rnsr>201119636A</rnsr>
+                            <center>
+                                <code>41</code>
+                                <name>Centre de recherche Antilles-Guyane</name>
+                                <acronym>CR Antilles-Guyane</acronym>
+                            </center>
+                            <department>
+                                <code>50</code>
+                                <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                                    Environnement</name>
+                                <acronym>SAE 2</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>16</code>
+                                <name>Santé des Plantes et Environnement</name>
+                                <acronym>SPE</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>81</code>
+                                <name>Biologie et Amélioration des Plantes </name>
+                                <acronym>BAP</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>15</code>
+                                <name>Environnement et Agronomie</name>
+                                <acronym>EA</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>ASTRO</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <title>Le compostage et la fertilisation organique à l’échelle du territoire en
+                Guadeloupe : conditions d’émergence d’une filière de recyclage des déchets en
+                agriculture</title>
+            <language>fra</language>
+            <year>2018</year>
+            <notes/>
+            <recordAccessCondition>Publique</recordAccessCondition>
+            <keywords>
+                <keyword>compostage</keyword>
+                <keyword>socio-économie</keyword>
+                <keyword>système de culture</keyword>
+                <keyword>Guadeloupe</keyword>
+                <keyword>enquête</keyword>
+                <keyword>perception</keyword>
+                <keyword>adoption</keyword>
+                <keyword>filière agricole</keyword>
+            </keywords>
+            <targetAudience>Scientifique</targetAudience>
+            <itemType>RESEARCH_REPORT</itemType>
+            <workflowStatus>à relire</workflowStatus>
+            <creationDate>2018-05-02T22:00:18</creationDate>
+            <transmissionDate>2018-05-02T22:08:02</transmissionDate>
+            <updateDate>2018-05-02T22:08:02</updateDate>
+            <depositor>
+                <lastName>Sierra</lastName>
+                <firstName>Jorge</firstName>
+                <inraIdentifier>18221F</inraIdentifier>
+                <email>jorge.sierra@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>50</code>
+                        <name>Sciences Sociales, Agriculture et Alimentation, Espace et
+                            Environnement</name>
+                        <acronym>SAE 2</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>16</code>
+                        <name>Santé des Plantes et Environnement</name>
+                        <acronym>SPE</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>81</code>
+                        <name>Biologie et Amélioration des Plantes </name>
+                        <acronym>BAP</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>15</code>
+                        <name>Environnement et Agronomie</name>
+                        <acronym>EA</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>41</code>
+                        <name>Centre de recherche Antilles-Guyane</name>
+                        <acronym>CR Antilles-Guyane</acronym>
+                    </center>
+                    <unitName>Agrosystèmes tropicaux</unitName>
+                    <unitCode>1321</unitCode>
+                </affiliation>
+            </depositor>
+            <complements/>
+            <halSending>false</halSending>
+            <origin>CREATED</origin>
+            <researchReportType>Rapport de fin de contrat</researchReportType>
+            <order>
+                <backer>
+                    <name>Agence de l'Environnement et de la Maîtrise de l'Energie</name>
+                    <country>FRA</country>
+                    <location>International</location>
+                    <acronym>ADEME</acronym>
+                </backer>
+            </order>
+            <publishing>
+                <published>false</published>
+            </publishing>
+            <reportDirector>Jorge Sierra</reportDirector>
+        </record>
+        <ns2:attachment>
+            <attachmentId>{EB554A63-4E02-4754-9098-944EB24DC98E}</attachmentId>
+            <accessCondition>Publique</accessCondition>
+            <title>Rapport Final Projet Adoption Compost</title>
+            <fileName>Rapport Final Projet Adoption Compost</fileName>
+            <fileSize>937572.0</fileSize>
+            <fileMimeType>application/pdf</fileMimeType>
+            <rights>CC-BY</rights>
+            <original>true</original>
+        </ns2:attachment>
+    </produit>
+</ns2:produits>

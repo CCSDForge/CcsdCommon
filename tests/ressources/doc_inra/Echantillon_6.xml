@@ -1,0 +1,639 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:produits xmlns:ns2="http://record.prodinra.inra.fr">
+    <produit>
+        <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:paper">
+            <identifier>433565</identifier>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>BERTIN</lastName>
+                    <firstName>Aline</firstName>
+                    <initial>A.</initial>
+                    <publicationName>Bertin</publicationName>
+                    <email>aline.bertin@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>110947V</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>17</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Physiologie de la Reproduction et des Comportements</name>
+                            <code>0085</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Physiologie de la Reproduction et des Comportements,
+                                Nouzilly</laboratory>
+                            <city>Nouzilly</city>
+                            <country>FRA</country>
+                            <rnsr>201220294L</rnsr>
+                            <center>
+                                <code>32</code>
+                                <name>Centre de recherche Val de Loire</name>
+                                <acronym>CR Val de Loire</acronym>
+                            </center>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>PRC</acronym>
+                            <affiliationPartners>
+                                <name>Centre National de la Recherche Scientifique</name>
+                                <acronym>CNRS</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut français du cheval et de l'équitation</name>
+                                <acronym>IFCE</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Université François Rabelais</name>
+                                <acronym>U. Tours</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Calandreau</lastName>
+                    <firstName>Ludovic</firstName>
+                    <initial>L.</initial>
+                    <publicationName>Calandreau</publicationName>
+                    <email>ludovic.calandreau@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>109872B</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>17</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Physiologie de la Reproduction et des Comportements</name>
+                            <code>0085</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Physiologie de la Reproduction et des Comportements,
+                                Nouzilly</laboratory>
+                            <city>Nouzilly</city>
+                            <country>FRA</country>
+                            <rnsr>201220294L</rnsr>
+                            <center>
+                                <code>32</code>
+                                <name>Centre de recherche Val de Loire</name>
+                                <acronym>CR Val de Loire</acronym>
+                            </center>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>PRC</acronym>
+                            <affiliationPartners>
+                                <name>Centre National de la Recherche Scientifique</name>
+                                <acronym>CNRS</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut français du cheval et de l'équitation</name>
+                                <acronym>IFCE</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Université François Rabelais</name>
+                                <acronym>U. Tours</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Cornilleau</lastName>
+                    <firstName>Fabien</firstName>
+                    <initial>F.</initial>
+                    <publicationName>Cornilleau</publicationName>
+                    <email>fabien.cornilleau@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>78536Q</inraIdentifier>
+                    <peps>true</peps>
+                    <fundingDepartment>MICS</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Physiologie de la Reproduction et des Comportements</name>
+                            <code>0085</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Physiologie de la Reproduction et des Comportements,
+                                Nouzilly</laboratory>
+                            <city>Nouzilly</city>
+                            <country>FRA</country>
+                            <rnsr>201220294L</rnsr>
+                            <center>
+                                <code>32</code>
+                                <name>Centre de recherche Val de Loire</name>
+                                <acronym>CR Val de Loire</acronym>
+                            </center>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>PRC</acronym>
+                            <affiliationPartners>
+                                <name>Centre National de la Recherche Scientifique</name>
+                                <acronym>CNRS</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut français du cheval et de l'équitation</name>
+                                <acronym>IFCE</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Université François Rabelais</name>
+                                <acronym>U. Tours</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Meurisse</lastName>
+                    <firstName>Maryse</firstName>
+                    <initial>M.</initial>
+                    <publicationName>Meurisse</publicationName>
+                    <email>maryse.meurisse@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>13164J</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>17</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Physiologie de la Reproduction et des Comportements</name>
+                            <code>0085</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Physiologie de la Reproduction et des Comportements,
+                                Nouzilly</laboratory>
+                            <city>Nouzilly</city>
+                            <country>FRA</country>
+                            <rnsr>201220294L</rnsr>
+                            <center>
+                                <code>32</code>
+                                <name>Centre de recherche Val de Loire</name>
+                                <acronym>CR Val de Loire</acronym>
+                            </center>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>PRC</acronym>
+                            <affiliationPartners>
+                                <name>Centre National de la Recherche Scientifique</name>
+                                <acronym>CNRS</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut français du cheval et de l'équitation</name>
+                                <acronym>IFCE</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Université François Rabelais</name>
+                                <acronym>U. Tours</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Georgelin</lastName>
+                    <firstName>Marion</firstName>
+                    <initial>M.</initial>
+                    <publicationName>Georgelin</publicationName>
+                    <email>marion.georgelin@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>147123R</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>17</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Physiologie de la Reproduction et des Comportements</name>
+                            <code>0085</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Physiologie de la Reproduction et des Comportements,
+                                Nouzilly</laboratory>
+                            <city>Nouzilly</city>
+                            <country>FRA</country>
+                            <rnsr>201220294L</rnsr>
+                            <center>
+                                <code>32</code>
+                                <name>Centre de recherche Val de Loire</name>
+                                <acronym>CR Val de Loire</acronym>
+                            </center>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>PRC</acronym>
+                            <affiliationPartners>
+                                <name>Centre National de la Recherche Scientifique</name>
+                                <acronym>CNRS</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut français du cheval et de l'équitation</name>
+                                <acronym>IFCE</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Université François Rabelais</name>
+                                <acronym>U. Tours</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>DARMAILLACQ</lastName>
+                    <firstName>Anne-Sophie</firstName>
+                    <initial>A.-S.</initial>
+                    <publicationName>Darmaillacq</publicationName>
+                    <email/>
+                    <role/>
+                    <inraIdentifier>123629E</inraIdentifier>
+                    <peps>true</peps>
+                    <externalAffiliation>
+                        <name>Université de Rennes 1</name>
+                        <identifier>313752</identifier>
+                        <acronym>UR1</acronym>
+                        <country>FRA</country>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Dickel</lastName>
+                    <firstName>Ludovic</firstName>
+                    <initial>L.</initial>
+                    <publicationName>Dickel</publicationName>
+                    <email/>
+                    <role/>
+                    <inraIdentifier>145402W</inraIdentifier>
+                    <peps>true</peps>
+                    <externalAffiliation>
+                        <name>Université de Rennes 1</name>
+                        <identifier>313752</identifier>
+                        <acronym>UR1</acronym>
+                        <section>UMR6552, Ethologie animale et humaine (EthoS) </section>
+                        <city>Rennes</city>
+                        <country>FRA</country>
+                        <partners>
+                            <identifier>311417</identifier>
+                            <name>Centre National de la Recherche Scientifique</name>
+                            <acronym>CNRS</acronym>
+                            <country>FRA</country>
+                        </partners>
+                        <partners>
+                            <identifier>310905</identifier>
+                            <name>Université de Caen Basse Normandie</name>
+                            <acronym>UNICAEN</acronym>
+                            <country>FRA</country>
+                        </partners>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:externalAuthor">
+                    <lastName>Lumineau</lastName>
+                    <firstName>Sophie</firstName>
+                    <initial>S.</initial>
+                    <publicationName>Lumineau</publicationName>
+                    <email/>
+                    <role/>
+                    <externalAffiliation>
+                        <name>Université de Rennes 1</name>
+                        <identifier>313752</identifier>
+                        <acronym>UR1</acronym>
+                        <section>UMR6552, Ethologie animale et humaine (EthoS) </section>
+                        <city>Rennes</city>
+                        <country>FRA</country>
+                        <partners>
+                            <identifier>311417</identifier>
+                            <name>Centre National de la Recherche Scientifique</name>
+                            <acronym>CNRS</acronym>
+                            <country>FRA</country>
+                        </partners>
+                        <partners>
+                            <identifier>310905</identifier>
+                            <name>Université de Caen Basse Normandie</name>
+                            <acronym>UNICAEN</acronym>
+                            <country>FRA</country>
+                        </partners>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Houdelier</lastName>
+                    <firstName>Cécilia</firstName>
+                    <initial>C.</initial>
+                    <publicationName>Houdelier</publicationName>
+                    <email/>
+                    <role/>
+                    <inraIdentifier>103755C</inraIdentifier>
+                    <peps>true</peps>
+                    <externalAffiliation>
+                        <name>Université de Rennes 1</name>
+                        <identifier>313752</identifier>
+                        <acronym>UR1</acronym>
+                        <section>UMR6552, Ethologie animale et humaine (EthoS) </section>
+                        <city>Rennes</city>
+                        <country>FRA</country>
+                        <partners>
+                            <identifier>311417</identifier>
+                            <name>Centre National de la Recherche Scientifique</name>
+                            <acronym>CNRS</acronym>
+                            <country>FRA</country>
+                        </partners>
+                        <partners>
+                            <identifier>310905</identifier>
+                            <name>Université de Caen Basse Normandie</name>
+                            <acronym>UNICAEN</acronym>
+                            <country>FRA</country>
+                        </partners>
+                    </externalAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Delaveau</lastName>
+                    <firstName>Joël</firstName>
+                    <initial>J.</initial>
+                    <publicationName>Delaveau</publicationName>
+                    <email>joel.delaveau@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>21850A</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>17</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Pôle d'Expérimentation Avicole de Tours</name>
+                            <code>1295</code>
+                            <type>UE</type>
+                            <laboratory>UE : Pôle d'Expérimentation Avicole de Tours,
+                                Nouzilly</laboratory>
+                            <city>Nouzilly</city>
+                            <country>FRA</country>
+                            <rnsr>200817785B</rnsr>
+                            <center>
+                                <code>32</code>
+                                <name>Centre de recherche Val de Loire</name>
+                                <acronym>CR Val de Loire</acronym>
+                            </center>
+                            <department>
+                                <code>36</code>
+                                <name>Génétique Animale</name>
+                                <acronym>GA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>PEAT</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Rat</lastName>
+                    <firstName>Christophe</firstName>
+                    <initial>C.</initial>
+                    <publicationName>Rat</publicationName>
+                    <email>christophe.rat@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>120601N</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>36</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Pôle d'Expérimentation Avicole de Tours</name>
+                            <code>1295</code>
+                            <type>UE</type>
+                            <laboratory>UE : Pôle d'Expérimentation Avicole de Tours,
+                                Nouzilly</laboratory>
+                            <city>Nouzilly</city>
+                            <country>FRA</country>
+                            <rnsr>200817785B</rnsr>
+                            <center>
+                                <code>32</code>
+                                <name>Centre de recherche Val de Loire</name>
+                                <acronym>CR Val de Loire</acronym>
+                            </center>
+                            <department>
+                                <code>36</code>
+                                <name>Génétique Animale</name>
+                                <acronym>GA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>PEAT</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>Arnould</lastName>
+                    <firstName>Cécile</firstName>
+                    <initial>C.</initial>
+                    <publicationName>Arnould</publicationName>
+                    <email>cecile.arnould@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>16108J</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>17</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Physiologie de la Reproduction et des Comportements</name>
+                            <code>0085</code>
+                            <type>UMR</type>
+                            <laboratory>UMR : Physiologie de la Reproduction et des Comportements,
+                                Nouzilly</laboratory>
+                            <city>Nouzilly</city>
+                            <country>FRA</country>
+                            <rnsr>201220294L</rnsr>
+                            <center>
+                                <code>32</code>
+                                <name>Centre de recherche Val de Loire</name>
+                                <acronym>CR Val de Loire</acronym>
+                            </center>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>PRC</acronym>
+                            <affiliationPartners>
+                                <name>Centre National de la Recherche Scientifique</name>
+                                <acronym>CNRS</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Institut français du cheval et de l'équitation</name>
+                                <acronym>IFCE</acronym>
+                            </affiliationPartners>
+                            <affiliationPartners>
+                                <name>Université François Rabelais</name>
+                                <acronym>U. Tours</acronym>
+                            </affiliationPartners>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <title language="fra">Facteurs de régulation précoces de la néophobie alimentaire chez
+                l’oiseau</title>
+            <alternateTitle/>
+            <subTitle/>
+            <language>fra</language>
+            <year>2018</year>
+            <recordAccessCondition>Publique</recordAccessCondition>
+            <keywords>
+                <keyword>néophobie alimentaire, éthologie, poule</keyword>
+            </keywords>
+            <targetAudience>Scientifique</targetAudience>
+            <itemType>PAPER</itemType>
+            <workflowStatus>validé</workflowStatus>
+            <creationDate>2018-06-25T09:57:41</creationDate>
+            <transmissionDate>2018-06-25T10:06:38</transmissionDate>
+            <firstValidationDate>2018-06-26T08:45:03</firstValidationDate>
+            <validationDate>2018-06-26T08:45:03</validationDate>
+            <updateDate>2018-06-26T08:45:04</updateDate>
+            <depositor>
+                <lastName>BERTIN</lastName>
+                <firstName>Aline</firstName>
+                <inraIdentifier>110947V</inraIdentifier>
+                <email>aline.bertin@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>17</code>
+                        <name>Physiologie Animale et Systèmes d'Elevage</name>
+                        <acronym>PHASE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>32</code>
+                        <name>Centre de recherche Val de Loire</name>
+                        <acronym>CR Val de Loire</acronym>
+                    </center>
+                    <unitName>Physiologie de la Reproduction et des Comportements</unitName>
+                    <unitCode>0085</unitCode>
+                </affiliation>
+            </depositor>
+            <reviewer>
+                <lastName>Lallemant</lastName>
+                <firstName>Pascal</firstName>
+                <inraIdentifier>12990V</inraIdentifier>
+                <email>pascal.lallemant@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>DPCE</code>
+                        <name>Direction Collégiale </name>
+                        <acronym>DCOLL</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>11</code>
+                        <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                        <acronym>CR IdF-Versailles-Grignon</acronym>
+                    </center>
+                    <unitName>Délégation Information Scientifique et Technique </unitName>
+                    <unitCode>1266</unitCode>
+                </affiliation>
+            </reviewer>
+            <firstReviewer>
+                <lastName>Lallemant</lastName>
+                <firstName>Pascal</firstName>
+                <inraIdentifier>12990V</inraIdentifier>
+                <email>pascal.lallemant@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>DPCE</code>
+                        <name>Direction Collégiale </name>
+                        <acronym>DCOLL</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>11</code>
+                        <name>Centre de recherche Ile-de-France-Versailles-Grignon</name>
+                        <acronym>CR IdF-Versailles-Grignon</acronym>
+                    </center>
+                    <unitName>Délégation Information Scientifique et Technique </unitName>
+                    <unitCode>1266</unitCode>
+                </affiliation>
+            </firstReviewer>
+            <complements/>
+            <halSending>false</halSending>
+            <origin>CREATED</origin>
+            <event>
+                <name>48ème colloque de la Société Française pour l'Etude du Comportement
+                    Animal</name>
+                <type>Colloque</type>
+                <meeting>
+                    <city>Rennes</city>
+                    <country>FRA</country>
+                    <period>
+                        <startDate>2018-06-19</startDate>
+                        <endDate>2018-06-21</endDate>
+                    </period>
+                </meeting>
+            </event>
+            <paperType>Présentation orale</paperType>
+            <invitedConference>true</invitedConference>
+            <peerReviewed>true</peerReviewed>
+            <pages/>
+            <paperNumber/>
+            <experimentalUnit/>
+        </record>
+        <ns2:attachment>
+            <attachmentId>{699C4CDB-A804-40F9-958B-9F5C89F66B36}</attachmentId>
+            <accessCondition>Publique</accessCondition>
+            <title>2018_Bertin_SFECA.pdf</title>
+            <fileName>2018_Bertin_SFECA.pdf</fileName>
+            <fileSize>56405.0</fileSize>
+            <fileMimeType>application/vnd.openxmlformats-officedocument.wordprocessingml.document</fileMimeType>
+            <rights>Autres droits (cf document)</rights>
+            <original>false</original>
+        </ns2:attachment>
+        <ns2:attachment>
+            <attachmentId>{699C4CDB-A804-40F9-958B-9F5C89F66B36}</attachmentId>
+            <accessCondition>Publique</accessCondition>
+            <title>2018_Bertin_SFECA.pdf</title>
+            <fileName>2018_Bertin_SFECA.pdf</fileName>
+            <fileSize>56405.0</fileSize>
+            <fileMimeType>application/vnd.openxmlformats-officedocument.wordprocessingml.document</fileMimeType>
+            <rights>Autres droits (cf document)</rights>
+            <original>true</original>
+        </ns2:attachment>
+    </produit>
+</ns2:produits>

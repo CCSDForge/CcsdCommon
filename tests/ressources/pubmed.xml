@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE PubmedArticleSet PUBLIC "-//NLM//DTD PubMedArticle, 1st June 2018//EN" "https://dtd.nlm.nih.gov/ncbi/pubmed/out/pubmed_180601.dtd">
+<PubmedArticleSet>
+    <PubmedArticle>
+        <MedlineCitation Status="MEDLINE" Owner="NLM">
+            <PMID Version="1">17267295</PMID>
+            <DateCompleted>
+                <Year>2007</Year>
+                <Month>08</Month>
+                <Day>02</Day>
+            </DateCompleted>
+            <DateRevised>
+                <Year>2014</Year>
+                <Month>11</Month>
+                <Day>20</Day>
+            </DateRevised>
+            <Article PubModel="Print-Electronic">
+                <Journal>
+                    <ISSN IssnType="Print">1569-9048</ISSN>
+                    <JournalIssue CitedMedium="Print">
+                        <Volume>157</Volume>
+                        <Issue>2-3</Issue>
+                        <PubDate>
+                            <Year>2007</Year>
+                            <Month>Aug</Month>
+                            <Day>01</Day>
+                        </PubDate>
+                    </JournalIssue>
+                    <Title>Respiratory physiology &#38; neurobiology</Title>
+                    <ISOAbbreviation>Respir Physiol Neurobiol</ISOAbbreviation>
+                </Journal>
+                <ArticleTitle>Muscarinic receptors and alpha2-adrenoceptors interact to modulate the respiratory rhythm in mouse neonates.</ArticleTitle>
+                <Pagination>
+                    <MedlinePgn>215-25</MedlinePgn>
+                </Pagination>
+                <Abstract>
+                    <AbstractText>The respiratory rhythm generator (RRG) is modulated by several endogenous substances, including acetylcholine (ACh) and noradrenaline (NA) that interact in several modulatory processes. To know whether ACh and NA interacted to modulate the RRG activity, we used medullary "en bloc" and slice preparations from neonatal mice where the RRG has been shown to receive a facilitatory modulation from A1/C1 neurons, via a continuous release of endogenous NA and activation of alpha2 adrenoceptors. Applying ACh at 25 microM activated the RRG but ACh had no effects at 50 microM. Applying the ACh receptor agonists nicotine and muscarine facilitated and depressed the RRG, respectively. After yohimbine pre-treatment that blocked the alpha2 facilitation, the nicotinic facilitation was not altered, the muscarinic depression was reversed and ACh 50 microM significantly facilitated the RRG. After L-tyrosine pre-treatment that potentiated the alpha2 facilitation, the muscarinic depression was enhanced. Thus, ACh regulates the RRG activity via nicotinic and muscarinic receptors, the muscarinic receptors interacting with alpha2 adrenoceptors.</AbstractText>
+                </Abstract>
+                <AuthorList CompleteYN="Y">
+                    <Author ValidYN="Y">
+                        <LastName>Zanella</LastName>
+                        <ForeName>Sébastien</ForeName>
+                        <Initials>S</Initials>
+                        <AffiliationInfo>
+                            <Affiliation>Formation de Recherche en Fermeture, FRE CNRS 2722, 280 Boulevard Sainte Marguerite, 13009 Marseille, France.</Affiliation>
+                        </AffiliationInfo>
+                    </Author>
+                    <Author ValidYN="Y">
+                        <LastName>Viemari</LastName>
+                        <ForeName>Jean-Charles</ForeName>
+                        <Initials>JC</Initials>
+                    </Author>
+                    <Author ValidYN="Y">
+                        <LastName>Hilaire</LastName>
+                        <ForeName>Gérard</ForeName>
+                        <Initials>G</Initials>
+                    </Author>
+                </AuthorList>
+                <Language>eng</Language>
+                <PublicationTypeList>
+                    <PublicationType UI="D016428">Journal Article</PublicationType>
+                </PublicationTypeList>
+                <ArticleDate DateType="Electronic">
+                    <Year>2006</Year>
+                    <Month>12</Month>
+                    <Day>19</Day>
+                </ArticleDate>
+            </Article>
+            <MedlineJournalInfo>
+                <Country>Netherlands</Country>
+                <MedlineTA>Respir Physiol Neurobiol</MedlineTA>
+                <NlmUniqueID>101140022</NlmUniqueID>
+                <ISSNLinking>1569-9048</ISSNLinking>
+            </MedlineJournalInfo>
+            <ChemicalList>
+                <Chemical>
+                    <RegistryNumber>0</RegistryNumber>
+                    <NameOfSubstance UI="D000317">Adrenergic alpha-Antagonists</NameOfSubstance>
+                </Chemical>
+                <Chemical>
+                    <RegistryNumber>0</RegistryNumber>
+                    <NameOfSubstance UI="D018721">Muscarinic Agonists</NameOfSubstance>
+                </Chemical>
+                <Chemical>
+                    <RegistryNumber>0</RegistryNumber>
+                    <NameOfSubstance UI="D018341">Receptors, Adrenergic, alpha-2</NameOfSubstance>
+                </Chemical>
+                <Chemical>
+                    <RegistryNumber>0</RegistryNumber>
+                    <NameOfSubstance UI="D011976">Receptors, Muscarinic</NameOfSubstance>
+                </Chemical>
+                <Chemical>
+                    <RegistryNumber>2Y49VWD90Q</RegistryNumber>
+                    <NameOfSubstance UI="D015016">Yohimbine</NameOfSubstance>
+                </Chemical>
+                <Chemical>
+                    <RegistryNumber>7T101UWZ5W</RegistryNumber>
+                    <NameOfSubstance UI="D009116">Muscarine</NameOfSubstance>
+                </Chemical>
+                <Chemical>
+                    <RegistryNumber>N9YNS0M02X</RegistryNumber>
+                    <NameOfSubstance UI="D000109">Acetylcholine</NameOfSubstance>
+                </Chemical>
+            </ChemicalList>
+            <CitationSubset>IM</CitationSubset>
+            <MeshHeadingList>
+                <MeshHeading>
+                    <DescriptorName UI="D000831" MajorTopicYN="N">Animals, Newborn</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D001933" MajorTopicYN="N">Brain Stem</DescriptorName>
+                    <QualifierName UI="Q000187" MajorTopicYN="N">drug effects</QualifierName>
+                    <QualifierName UI="Q000469" MajorTopicYN="N">parasitology</QualifierName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D004305" MajorTopicYN="N">Dose-Response Relationship, Drug</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D004347" MajorTopicYN="N">Drug Interactions</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D066298" MajorTopicYN="N">In Vitro Techniques</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D051379" MajorTopicYN="N">Mice</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D009116" MajorTopicYN="N">Muscarine</DescriptorName>
+                    <QualifierName UI="Q000494" MajorTopicYN="N">pharmacology</QualifierName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D018721" MajorTopicYN="N">Muscarinic Agonists</DescriptorName>
+                    <QualifierName UI="Q000494" MajorTopicYN="N">pharmacology</QualifierName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D010507" MajorTopicYN="Y">Periodicity</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D018341" MajorTopicYN="N">Receptors, Adrenergic, alpha-2</DescriptorName>
+                    <QualifierName UI="Q000502" MajorTopicYN="Y">physiology</QualifierName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D011976" MajorTopicYN="N">Receptors, Muscarinic</DescriptorName>
+                    <QualifierName UI="Q000502" MajorTopicYN="Y">physiology</QualifierName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D012119" MajorTopicYN="Y">Respiration</DescriptorName>
+                    <QualifierName UI="Q000187" MajorTopicYN="N">drug effects</QualifierName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D015016" MajorTopicYN="N">Yohimbine</DescriptorName>
+                    <QualifierName UI="Q000494" MajorTopicYN="N">pharmacology</QualifierName>
+                </MeshHeading>
+            </MeshHeadingList>
+        </MedlineCitation>
+        <PubmedData>
+            <History>
+                <PubMedPubDate PubStatus="received">
+                    <Year>2006</Year>
+                    <Month>10</Month>
+                    <Day>27</Day>
+                </PubMedPubDate>
+                <PubMedPubDate PubStatus="revised">
+                    <Year>2006</Year>
+                    <Month>12</Month>
+                    <Day>01</Day>
+                </PubMedPubDate>
+                <PubMedPubDate PubStatus="accepted">
+                    <Year>2006</Year>
+                    <Month>12</Month>
+                    <Day>01</Day>
+                </PubMedPubDate>
+                <PubMedPubDate PubStatus="pubmed">
+                    <Year>2007</Year>
+                    <Month>2</Month>
+                    <Day>3</Day>
+                    <Hour>9</Hour>
+                    <Minute>0</Minute>
+                </PubMedPubDate>
+                <PubMedPubDate PubStatus="medline">
+                    <Year>2007</Year>
+                    <Month>8</Month>
+                    <Day>3</Day>
+                    <Hour>9</Hour>
+                    <Minute>0</Minute>
+                </PubMedPubDate>
+                <PubMedPubDate PubStatus="entrez">
+                    <Year>2007</Year>
+                    <Month>2</Month>
+                    <Day>3</Day>
+                    <Hour>9</Hour>
+                    <Minute>0</Minute>
+                </PubMedPubDate>
+            </History>
+            <PublicationStatus>ppublish</PublicationStatus>
+            <ArticleIdList>
+                <ArticleId IdType="pubmed">17267295</ArticleId>
+                <ArticleId IdType="pii">S1569-9048(06)00337-5</ArticleId>
+                <ArticleId IdType="doi">10.1016/j.resp.2006.12.007</ArticleId>
+            </ArticleIdList>
+        </PubmedData>
+    </PubmedArticle>
+</PubmedArticleSet>

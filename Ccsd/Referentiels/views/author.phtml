@@ -1,0 +1,141 @@
+<?php
+
+/* @var $author Ccsd_Referentiels_Author */
+$author = $this->o;
+
+if (! $author instanceof Ccsd_Referentiels_Author) {
+    $author = (new Ccsd_Referentiels_Author)->set($author);
+}
+
+$cv = (new Hal_Cv($author->IDHAL))->load(false);
+$aInformations = array_filter($cv->toArray());
+
+/* @var $plugin Aurehal_Acl_Plugin */
+$this->plugin = Zend_Controller_Front::getInstance()->getPlugin('Aurehal_Acl_Plugin');
+
+?>
+<blockquote>
+<div class='row'>
+	<div class='col-md-9'>
+		<div style='margin-top: 10px;' <?php if ($author->AUTHORID != '') { echo 'data-id="' . $author->AUTHORID . '"'; } ?> >
+				<h4>
+					<?php if ($this->details) {?>
+				    <i class='glyphicon glyphicon-user' style='font-size: 5.2em; color:#333;'></i>
+				    <?php } ?>
+				    <?php if (isset($aInformations['url'])) { ?>
+				    <a href="<?php echo $aInformations['url'] ?>" target="_blank">
+				    <?php } ?>
+				    <?php echo  Ccsd_Tools::formatAuthor($author->FIRSTNAME, $author->LASTNAME); ?>
+				    <?php if (isset($aInformations['url'])) { ?>
+				    </a>
+				    <?php } ?>
+				    <?php if (isset ($aInformations['uri'])) { ?>
+				    <span style='font-size: 12px; font-style: italic;'>(<?php echo $aInformations['uri'] ?>)</span>
+				    <?php } ?>
+				    <?php if ($this->plugin->isAllowed((new Zend_Controller_Request_Http())->setControllerName('author')->setActionName('modify')) && $this->options) { ?>
+					<a href="<?php echo URL . "/author/modify/id/" .  $author->AUTHORID; ?>" style="font-size: inherit;" ><i class='glyphicon glyphicon-edit'></i></a>
+					<?php } ?>
+					<?php if (SPACE_NAME == 'AUREHAL' && $author->AUTHORID != 0) {
+					echo "<span class='badge' style='margin-left:5px;'>" . $author->AUTHORID . "</span>";
+					} ?>
+			    </h4>
+		        <div>
+		        	<?php if ($author->EMAIL) { ?>
+		        	<small style='font-size: 100%;'>
+		        		<?php echo $author->EMAIL ?>
+		        	</small>
+		        	<?php } ?>
+		        	<?php if ($author->URL) { ?>
+		        	<small style='font-size: 100%;'>
+		        		<?php echo $author->URL ?>
+		        	</small>
+		        	<?php } ?>
+		        	<?php 
+		        	if ($author->STRUCTID) {
+						?>
+						<br/>
+						<?php 
+		        		echo (new Ccsd_Referentiels_Structure($author->STRUCTID))->__toString(false);
+		        	} 
+		        	?>
+		        </div>
+		        <?php if ('read' ==  Zend_Controller_Front::getInstance()->getRequest()->getActionName()) { ?>
+                    <br/>
+                    <a class='btn btn-primary' target='_blank' href='<?php echo HALURL ?>/search/index/q/*/authId_i/<?php echo $author->AUTHORID ?>'><?php echo $this->translate("Voir les documents associés") ?></a>
+                    <!--<a class='btn btn-primary' target='_blank' href='<?php //echo HAL_API ?>/ref/author/?q=docid:<?php //echo $author->AUTHORID ?>&wt=xml&fl=*'><?php //echo $this->translate("Exporter (xml)") ?></a>-->
+					<div class="btn-group">
+						<a class="btn btn-primary" href="<?php echo HAL_API ?>/ref/author/?q=docid:<?php echo $author->AUTHORID ?>&wt=xml&fl=*" target="_blank">
+							<?php echo $this->translate("Exporter") ?>
+						</a>
+						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+							<span class="caret" style="border-top-color: #fff; border-bottom-color: #fff;"></span>
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a href="<?php echo HAL_API ?>/ref/author/?q=docid:<?php echo $author->AUTHORID ?>&wt=xml&fl=*" target="_blank">
+									<?php echo $this->translate('Export XML');?>
+								</a>
+							</li>
+							<li>
+								<a href="<?php echo AUREHAL_URL ?>/author/<?php echo $author->AUTHORID ?>/rdf" target="_blank">
+									<?php echo $this->translate('Export RDF');?>
+								</a>
+							</li>
+						</ul>
+					</div>
+				<?php } else if ( 'replace' == Zend_Controller_Front::getInstance()->getRequest()->getActionName() ) { ?>
+		        	<?php if (!isset ($this->{"OBJID_" . $author->AUTHORID}) && !isset($this->no_displaying_documents)) { ?>
+                        <?php $panel = isset($this->panel[$this->id]) && $this->panel[$this->id]; ?>
+                        <div class='articles'>
+                            <div style='padding-top: 50px;' class='legend' data-objid="<?php echo $author->AUTHORID ?>">
+                                <a class='hiding'  <?php if (!$panel)  echo "style='display: none;'"; ?> href='javascript:void(0);'>[ <?php echo $this->translate("Cacher") ?> ]</a>
+                                <a class='showing' <?php if ($panel)   echo "style='display: none;'"; ?> href='javascript:void(0);'>[ <?php echo $this->translate("Voir") ?> ]</a>
+                                <input type='hidden' name='panel[<?php echo $author->AUTHORID ?>]' value='<?php echo $panel ? "1" : "0" ?>' />
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.articles').find('section').<?php echo $panel ? "show" : "hide"?>();
+                                        $('.articles').find('.legend .<?php echo $panel ? "showing" : "hiding"?>').trigger('click');
+                                        $('#authId_i_<?php echo $author->AUTHORID ?>').load('/author/ajaxloaddocument/obj/Author/id/<?php echo $author->AUTHORID ?>', function() { $(this).closest('blockquote').find('div[data-id]').find('a:last').remove(); });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                	<?php }?>
+                <?php } ?>
+		</div>
+	</div>
+	<div class='col-md-3'>
+		<?php 
+
+		$idsExt = $cv->getIdExt();
+		$servers = $cv->getServerExt();
+		$urls = $cv->getServerUrl();
+		
+		
+		if (count($idsExt)) {
+			$content = '<ul>';
+			foreach($idsExt as $server => $id) {
+				$content .= '<li>' . $servers[$server] . ' : <a href="' . $urls[$server] . $id . '" target="_blank">' . $id . '</a></li>';
+			}
+			$content .= '</ul>';
+			echo $this->widget(array('title' => $this->translate('cv_widget_idext'), 'content' => $content));
+		}
+		
+		
+		?>
+	</div>
+</div>
+<?php if ( 'replace' == Zend_Controller_Front::getInstance()->getRequest()->getActionName() ) { ?>
+<div class='row'>
+    <div class='col-md-12'>
+        <div id="authId_i_<?php echo $author->AUTHORID ?>">
+        <?php 
+        if (isset ($this->{"OBJID_" . $author->AUTHORID}) && !isset($this->no_displaying_documents)) {
+			echo $this->documents ($author->AUTHORID, "Ccsd_Referentiels_Author");
+		}
+		?>
+        </div>
+    </div>
+</div>
+<?php } ?>
+</blockquote>

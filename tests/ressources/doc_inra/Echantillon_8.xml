@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:produits xmlns:ns2="http://record.prodinra.inra.fr">
+    <produit>
+        <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:dissertation">
+            <identifier>430961</identifier>
+            <halClassification>
+                <code>SDV:BA:ZV</code>
+                <french>Zoologie des vertébrés</french>
+                <english>Vertebrate Zoology</english>
+            </halClassification>
+            <creator>
+                <author xsi:type="ns2:inraAuthor">
+                    <lastName>YOU</lastName>
+                    <firstName>Lucien</firstName>
+                    <initial>L.</initial>
+                    <publicationName>You</publicationName>
+                    <email>lucien.you@inra.fr</email>
+                    <role/>
+                    <inraIdentifier>173323V</inraIdentifier>
+                    <peps>false</peps>
+                    <fundingDepartment>36</fundingDepartment>
+                    <inraAffiliation>
+                        <name>Institut National de Recherche Agronomique</name>
+                        <acronym>INRA</acronym>
+                        <unit>
+                            <name>Génétique, Expérimentation et Systèmes Innovants </name>
+                            <code>1372</code>
+                            <type>UE</type>
+                            <laboratory>UE : Génétique, Expérimentation et Systèmes Innovants ,
+                                Saint-Pierre-d'Amilly</laboratory>
+                            <city>Saint-Pierre-d'Amilly</city>
+                            <country>FRA</country>
+                            <rnsr>201321779W</rnsr>
+                            <center>
+                                <code>44</code>
+                                <name>Centre de recherche Nouvelle-Aquitaine-Poitiers</name>
+                                <acronym>CR Nouvelle-Aquitaine-Poitiers</acronym>
+                            </center>
+                            <department>
+                                <code>36</code>
+                                <name>Génétique Animale</name>
+                                <acronym>GA</acronym>
+                                <authorityType/>
+                            </department>
+                            <department>
+                                <code>17</code>
+                                <name>Physiologie Animale et Systèmes d'Elevage</name>
+                                <acronym>PHASE</acronym>
+                                <authorityType/>
+                            </department>
+                            <acronym>GenESI</acronym>
+                        </unit>
+                    </inraAffiliation>
+                </author>
+            </creator>
+            <title language="fra">Projet AROME (Aptitude à la Reproduction et Odeur de Mâle Entier
+                chez le porc)</title>
+            <alternateTitle/>
+            <subTitle/>
+            <language>fra</language>
+            <abstract language="fra">La castration des porcelets mâles empêche la formation d’odeurs
+                désagréables lors de la cuisson de la viande. L’objectif du projet AROME est de
+                déterminer s’il est possible de sélectionner des verrats avec peu d’odeur lors de la
+                cuisson de la viande (concentration faible en scatol et androsténone) en s’assurant
+                que l’on n’altère pas la capacité de reproduction. Pour cela, un projet d’études
+                cherche à déterminer si une diminution de la concentration en scatol et androsténone
+                entraîne une diminution de l’aptitude à la reproduction. Il a été également cherché
+                des variables physiologiques, comportementales, de production spermatique lors des
+                collectes de semences, génétiques (race) et zootechniques qui prédiraient ou
+                modifieraient l’odeur des verrats. Pour cela, j’ai étudié un lot de 86 verrats de
+                type génétique Duroc, Musclor et Landrace. Des biopsies et des prises de sang ainsi
+                que des collectes de semences sont réalisées sur les verrats pour déterminer et
+                évaluer différentes variables. Des données d’observations comportementales : la RHA
+                (Relation Homme Animal) ainsi que des pesées d’organes après l’abattage sont
+                également réalisées. Les premiers résultats indiquent qu’il semble possible de
+                sélectionner contre l’androsténone sans détériorer l’aptitude à la reproduction car
+                l’androsténone est liée à la reproduction (corrélation positive avec le poids
+                testiculaire) mais semble non liée quand on regarde la production spermatique. Pour
+                le scatol, les verrats avec une concentration faible ont une production spermatique
+                plus élevée, il serait donc possible de sélectionner contre le scatol sans affecter
+                la capacité de reproduction. L’effet race indique que la concentration en
+                androsténone est différente entre les races ; le type génétique Musclor a un taux
+                d’androsténone plus faible. Pour les différentes variables testées la RHA semble un
+                facteur non lié à la teneur en androsténone. Le poids testiculaire est corrélé
+                positivement avec la teneur en androsténone mais reste un indicateur mesurable
+                qu’après l’abattage. La teneur en œstradiol (hormone libre dans le sang) a tendance
+                à être proportionnelle à la teneur en androsténone.</abstract>
+            <year>2018</year>
+            <recordAccessCondition>Publique</recordAccessCondition>
+            <keywords>
+                <keyword>odeur</keyword>
+                <keyword>reproduction</keyword>
+                <keyword>verrat</keyword>
+                <keyword>mâle</keyword>
+                <keyword>AROME</keyword>
+            </keywords>
+            <targetAudience>Etudiants</targetAudience>
+            <itemType>DISSERTATION</itemType>
+            <workflowStatus>validé</workflowStatus>
+            <creationDate>2018-06-07T14:15:45</creationDate>
+            <transmissionDate>2018-06-07T14:23:01</transmissionDate>
+            <firstValidationDate>2018-06-25T16:06:06</firstValidationDate>
+            <validationDate>2018-06-25T16:06:06</validationDate>
+            <updateDate>2018-07-27T14:00:08</updateDate>
+            <depositor>
+                <lastName>Lecestre</lastName>
+                <firstName>Laetitia</firstName>
+                <inraIdentifier>115371D</inraIdentifier>
+                <email>laetitia.lecestre@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>36</code>
+                        <name>Génétique Animale</name>
+                        <acronym>GA</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>17</code>
+                        <name>Physiologie Animale et Systèmes d'Elevage</name>
+                        <acronym>PHASE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>44</code>
+                        <name>Centre de recherche Nouvelle-Aquitaine-Poitiers</name>
+                        <acronym>CR Nouvelle-Aquitaine-Poitiers</acronym>
+                    </center>
+                    <unitName>Génétique, Expérimentation et Systèmes Innovants </unitName>
+                    <unitCode>1372</unitCode>
+                </affiliation>
+            </depositor>
+            <reviewer>
+                <lastName>Naudinat</lastName>
+                <firstName>Carine</firstName>
+                <inraIdentifier>12556Y</inraIdentifier>
+                <email>carine.naudinat@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>36</code>
+                        <name>Génétique Animale</name>
+                        <acronym>GA</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>17</code>
+                        <name>Physiologie Animale et Systèmes d'Elevage</name>
+                        <acronym>PHASE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>31</code>
+                        <name>Centre de recherche Occitanie-Toulouse</name>
+                        <acronym>CR Occitanie-Toulouse</acronym>
+                    </center>
+                    <unitName>Génétique Physiologie et Systèmes d'Elevage</unitName>
+                    <unitCode>1388</unitCode>
+                </affiliation>
+            </reviewer>
+            <firstReviewer>
+                <lastName>Naudinat</lastName>
+                <firstName>Carine</firstName>
+                <inraIdentifier>12556Y</inraIdentifier>
+                <email>carine.naudinat@inra.fr</email>
+                <affiliation>
+                    <department>
+                        <code>36</code>
+                        <name>Génétique Animale</name>
+                        <acronym>GA</acronym>
+                        <authorityType/>
+                    </department>
+                    <department>
+                        <code>17</code>
+                        <name>Physiologie Animale et Systèmes d'Elevage</name>
+                        <acronym>PHASE</acronym>
+                        <authorityType/>
+                    </department>
+                    <center>
+                        <code>31</code>
+                        <name>Centre de recherche Occitanie-Toulouse</name>
+                        <acronym>CR Occitanie-Toulouse</acronym>
+                    </center>
+                    <unitName>Génétique Physiologie et Systèmes d'Elevage</unitName>
+                    <unitCode>1388</unitCode>
+                </affiliation>
+            </firstReviewer>
+            <complements/>
+            <halSending>false</halSending>
+            <origin>CREATED</origin>
+            <pages>17 p.</pages>
+            <publishing/>
+            <organizationDegree>
+                <name>Université de La Rochelle</name>
+                <acronym>ULR</acronym>
+                <identifier>310913</identifier>
+                <country>FRA</country>
+            </organizationDegree>
+            <experimentalUnit>1372-Génétique, Expérimentation et Systèmes Innovants (GenESI)
+                2014-01-01 </experimentalUnit>
+            <dissertationType>Mémoire</dissertationType>
+            <internshipSupervisor>Stéphane Ferchaud</internshipSupervisor>
+            <internshipSupervisor>Catherine Larzul</internshipSupervisor>
+            <degree/>
+            <grant/>
+        </record>
+        <ns2:attachment>
+            <attachmentId>{6F2294CD-D36C-4B10-8B81-07440C559C96}</attachmentId>
+            <accessCondition>Interne</accessCondition>
+            <title>Rapport_Lucien You 2018.pdf</title>
+            <fileName>Rapport_Lucien You 2018.pdf</fileName>
+            <fileSize>435729.0</fileSize>
+            <fileMimeType>application/pdf</fileMimeType>
+            <original>true</original>
+        </ns2:attachment>
+    </produit>
+</ns2:produits>
