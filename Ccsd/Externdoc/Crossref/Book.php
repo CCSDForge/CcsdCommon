@@ -23,14 +23,14 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
 
     // Contributors - Path Relatif
     const REL_XPATH_PERS = "/person_name";
-    const REL_XPATH_LASTNAME = "surname";
-    const REL_XPATH_FIRSTNAME = "given_name";
-    const REL_XPATH_ORCID = "ORCID";
-    const REL_XPATH_SUFFIX = "suffix";
-    const REL_XPATH_AFFILIATIONS = "affiliation";
-    const REL_XPATH_ORGANIZATIONS = "organization";
-    const REL_XPATH_ORG_SEQUENCE = "organization/@sequence";
-    const REL_XPATH_ORG_ROLE = "organization/@contributor_role";
+    const REL_XPATH_LASTNAMES = "/person_name/surname";
+    const REL_XPATH_FIRSTNAMES = "/person_name/given_name";
+    const REL_XPATH_ORCID = "/person_name/ORCID";
+    const REL_XPATH_SUFFIX = "/person_name/suffix";
+    const REL_XPATH_AFFILIATIONS = "/person_name/affiliation";
+    const REL_XPATH_ORGANIZATIONS = "/person_name/organization";
+    const REL_XPATH_ORG_SEQUENCE = "/person_name/organization/@sequence";
+    const REL_XPATH_ORG_ROLE = "/person_name/organization/@contributor_role";
 
     // Date de publication - Path relatif
     const REL_XPATH_PUBLICATION_DAY = "/day";
@@ -120,8 +120,7 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
 
     /**
      * @param string $id
-     * @param DOMDocument $xmlDom
-     * @return Ccsd_Externdoc_Crossref_Book
+     * @param string $xmlDom
      */
     static public function createFromXML($id, $xmlDom)
     {
@@ -130,10 +129,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $doc;
     }
 
-    /**
-     * @param string $defaultLang
-     * @return array
-     */
     public function getTitle($defaultLang='en')
     {
         $title = $this->getValue(self::XPATH_TITLES.self::REL_XPATH_TITLE);
@@ -143,9 +138,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $this->metasToLangArray($title, $defaultLang);
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getSubtitle()
     {
         $subtitle = $this->getValue(self::XPATH_TITLES.self::REL_XPATH_SUBTITLE);
@@ -153,9 +145,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $subtitle;
     }
 
-    /**
-     * @return string[]
-     */
     public function getIdentifier()
     {
         return $this->getValue(self::XPATH_DOI_DATA.self::REL_XPATH_DOI);
@@ -167,9 +156,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         //return $this->getValue();
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getIsbn()
     {
         $isbn = $this->getValue(self::XPATH_ISBN);
@@ -177,9 +163,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $isbn;
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getIssn()
     {
         $issn = $this->getValue(self::XPATH_ISSN);
@@ -187,9 +170,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $issn;
     }
 
-    /**
-     * @return string
-     */
     public function getDate()
     {
         $yearconst = $this->getValue(self::XPATH_PUBLICATION_DATE.self::REL_XPATH_PUBLICATION_YEAR);
@@ -203,9 +183,7 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
 
         return $this->formateDate($yearconst, $monthconst, $dayconst);
     }
-    /**
-     * @return string|string[]
-     */
+
     public function getSerie()
     {
         $serie = $this->getValue(self::XPATH_SERIE_TITLES.self::REL_XPATH_TITLE);
@@ -213,9 +191,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $serie;
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getVolume()
     {
         $volume = $this->getValue(self::XPATH_VOLUME);
@@ -223,9 +198,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $volume;
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getIssue()
     {
         $issue = $this->getValue(self::XPATH_EDITION_NUMBER);
@@ -233,9 +205,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $issue;
     }
 
-    /**
-     * @return string
-     */
     public function getPage()
     {
         $first = $this->getValue(self::XPATH_FIRSTPAGE);
@@ -247,9 +216,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $this->formatePage($first, $last);
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getPublisher()
     {
         $publisher = $this->getValue(self::XPATH_PUBLISHER_NAME);
@@ -257,9 +223,6 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
         return $publisher;
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getPubPlace()
     {
         $pubplace = $this->getValue(self::XPATH_PUBLISHER_PLACE);
@@ -270,6 +233,30 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
     public function getEditor()
     {
         // Todo
+    }
+
+    /**
+     * @param $interMetas
+     * @param $internames
+     * @return array
+     */
+    public function getAuthors()
+    {
+        // TODO : prendre en compte les autres infos de l'auteur : affiliations, etc
+
+        $fullNames = $this->getValue(self::XPATH_CONTRIBUTORS.self::REL_XPATH_PERS);
+        $fullNames = is_array($fullNames) ? $fullNames : [$fullNames];
+
+        $firstNames = $this->getValue(self::XPATH_CONTRIBUTORS.self::REL_XPATH_FIRSTNAMES);
+        $firstNames = is_array($firstNames) ? $firstNames : [$firstNames];
+
+        $lastNames = $this->getValue(self::XPATH_CONTRIBUTORS.self::REL_XPATH_LASTNAMES);
+        $lastNames = is_array($lastNames) ? $lastNames : [$lastNames];
+
+        $orcids = $this->getValue(self::XPATH_CONTRIBUTORS.self::REL_XPATH_ORCID);
+        $orcids = is_array($orcids) ? $orcids : [$orcids];
+
+        return $this->formateAuthors($fullNames, $firstNames, $lastNames, [], $orcids);
     }
 
     /**
@@ -339,8 +326,8 @@ class Ccsd_Externdoc_Crossref_Book extends Ccsd_Externdoc_Crossref
 
         // Ajout de la langue
         $this->_metas[self::META_LANG] = $this->formateLang($this->getDocLang(), $titleLang);
-        $this->_metas[self::META][self::META_IDENTIFIER]["doi"] = $this->_id;
-        $this->_metas[self::AUTHORS] = $this->getAuthors(self::XPATH_CONTRIBUTORS.self::REL_XPATH_PERS);
+        $this->_metas[self::META_IDENTIFIER]["doi"] = $this->_id;
+        $this->_metas[self::AUTHORS] = $this->getAuthors();
 
         $this->_metas[self::DOC_TYPE] = $this->_type;
         return $this->_metas;

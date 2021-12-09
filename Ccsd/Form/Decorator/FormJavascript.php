@@ -1,56 +1,45 @@
 <?php
 
-/**
- * Class Ccsd_Form_Decorator_FormJavascript
- * @property array[] $_javascript
- * @property array   $_replace
- */
 class Ccsd_Form_Decorator_FormJavascript extends Zend_Form_Decorator_HtmlTag
 {
-    /**
-     * @param Ccsd_Form_Interface_Javascript $item
-     */
-    private function processItem($item) {
-        $javascript = $item->getJavascript();
-        foreach (array('var', 'function', 'ready') as $type) {
-            foreach ($javascript[$type] as $i => $js) {
-                if (!in_array ($js, $this->_javascript[$type])) {
-                    if ('ready' == $type) {
-                        $this->_javascript[$type][] = $js;
-                    } else {
-                        $this->_javascript[$type][$i] = $js;
-                    }
-                } else if (!in_array ($type, array ('ready', 'var'))) {
-                    $this->_replace[$i] = array_search($js, $this->_javascript[$type]);
-                }   // else {
-                    // Hum... What to do here???
-                    // Script deja present et pas a considerer
-                    // }
-            }
-        }
-
-    }
-    /**
-     * @param Zend_Form $form
-     */
-    private function processForm ($form) {
+    private function process ($form) {
         foreach ($form as $item) {
+
             if ($item instanceof Zend_Form_SubForm) {
-                $this->processForm ($item);
+                $this->process ($item);
             } else if ($item instanceof Zend_Form_DisplayGroup) {
-                $this->processForm ($item);
+                $this->process ($item);
             } else {
                 if ($item instanceof Ccsd_Form_Interface_Javascript) {
-                    $this->processItem($item);
+                    $javascript = $item->getJavascript();
+                    foreach (array('var', 'function', 'ready') as $type) {
+                    	
+                    	
+        
+                        foreach ($javascript[$type] as $i => $js) {
+                        	                        	
+                            if (!in_array ($js, $this->_javascript[$type])) {
+                                if ('ready' == $type) {
+                                    $this->_javascript[$type][] = $js;
+                                } else {
+                                    $this->_javascript[$type][$i] = $js;
+                                }
+                            } else if (!in_array ($type, array ('ready', 'var'))) {
+                                $this->_replace[$i] = array_search($js, $this->_javascript[$type]);
+                            }
+                        }
+                        
+                        
+                        
+                        
+                        
+                        
+                    }
                 }
             }
         }
     }
 
-    /**
-     * @param string $content
-     * @return string
-     */
     public function render($content)
     {
         $form    = $this->getElement();
@@ -64,7 +53,7 @@ class Ccsd_Form_Decorator_FormJavascript extends Zend_Form_Decorator_HtmlTag
         
         $this->_replace = array ();
 
-        $this->processForm($form);
+        $this->process($form);
 
         if (!empty($this->_javascript['ready'])) {
             $output .= " $(document).ready(function() { ";

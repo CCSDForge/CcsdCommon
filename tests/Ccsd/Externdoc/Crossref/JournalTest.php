@@ -6,8 +6,6 @@
 class Ccsd_Externdoc_Crossref_JournalTest extends PHPUnit\Framework\TestCase {
     /** @var Ccsd_Externdoc_Crossref_Journal  */
     private $_doc = null;
-    /** @var Ccsd_Externdoc_Crossref_Journal  */
-    private $_docWithEditor = null;
 
     public function setUp()
     {
@@ -15,17 +13,10 @@ class Ccsd_Externdoc_Crossref_JournalTest extends PHPUnit\Framework\TestCase {
         $handle = fopen($filename, "r");
         $xmlString = fread($handle, filesize($filename));
         fclose($handle);
+
         $xml = new DOMDocument();
         $xml->loadXML((string)$xmlString);
         $this->_doc = Ccsd_Externdoc_Crossref_Journal::createFromXML("10.1016/j.yexcr.2011.10.003", $xml);
-
-        $filenameWithEditor = __DIR__."/../../../ressources/crossrefJournalWithEditor.xml";
-        $handle = fopen($filenameWithEditor, "r");
-        $xmlStringWithEditor = fread($handle, filesize($filenameWithEditor));
-        fclose($handle);
-        $xmlWithEditor = new DOMDocument();
-        $xmlWithEditor->loadXML((string)$xmlStringWithEditor);
-        $this->_docWithEditor = Ccsd_Externdoc_Crossref_Journal::createFromXML("10.1371/journal.pone.0112363", $xmlWithEditor);
     }
 
     public function testDocType()
@@ -73,7 +64,7 @@ class Ccsd_Externdoc_Crossref_JournalTest extends PHPUnit\Framework\TestCase {
 
     public function testgetAuthors()
     {
-        $authors = $this->_doc->getAuthors(Ccsd_Externdoc_Crossref_Journal::XPATH_COMPLETE_AUTHOR);
+        $authors = $this->_doc->getAuthors();
 
         self::assertEquals($authors[0]['firstname'], 'Catherine');
         self::assertEquals($authors[0]['lastname'], 'Strassel');
@@ -96,10 +87,5 @@ class Ccsd_Externdoc_Crossref_JournalTest extends PHPUnit\Framework\TestCase {
 
         self::assertEquals($authors[6]['firstname'], 'François');
         self::assertEquals($authors[6]['lastname'], 'Lanza');
-
-        $authors = $this->_docWithEditor->getAuthors(Ccsd_Externdoc_Crossref_Journal::XPATH_COMPLETE_AUTHOR);
-        $names = array_map(function ($a) { return $a['lastname']; }, $authors);
-        self::assertContains('Kang',$names);
-        self::assertNotContains('Wang',$names);  // An editor
     }
 }

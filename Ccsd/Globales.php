@@ -13,8 +13,6 @@ class Ccsd_Globales_Exception extends Exception{
 /**
  * Class Ccsd_Globales
  *
- * @deprecated
- *
  * This class was desined to replace Hal constant use.
  * In general, one execution can define constant because a value will not change during all the request.
  *

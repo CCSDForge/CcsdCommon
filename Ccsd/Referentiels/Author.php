@@ -49,7 +49,7 @@ class Ccsd_Referentiels_Author extends Ccsd_Referentiels_Abstract
         'lastname' => '&sort=lastName_s+asc,firstName_s+asc,valid_s+desc',
         'structid' => '&sort=structureId_i+asc,lastName_s+asc,firstName_s+asc,valid_s+desc'
     );
-    static public $_table = 'REF_AUTHOR';
+    protected $_table = 'REF_AUTHOR';
     protected $_primary = 'AUTHORID';
     protected $_smallFormElements = array('AUTHORID', 'LASTNAME', 'FIRSTNAME', 'EMAIL');
     protected $_mandatoryFormElements = array('LASTNAME', 'FIRSTNAME');
@@ -182,37 +182,21 @@ class Ccsd_Referentiels_Author extends Ccsd_Referentiels_Abstract
         return md5(strtolower($this->IDHAL . 'idhal' . $this->LASTNAME . 'lastname' . $this->FIRSTNAME . 'firstname' . $this->MIDDLENAME . 'middlename' . $this->EMAIL . 'email' . $this->URL . 'url' . $this->STRUCTID . 'structid'));
     }
 
-    /**
-     * @param bool $header
-     * @param int[] $structureID
-     * @param string $quality
-     * @return string
-     */
-    public function getXML($WantHeader = true, $structureID = [], $quality = null)
+    /*
+     * Renvoie les docid des dépôts liés à un élement du référentiel
+     * @param int|array
+     * @return array
+    */
+
+    public function getXML($header = true, $structureID = null, $quanlity = null)
     {
         $xml = new Ccsd_DOMDocument('1.0', 'utf-8');
         $xml->formatOutput = true;
         $xml->substituteEntities = true;
         $xml->preserveWhiteSpace = false;
-        $root = $this -> getXMLNode($xml, $structureID, $quality);
-        $xml->appendChild($root);
-        return ($WantHeader) ? $xml->saveXML() : $xml->saveXML($xml->documentElement) . PHP_EOL;
-    }
-
-    /**
-     * Renvoie les docid des dépôts liés à un élement du référentiel
-     * @param DOMDocument $xml;
-     * @param int[] $structureID
-     * @param string $quality
-     * @return DOMElement
-    */
-
-    public function getXMLNode($xml, $structureID = [], $quality = null)
-    {
-
         $root = $xml->createElement('author');
-        if (null != $quality) {
-            $root->setAttribute('role', $quality);
+        if (null != $quanlity) {
+            $root->setAttribute('role', $quanlity);
         }
         $persName = $xml->createElement('persName');
         $first = $xml->createElement('forename', $this->FIRSTNAME);
@@ -297,7 +281,8 @@ class Ccsd_Referentiels_Author extends Ccsd_Referentiels_Abstract
             }
         }
 
-        return $root;
+        $xml->appendChild($root);
+        return ($header) ? $xml->saveXML() : $xml->saveXML($xml->documentElement) . PHP_EOL;
     }
 
     /*
@@ -326,7 +311,7 @@ class Ccsd_Referentiels_Author extends Ccsd_Referentiels_Abstract
     protected function _createBaseQuery($critere, $orderby, $filter, $nbResultPerPage, $valid)
     {
         /* @var $select Zend_Db_Select */
-        $select = Zend_Db_Table_Abstract::getDefaultAdapter()->select()->from(self::$_table);
+        $select = Zend_Db_Table_Abstract::getDefaultAdapter()->select()->from($this->_table);
 
         if ($critere != "*") {
             $select->orWhere("AUTHORID = '?'", $critere);

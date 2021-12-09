@@ -1,10 +1,16 @@
 {
+  "name": "ccsd/library",
+  "type": "library",
   "require-dev": {
+    "phpunit/phpunit": "5.7.12"
   },
 
   "require": {
+    "shardj/zf1-future": ">=1.19",
     "php": ">=7.0",
-
+    "guzzlehttp/guzzle": "*",
+    "guzzlehttp/psr7": "*",
+    "ext-fileinfo": "*",
     "ext-xml": "*",
     "ext-dom": "*",
     "ext-ssh2": "*"
@@ -12,5 +18,6 @@
   "autoload": {
     "classmap": [ "Ccsd"
     ]
-  }
+  },
+  "description": "ccsd library"
 }

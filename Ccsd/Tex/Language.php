@@ -79,10 +79,6 @@ class Ccsd_Tex_Language
     /** @var string  */
     protected $replaceBy = '';
 
-    /**
-     * @param string $toLang
-     * @return string
-     */
     public function getName($toLang = null) {
         if ($toLang) {
             return Locale::getDisplayLanguage($this->locale, $toLang);
@@ -98,12 +94,6 @@ class Ccsd_Tex_Language
     }
     /** Constructor
      * @param string $classname : Language name corresponding to the ClassName
-     * @uses Ccsd_Tex_Language_Russian
-     * @uses Ccsd_Tex_Language_Japanese
-     * @uses Ccsd_Tex_Language_Chinese
-     * @uses Ccsd_Tex_Language_Corean
-     * @uses Ccsd_Tex_Language_Greek
-     * @uses ...
      * @return false|Ccsd_Tex_Language
      */
     public static function getLanguage($classname) {

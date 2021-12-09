@@ -8,16 +8,43 @@
 class Ccsd_User_Form_Accountcreate extends Ccsd_Form
 {
 
+    private $iniFile = '';
+    /** @var string|null  */
+    private $iniSection = null;
+
     const ACCOUNT_CREATED_SUCCESS = 'Compte créé';
 
     const ACCOUNT_CREATED_FAIL = 'Échec de la création du compte';
 
+    /**
+     * Ccsd_User_Form_Accountcreate constructor.
+     * @param null $options
+     * @param null $context
+     */
+    public function __construct($options = null, $context = null)
+    {
+        if (array_key_exists('ini', $options)) {
+            $this->iniFile = $options['ini'];
+            unset($options['ini']);
+        }
+        if (array_key_exists('section', $options)) {
+            $this->iniSection = $options['section'];
+            unset($options['section']);
+        }
+        parent::__construct($options, $context);
+    }
+
     public function init ()
     {
         parent::init();
-        $this->setConfig(new Zend_Config_Ini('Ccsd/User/configs/accountcreate.ini'));
-
+        $config = new Zend_Config_Ini($this->iniFile, $this->iniSection);
+        if ($this->iniSection === null) {
+            $this->iniSection = 'main';
+        }
+        $section = $config->get($this->iniSection);
+        $this->setConfig($section);
         $elem = $this->getElement('USERNAME');
+        // Controle du login existant
         if ($elem) {
             $options = array(
                     'table' => 'T_UTILISATEURS',
@@ -29,6 +56,7 @@ class Ccsd_User_Form_Accountcreate extends Ccsd_Form
         }
 
         $email = $this->getElement('EMAIL');
+        // Controle du mail existant
         if ($email) {
             $options = array(
                 'table' => 'T_UTILISATEURS',

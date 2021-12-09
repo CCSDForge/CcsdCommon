@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Class Ccsd_Form_Element_MultiText
- */
 abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi implements Ccsd_Form_Interface_Javascript
 {
     use Ccsd_Form_Trait_ImplementFunctionJS;
@@ -23,9 +20,6 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
     protected $_unprocessedValues = array ();
     protected $_tiny = false;
 
-    /**
-     * @throws Zend_Form_Exception
-     */
     public function init ()
     {
         $this->addPrefixPath('Ccsd_Form_Decorator_', 'Ccsd/Form/Decorator/', Zend_Form::DECORATOR);
@@ -38,17 +32,11 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         parent::init();
     }
 
-    /**
-     * @return Ccsd_Form_Element_MultiText $this
-     */
     public function getElement ()
     {
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getPrefix ()
     {
         $prefix = "multi/";
@@ -77,10 +65,23 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
     }
 
     /**
+     * @deprecated
+     */
+    public function getPrefixPath ()
+    {
+        error_log('getPrefixPath ne devrait plus etre appele');
+		$prefixPath = (new ReflectionClass(get_class($this)))->getFileName();
+
+        while (dirname ($prefixPath) && !is_dir($prefixPath . '/public'))
+            $prefixPath = dirname($prefixPath);
+
+        return $prefixPath;
+    }
+
+    /**
      * Load default decorators
      *
      * @return Zend_Form_Element
-     * @throws Zend_Form_Exception
      */
     public function loadDefaultDecorators()
     {
@@ -99,10 +100,6 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         return $this;
     }
 
-    /**
-     * @param mixed $value
-     * @return Zend_Form_Element
-     */
     public function setValue ($value)
     {
         if ($this->_split) {
@@ -117,23 +114,11 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         return parent::setValue(array_filter($value));
     }
 
-    /**
-     * @return string
-     */
     public function getDisplay ()
     {
-        if ($this->_display) {
-            return $this->_display;
-        } else {
-            // Default value: normaly, allways set unless ...
-            return self::DISPLAY_SIMPLE;
-        }
+        return $this->_display;
     }
 
-    /**
-     * @param $display
-     * @return $this
-     */
     public function setDisplay ($display)
     {
         if (in_array ($display, array (self::DISPLAY_SIMPLE, self::DISPLAY_ADVANCED))) {
@@ -142,36 +127,22 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getSplit ()
     {
         return $this->_split;
     }
 
-    /**
-     * @param bool $split
-     * @return $this
-     */
     public function setSplit ($split = false)
     {
         $this->_split = $split;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getTinymce ()
     {
         return $this->_tinymce;
     }
 
-    /**
-     * @param bool $tinymce
-     * @return $this
-     */
     public function setTinymce ($tinymce = false)
     {
         if (!($this instanceof Ccsd_Form_Element_MultiTextArea || $this instanceof Ccsd_Form_Element_MultiTextAreaLang))
@@ -180,63 +151,38 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getLength ()
     {
         return $this->_length;
     }
 
-    /**
-     * @param $length
-     * @return $this
-     */
     public function setLength ($length)
     {
         $this->_length = $length;
         return $this;
     }
 
-    /**
-     * @param bool $b
-     * @return $this
-     */
     public function setClone ($b = false)
     {
         $this->_isClone = $b;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isClone ()
     {
         return $this->_isClone;
     }
 
-    /**
-     * @param $messages
-     */
     public function setMessages ($messages)
     {
         $this->_messages = $messages;
     }
 
-    /**
-     * @return array
-     */
     public function getUnprocessedValues()
     {
         return $this->_unprocessedValues;
     }
 
-    /**
-     * @param bool $b
-     * @return $this
-     * @throws Exception
-     */
     public function setTiny ($b = false)
     {
         if (!$this instanceof Ccsd_Form_Element_MultiTextArea && !$this instanceof Ccsd_Form_Element_MultiTextAreaLang)
@@ -246,20 +192,11 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isTiny ()
     {
         return $this->_tiny;
     }
 
-    /**
-     * @param Zend_Form_Decorator_Abstract $decorator
-     * @param string $content
-     * @return string
-     * @throws Zend_Form_Decorator_Exception
-     */
     public function renderValues ($decorator, $content = '')
     {
         $this->_unprocessedValues = $this->_value;
@@ -288,11 +225,6 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         return $content;
     }
 
-    /**
-     * @param Zend_View_Interface|null $view
-     * @return string
-     * @throws Zend_Form_Decorator_Exception
-     */
     public function render(Zend_View_Interface $view = null)
     {
         if ($this->_isPartialRendering) {
@@ -304,7 +236,6 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         }
 
         $content = '';
-        /** @var Zend_Form_Decorator_Abstract $decorator */
         foreach ($this->getDecorators() as $decorator) {
             if ($decorator instanceof Ccsd_Form_Decorator_Group) {
                 $this->_unprocessedValues = $this->_value;
@@ -318,18 +249,11 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         return $content;
     }
 
-    /**
-     *
-     */
     public function initValidators ()
     {
 
     }
 
-    /**
-     * @param array $errors
-     * @param bool $groupValidate
-     */
     public function errors ($errors = array(), $groupValidate = false)
     {
         $errorname = "_";
@@ -354,14 +278,6 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         }
     }
 
-    /**
-     * @param Zend_Validate_Interface $validator
-     * @param array $value
-     * @param $messages
-     * @param $errors
-     * @param $result
-     * @param null $context
-     */
     public function execValidators (&$validator, $value = array (), &$messages, &$errors, &$result, $context = null)
     {
         foreach ((array)$value as $i => $v) {
@@ -383,10 +299,6 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         }
     }
 
-    /**
-     * @param array $value
-     * @return array
-     */
     public function prepareValues ($value = array ())
     {
         $v = array_shift ($value);
@@ -402,27 +314,17 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         return $value;
     }
 
-    /**
-     * @param $validator
-     */
     public function setConditionValidators ($validator)
     {
 
     }
 
-    /**
-     * @return array
-     */
     public function getGroupErrors()
     {
         return $this->_grouperrors;
     }
 
-    /**
-     * @param $errors
-     * @return $this
-     */
-    public function setGroupErrors($errors )
+    public function setGroupErrors( $errors )
     {
         $this->_grouperrors = array($errors);
         $this->_messages = array_flip (array_combine($errors, $errors));
@@ -430,19 +332,11 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function hasErrors()
     {
         return (!empty($this->_messages) || $this->_isError || !empty($this->_grouperrors));
     }
 
-    /**
-     * @param string $value
-     * @param null $context
-     * @return bool
-     */
     public function isValid($value, $context = null)
     {
         $this->setValue($value);
@@ -492,8 +386,13 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
         $this->_messages = array();
         $this->_errors   = array();
         $result          = true;
-        /** @var Zend_Validate_Interface  $validator */
-        foreach ($this->getValidators() as $key => $validator) {
+        $validators      = $this->getValidators();
+
+        if (!isset ($this->_display)) {
+            $this->_display = self::DISPLAY_SIMPLE;
+        }
+
+        foreach ($validators as $key => $validator) {
             if (method_exists($validator, 'setTranslator')) {
                 if (method_exists($validator, 'hasTranslator')) {
                     if (!$validator->hasTranslator()) {
@@ -545,8 +444,8 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
             $result = false;
 
             // À refaire proprement
-            foreach ($messages as $messkey => $message) {
-                if (is_numeric($messkey)) {
+            foreach ($messages as $key => $message) {
+                if (is_numeric($key)) {
                     $this->_messages = array_merge($this->_messages, $message);
                     $this->_conditionValidators = false;
                 } else {
@@ -556,7 +455,7 @@ abstract class Ccsd_Form_Element_MultiText extends Zend_Form_Element_Multi imple
 
             $this->errors ($errors, !$this->_conditionValidators);
 
-            if ($this->zfBreakChainOnFailure) {
+            if ($validator->zfBreakChainOnFailure) {
                 break;
             }
         }

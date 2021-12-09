@@ -25,6 +25,7 @@ class Ccsd_Auth_Plugin extends Zend_Controller_Plugin_Abstract
     
     const PAGENOTFOUND_ACTION = 'pagenotfound';
 
+    /** @var Hal_Acl  */
     protected $_acl = null;
     
     /**

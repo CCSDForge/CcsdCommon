@@ -1,5 +1,5 @@
 <?php
-/** @var Hal_View $this */
+
 $label_valid = array (
     '0'    => 'danger',
 	'OLD'  => 'warning',
@@ -103,8 +103,7 @@ if (isset($this->item)) {
     	
     if ($this->journal->JID != '') { 
     	$row .= "<input type='hidden' name='" . $this->item->getName() . "' value='" . $this->journal->JID . "' />";
-    } else foreach($this->journal->getForm() as $element) {
-        /** @var Ccsd_Form_Element $element */
+    } else foreach($this->journal->getForm() as $element) { 
 		$element->setAttrib('readonly', 'readonly');
 		$row .= $this->formHidden($element->getName(), $element->getValue(), $element->getAttribs());
 		$element->setAttrib('readonly', null);

@@ -31,6 +31,14 @@ class Ccsd_Tools_String {
     }
 
     /**
+     * @param $s
+     * @return string|string[]
+     */
+    static function replaceNbsp4Tex($s) {
+        return str_replace('&nbsp;',' ', $s);
+    }
+
+    /**
      * Tronque une chaine de caractères
      * La chaine retournee fait au maximum $stringMaxLength + length($postTruncateString)
      *

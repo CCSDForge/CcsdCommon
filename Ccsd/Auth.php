@@ -3,7 +3,7 @@
 class Ccsd_Auth extends Zend_Auth
 {
 
-    public static function isLogged () : bool
+    public static function isLogged ()
     {
         return self::getInstance()->hasIdentity();
     }
@@ -18,30 +18,14 @@ class Ccsd_Auth extends Zend_Auth
         self::getInstance()->getStorage()->write($user);
     }
 
-    /**
-     * retourne l'objet User de l'utilisateur courant
-     * @return mixed|null
-     */
     public static function getUser ()
     {
-        return self::getInstance()->getIdentity();
+    	return self::getInstance()->getIdentity();
     }
 
-    /**
-     * Retourne le username de l'utilisateur courant
-     * @return string|null
-     */
     public static function getUsername ()
     {
-        $instance = self::getInstance();
-        if ($instance === null) {
-            return null;
-        }
-        $identity = $instance -> getIdentity();
-        if ($identity === null) {
-            return null;
-        }
-        return $identity->getUsername();
+        return self::getInstance()->getIdentity()->getUsername();
     }
 
     public static function getUid ()

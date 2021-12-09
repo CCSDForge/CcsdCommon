@@ -6,7 +6,7 @@
  * @author ccsd
  *
  */
-class Ccsd_Auth_Adapter_Mysql  implements Zend_Auth_Adapter_Interface
+class Ccsd_Auth_Adapter_Mysql implements Zend_Auth_Adapter_Interface
 {
 
     /**
@@ -124,40 +124,6 @@ class Ccsd_Auth_Adapter_Mysql  implements Zend_Auth_Adapter_Interface
         $this->_identity = $_identity;
         return $this;
     }
-
-
-    /**
-     * fonction héritée de Ccsd_Auth_Adapter
-     * organise le préalable à l'identification et instanciation de l'utilisateur
-     */
-
-    public function pre_login()
-    {
-        parent::pre_login();
-    }
-
-
-    /**
-     * fonction héritée de Ccsd_Auth_Adapter
-     * organise le postérieur à l'identification et instanciation de l'utilisateur
-     */
-    public function post_login()
-    {
-        parent::post_login();
-    }
-
-    /**
-     * fonction permettant de forcer la creation d'un compte utilisateur
-     * à partir des informations du fournisseur d'identité
-     * @param array $array_attr tableau d'informations fournies par le fournisseur d'identité
-     * @param boolean $forceCreate
-     * @return bool
-     */
-    public function createUserFromAdapter($array_attr,$forceCreate)
-    {
-        return false;
-    }
-
 }
 
 

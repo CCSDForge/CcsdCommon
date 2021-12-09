@@ -6,11 +6,23 @@
 class Ccsd_User_Merge extends Zend_Db_Table_Abstract {
 
     /**
+     * Liste des tables de la base de données
+     * @var array
+     */
+    private $_tables;
+
+    /**
      * Tables de la BDD à ne pas modifier
      * La méthode qui fusionne les profils ne modifiera pas ces tables
      * @var array
      */
-    protected $_tablesBlacklist = array();
+    private $_tablesBlacklist = array();
+
+    /**
+     * Liste des colonnes d'une table
+     * @var array
+     */
+    private $_columns;
 
     /**
      * Table des profils utilisateurs dans l'application
@@ -50,30 +62,52 @@ class Ccsd_User_Merge extends Zend_Db_Table_Abstract {
     }
 
     /**
+     * List DB tables
+     */
+    public function getDbTables() {
+        $stmt = $this->_db->query('SHOW TABLES FROM ' . $this->_db->getConfig()['dbname']);
+        $stmt->setFetchMode(Zend_Db::FETCH_NUM);
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Retourne une liste de tables contenant les colonnes du tableau $columnName
      * @param string $columnName
-     * @return string[]
-     * @throws Zend_Db_Exception
+     * @return array
      */
-    public function getTablesWithColumnName($columnName)
-    {
-        $DBName = $this->_db->getConfig()['dbname'];
-        $res = [];
+    public function getTablesWithColumnName($columnName) {
+
+        $res = null;
+        $tables = $this->getDbTables();
         $blackListTables = $this->getTablesBlacklist();
 
-        $sql = "SELECT TABLE_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '$DBName' AND  COLUMN_NAME = '$columnName'";
+        foreach ($tables as $k => $v) {
+            $tableName = $v[0];
 
-        $stmt = $this->_db->query($sql);
-        $rows = $stmt->fetchAll();
-
-        foreach ($rows as $k => $v) {
-            $tableName = $v['TABLE_NAME'];
             // Tables à ne pas toucher
             if (in_array($tableName, $blackListTables)) {
                 continue;
             }
-            $res[] = $tableName;
+
+            $sql = "SHOW COLUMNS FROM `$tableName` WHERE `Field` = '$columnName'";
+
+            try {
+                $stmt = $this->_db->query($sql);
+                $rows = $stmt->fetchAll();
+            } catch (Zend_Db_Exception $exc) {
+                // meh
+                continue;
+            }
+
+
+            if (isset($rows[0])) {
+                $columnName = $rows[0]['Field']; //nomDuChamp
+
+                $res[] = $tableName;
+            }
         }
+
+
         return $res;
     }
 
@@ -101,8 +135,7 @@ class Ccsd_User_Merge extends Zend_Db_Table_Abstract {
      * Retourne le nombre d'occurence de la valeur $colValue dans la colonne $columnName
      * @param string $columnName
      * @param mixed $colValue
-     * @throws Zend_Db_Exception
-     * @return int[]
+     * @return array
      */
     public function getValueOccurr($columnName, $colValue) {
         $res = [];
@@ -138,20 +171,10 @@ class Ccsd_User_Merge extends Zend_Db_Table_Abstract {
      */
     public function mergeUsers($tables) {
         $result = [];
-        $uidFrom = $this->getUidFrom();
-        $uidTo = $this->getUidTo();
-        if (! (($uidFrom > 0 ) && ($uidTo >0) )) {
-            die( "Uids cannot be null here! $uidFrom -> $uidTo");
-        }
-        $bindData = array('UID' => $uidTo);
+
+        $bindData = array('UID' => $this->getUidTo());
 
         foreach ($tables as $table) {
-            switch ($table) {
-                case 'USER_LIBRARY_SHELF':
-                    /** POur cette table, on supprime les entrees, on ne merge pas! */
-                    $this->_db->delete($table, "UID = $uidFrom");
-                    continue;
-            }
 
             if (in_array($table, $this->getTablesBlacklist())) {
                 continue;
@@ -199,81 +222,65 @@ class Ccsd_User_Merge extends Zend_Db_Table_Abstract {
         return (int) $nb;
     }
 
-    /**
-     * @param $_userMergeLogTable
-     * @return $this
-     */
     public function setUserMergeLogTable($_userMergeLogTable) {
         $this->_userMergeLogTable = $_userMergeLogTable;
         return $this;
     }
 
-    /**
-     * @return string
-     */
+
     public function getUserMergeLogTable() {
         return $this->_userMergeLogTable;
     }
 
-    /**
-     * @return array
-     */
+    public function getTables() {
+        return $this->_tables;
+    }
+
+    public function setTables($tables) {
+        $this->_tables = $tables;
+        return $this;
+    }
+
+    public function getColumns() {
+        return $this->_columns;
+    }
+
+    public function setColumns($columns) {
+        $this->_columns = $columns;
+        return $this;
+    }
+
     public function getTablesBlacklist() {
         return $this->_tablesBlacklist;
     }
 
-    /**
-     * @param $tablesBlacklist
-     * @return $this
-     */
     public function setTablesBlacklist($tablesBlacklist) {
         $this->_tablesBlacklist = $tablesBlacklist;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getApplicationUsersTable() {
         return $this->_applicationUsersTable;
     }
 
-    /**
-     * @param $applicationUsersTable
-     * @return $this
-     */
     public function setApplicationUsersTable($applicationUsersTable) {
         $this->_applicationUsersTable = $applicationUsersTable;
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getUidFrom() {
         return $this->_uidFrom;
     }
 
-    /**
-     * @return int
-     */
     public function getUidTo() {
         return $this->_uidTo;
     }
 
-    /**
-     * @param $uidFrom
-     * @return $this
-     */
     public function setUidFrom($uidFrom) {
         $this->_uidFrom = (int) $uidFrom;
         return $this;
     }
 
-    /**
-     * @param $uidTo
-     * @return $this
-     */
     public function setUidTo($uidTo) {
         $this->_uidTo = (int) $uidTo;
         return $this;

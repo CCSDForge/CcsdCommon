@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class Ccsd_Acl
+ */
 class Ccsd_Acl extends Zend_Acl 
 {
 	const DEFAULT_ROLE = 'guest';
@@ -34,7 +37,7 @@ class Ccsd_Acl extends Zend_Acl
     
     /**
      * Chargement des ACL à partir d'un fichier
-     * @param unknown_type $filename
+     * @param string $filename
      */
     public function loadFromFile($filename)
     {

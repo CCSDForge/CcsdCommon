@@ -18,7 +18,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
 
     public $locale = 'fr';
     static public $core = 'ref_domain';
-    static public $_table = 'REF_DOMAIN';
+    protected $_table = 'REF_DOMAIN';
     protected $_primary = 'ID';
     static protected $_metaname = 'domain';
 
@@ -201,7 +201,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
 
         // Lecture de la base dans l'ordre de la base...
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $tableauDomaineTotal = $db->fetchAll($db->select()->from(self::$_table));
+        $tableauDomaineTotal = $db->fetchAll($db->select()->from($this->_table));
         // Table de row non cherchable, on cree un tableau indexe
         foreach ($tableauDomaineTotal as $domainrow) {
             $tableauDomaineTotalIndexe[$domainrow['ID']] = $domainrow;
@@ -244,7 +244,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
 
         /* Je recupere tous les noeuds */
         $select = $db->select();
-        $select->from(array('d' => self::$_table), array('ID', 'PARENT'))
+        $select->from(array('d' => $this->_table), array('ID', 'PARENT'))
                 ->order('PARENT');
 
         if ($this->_sid != 0) {
@@ -270,7 +270,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
         $nomTablePortailDomain = "PORTAIL_DOMAIN";
 
         $select = $db->select();
-        $select->from(self::$_table)
+        $select->from($this->_table)
                 ->where('PARENT = ?', $idParent);
 
         if ($this->_sid != 0) {
@@ -297,7 +297,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
 
         $select = $db->select();
-        $select->from(self::$_table, new Zend_Db_Expr('COUNT(*)'));
+        $select->from($this->_table, new Zend_Db_Expr('COUNT(*)'));
         $select->where('PARENT = ?', $code);
 
         if ($this->_sid != 0) {
@@ -359,7 +359,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
      */
     public function getDocidsByDb($count = 10, $offset = 0) {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(static::$_table, ['docid' => $this->_primary])
+        $sql = $db->select()->from($this->_table, ['docid' => $this->_primary])
                 ->order($this->_primary . ' ASC')
                 ->where('`ID` IN (SELECT ID FROM ' . $this->_relationDomainePortail . ' WHERE SID = 1)')
                 ->limit($count, $offset);
@@ -372,7 +372,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
      */
     public function countDbEntries() {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(static::$_table, 'COUNT(*) AS NB')
+        $sql = $db->select()->from($this->_table, 'COUNT(*) AS NB')
                 ->where('`ID` IN (SELECT ID FROM ' . $this->_relationDomainePortail . ' WHERE SID = 1)');
         return (int) $db->fetchOne($sql);
     }
@@ -385,7 +385,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
     public function getCodeId($code)
     {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(static::$_table, $this->_primary)
+        $sql = $db->select()->from($this->_table, $this->_primary)
             ->where("CODE = ?", $code);
         return $db->fetchOne($sql);
     }
@@ -393,7 +393,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
     public function getCode($id)
     {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(static::$_table, 'CODE')
+        $sql = $db->select()->from($this->_table, 'CODE')
             ->where($this->_primary . " = ?", $id);
         return $db->fetchOne($sql);
     }
@@ -419,7 +419,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
         }
 
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(self::$_table, 'PARENT')
+        $sql = $db->select()->from($this->_table, 'PARENT')
             ->where($this->_primary . ' = ?', $id);
         $parentid = $db->fetchOne($sql);
         if ($parentid === false || $parentid === 0) {
@@ -431,7 +431,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
     public function getNarrower ($id)
     {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(self::$_table, 'CODE')
+        $sql = $db->select()->from($this->_table, 'CODE')
             ->where('PARENT = ?', $id);
 
         return $db->fetchCol($sql);
@@ -445,7 +445,7 @@ Class Ccsd_Referentiels_Domain extends Ccsd_Referentiels_Abstract {
     public function getIds($from = NULL)
     {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(self::$_table, 'CODE');
+        $sql = $db->select()->from($this->_table, 'CODE');
         return $db->fetchCol($sql);
     }
     public function toHtml($option = [])

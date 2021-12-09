@@ -103,7 +103,7 @@ class Ccsd_Externdoc_Crossref_BookTest extends PHPUnit\Framework\TestCase {
 
     public function testgetAuthors()
     {
-        $authors = $this->_doc->getAuthors(Ccsd_Externdoc_Crossref_Book::XPATH_CONTRIBUTORS.Ccsd_Externdoc_Crossref_Book::REL_XPATH_PERS);
+        $authors = $this->_doc->getAuthors();
 
         self::assertEquals($authors[0]['firstname'], 'Fabio');
         self::assertEquals($authors[0]['lastname'], 'Sangalli');

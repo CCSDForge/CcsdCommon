@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Class Ccsd_Form_Decorator_GroupAreaLang
- */
 class Ccsd_Form_Decorator_GroupAreaLang extends Ccsd_Form_Decorator_GroupArea
 {
 
@@ -22,10 +19,6 @@ class Ccsd_Form_Decorator_GroupAreaLang extends Ccsd_Form_Decorator_GroupArea
         array ('decorator' => 'HtmlTag',     'options' => array ('tag' => 'div', 'closeOnly' => true,'placement' => Zend_Form_Decorator_Abstract::APPEND))
     );
 
-    /**
-     * @return $this|Ccsd_Form_Decorator_GroupArea
-     * TODO: Comprendre a quoi cela sert-il puique la valeur initiale est la meme
-     */
     public function loadDefaultDecorators ()
     {
     	$this->_decorators = array (

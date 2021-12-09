@@ -38,7 +38,6 @@ Class Ccsd_Referentiels_Typdoc
     const TYPE_HDR      =   'HDR';
     const TYPE_MINUTES  =   'MINUTES';
     const TYPE_SYNTHESE =   'SYNTHESE';
-    const TYPE_ETABTHESE    =   'ETABTHESE';
 
     /**
      * @var string identifiant du type de document

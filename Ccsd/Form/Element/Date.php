@@ -29,4 +29,17 @@ class Ccsd_Form_Element_Date extends Zend_Form_Element_Text implements Ccsd_Form
         }
         return $this;
     }
+
+    // Obsolete
+    /** @deprecated  */
+    public function getPrefixPath ()
+    {
+    	error_log('getPrefixPath ne devrait plus etre appele');
+		$prefixPath = (new ReflectionClass(get_class($this)))->getFileName();
+    		
+    	while (dirname ($prefixPath) && !is_dir($prefixPath . '/public')) {
+            $prefixPath = dirname($prefixPath);
+        }
+    	return $prefixPath;
+    }
 }

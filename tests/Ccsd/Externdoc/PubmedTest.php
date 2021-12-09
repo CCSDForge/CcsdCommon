@@ -22,9 +22,8 @@ class Ccsd_Externdoc_PubmedTest extends PHPUnit\Framework\TestCase {
 
         // On a pas accès à la base de données depuis la librairie
         //$this->_doc->setAdapter(Zend_Db_Table_Abstract::getDefaultAdapter());
-        if ($this->_doc) {
-            $this->_metas = $this->_doc->getMetadatas();
-        }
+
+        $this->_metas = $this->_doc->getMetadatas();
     }
 
     public function testDocType()
@@ -41,7 +40,7 @@ class Ccsd_Externdoc_PubmedTest extends PHPUnit\Framework\TestCase {
     public function testGetAbstract()
     {
         $abstract = $this->_metas['metas']['abstract'];
-        self::assertEquals(['en' => "The respiratory rhythm generator (RRG) is modulated by several endogenous substances, including acetylcholine (ACh) and noradrenaline (NA) that interact in several modulatory processes. To know whether ACh and NA interacted to modulate the RRG activity, we used medullary \"en bloc\" and slice preparations from neonatal mice where the RRG has been shown to receive a facilitatory modulation from A1/C1 neurons, via a continuous release of endogenous NA and activation of alpha2 adrenoceptors. Applying ACh at 25 microM activated the RRG but ACh had no effects at 50 microM. Applying the ACh receptor agonists nicotine and muscarine facilitated and depressed the RRG, respectively. After yohimbine pre-treatment that blocked the alpha2 facilitation, the nicotinic facilitation was not altered, the muscarinic depression was reversed and ACh 50 microM significantly facilitated the RRG. After L-tyrosine pre-treatment that potentiated the alpha2 facilitation, the muscarinic depression was enhanced. Thus, ACh regulates the RRG activity via nicotinic and muscarinic receptors, the muscarinic receptors interacting with alpha2 adrenoceptors."], $abstract);
+        self::assertEquals($abstract, ['en' => "The respiratory rhythm generator (RRG) is modulated by several endogenous substances, including acetylcholine (ACh) and noradrenaline (NA) that interact in several modulatory processes. To know whether ACh and NA interacted to modulate the RRG activity, we used medullary \"en bloc\" and slice preparations from neonatal mice where the RRG has been shown to receive a facilitatory modulation from A1/C1 neurons, via a continuous release of endogenous NA and activation of alpha2 adrenoceptors. Applying ACh at 25 microM activated the RRG but ACh had no effects at 50 microM. Applying the ACh receptor agonists nicotine and muscarine facilitated and depressed the RRG, respectively. After yohimbine pre-treatment that blocked the alpha2 facilitation, the nicotinic facilitation was not altered, the muscarinic depression was reversed and ACh 50 microM significantly facilitated the RRG. After L-tyrosine pre-treatment that potentiated the alpha2 facilitation, the muscarinic depression was enhanced. Thus, ACh regulates the RRG activity via nicotinic and muscarinic receptors, the muscarinic receptors interacting with alpha2 adrenoceptors."]);
     }
 
     public function testgetDate()

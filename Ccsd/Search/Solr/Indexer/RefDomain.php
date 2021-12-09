@@ -37,7 +37,7 @@ class Ccsd_Search_Solr_Indexer_RefDomain extends Ccsd_Search_Solr_Indexer
 
     /**
      * @param int $docId
-     * @param \Solarium\QueryType\Update\Query\Document $ndx
+     * @param \Solarium\QueryType\Update\Query\Document\Document $ndx
      * @see Ccsd_Search_Solr_Indexer::addMetadataToDoc()
      */
     protected function addMetadataToDoc($docId, $ndx)

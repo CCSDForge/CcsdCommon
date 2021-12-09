@@ -174,7 +174,7 @@ class Ccsd_Sword_Client
      */
     static private function getGoodTimeOutValue(int $size)
     {
-        $timeout = log($size / 100) * 3 + 120;
+        $timeout = log($size / 100) * 3 + 40;
         return $timeout;
     }
 
@@ -197,7 +197,7 @@ class Ccsd_Sword_Client
 				curl_setopt ( $curl, CURLOPT_POST, true );
 			}
 
-			$timeout = $this -> getGoodTimeOutValue(strlen($this->file));
+			$timeout = $this -> getGoodTimeOutValue(sizeof($this->file));
 
 			curl_setopt ( $curl, CURLINFO_HEADER_OUT, true );
 			curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, true );

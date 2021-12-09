@@ -40,7 +40,7 @@ class Ccsd_Tools {
         "λ" => '$\\lambda$',
         "Μ" => '$M$',   // \\Mu ne fonctionne pas dans notre version de latex (2014)
         "μ" => '$\\mu$',
-        "µ" => '$\\mu$', # different du precedent...
+        "µ" => '$\\mu$', # different du precedent... 
         "Ν" => '$\\Nu$',
         "ν" => '$\\nu$',
         "Ξ" => '$\\Xi$',
@@ -95,7 +95,7 @@ class Ccsd_Tools {
         "°" => "{\\textdegree}",
         "²" => '${}^2$',
         "³" => '${}^3$',
-
+        
         // Autre alphabet
         'ℵ' => '$\\aleph',
         //symboles mathématiques
@@ -116,9 +116,12 @@ class Ccsd_Tools {
         "∉" => '$\\notin$',
         "∋" => '$\\ni$',
         "−" => "--",
+        "ℋ"=> '$\\mathcal{H}$',
         "∞" => '$\\infty$',
-        "∧" => '$\\wedge$',
-        "∨" => '$\\vee$',
+        //"∧" => '$\\wedge$',
+        //"∨" => '$\\vee$',
+        "∧" => '$\\land$',
+        "∨" => '$\\lor$',
         "⋒"  => '$\\doublecap$',
         "⋓" => '$\\doublecup$',
         "∼" => '$\\sim$',
@@ -156,12 +159,9 @@ class Ccsd_Tools {
         "∂" => '$\\partial$',
         "∏" => '$\\prod$',
         "∑" => '$\\sum$',
-        "×" => 'x',
         "∗" => '$\\star$',
         "×" => 'x',
         "√" => '$\\sqrt$',
-        "∧" => '$\\land$',
-        "∨" => '$\\lor$',
         "∩" => '$\\cap$',
         "∪" => '$\\cup$',
         "∫" => '$\\int$',
@@ -173,6 +173,7 @@ class Ccsd_Tools {
         "⋆" => '$\\star$',
         '⁺' => '${}^{+}$',
         // caracteres spéciaux
+        '…' => "{\\ldots}",
         '"' => "''",
         "“" => "``",
         "”" => "''",
@@ -303,9 +304,9 @@ class Ccsd_Tools {
         // Autres accents mal convertit
         "ă" => "{\\u a}",
         "Ă" => "{\\u a}",
-        // accent windows
-        "è" => "{\\`e}",
-        "é" => "{\\'e}",
+        //accent windows
+        "è" => "{\\`e}", // e suivit d'accent
+        "é" => "{\\'e}", //é e suivit d'accent
         "à" => "{\\`a}",
         "ů" => "{\\r u}",
         "Ů" => "{\\r U}",
@@ -388,41 +389,41 @@ class Ccsd_Tools {
         // Particules patronymiques
         /* française : de ou le d’ sont toujours en minuscules */
         //$res = str_replace('De ', 'de ', $res);
-        $res = str_replace("D'", "d'", $res);
+        $res = str_replace(" D'", " d'", $res);
         /* allemandes : an, auf, von (der), zu */
-        $res = str_replace('An ', 'an ', $res);
-        $res = str_replace('Auf ', 'auf ', $res);
+        $res = str_replace(' An ', ' an ', $res);
+        $res = str_replace(' Auf ', ' auf ', $res);
         $res = str_replace('Von Der ', 'von der ', $res);
-        $res = str_replace('Von ', 'von ', $res);
-        $res = str_replace('Zu ', 'zu ', $res);
+        $res = str_replace(' Von ', ' von ', $res);
+        $res = str_replace(' Zu ', ' zu ', $res);
         $res = str_replace("L'", "l'", $res);
         /* anglaise : of */
-        $res = str_replace('Of ', 'of ', $res);
+        $res = str_replace(' Of ', ' of ', $res);
         /* espagnoles : de, del, de la, de los, de las, y */
         // $res = str_replace('De ', 'de ', $res);
-        $res = str_replace('Del ', 'del ', $res);
-        $res = str_replace('De La ', 'de la ', $res);
-        $res = str_replace('De Los ', 'de los ', $res);
-        $res = str_replace('De Las ', 'de las ', $res);
-        $res = str_replace('Y ', 'y ', $res);
+        $res = str_replace(' Del ', ' del ', $res);
+        $res = str_replace(' De La ', ' de la ', $res);
+        $res = str_replace(' De Los ', ' de los ', $res);
+        $res = str_replace(' De Las ', ' de las ', $res);
+        $res = str_replace(' Y ', ' y ', $res);
         /* néerlandaises aux Pays-Bas : de, den, t’, ten, ter, van (der/den) */
         //$res = str_replace('De ', 'de ', $res);
-        $res = str_replace('Den ', 'den ', $res);
-        $res = str_replace("T'", "t'", $res);
-        $res = str_replace('Ten ', 'ten ', $res);
-        $res = str_replace('Ter ', 'ter ', $res);
-        $res = str_replace('Van Der ', 'van der ', $res);
-        $res = str_replace('Van Den ', 'van den ', $res);
+        $res = str_replace(' Den ', ' den ', $res);
+        $res = str_replace(" T'", " t'", $res);
+        $res = str_replace(' Ten ', ' ten ', $res);
+        $res = str_replace(' Ter ', ' ter ', $res);
+        $res = str_replace(' Van Der ', ' van der ', $res);
+        $res = str_replace(' Van Den ', ' van den ', $res);
         $res = str_replace('Van ', 'van ', $res);
         /* portugaises : a, da, das, de, dos */
-        $res = str_replace('A ', 'a ', $res);
-        $res = str_replace('Da ', 'da ', $res);
-        $res = str_replace('Das ', 'das ', $res);
+        $res = str_replace(' A ', ' a ', $res);
+        $res = str_replace(' Da ', ' da ', $res);
+        $res = str_replace(' Das ', ' das ', $res);
         //$res = str_replace('De ', 'de ', $res);
-        $res = str_replace('Dos ', 'dos ', $res);
+        $res = str_replace(' Dos ', ' dos ', $res);
         /* scandinaves : af, av, von */
-        $res = str_replace('Af ', 'af ', $res);
-        $res = str_replace('Av ', 'av ', $res);
+        $res = str_replace(' Af ', ' af ', $res);
+        $res = str_replace(' Av ', ' av ', $res);
         //$res = str_replace('Von ', 'von ', $res);
         // Les particules non composees
         $res = str_replace('De ', 'de ', $res);
@@ -432,7 +433,8 @@ class Ccsd_Tools {
     /**
      * @param string|string[] $mixed
      * @param bool $strip_br
-     * @return array|mixed|string|string[]|null
+     * @param bool $allUtf8
+     * @return string|string[]|null
      */
     public static function space_clean($mixed, $strip_br = true, $allUtf8=false) {
         if (is_array($mixed)) {
@@ -440,20 +442,20 @@ class Ccsd_Tools {
             foreach ($mixed as $val) {
                 $new [] = self::space_clean($val);
             }
-            $mixed = $new;
+            $mixed = array_filter($new);
         } else {
-            $mixed = preg_replace("/[\x-\x8\xb-\xc\xe-\x1f]/", "", ($strip_br) ? self::br2space($mixed) : $mixed );
-            $mixed = str_replace("\n", ' ', $mixed);
-            $mixed = str_replace("\r", ' ', $mixed);
-            $mixed = str_replace("\t", ' ', $mixed);
-            $mixed = preg_replace('/\t/', ' ', $mixed);
+            $mixed = ($strip_br) ? self::br2space($mixed) : $mixed;
+            // On ne change pas les espaces insécables ou demi-espace...
+            //   \s changerai l'intégralité des espaces.
+            $mixed = preg_replace('/[\n\t\r ]+/', ' ', $mixed);
+            // Suppr control char (CR already transformed)
+            $mixed = preg_replace("/[\x1-\x1f]/", "", $mixed);
+            // On devrait pouvoir supprimer tous les caractères espaces Utf8 (ex: pour repec)
+            // Mais ca doit etre optionnel, on doit accepter les espaces insécables par exemple
             $mixed = preg_replace('/\s\s+/u', ' ', $mixed);
-            // On devrait pouvoir supprimer tous les caracteres Utf8 (ex: pour repec)
-            // Mais ca doit etre optionnel, on doit accepter les espaces insecables par exemple
             if ($allUtf8) {
-                $mixed = preg_replace('/[\x00-\x1F\x7F-\xA0\xAD]/u','',$mixed);
+                $mixed = preg_replace('/[\x7F-\xA0\xAD\x{2009}]/u','',$mixed);
             }
-
             $mixed = trim($mixed);
         }
         return $mixed;
@@ -464,7 +466,7 @@ class Ccsd_Tools {
      * @return string|string[]|null
      */
     public static function br2space($string) {
-        return (preg_replace("/<br[[:space:]]*\/?[[:space:]]*>/i", " ", $string));
+        return (preg_replace("|<br\b[^>]*>|i", " ", $string));
     }
 
     /**
@@ -533,7 +535,11 @@ class Ccsd_Tools {
     /**
      * Search for a regexp $needle in array and return the first index that matche
      * You can specify a $begin prefix and $end suffix for the regexp
-     * @param string[][]
+     * @param string $needle
+     * @param string[] $array
+     * @param string $begin
+     * @param string $end
+     * @return mixed
      */
     public static function preg_in_array_get_key($needle = "", $array = array(), $begin = "", $end = "") {
         $pattern = '/' . str_replace('/', '\/', $begin . $needle . $end) . '/';
@@ -558,7 +564,7 @@ class Ccsd_Tools {
      * @return bool
      */
     public static function preg_in_array($needle = "", $array = array(), $begin = "", $end = "") {
-        return self::preg_in_array_get_key($needle, $array, $begin = "", $end = "") != null;
+        return self::preg_in_array_get_key($needle, $array, $begin, $end) != null;
     }
 
     /**
@@ -569,11 +575,35 @@ class Ccsd_Tools {
      * @param mixed $set
      *        	valeur par défaut
      * @return mixed $var s'il existe $set sinon
+     * NOTE: & is important on $var: else there are warnings on non existent var or array keys...
      */
     public static function ifsetor(&$var, $set = '') {
         return isset($var) ? $var : $set;
     }
+    /**
+     * Vérifier l'existence de la clef key dans  le tableau et retourne null ou la valeur  set
+     * On veut l'equivalent de isset($arra[$key]) ? $array[$key] : $default
+     * Mais sans les warnings de $key n'existe pas...
+     * Attention: si $array[$key] existe mais est null: rendra $default
+     * @param mixed[] $var tableau à tester
+     * @param mixed $default valeur par défaut
+     * @return mixed
+     */
+    public static function ifarraysetor($key, $array, $default = '') {
+        return self::issetarray($key, $array) ? $array[$key] : $default;
+    }
 
+    /**
+     * @param $key
+     * @param array $array
+     * @return bool
+     */
+    public static function issetarray($key, $array) {
+        if (is_array($array) && array_key_exists($key, $array) && isset($array[$key])) {
+            return true;
+        }
+        return false;
+    }
     /**
      * @param string $string
      * @return string
@@ -605,7 +635,7 @@ class Ccsd_Tools {
                 throw new Exception('fichier ' . $xslFile . " n'existe pas");
             }
 
-            set_error_handler('\Ccsd\Xml\Exception::HandleXmlError');
+            set_error_handler('Ccsd_Xml_Exception::HandleXmlError');
             $xml->loadXML($xmlStr);
             restore_error_handler();
 
@@ -626,12 +656,22 @@ class Ccsd_Tools {
     /**
      * @return string
      */
-    public function getStoredLang() {
+    public static function getStoredLang() {
         try {
-            $lang = Zend_Registry::get('lang');
-            return $lang;
+            return Zend_Registry::get('lang');
         } catch (Exception $e) {
             return "en";
+        }
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getStoredLanguages() {
+        try {
+            return Zend_Registry::get('languages');
+        } catch (Exception $e) {
+            return array('fr','en','es','eu');
         }
     }
     /**
@@ -644,7 +684,7 @@ class Ccsd_Tools {
             /** @var Zend_Translate_Adapter $translator */
             $translator = Zend_Registry::get('Zend_Translate');
             if ($lang === null) {
-                $lang = Zend_Registry::get('lang');
+                $lang = Ccsd_Tools::getStoredLang();
             }
             return $translator ->translate($str, $lang);
         } catch (Zend_Exception $e) {
@@ -689,7 +729,7 @@ class Ccsd_Tools {
             if (!$xmlStr || !$tag) {
                 throw new Exception('pas de données');
             }
-            set_error_handler('\Ccsd\Xml\Exception::HandleXmlError');
+            set_error_handler('Ccsd_Xml_Exception::HandleXmlError');
             $xml->loadXML($xmlStr);
             restore_error_handler();
             $xpath = new DOMXPath($xml);
@@ -834,7 +874,7 @@ class Ccsd_Tools {
      * @return string
      */
     public static function cleanFileName($filename = '') {
-        $filename = preg_replace('/[^a-z0-9_\.-\/\\\\]/i', '_', self::spaces2Space(self::stripAccents(($filename))));
+        $filename = preg_replace('/[^a-z0-9_.-\/\\\\]/i', '_', self::spaces2Space(self::stripAccents(($filename))));
         $filename = preg_replace("~\.\.*~", ".", $filename);
         return (preg_replace("/__*/", "_", $filename));
     }
@@ -895,13 +935,14 @@ class Ccsd_Tools {
     /**
      * @param $string
      * @param bool $pad
+     * @param bool $isEndDate indicate that if only year is given , should be extended to end of the year
      * @return string
      * Verify that the input date is /^\d{4}(-\d{2}(-\d{2})?)?
      * return '' if not or 0000-00-00 if pad is true
      * return the same date if yes, and pad with 01-01 if pad is true
      *
      */
-    public static function str2date($string, $pad = false) {
+    public static function str2date($string, $pad = false, $isEndDate = false) {
         if (is_string($string)) {
             $date = '';
             list($y, $m, $d) = array_pad(explode('-', $string, 3), 3, 0);
@@ -921,7 +962,7 @@ class Ccsd_Tools {
                     }
                 } else {
                     if ($pad) {
-                        $date = $y . '-01-01';
+                        $date = $y . ($isEndDate ? '-12-31':'-01-01');
                     }
                 }
             } else {
@@ -1032,10 +1073,12 @@ class Ccsd_Tools {
         curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curlHandler, CURLOPT_CONNECTTIMEOUT, 15); // timeout in seconds
 
-        //$auth = $s->getEndPointAuth();
-        //if (is_array($auth)) {
-        //    curl_setopt($curlHandler, CURLOPT_USERPWD, $auth ['username'] . ':' . $auth ['password']);
-        //}
+        $auth = null;
+
+        $auth = $s->getEndPointAuth();
+        if (is_array($auth)) {
+            curl_setopt($curlHandler, CURLOPT_USERPWD, $auth ['username'] . ':' . $auth ['password']);
+        }
 
         curl_setopt($curlHandler, CURLOPT_URL, $endPointUrl);
         curl_setopt($curlHandler, CURLOPT_TIMEOUT, $timeout); // timeout in seconds
@@ -1162,7 +1205,6 @@ class Ccsd_Tools {
      * @param string $dst
      */
     // copies files and non-empty directories
-
     public static function rcopy($src, $dst) {
         if (file_exists($dst)) {
             self::rrmdir($dst);
@@ -1224,7 +1266,7 @@ class Ccsd_Tools {
     /**
      * @param string $text
      * @return string
-     * Utilisee dans des feuille de style...
+     * Utilisée dans des feuilles de style...
      */
     public static function protectLatex($text) {
         /* lfarhi : on ne met pas $,^,~,_ { et } car il y a du latex dans certains champs avec ces caractères
@@ -1233,20 +1275,49 @@ class Ccsd_Tools {
                 array("&", "#", "%"), array("\\&", "\\#", "\\%"), $text);
         return $text_replace;
     }
+    /**
+     * @param string $text
+     * @return string
+     * Utilisée dans des feuilles de style...
+     * @see file:Hal/Document/xsl/bibtex.xsl
+     */
+    public static function protectBibtexTitle($text) {
+        if (preg_match('/(\$[^$]+\$|\\\\[a-zA-Z]+\{)/xms', $text)) {
+            // Encodage des carateres, mais pas d'echappement...
+            $text = self::decodeLatex($text);
+            // Args, on a encode le _ dans decode latex...
+            $text = preg_replace('/\\\\_/', '_', $text);
+        } else {
+            $text = preg_replace('/{/', '\\{', $text);
+            $text = preg_replace('/}/', '\\}', $text);
+            $text = preg_replace('/\$/', '\\\\$', $text);
+            $text = self::decodeLatex($text);
+            // la chaine ne contient pas de latex math  on echappe les caractères...
+            $text = preg_replace('/%/', '\\%', $text);
+            $text = preg_replace('/&/', '\\&', $text);
+            $text = preg_replace('/#/', '\\#', $text);
+
+            $text = str_replace(' ', '~', $text);
+            $text = str_replace(' ', '\\,', $text);
+            // Arg: & a deja ete remplace par \\&
+            $text = str_replace('\\\\&nbsp;', '~', $text);
+            return $text;
+        }
+        return $text;
+    }
    /**
      * @param string $text
      * @return string
-     * Utilisee dans des feuille de style...
+     * Utilisée dans des feuilles de style...
      */
     public static function protectCoverpage($text) {
         /*
-        Les caractere deja traite par html2 text ne sont pas a retraiter
+        Les caractères déja traité par html2 text ne sont pas a retraiter
         */
         $text_replace = str_replace(
                 array("%"), array("\\%"), $text);
         return $text_replace;
     }
-
     /**
      * @param string $text
      * @return string
@@ -1257,7 +1328,6 @@ class Ccsd_Tools {
                 array("_"), array("\\_"), $text);
         return $text_replace;
     }
-
     /**
      * @param string $text
      * @return string
@@ -1271,12 +1341,12 @@ class Ccsd_Tools {
                     self::$_PatternCarLatex[] = $car_utf8;
                     self::$_ReplaceCarLatex[] = $latex;
                 }
-            }
+                }
             if (self::$_PatternCarLatexGreek == null) {//n'a pas encore ete genere
                 foreach (self::$_TRANS_CAR_LATEX_GREEK as $car_utf8 => $latex) {
                     self::$_PatternCarLatexGreek[] = $car_utf8;
                     self::$_ReplaceCarLatexGreek[] = $latex;
-                }
+            }
                 self::$_PatternCarLatexGlobal = array_merge(self::$_PatternCarLatexGreek, self::$_PatternCarLatex );
                 self::$_ReplaceCarLatexGlobal = array_merge(self::$_ReplaceCarLatexGreek, self::$_ReplaceCarLatex);
             }
@@ -1329,6 +1399,7 @@ class Ccsd_Tools {
 
         return $text;
     }
+    
     /**
      * Supprime toute les valeurs correspondant a la valeur de filter
      * Et supprime toute les clefs dont la valeur est un tableau vide
@@ -1395,25 +1466,27 @@ class Ccsd_Tools {
         }
         return substr($email, $arobasePosition + 1);
     }
-
     /**
      * @param $value
      * @return bool
-     * @throws ReflectionException
      */
     public static function isEmpty($value)
     {
         if (is_object($value)) {
-            $class = new ReflectionClass($value);
-            if ($class->hasMethod('isEmpty')) {
-                return $value->isEmpty();
-            } else {
+            try {
+                $class = new ReflectionClass($value);
+                if ($class->hasMethod('isEmpty')) {
+                    return $value->isEmpty();
+                } else {
+                    return false;
+                }
+            } catch (ReflectionException $e) {
                 return false;
             }
         }
         if ($value === 0 || $value === "0") {
             return false;
-        }
+        } 
         return empty($value);
     }
 
@@ -1450,10 +1523,10 @@ class Ccsd_Tools {
             }
             if ($item->isDir()) {
                 $dirdst = $dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
-                $success |= mkdir($dirdst, $dirmode);
+                $success |= @mkdir($dirdst, $dirmode);
             } else {
                 $filedst = $dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
-                 $success |= copy($item, $filedst);
+                 $success |= @copy($item, $filedst);
             }
         }
         if ($success) {
@@ -1532,18 +1605,19 @@ class Ccsd_Tools {
      * @return bool|string
      */
     static public function getFileLine($fileStream, $lineNb)
-    {
-        $result = false;
-        for ($currentLine=1; $currentLine <= $lineNb; $currentLine++) {
-            $buffer = fgets($fileStream);
-            if (empty($buffer)) {
-                break;
+	{
+		$result = false;
+		for ($currentLine=1; $currentLine <= $lineNb; $currentLine++)
+		{
+			$buffer = fgets($fileStream);
+			if (empty($buffer)) {
+			    break;
             } else {
                 $result = $buffer;
-            }
-        }
-        return $result;
-    }
+			}
+		}
+		return $result;
+	}
 
     /**
      * Génération du mot de passe d'un compte

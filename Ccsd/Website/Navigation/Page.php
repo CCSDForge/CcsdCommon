@@ -8,9 +8,6 @@
 abstract class Ccsd_Website_Navigation_Page
 {
     protected $_table   =   'WEBSITE_NAVIGATION';
-
-    /** @var bool The page is the only one of this type */
-    protected $_constraintUniq = false;
     /**
      * Identifiant de la page
      * @var int
@@ -101,6 +98,27 @@ abstract class Ccsd_Website_Navigation_Page
                 $this -> $function($value);
             }
         }
+    }
+    /**
+     * Définition des options de la page
+     * @param array $options
+     * @deprecated
+     */
+    public function setOptionsOld($options = array())
+    {
+        foreach ($options as $option => $value) {
+            $option = strtolower($option);
+            switch($option) {
+                case 'languages':   $this->_languages = $value;
+                                    break;
+                case 'pageid'   :   $this->_pageId = (int) $value;
+                                    break;
+                case 'labels'   :   $this->setLabels($value);
+                                    break; 
+                case 'parentid' :   $this->setPageParentId($value);
+                                    break;                                            
+            }
+        } 
     }
     /**
      * @param $value
@@ -356,9 +374,6 @@ abstract class Ccsd_Website_Navigation_Page
                 return $this->_form;
     }
 
-    /**
-     * @return Ccsd_Website_Navigation|null
-     */
     protected function getNavigation() {
         return $this -> nav;
     }

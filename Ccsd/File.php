@@ -666,6 +666,7 @@ class Ccsd_File
         }
         $img = imagecreatetruecolor($newWidth, $newHeight);
 
+
         switch ($imageType) {
             case IMAGETYPE_GIF:
                 $source = imagecreatefromgif($filename);
@@ -804,7 +805,7 @@ class Ccsd_File
      */
     public static function pdf2pdfa($input, $output = null, $outputPrefix = 'archivable_', $forceOverwrite = false)
     {
-        setlocale(LC_CTYPE, "fr_FR.UTF-8"); // escapeshellarg strip les lettres accentuees si on n'est pas dans une locale Utf8
+
         //ghostscript binary
         $ghostscript_bin = static::GHOSTSCRIPT_PATH . DIRECTORY_SEPARATOR . 'gs';
 

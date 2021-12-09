@@ -136,8 +136,8 @@ class Ccsd_Search_Solr {
                     'port' => (int) $configParams->endpoints->{$options[self::ENDPOINT_DEFAULT]}->port,
                     'path' => $configParams->endpoints->{$options[self::ENDPOINT_DEFAULT]}->path,
                     'timeout' => (int) $configParams->endpoints->{$options[self::ENDPOINT_DEFAULT]}->timeout,
-                    //'username' => $configParams->endpoints->{$options[self::ENDPOINT_DEFAULT]}->username,
-                    //'password' => $configParams->endpoints->{$options[self::ENDPOINT_DEFAULT]}->password,
+                    'username' => $configParams->endpoints->{$options[self::ENDPOINT_DEFAULT]}->username,
+                    'password' => $configParams->endpoints->{$options[self::ENDPOINT_DEFAULT]}->password,
                     'core' => $coreName
                 ]
             ]
@@ -174,13 +174,12 @@ class Ccsd_Search_Solr {
     /**
      * Retourne les paramètres d'authentification pour un type de endpoint
      * @param string $endpointType
-     * @return array|false
+     * @return array
      */
     public function getEndPointAuth($endpointType = self::ENDPOINT_RESPONDER) {
         $endpoints = $this->getEndpoints();
-        $auth=false; // plus d'auth
-        //$auth['username'] = $endpoints['endpoint'][$endpointType]['username'];
-        //$auth['password'] = $endpoints['endpoint'][$endpointType]['password'];
+        $auth['username'] = $endpoints['endpoint'][$endpointType]['username'];
+        $auth['password'] = $endpoints['endpoint'][$endpointType]['password'];
 
         return $auth;
     }

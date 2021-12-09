@@ -1,33 +1,25 @@
 <?php
 
-/**
- * Trait Ccsd_Form_Trait_Populate
- */
 trait Ccsd_Form_Trait_Populate {
-     /** @var string[] */
+     
      protected $_populate;
-     /** @var string */
      private   $_class;
-    /** @var string   */
      private   $_method;
      private   $_args;
      protected $_data = array ();
-
-    /**
-     * @param array $populate
-     * @return $this
-     * @throws Zend_Form_Exception
-     */
+     
      public function setPopulate ($populate)
      {
          if (isset($populate['class']) && isset($populate['method'])) {
              if (!class_exists($populate['class'])) {
-                 throw new Zend_Form_Exception(sprintf('Class not found : %s', $populate['class']));
+                 require_once 'Zend/Form/Exception.php';
+                 throw new Zend_Form_Exception(sprintf('Class not found : ', $populate['class']));
              }
              
              $this->_class      = $populate['class'];
              
              if (!isset($populate['method'])) {
+                 require_once 'Zend/Form/Exception.php';
                  throw new Zend_Form_Exception(sprintf('Need a method'));
              }
              $this->_method     = $populate['method'];
@@ -36,6 +28,7 @@ trait Ccsd_Form_Trait_Populate {
                  $this->_args       = $populate['args'];
              }
          } else if (!is_array ($populate)) {
+             require_once 'Zend/Form/Exception.php';
              throw new Zend_Form_Exception(sprintf("Can't populate with no array"));
          } else {
              $this->setData($populate);
@@ -45,19 +38,12 @@ trait Ccsd_Form_Trait_Populate {
          
          return $this;
      }
-
-    /**
-     * @return bool
-     */
+     
      public function isPopulate ()
      {
          return isset ($this->_populate);
      }
-
-    /**
-     * @param $data
-     * @return $this
-     */
+      
      public function setData ($data)
      {
          if (!is_array ($data)) {
@@ -87,26 +73,17 @@ trait Ccsd_Form_Trait_Populate {
 
          return $this;
      }
-
-    /**
-     * @return array
-     */
+     
      public function getData ()
      {
          return $this->_data;
      }
-
-    /**
-     * @return bool
-     */
+     
      public function isDefined ()
      {
          return isset ($this->_class) && isset ($this->_method);
      }
-
-    /**
-     * @throws Zend_Form_Exception
-     */
+     
      public function build ()
      {
          if ($this->isDefined()) {
@@ -133,12 +110,14 @@ trait Ccsd_Form_Trait_Populate {
                      $this->setData ($reflectionMethod->invokeArgs($reflectionMethod, $pass));
                  }
              } catch (Exception $e) {
-                 throw new Zend_Form_Exception(sprintf('La méthode ne peut pas être appelée: %s', $this->_method));
+                 require_once 'Zend/Form/Exception.php';
+                 throw new Zend_Form_Exception(sprintf('La méthode ne peut pas être appelée', $this->_method));
              }   
          }
 
          if (!isset ($this->_data)) {
-             throw new Zend_Form_Exception('Aucune donnée n\'est définie');
+             require_once 'Zend/Form/Exception.php';
+             throw new Zend_Form_Exception(sprintf('Aucune donnée n\'est définie', $this->_data));
          }
      }
  }

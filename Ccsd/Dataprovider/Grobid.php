@@ -55,7 +55,7 @@ class Ccsd_Dataprovider_Grobid extends Ccsd_Dataprovider
         }
         
         if ($postfield == NULL) {
-            $postfield = array('consolidate' => '1', 'input' => new CurlFile($this->_id));
+            $postfield = array('consolidate' => '0', 'input' => new CurlFile($this->_id));
         }
         
         return parent::requestXml($url, $postfield, $timeout);

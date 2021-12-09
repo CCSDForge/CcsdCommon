@@ -33,7 +33,7 @@ abstract class Ccsd_Referentiels_Abstract {
      * Table du référentiel
      * @var string
      */
-    static public $_table = '';
+    protected $_table = '';
 
     /**
      * Nom de la Clé primaire de la table associee a la classe fille
@@ -144,15 +144,15 @@ abstract class Ccsd_Referentiels_Abstract {
 
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
 
-        if (static::$_table == Ccsd_Referentiels_Author::$_table){
-            $sql = $db->select()->from(array('ra' => static::$_table))
+        if ($this->_table == 'REF_AUTHOR'){
+            $sql = $db->select()->from(array('ra' => $this->_table))
                 ->joinLeft(array(
                     'rs' => 'REF_STRUCTURE'
                 ), 'ra.STRUCTID = rs.STRUCTID', array(
                     'ORGANISM' => 'rs.STRUCTNAME'
                 ))->where($this->_primary . ' = ?', (int)$id);
         } else {
-            $sql = $db->select()->from(static::$_table)
+            $sql = $db->select()->from($this->_table)
                 ->where($this->_primary . ' = ?', (int)$id);
         }
 
@@ -433,9 +433,9 @@ abstract class Ccsd_Referentiels_Abstract {
             unset($bind[$this->_primary]);
             try {
                 //On essaie d'insérer en base
-                $db->insert(static::$_table, $bind);
+                $db->insert($this->_table, $bind);
 
-                $this->{$this->_primary} = $db->lastInsertId(static::$_table);
+                $this->{$this->_primary} = $db->lastInsertId($this->_table);
                 //Enregistrement Ok, on indexe la nouvelle entrée
                 Ccsd_Search_Solr_Indexer::addToIndexQueue(array($this->{$this->_primary}), SPACE_NAME, Ccsd_Search_Solr_Indexer::O_UPDATE, static::$core, 10);
                 //Log de l'insertion
@@ -445,7 +445,7 @@ abstract class Ccsd_Referentiels_Abstract {
                     $this->{$this->_primary} = $this->searchDoublon();
 
                 } else {
-                    Ccsd_Tools::panicMsg(__DIR__, __LINE__, 'Enregistrement dans le référentiel ' . static::$_table . ' de la donnée ' . serialize($bind) . ' a échoué !');
+                    Ccsd_Tools::panicMsg(__DIR__, __LINE__, 'Enregistrement dans le référentiel ' . $this->_table . ' de la donnée ' . serialize($bind) . ' a échoué !');
                 }
             }
             return $this->{$this->_primary};
@@ -454,7 +454,7 @@ abstract class Ccsd_Referentiels_Abstract {
             try {
                 //Si nécessaire : modification, réindexation de l'entrée, répercution sur les documents
                 if (array_diff_assoc($this->_prev_data, $this->_data)) {
-                    $db->update(static::$_table, $bind, $this->_primary . ' = ' . $this->{$this->_primary});
+                    $db->update($this->_table, $bind, $this->_primary . ' = ' . $this->{$this->_primary});
                     Ccsd_Referentiels_Logs::log($this->{$this->_primary}, static::$core, Hal_Auth::getUid(), "MODIFIED", Zend_Json::encode(array($this->_prev_data)));
                     Ccsd_Search_Solr_Indexer::addToIndexQueue(array($this->{$this->_primary}), SPACE_NAME, Ccsd_Search_Solr_Indexer::O_UPDATE, static::$core, 10);
                     Ccsd_Referentiels_Update::add(static::$core, $this->{$this->_primary});
@@ -474,7 +474,7 @@ abstract class Ccsd_Referentiels_Abstract {
                         Ccsd_Referentiels_Logs::log($this->{$this->_primary}, static::$core, Hal_Auth::getUid(), "REPLACE", Zend_Json::encode (array ($oldId)));
 
                         //On supprime le doublon
-                        $db->delete(static::$_table, $this->_primary . ' = ' . $oldId);
+                        $db->delete($this->_table, $this->_primary . ' = ' . $oldId);
 
                         // On ajoute l'id supprimé dans la table des alias
                         try {
@@ -539,7 +539,7 @@ abstract class Ccsd_Referentiels_Abstract {
      */
     protected function searchDoublon() {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(static::$_table, $this->_primary);
+        $sql = $db->select()->from($this->_table, $this->_primary);
         $sql->where('MD5' . ' = ?', new Zend_Db_Expr('UNHEX("' . $this->getMd5() . '")'));
         $sql->where($this->_primary . ' != ?', $this->{$this->_primary});
         $primaryId = $db->fetchOne($sql);
@@ -576,7 +576,7 @@ abstract class Ccsd_Referentiels_Abstract {
         //Log de suppression
         Ccsd_Referentiels_Logs::log($this->{$this->_primary}, static::$core, Hal_Auth::getUid(), "DELETED", Zend_Json::encode(array($data)));
 
-        $nb = $db->delete(static::$_table, $condition);
+        $nb = $db->delete($this->_table, $condition);
         if ($nb == 1) {
             Ccsd_Search_Solr_Indexer::addToIndexQueue(array($this->{$this->_primary}), SPACE_NAME, 'DELETE', static::$core, 10);
         }
@@ -745,7 +745,7 @@ abstract class Ccsd_Referentiels_Abstract {
      */
     public function exist($id) {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(static::$_table, 'COUNT(*) AS NB')
+        $sql = $db->select()->from($this->_table, 'COUNT(*) AS NB')
                 ->where($this->_primary . ' = ?', $id);
         return $db->fetchOne($sql);
     }
@@ -766,7 +766,7 @@ abstract class Ccsd_Referentiels_Abstract {
      */
     public function getIds($from = 0)
     {
-        $sql = Zend_Db_Table_Abstract::getDefaultAdapter()->select()->from(static::$_table, $this->_primary)->order($this->_primary . ' ASC');
+        $sql = Zend_Db_Table_Abstract::getDefaultAdapter()->select()->from($this->_table, $this->_primary)->order($this->_primary . ' ASC');
         if ($from) {
             $sql->where($this->_primary . ' > ?', (int)$from );
         }
@@ -781,7 +781,7 @@ abstract class Ccsd_Referentiels_Abstract {
      */
     public function getDocidsByDb($count = 10, $offset = 0) {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(static::$_table, ['docid' => $this->_primary])
+        $sql = $db->select()->from($this->_table, ['docid' => $this->_primary])
                 ->where($this->_primary . ' > ?', (int) $offset)
                 ->order($this->_primary . ' ASC')
                 ->limit($count);
@@ -809,7 +809,7 @@ abstract class Ccsd_Referentiels_Abstract {
      */
     public function checkIfDocidsExistInDb(array $docids) {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(static::$_table, ['docid' => $this->_primary])
+        $sql = $db->select()->from($this->_table, ['docid' => $this->_primary])
                 ->where($this->_primary . ' IN (' . implode(',', $docids) . ')')
                 ->order($this->_primary . ' ASC');
         return $db->fetchAll($sql);
@@ -836,7 +836,7 @@ abstract class Ccsd_Referentiels_Abstract {
      */
     public function countDbEntries() {
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $sql = $db->select()->from(static::$_table, 'COUNT(*) AS NB');
+        $sql = $db->select()->from($this->_table, 'COUNT(*) AS NB');
         return (int) $db->fetchOne($sql);
     }
 

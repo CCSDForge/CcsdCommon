@@ -10,9 +10,6 @@
 // @see https://wiki.epfl.ch/infoscience-historique/documents/crossref.pdf
 require_once "Ccsd/Externdoc/Crossref.php";
 
-/**
- * Class Ccsd_Externdoc_Crossref_Journal
- */
 class Ccsd_Externdoc_Crossref_Journal extends Ccsd_Externdoc_Crossref
 {
     /**
@@ -39,22 +36,14 @@ class Ccsd_Externdoc_Crossref_Journal extends Ccsd_Externdoc_Crossref
     const XPATH_ABBREVTITLE = '/doi_records/doi_record/crossref/journal/journal_metadata/abbrev_title';
     const XPATH_FIRSTPAGE = '/doi_records/doi_record/crossref/journal/journal_article/pages/first_page';
     const XPATH_LASTPAGE = '/doi_records/doi_record/crossref/journal/journal_article/pages/last_page';
-    const XPATH_COMPLETE_AUTHOR = '/doi_records/doi_record/crossref/journal/journal_article/contributors/person_name[@contributor_role="author"]';
-
+    const XPATH_COMPLETE_AUTHOR = '/doi_records/doi_record/crossref/journal/journal_article/contributors/person_name';
     const XPATH_CONTRIBUTORS_FIRST = '/doi_records/doi_record/crossref/journal/journal_article/contributors/person_name/given_name';
     const XPATH_CONTRIBUTORS_LAST = '/doi_records/doi_record/crossref/journal/journal_article/contributors/person_name/surname';
     const XPATH_CONTRIBUTORS_ORCID = '/doi_records/doi_record/crossref/journal/journal_article/contributors/person_name/ORCID';
-    const XPATH_FUNDING = '/doi_records/doi_record/crossref/journal/journal_article//program[@name="fundref"]/assertion[@name="fundgroup"]';
-    const XPATH_FUNDING_NAME = '/doi_records/doi_record/crossref/journal/journal_article//program[@name="fundref"]/assertion[@name="fundgroup"]/assertion[@name="funder_name"]/text()[1]';
-    const XPATH_FUNDING_DOI = '/doi_records/doi_record/crossref/journal/journal_article//program[@name="fundref"]/assertion[@name="fundgroup"]/assertion[@name="funder_name"]/assertion[@name="funder_identifier"]';
-    const XPATH_FUNDING_CODE = '/doi_records/doi_record/crossref/journal/journal_article//program[@name="fundref"]/assertion[@name="fundgroup"]/assertion[@name="award_number"]';
-
-    const XPATH_IDENT_DOI = '/doi_records/doi_record/crossref/journal/journal_article/doi_data/doi';
 
     /**
      * @param string $id
-     * @param DOMDocument $xmlDom
-     * @return Ccsd_Externdoc_Crossref_Journal
+     * @param string $xmlDom
      */
     static public function createFromXML($id, $xmlDom)
     {
@@ -78,7 +67,9 @@ class Ccsd_Externdoc_Crossref_Journal extends Ccsd_Externdoc_Crossref
 
     /**
      * Traduction de la page
-     * @return DOMNodeList|DOMNodeList[]|string
+     * @param $interMetas
+     * @param $internames
+     * @return string
      */
     public function getPage()
     {
@@ -96,10 +87,6 @@ class Ccsd_Externdoc_Crossref_Journal extends Ccsd_Externdoc_Crossref
         return $last;
     }
 
-    /**
-     * @param string $defaultLang
-     * @return array|string
-     */
     public function getTitle($defaultLang='en')
     {
         $title = $this->getValue(self::XPATH_TITLE);
@@ -110,33 +97,30 @@ class Ccsd_Externdoc_Crossref_Journal extends Ccsd_Externdoc_Crossref
         return $title;
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getVolume()
     {
         return $this->getValue(self::XPATH_VOLUME);
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getIssue()
     {
         return $this->getValue(self::XPATH_ISSUE);
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getDocLang()
     {
         return $this->getValue(self::XPATH_LANG);
     }
 
-    /** Création du Referentiel Journal
+    /* Création du Referentiel Journal :
+     *
+     * @param $issns : array
+     * @param $fulltitle : string
+     * @param $abbrevtitle : string
+     *
      * @return Ccsd_Referentiels_Journal
      */
+
     public function getJournal()
     {
         $issn = $this->getValue(self::XPATH_ISSN);
@@ -154,24 +138,21 @@ class Ccsd_Externdoc_Crossref_Journal extends Ccsd_Externdoc_Crossref
         return $this->formateJournal($fulltitle, $abbrevtitle, $issn, $eissn);
     }
 
-    /** Création des Funding/Projet ANR/Projet Européen
-     * @return  Ccsd_Referentiels_Anrproject | Ccsd_Referentiels_Europeanproject | array
-     */
-    public function getFunding()
+    public function getAuthors()
     {
-        $funding = $this->getValue(self::XPATH_FUNDING);
-        $funding = is_array($funding) ? $funding : [$funding];
+        $fullNames = $this->getValue(self::XPATH_COMPLETE_AUTHOR);
+        $fullNames = is_array($fullNames) ? $fullNames : [$fullNames];
 
-        $fundingname = $this->getValue(self::XPATH_FUNDING_NAME);
-        $fundingname = is_array($fundingname) ? $fundingname : [$fundingname];
+        $firstNames = $this->getValue(self::XPATH_CONTRIBUTORS_FIRST);
+        $firstNames = is_array($firstNames) ? $firstNames : [$firstNames];
 
-        $fundingdoi = $this->getValue(self::XPATH_FUNDING_DOI);
-        $fundingdoi = is_array($fundingdoi) ? $fundingdoi : [$fundingdoi];
+        $lastNames = $this->getValue(self::XPATH_CONTRIBUTORS_LAST);
+        $lastNames = is_array($lastNames) ? $lastNames : [$lastNames];
 
-        $fundingcode = $this->getValue(self::XPATH_FUNDING_CODE);
-        $fundingcode = is_array($fundingcode) ? $fundingcode : [$fundingcode];
+        $orcids = $this->getValue(self::XPATH_CONTRIBUTORS_ORCID);
+        $orcids = is_array($orcids) ? $orcids : [$orcids];
 
-        return $this->formateFunding($funding, $fundingname, $fundingdoi, $fundingcode);
+        return $this->formateAuthors($fullNames, $firstNames, $lastNames, [], $orcids);
     }
 
     /**
@@ -212,10 +193,6 @@ class Ccsd_Externdoc_Crossref_Journal extends Ccsd_Externdoc_Crossref
                 case self::META_ISSUE :
                     $meta = $this->getIssue();
                     break;
-                /** TODO : Funding à terminer */
-                /* case self::META_FUNDING :
-                    $meta = $this->getFunding();
-                    break; */
                 default:
                     break;
             }
@@ -229,10 +206,10 @@ class Ccsd_Externdoc_Crossref_Journal extends Ccsd_Externdoc_Crossref
         $titleLang = isset($this->_metas[self::META_TITLE]) ? array_keys($this->_metas[self::META_TITLE])[0] : '';
 
         // Ajout de la langue
-        $this->_metas[self::META][self::META_LANG] = $this->formateLang($lang, $titleLang);
+        $this->_metas[self::META_LANG] = $this->formateLang($lang, $titleLang);
 
-        $this->_metas[self::META][self::META_IDENTIFIER]["doi"] = $this->_id;
-        $this->_metas[self::AUTHORS] = $this->getAuthors(self::XPATH_COMPLETE_AUTHOR);
+        $this->_metas[self::META_IDENTIFIER]["doi"] = $this->_id;
+        $this->_metas[self::AUTHORS] = $this->getAuthors();
 
         $this->_metas[self::DOC_TYPE] = $this->_type;
         return $this->_metas;

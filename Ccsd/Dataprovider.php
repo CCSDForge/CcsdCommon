@@ -1,17 +1,16 @@
 <?php
 
-/**
- * classe d'acces aux providers de donnees comme Crossref, Arxiv, ...
+/*
+ *
+ * @author S. Denoux
  */
 
 abstract class Ccsd_Dataprovider
 {
-    /**  Identifiant de la référence dont on cherche les metadonnees
-     * @var string */
+    // Identifiant de la référence dont on cherche les metadonnees
     public $_id;
 
-    /** Nom du service dont on cherche les metadonnees
-     * @var string */
+    // Nom du service dont on cherche les metadonnees
     protected $_type;
 
     /**
@@ -23,18 +22,14 @@ abstract class Ccsd_Dataprovider
     // C'est pas terrible qu'il y ait besoin d'une base (surtout seulement pour Arxiv)
     /** @var Zend_Db_Adapter_Abstract  */
     protected $_dbAdapter;
-    /** @var \Hal\Config $_context */
-    protected $_context = null;
 
     /**
      * Ccsd_Dataprovider constructor.
      * @param null $dbAdapter
-     * @param \Hal\Config $context
      */
-    public function __construct($dbAdapter=NULL, $context = null)
+    public function __construct($dbAdapter=NULL)
     {
         $this->_dbAdapter = $dbAdapter;
-        $this->_context = $context;
     }
 
     /**
@@ -72,10 +67,7 @@ abstract class Ccsd_Dataprovider
 
             try {
                 $dom = new DOMDocument();
-                $parsingOk = $dom->loadXML((string)$string);
-                if (!$parsingOk) {
-                    error_log("XML Parsing failed for $url");
-                }
+                $dom->loadXML((string)$string);
                 return $dom;
             } catch (Exception $e) {
                 error_log("Requête de récupération des métadonnées a échouée");
@@ -91,7 +83,7 @@ abstract class Ccsd_Dataprovider
 
     /**
      * Retourne l'e type'identifiant de la métadonnée
-     * @return string $type
+     * @return $type : string;
      */
     public function getID()
     {
@@ -100,7 +92,7 @@ abstract class Ccsd_Dataprovider
 
     /**
      * Retourne le type de la métadonnée
-     * @return string
+     * @return $type : string;
      */
     public function getType()
     {
@@ -123,13 +115,7 @@ abstract class Ccsd_Dataprovider
     {
         $this->_error = $err;
     }
-   /**
-     * @return Hal\Config
-     */
-    public function getContext()
-    {
-        return $this->_context;
-    }
 
+    //</editor-fold>
 }
 

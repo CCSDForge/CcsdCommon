@@ -25,6 +25,18 @@ class Ccsd_Form_Element_Referentiel extends Ccsd_Form_Element_AutoComplete imple
         $this->jQueryParams['async'] = false;
     }
 
+    /** @deprecated  */
+    public function getPrefixPath ()
+    {
+    	error_log('getPrefixPath ne devrait plus etre appele');
+		$prefixPath = (new ReflectionClass(get_class($this)))->getFileName();
+    		
+    	while (dirname ($prefixPath) && !is_dir($prefixPath . '/public')) {
+            $prefixPath = dirname($prefixPath);
+        }
+    	return $prefixPath;
+    }
+    
     public function getType ()
     {
         return $this->_type;

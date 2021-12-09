@@ -247,31 +247,32 @@ class Ccsd_Search_Solr_Schema extends Ccsd_Search_Solr
         $r = json_decode($r);
         if (isset($r->dynamicFields)) {
             $fieldTypes = $this->getFieldTypes();
-            $usedFieldList = $this->getSchemaDynamicFieldsList();
-            if (null == $usedFieldList) {
+            $fl = $this->getSchemaDynamicFieldsList();
+            if (null == $fl) {
                 return $this;
             }
             $t = [];
-            foreach ($r->dynamicFields as $k => $schemaDynField) {
-                if (array_key_exists($schemaDynField->name, $usedFieldList)) {
-                    $usedDynField = new stdClass ();
+            foreach ($r->dynamicFields as $k => $d) {
+                if (array_key_exists($d->name, $fl)) {
 
-                    $usedDynField->name = $schemaDynField->name;
-                    $usedDynField->type = $schemaDynField->type;
-                    if (isset($schemaDynField->multiValued)) {
-                        $usedDynField->multiValued = $schemaDynField->multiValued;
+                    $t [$k] = new stdClass ();
+
+                    $t [$k]->name = $d->name;
+                    $t [$k]->type = $d->type;
+                    if (isset($d->multiValued)) {
+                        $t [$k]->multiValued = $d->multiValued;
                     }
-                    if (isset($schemaDynField->docValues)) {
-                        $usedDynField->docValues = $schemaDynField->docValues;
+
+                    if (isset($d->docValues)) {
+                        $t [$k]->docValues = $d->docValues;
                     } else {
-                        $usedDynField->docValues = '';
+                        $t [$k]->docValues = '';
                     }
-                    $usedDynField->indexed   = $fieldTypes [$schemaDynField->type] ['indexed'];
-                    $usedDynField->stored    = $fieldTypes [$schemaDynField->type] ['stored'];
-                    $usedDynField->fieldList = $usedFieldList [$schemaDynField->name];
-                    $usedDynField->sample    = '';
+                    $t [$k]->indexed = $fieldTypes [$d->type] ['indexed'];
+                    $t [$k]->stored = $fieldTypes [$d->type] ['stored'];
 
-                    $t [$k] = $usedDynField;
+                    $t [$k]->fieldList = $fl [$d->name];
+                    $t [$k]->sample = '';
                 }
             }
 

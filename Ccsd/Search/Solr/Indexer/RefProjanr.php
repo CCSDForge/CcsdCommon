@@ -5,8 +5,7 @@
  * @author rtournoy
  *
  */
-class Ccsd_Search_Solr_Indexer_RefProjanr extends Ccsd_Search_Solr_Indexer
-{
+class Ccsd_Search_Solr_Indexer_RefProjanr extends Ccsd_Search_Solr_Indexer {
 
     public static $_coreName = 'ref_projanr';
     public static $_maxDocsInBuffer = 3000;
@@ -16,12 +15,29 @@ class Ccsd_Search_Solr_Indexer_RefProjanr extends Ccsd_Search_Solr_Indexer
      *
      * @param array $options
      */
-    public function __construct(array $options)
-    {
+    public function __construct(array $options) {
         $options['core'] = self::$_coreName;
         parent::initHalEnv();
 
         parent::__construct($options);
+    }
+
+    protected function getDocidData($docId) {
+        $db = $this->getDb();
+        $select = new Zend_Db_Select($db);
+
+        $select = $db->select();
+        $select->from(array(
+            'REF_PROJANR'
+        ));
+        $select->where('ANRID = ?', $docId);
+
+        $stmt = $select->query();
+        $res = $stmt->fetchAll();
+        if (count($res) == 0) {
+            return null;
+        }
+        return $res[0];
     }
 
     /**
@@ -29,7 +45,11 @@ class Ccsd_Search_Solr_Indexer_RefProjanr extends Ccsd_Search_Solr_Indexer
      */
     protected function selectIds($select)
     {
-        $select->from([Ccsd_Referentiels_Anrproject::$_table], ['ANRID'])->order('ANRID');
+        $select->from(array(
+            'REF_PROJANR'
+                ), array(
+            'ANRID'
+        ))->order('ANRID');
     }
 
     /**
@@ -37,65 +57,50 @@ class Ccsd_Search_Solr_Indexer_RefProjanr extends Ccsd_Search_Solr_Indexer
      * @param Solarium\QueryType\Update\Query\Document\Document $ndx
      * @return mixed
      */
-    protected function addMetadataToDoc($docId, $ndx)
-    {
-        $anr = self::getDocidData($docId);
+    protected function addMetadataToDoc($docId, $ndx) {
 
-        if ($anr == null) {
+
+        $row = self::getDocidData($docId);
+
+        if ($row == null) {
             Ccsd_Log::message('Pas de données pour ce DOCID ' . $docId . ', le document ne sera pas indexé.', true, 'ERR', $this->getLogFilename());
             return null;
         }
 
-        $row = $anr->getData();
+
 
         $row = array_map('Ccsd_Tools_String::stripCtrlChars', $row);
-        $row = array_map('trim', $row);
 
-        $ndx->docid = (int) $row['ANRID'];
+        $ndx->docid = $row['ANRID'];
 
-        $tabRefAlias = Ccsd_Referentiels_Alias::getAllAlias($docId, Ccsd_Referentiels_Anrproject::$_table);
+        $tabRefAlias = Ccsd_Referentiels_Alias::getAllAlias($docId, 'REF_PROJANR');
         foreach ($tabRefAlias as $ligne) {
             $ndx->addField('aliasDocid_i', $ligne['OLDREFID']);
         }
 
-        $dataToIndex = [
-            'label_s' => self::getLabel_s($row),
-            'label_html' => self::getLabel_html($row),
+        $bufferedDocidList[] = $docId;
+
+        $dataToIndex = array(
             'title_s' => $row['TITRE'],
             'acronym_s' => $row['ACRONYME'],
             'reference_s' => $row['REFERENCE'],
             'callTitle_s' => $row['INTITULE'],
             'callAcronym_s' => $row['ACROAPPEL'],
-            'valid_s' => $row['VALID'],
-            'callTitle_fs' => self::getCallTitle_fs($row),
-            'yearDate_s' => $row['ANNEE'],
-            'yearDate_tdate' => self::getYear_tdate($row['ANNEE'])
-
-        ];
+            'valid_s' => $row['VALID']
+        );
 
         foreach ($dataToIndex as $fieldName => $fieldValue) {
+
             if ($fieldValue != '') {
                 $ndx->addField($fieldName, $fieldValue);
             }
         }
+        unset($dataToIndex, $fieldName, $fieldValue);
 
-
-        return $ndx;
-    }
-
-    protected function getDocidData($docId)
-    {
-        return Ccsd_Referentiels_Anrproject::findById($docId);
-    }
-
-    /**
-     * @param array $row
-     * @return string
-     */
-    private static function getLabel_s(array $row): string
-    {
 
         $label = '';
+
+
         if ($row['TITRE'] != '') {
             $label .= $row['TITRE'];
         }
@@ -113,18 +118,12 @@ class Ccsd_Search_Solr_Indexer_RefProjanr extends Ccsd_Search_Solr_Indexer
         if ($row['ACROAPPEL'] != '') {
             $label .= ' [' . $row['ACROAPPEL'] . ']';
         }
-
-        return $label;
-    }
-
-    /**
-     * @param array $row
-     * @return string
-     */
-    private static function getLabel_html(array $row): string
-    {
+        if ($label != '') {
+            $ndx->label_s = trim($label);
+        }
 
         $label = '';
+
         if ($row['TITRE'] != '') {
             $label .= $row['TITRE'];
         }
@@ -142,36 +141,23 @@ class Ccsd_Search_Solr_Indexer_RefProjanr extends Ccsd_Search_Solr_Indexer
         if ($row['ACROAPPEL'] != '') {
             $label .= ' <span class="callAcronym">' . $row['ACROAPPEL'] . '</span>';
         }
-
-        return '<span class="' . strtolower($row['VALID']) . '">' . trim($label) . '</span>';
-
-    }
-
-    /**
-     * @param array $row
-     * @return string
-     */
-    private static function getCallTitle_fs(array $row): string
-    {
-        $callTitleFs = '';
-        if (($row['ACROAPPEL'] != '') and ($row['INTITULE'])) {
-            $callTitleFs = $row['ACROAPPEL'] . self::SOLR_FACET_SEPARATOR . $row['INTITULE'];
-        }
-        return $callTitleFs;
-    }
-
-    /**
-     * @param $year
-     * @return string
-     */
-    private static function getYear_tdate($year = ''): string
-    {
-        if ($year != '') {
-            $year .= '-01-01T00:00:00Z';
+        if ($label != '') {
+            $ndx->label_html = '<span class="' . strtolower($row['VALID']) . '">' . trim($label) . '</span>';
         }
 
-        return $year;
 
+        if (($row['ACROAPPEL'] != '') and ( $row['INTITULE'])) {
+            $ndx->callTitle_fs = $row['ACROAPPEL'] . self::SOLR_FACET_SEPARATOR . $row['INTITULE'];
+        }
+
+
+        if ($row['ANNEE'] != '') {
+            // 2006-00-00 =====> 2006-01-01
+            $ndx->yearDate_s = $row['ANNEE'];
+            $ndx->yearDate_tdate = $row['ANNEE'] . '-01-01T00:00:00Z';
+        }
+
+        return $ndx;
     }
 
 }

@@ -93,7 +93,14 @@ class Ccsd_Archive
      */
     const ARCHIVE_NON_CORRIGEE = 10;
 
+    /*
+     * Données statiques utiles
+     */
 
+    /*
+     * Table de stockage des informations
+     * Ajout des information d'archivage dans la table des fichiers
+     */
     /**
      * ARCHIVE en test sur facile
      */
@@ -101,7 +108,7 @@ class Ccsd_Archive
     /**
      * ARCHIVE testée avec succes sur facile
      */
-    const ARCHIVE_ELIGIBLE = 12;
+    const ARCHIVE_ELLIGIBLE = 12;
 
 
     /*
@@ -113,8 +120,6 @@ class Ccsd_Archive
      */
     const FACILE_MAX_FILESIZE = 100000000;
 
-
-    const CONVERTED_FILES_PATH = '/nas/archivage_hal/';
 
     /*
      * ARCHIVE qui répond au critère de format et de date pour être envoyée au CINES
@@ -134,6 +139,9 @@ class Ccsd_Archive
     ];
     public static $_URL_SCHEMA_SIP = "https://www.cines.fr/pac/sip.xsd";
     public static $_URL_SCHEMA_METIER = "https://hal.archives-ouvertes.fr/documents/aofr.xsd";
+    public static $_TYPE_FILE = 'file';
+    public static $_TYPE_ANNEXE = 'annex';
+    public static $_TYPE_SRC = 'src';
     public static $_TYPE_FORMATS_ARCHIVABLES = [
         'text' => [
             'application/pdf'
@@ -158,7 +166,7 @@ class Ccsd_Archive
      * correspondance type mime et select facile
      * @var array
      */
-    private static $_cinesFacileFileTypes = [
+    public static $_OPTION_FACILE_FORMATS_FICHIER_TYPE = [
         'text/xml' => 'XML',
         'application/pdf' => 'PDF',
         'application/x-pdf' => 'PDF',
@@ -191,10 +199,10 @@ class Ccsd_Archive
     public static $_PERSONNE = "Automate";
     public static $_DUREE_CONSERVATION = "P1000Y";
 
-    public static $_REPERTOIRE_LOG = ARCHIVAGE_LOG_PATH;
+    public static $_REPERTOIRE_LOG = "/sites/logs/php/archivage-cines/";
     public static $_PREFIXE_SAUVEGARDE_AVANT_CONVERSION = "ORI1_";
     public static $prefixe_version_convertie_archivable = "archivable_";
-    public static $_REPERTOIRE_BASE_DEPOT = ARCHIVAGE_SSH_PATH; // 100Mo
+    public static $_REPERTOIRE_BASE_DEPOT = "/pac/ccsdftp/VERS/CCSD/"; // 100Mo
     public static $_PREFIXE_REPERTOIRE_DEPOT = "DOCUMENT_";
     public static $_REPERTOIRE_BASE_DEPOT_FICHIERS = "DEPOT";
     public static $_SOUS_REPERTOIRE_FICHIERS_METIERS = "DESC";
@@ -203,7 +211,7 @@ class Ccsd_Archive
     /*
      * Données concernant la connexion sur le serveur distant
      */
-    public static $_MAJ = "maj";
+    public static $_MAJ = "maj"; // mdp : 7y15u7ioaeo4
     public static $_NOUVELLE_VERSION = "version";
 
     /*
@@ -211,6 +219,10 @@ class Ccsd_Archive
      */
     public static $_PRODUCTEUR = "Producteur";
     public static $_ARCHIVEUR = "PAC";
+    public static $_SERVEUR_MAIL = "ccsdmail.in2p3.fr";
+    public static $_COMPTE_MAIL = "ccsdarch@ccsd.cnrs.fr";
+    public static $_SESAME_MAIL = "arXHAL11";
+    public static $_PROTOCOLE_MAIL = "SSL";
     public static $_ENTETE_SIP = [
         "production" => "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<pac xmlns=\"http://www.cines.fr/pac/sip\"\n  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n  xsi:schemaLocation=\"http://www.cines.fr/pac/sip http://www.cines.fr/pac/sip.xsd\">\n",
         "development" => "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<pac xmlns=\"http://www.cines.fr/pac/test/sip\"\n   xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n  xsi:schemaLocation=\"http://www.cines.fr/pac/test/sip http://www.cines.fr/pac/test/sip.xsd\">\n",
@@ -236,12 +248,15 @@ class Ccsd_Archive
     ];
 
     /**
-     * Données concernant le compte mail utilisé pour nous renvoyer les états d'archivage des données transmises
+     * Données concernant le compte mail utilisé pour nous renvoyé les états d'archivage des données transmises
      */
     public static $_MAIL_FROM = [
         "production" => "Production",
         "development" => "Test",
         "testing" => "Test"
+    ];
+    public static $_MAIL_DESTINATAIRES = [
+        'ccsd-archivage@ccsd.cnrs.fr'
     ];
 
     public $forceConversion;
@@ -528,7 +543,7 @@ class Ccsd_Archive
             static::ARCHIVE_RECUE,
             static::ARCHIVE_ACCEPTEE,
             static::ARCHIVE_REJETEE,
-            static::ARCHIVE_ELIGIBLE
+            static::ARCHIVE_ELLIGIBLE
         ];
     }
 
@@ -649,7 +664,7 @@ class Ccsd_Archive
             case static::ARCHIVE_PRISE_EN_CHARGE :
             case static::ARCHIVE_EN_TEST :
             case static::ARCHIVE_REJETEE :
-            case static::ARCHIVE_ELIGIBLE :
+            case static::ARCHIVE_ELLIGIBLE :
                 break;
             default :
                 $this->logAction("Fichier à ne pas tester");
@@ -674,12 +689,12 @@ class Ccsd_Archive
         foreach ($fichiers as $fichier) {
 
             // On n'archive pas les fichiers de type source
-            if ($fichier->getType() == Hal_Settings::FILE_TYPE_SOURCES ) {
+            if ($fichier->getType() == static::$_TYPE_SRC) {
                 continue;
             }
 
             // Façon de shunter les annexes
-            if (($fichier->getType() == Hal_Settings::FILE_TYPE_ANNEX) && $sansAnnexe) {
+            if (($fichier->getType() == static::$_TYPE_ANNEXE) && $sansAnnexe) {
                 continue;
             }
 
@@ -740,14 +755,11 @@ class Ccsd_Archive
 
                 $this->logAction("Fin conversion, résultat : " . $nomFichierConverti);
 
-
-                // pas de conservation du fichier de travail
-                unlink($nomTravail);
-                $this->logAction('Suppression du fichier de travail après conversion : ' . $nomTravail);
-
                 if (!is_file($nomFichierConverti)) {
-
-                    if ($fichier->getType() == Hal_Settings::FILE_TYPE_ANNEX) {
+                    // pas de conservation du fichier de travail
+                    unlink($nomTravail);
+                    $this->logAction('Suppression du fichier de travail après conversion : ' . $nomTravail);
+                    if ($fichier->getType() == static::$_TYPE_ANNEXE) {
                         // La conversion ne fonctionne pas mais c'est une annexe, on continue
                         $this->logAction("La conversion du fichier d'annexe : " . $fichier->getName() . " n'a pas abouti, il ne sera pas intégré au lot.");
                         continue;
@@ -764,6 +776,9 @@ class Ccsd_Archive
                         return (false);
                     }
                 } else {
+                    // pas de conservation du fichier de travail
+                    unlink($nomTravail);
+                    $this->logAction('Suppression du fichier de travail après conversion : ' . $nomTravail);
 
 
                     //si on a forcé la conversion on essaie d'archiver sans vérifier avec facile.cines.fr
@@ -772,57 +787,38 @@ class Ccsd_Archive
                         $this->logAction("Test facile de : " . $nomFichierConverti);
                         $resultat2 = $this->verifie_by_facile($nomFichierConverti, $fileMimeType);
                     } else {
-                        // quel est le rapport ? il peut être converti et pas archivable
                         $this->logAction('La conversion du fichier a été forcée, on ne teste pas si il est archivable');
                         $resultat2 ['archivable'] = true;
                     }
 
                     if ($resultat2 ['archivable']) {
-
-
-                        $convertedDocDir = self::getConvertedDocDir($this->DOCID);
-                        if (!is_dir($convertedDocDir)) {
-                            $mkdirRes = mkdir($convertedDocDir, 0755, true);
-                            if (!$mkdirRes) {
-                                $this->logAction("Problème de création du répertoire " . $convertedDocDir);
+                        $nomCompletVersionArchivable = $repBase . self::$prefixe_version_convertie_archivable . $fichier->getName();
+                        $resOfCopyVersionArchivable = rename($nomFichierConverti, $nomCompletVersionArchivable);
+                        // copie du fichier qui est désormais archivable dans le répertoire du dépôt
+                        if ($resOfCopyVersionArchivable === false) {
+                            if ($fichier->getType() == static::$_TYPE_ANNEXE) {
+                                // La conversion ne fonctionne pas mais c'est une annexe, on continue
+                                $this->logAction("Le déplacement du fichier d'annexe : " . $nomCompletVersionArchivable . " s'est mal passé il ne sera pas intégré au lot.");
+                                continue;
+                            } else {
+                                $this->logAction("Problème de déplacement de " . $nomFichierConverti . " vers " . $nomCompletVersionArchivable);
                                 $this->STATUT = static::ARCHIVE_REJETEE;
-                                $this->CODE = "Problème de création du répertoire de fichier converti";
+                                $this->CODE = "Impossible de renommer le fichier résultant de la conversion";
                                 $this->ACTION = static::$_ACTIONS [6];
                                 $this->DATE_ACTION = date("Y-m-d H:i:s");
                                 $this->sauvegardeBase();
                                 $this->FICHIERS = [];
-                                return false;
+                                return (false);
                             }
                         }
-
-                        $nomCompletVersionArchivable = self::$prefixe_version_convertie_archivable . $fichier->getName();
-                        $destOfConvertedFile = $convertedDocDir . $nomCompletVersionArchivable;
-
-                        $resOfCopyVersionArchivable = rename($nomFichierConverti, $destOfConvertedFile);
-
-                        // copie du fichier qui est désormais archivable dans le répertoire où on garde les archives de fichiers convertis
-                        if ($resOfCopyVersionArchivable === false) {
-                            $this->logAction("Problème de déplacement de " . $nomFichierConverti . " vers " . $destOfConvertedFile);
-                            $this->STATUT = static::ARCHIVE_REJETEE;
-                            $this->CODE = "Impossible de renommer le fichier résultant de la conversion";
-                            $this->ACTION = static::$_ACTIONS [6];
-                            $this->DATE_ACTION = date("Y-m-d H:i:s");
-                            $this->sauvegardeBase();
-                            $this->FICHIERS = [];
-                            return false;
-                        } else {
-                            $this->logAction("OK: Déplacement de " . $nomFichierConverti . " vers " . $destOfConvertedFile);
-                        }
-
                         unset($resOfCopyVersionArchivable);
                         $this->logAction("Pour l'archivage utilisation du fichier archivable : " . $nomCompletVersionArchivable . " au lieu de l'original " . $fichier->getName());
-                        $this->FICHIERS ['nom_fichier'] [$i] = $destOfConvertedFile;
+                        $this->FICHIERS ['nom_fichier'] [$i] = $nomCompletVersionArchivable;
                         $this->FICHIERS ['id_cible'] [$i] = $fichier->getFileid() . "." . $fichier->getExtension();
                         $this->FICHIERS ['type_mime'] [$i] = $fileMimeType;
-                        $this->FICHIERS ['md5'] [$i] = md5_file($destOfConvertedFile);
+                        $this->FICHIERS ['md5'] [$i] = md5_file($nomCompletVersionArchivable);
                         $i++;
 
-                        // supprime le fichier de travail
                         if (is_readable($repBase . static::$_PREFIXE_SAUVEGARDE_AVANT_CONVERSION . $fichier->getName())) {
                             unlink($repBase . static::$_PREFIXE_SAUVEGARDE_AVANT_CONVERSION . $fichier->getName());
                             $this->logAction("Suppression de : " . $repBase . static::$_PREFIXE_SAUVEGARDE_AVANT_CONVERSION . $fichier->getName());
@@ -830,7 +826,7 @@ class Ccsd_Archive
 
                     } else {
                         // fichier converti toujours pas archivable
-                        if ($fichier->getType() == Hal_Settings::FILE_TYPE_ANNEX) {
+                        if ($fichier->getType() == static::$_TYPE_ANNEXE) {
                             // La conversion ne fonctionne pas mais c'est une annexe, on continue
                             $this->logAction("La conversion du fichier d'annexe ne sert à rien : " . $fichier->getName() . " fichier converti non envoyé.");
                             continue;
@@ -842,7 +838,7 @@ class Ccsd_Archive
                             $this->DATE_ACTION = date("Y-m-d H:i:s");
                             $this->sauvegardeBase();
                             $this->FICHIERS = [];
-                            return false;
+                            return (false);
                         }
                     }
                 }
@@ -862,7 +858,7 @@ class Ccsd_Archive
         }
         // Fin de la préparation des fichiers - pas de sortie en erreur
         $this->logAction("Lot éligible " . $this->DOCID);
-        $this->STATUT = static::ARCHIVE_ELIGIBLE;
+        $this->STATUT = static::ARCHIVE_ELLIGIBLE;
         $this->ACTION = static::$_ACTIONS [9];
         $this->DATE_ACTION = date("Y-m-d H:i:s");
         $this->sauvegardeBase();
@@ -874,6 +870,10 @@ class Ccsd_Archive
         return $this->STATUT;
     }
 
+    /*
+     * Recherche version d'un fichier pdf
+     */
+
     private function getArchivageMimeType($filename)
     {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -881,6 +881,7 @@ class Ccsd_Archive
         finfo_close($finfo);
         return $mimeType;
     }
+
 
     /**
      *  Envoi du fichier sur l'interface facile avant de l'envoyer à l'archivage
@@ -891,7 +892,7 @@ class Ccsd_Archive
     function verifie_by_facile($nomCompletFichier, $typeMime)
     {
         if (is_file($nomCompletFichier)) {
-            if (!array_key_exists($typeMime, $this->getCinesFacileFileTypes())) {
+            if (!array_key_exists($typeMime, static::$_OPTION_FACILE_FORMATS_FICHIER_TYPE)) {
                 return [
                     'archivable' => false,
                     'message' => ' type_fichier_inconnu ' . $typeMime
@@ -919,7 +920,7 @@ class Ccsd_Archive
 
             $fichier = curl_file_create($nomCompletFichier, null, basename($nomCompletFichier));
             curl_setopt($curlHandler, CURLOPT_POSTFIELDS, [
-                'format' => $this->getCinesFacileFileTypes() [$typeMime],
+                'format' => static::$_OPTION_FACILE_FORMATS_FICHIER_TYPE [$typeMime],
                 'file' => $fichier
             ]);
 
@@ -927,7 +928,7 @@ class Ccsd_Archive
             curl_setopt($curlHandler, CURLOPT_USERAGENT, 'CCSD Archivage HAL https://www.ccsd.cnrs.fr/ ccsd-archivage@ccsd.cnrs.fr');
 
 
-            $this->logAction("Format " . $this->getCinesFacileFileTypes() [$typeMime]);
+            $this->logAction("Format " . static::$_OPTION_FACILE_FORMATS_FICHIER_TYPE [$typeMime]);
             $this->logAction("File " . $nomCompletFichier);
 
             if (($response = curl_exec($curlHandler)) == '') {
@@ -1011,7 +1012,6 @@ class Ccsd_Archive
     function get_PDF_info($filename)
     {
         $return = [];
-        setlocale(LC_CTYPE, "fr_FR.UTF-8"); // escapeshellarg strip les lettres accentuees si on n'est pas dans une locale Utf8
         $commande = "/usr/bin/pdfinfo";
         if (is_executable($commande) && is_file($filename) && is_readable($filename)) {
             exec($commande . " " . escapeshellarg($filename), $output);
@@ -1037,6 +1037,7 @@ class Ccsd_Archive
         return ($return);
     }
 
+
     private function convertPDFtoPDFa($nomCompletFichier, $fileId)
     {
         try {
@@ -1051,17 +1052,6 @@ class Ccsd_Archive
             $this->logAction($e->getMessage());
             return false;
         }
-
-    }
-
-    /**
-     * Retourne répertoire où stocker doc convertis pour l'archivage
-     * @param int $docid
-     * @return string
-     */
-    private static function getConvertedDocDir(int $docid): string
-    {
-        return self::CONVERTED_FILES_PATH . wordwrap(sprintf("%08d", $docid), 2, DIRECTORY_SEPARATOR, 1) . DIRECTORY_SEPARATOR;
 
     }
 
@@ -1226,6 +1216,8 @@ class Ccsd_Archive
         //$descDepot->appendChild($planClassement);
 
 
+
+
         if ($miseAjour) {
             // relation dans le systeme du CCSD
             $relation = $xml->createElement('docRelation');
@@ -1299,7 +1291,7 @@ class Ccsd_Archive
         $encodage = $xml->createElement('encodage', 'UTF-8');
         $descFile->appendChild($encodage);
 
-        $formatFichier = $xml->createElement('formatFichier', $this->getCinesFacileFileTypes() [$typeMimeXML]);
+        $formatFichier = $xml->createElement('formatFichier', static::$_OPTION_FACILE_FORMATS_FICHIER_TYPE [$typeMimeXML]);
         $descFile->appendChild($formatFichier);
 
         $nomFichier = $xml->createElement('nomFichier', 'DESC/metier_' . $this->DOCID . '.xml');
@@ -1330,7 +1322,7 @@ class Ccsd_Archive
                 }
 
 
-                $formatFichier = $xml->createElement('formatFichier', $this->getCinesFacileFileTypes() [$this->FICHIERS ['type_mime'] [$i]]);
+                $formatFichier = $xml->createElement('formatFichier', static::$_OPTION_FACILE_FORMATS_FICHIER_TYPE [$this->FICHIERS ['type_mime'] [$i]]);
                 $descFile->appendChild($formatFichier);
 
                 $nomFichier = $xml->createElement('nomFichier', $this->FICHIERS ['id_cible'] [$i]);
@@ -1390,6 +1382,7 @@ class Ccsd_Archive
         return $this->FICHIERMETIER;
     }
 
+
     function valide($monFichier)
     {
         libxml_use_internal_errors(true);
@@ -1404,6 +1397,7 @@ class Ccsd_Archive
             return false;
         }
     }
+
 
     function libxml_log_errors()
     {
@@ -1626,10 +1620,10 @@ class Ccsd_Archive
     public function lireCompteMail($env = APPLICATION_ENV)
     {
         $mail_info = [
-            'host' => ARCHIVAGE_MAIL_SERVER,
-            'user' => ARCHIVAGE_MAIL_USERNAME,
-            'password' => ARCHIVAGE_MAIL_PWD,
-            'ssl' => ARCHIVAGE_MAIL_PROTOCOL
+            'host' => static::$_SERVEUR_MAIL,
+            'user' => static::$_COMPTE_MAIL,
+            'password' => static::$_SESAME_MAIL,
+            'ssl' => static::$_PROTOCOLE_MAIL
         ];
 
         Zend_Db_Table_Abstract::getDefaultAdapter();
@@ -1646,6 +1640,24 @@ class Ccsd_Archive
             $idMessageCourant = 1;
             for ($i = 1; $i <= $nbMessageTotal; $i++) {
                 $message = $maConnection->getMessage($idMessageCourant);
+                if (strpos($message->from, "DELAUNAY")) {
+                    $maConnection->removeMessage($idMessageCourant);
+                    continue;
+                }
+
+
+                if (!strpos($message->sender, static::$_MAIL_FROM [$env])) {
+                    // Si l'expediteur n'est pas cohérent avec le type d'environnement je ne traite pas le mail
+                    $this->logAction("PB env=" . $env . " et sender=" . $message->sender . "\n Je passe au mail suivant");
+                    $destinataires = implode(",", static::$_MAIL_DESTINATAIRES);
+                    $sujet = "[ArchivHAL] PB d'environnement";
+                    $message = " Sender : " . $message->sender . "\n -- \n" . "Env : " . $env . "Contenu : " . $message->getContent() . "\t\tArchivHAL";
+                    $entetes = "From: ArchivHAL <hal@ccsd.cnrs.fr>\n" . "Content-type: text/plain; charset=utf-8'\n";
+                    mail($destinataires, $sujet, $message, $entetes);
+
+                    continue;
+
+                }
 
                 $this->DATE_ACTION = date("Y-m-d H:i:s", strtotime($message->getHeader('date', 'string')));
                 $j = 1;
@@ -1708,7 +1720,7 @@ class Ccsd_Archive
                                 $this->ACTION = static::$_ACTIONS [5];
                             }
                             // envoi d'un mail aux administrateur pour signifier le rejet
-                            $destinataires = implode(",", ARCHIVAGE_MAIL_ADMINISTRATOR);
+                            $destinataires = implode(",", static::$_MAIL_DESTINATAIRES);
                             $sujet = "[ArchivHAL] AVIS DE REJET docid " . $docid;
                             $this->DEPOT = Hal_Document::find($docid);
                             $message = "Cet avis concerne le depot : \n" . $this->DEPOT->getID() . " version " . $this->DEPOT->getVersion() . "\n\n" . "Depose par " . implode(" - ", $this->DEPOT->getContributor()) . " le " . $this->DEPOT->getSubmittedDate() . "\n" . "L'erreur est : code " . $xml->codeErreur . " - " . static::$_ERREURS_CINES [(string)$xml->codeErreur] . "\n -- \n" . $xml->commentaire . "\n -- \n" . $xml->erreurValidation . "\n\n" . "\n -- \n" . "\t\tArchivHAL";
@@ -1737,7 +1749,7 @@ class Ccsd_Archive
             $maConnection->close();
         } // fin try
         catch (Exception $e) {
-            $this->logAction("Error");
+            $this->logAction("je suis en erreur");
             $this->logAction($e->getMessage());
         }
     }
@@ -1777,6 +1789,8 @@ class Ccsd_Archive
         return ($actions);
     }
 
+
+
     /**
      * @return string
      */
@@ -1798,13 +1812,7 @@ class Ccsd_Archive
         $this->_planDeClassement = $planDeClassement . $typeDocCamelCase;
     }
 
-    /**
-     * @return array
-     */
-    public static function getCinesFacileFileTypes(): array
-    {
-        return self::$_cinesFacileFileTypes;
-    }
+
 
 
 }

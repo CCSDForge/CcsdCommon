@@ -8,7 +8,7 @@
 
 class Ccsd_FileConvert_Pdf
 {
-    /** @const PDF max file size to process  1G */
+    /** @const PDF max file size to process */
     const PDF_MAX_FILE_SIZE = 1073741824;
 
     /**
@@ -107,7 +107,6 @@ class Ccsd_FileConvert_Pdf
 
         $pdftotextOptions = ' -enc UTF-8 -q ';
 
-        setlocale(LC_CTYPE, "fr_FR.UTF-8"); // escapeshellarg strip les lettres accentuees si on n'est pas dans une locale Utf8
         $escapedCommandToExec = self::PDFTOTEXT_BIN . $pdftotextOptions . escapeshellarg($pdfInputFile) . ' ' . $fullTextCacheFile;
 
         shell_exec($escapedCommandToExec);

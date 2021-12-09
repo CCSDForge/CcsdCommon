@@ -1,42 +1,17 @@
 <?php
 
-/**
- * Class Ccsd_Oai_Server
- */
 abstract class Ccsd_Oai_Server {
 
-    const LIMIT_IDENTIFIERS = 400;
-    const LIMIT_RECORDS     = 100;
-
-    const OAI_VERB_LISTIDS  = 'ListIdentifiers';
-    const OAI_VERB_LISTRECS = 'ListRecords';
-    const OAI_VERB_IDENTIFY = "Identify";
-    const OAI_VERB_LIST_SETS = "ListSets";
-    const OAI_VERB_LIST_METADATA_FORMATS = "ListMetadataFormats";
-    const OAI_VERB_GET_RECORD = "GetRecord";
-
-
-    protected $_config = array();
+	protected $_config = array();
 	protected $_params = array();
 	protected $_xml = null;
 	protected $_oaipmh = null;
 	protected $_format;
-    /**
-     * @var string
-     * Use to diffferentiate the change of Oai identifier form
-     *
-     * We pass from oai:HAL:hal-00000001
-     *      to oai:hal.archives-ouvertes.fr:hal-0000001
-     */
-	protected $version = "v1";
 
-    /**
-     * Ccsd_Oai_Server constructor.
-     * @param Zend_Controller_Request_Abstract $request
-     */
-	public function __construct( Zend_Controller_Request_Abstract $request, $version="v1") {
-
-	    $this->version=$version;
+	const LIMIT_IDENTIFIERS = 400;
+	const LIMIT_RECORDS = 100;
+	
+	public function __construct( Zend_Controller_Request_Abstract $request ) {
         /** @var Zend_Controller_Request_Http $request */
 		header('Content-Type: text/xml; charset=utf-8');
 		$this->_xml = new Ccsd_DOMDocument('1.0', 'utf-8');
@@ -78,9 +53,6 @@ abstract class Ccsd_Oai_Server {
 			}
 			exit;
 		}
-		if (isset($this->_params['XDEBUG_SESSION_START'])) {
-		    unset($this->_params['XDEBUG_SESSION_START']);
-        }
         $this->_params = array_map('rawurldecode', $this->_params);
 
 		if ( array_key_exists('verb', $this->_params) && is_string($this->_params['verb']) ) {
@@ -92,16 +64,16 @@ abstract class Ccsd_Oai_Server {
 			$verb = $this->_params['verb'];
 			unset($this->_params['verb']);
 			switch ( $verb ) {
-				case self::OAI_VERB_IDENTIFY:
+				case "Identify":
 					$this->identify($request->getScheme().'://'.$request->getHttpHost().$request->getPathInfo());
 					break;
-				case self::OAI_VERB_LIST_SETS:
+				case "ListSets":
 					$this->listSets();
 					break;
-				case self::OAI_VERB_LIST_METADATA_FORMATS:
+				case "ListMetadataFormats":
 					$this->listMetadataFormats();
 					break;
-				case self::OAI_VERB_GET_RECORD:
+				case "GetRecord":
 					if ( ! array_key_exists("metadataPrefix", $this->_params) ) {
 						$error = new Ccsd_Oai_Error('missingArgument', 'metadataPrefix');
 						if ( $this->_xml instanceof Ccsd_DOMDocument ) {
@@ -124,7 +96,7 @@ abstract class Ccsd_Oai_Server {
 					}
 					$this->getRecord();
 					break;
-				case self::OAI_VERB_LISTIDS:
+				case "ListIdentifiers":
 					if ( ! array_key_exists("metadataPrefix", $this->_params) && ! array_key_exists("resumptionToken", $this->_params) ) {
 						$error = new Ccsd_Oai_Error('missingArgument', 'metadataPrefix');
 						if ( $this->_xml instanceof Ccsd_DOMDocument ) {
@@ -175,12 +147,9 @@ abstract class Ccsd_Oai_Server {
 			}
 			exit;
 		}
+		
 	}
-
-    /**
-     * @param string $url
-     * @return bool
-     */
+	
 	private function identify($url) {
 		if ( count($this->_params) > 0 ) {
 			foreach ($this->_params as $key=>$val) {
@@ -193,7 +162,7 @@ abstract class Ccsd_Oai_Server {
 			}
 			return false;
 		}
-		$identify = $this->_xml->createElement(self::OAI_VERB_IDENTIFY);
+		$identify = $this->_xml->createElement('Identify');
         foreach ( $this->getIdentity($url) as $config=>$value ) {
             if ( is_array($value) ) {
                 foreach ( $value as $node=>$val ) {
@@ -223,12 +192,8 @@ abstract class Ccsd_Oai_Server {
             }
         }
         $this->_oaipmh->appendChild($identify);
-        return true;
 	}
-
-    /**
-     * @return bool  (true on success)
-     */
+	
 	private function listSets() {
 	    if ( count($this->_params) > 0 ) {
             foreach ($this->_params as $key=>$val) {
@@ -252,7 +217,7 @@ abstract class Ccsd_Oai_Server {
             }
             return false;
         }
-        $sets = $this->_xml->createElement(self::OAI_VERB_LIST_SETS);
+        $sets = $this->_xml->createElement('ListSets');
         foreach ( $this->getSets() as $code=>$name ) {
             $set = $this->_xml->createElement('set');
             $set->appendChild($this->_xml->createElement('setSpec', $code));
@@ -260,12 +225,8 @@ abstract class Ccsd_Oai_Server {
             $sets->appendChild($set);
         }
         $this->_oaipmh->appendChild($sets);
-        return true;
 	}
-
-    /**
-     * @return bool (true on success)
-     */
+	
 	private function listMetadataFormats() {
 	    $identifier = $error = null;
 	    if ( count($this->_params) > 0 ) {
@@ -298,7 +259,7 @@ abstract class Ccsd_Oai_Server {
 				return false;
         	}
         }
-        $formats = $this->_xml->createElement(self::OAI_VERB_LIST_METADATA_FORMATS);
+        $formats = $this->_xml->createElement('ListMetadataFormats');
         foreach ( $this->getFormats() as $code=>$metas ) {
             $format = $this->_xml->createElement('metadataFormat');
             $format->appendChild($this->_xml->createElement('metadataPrefix', $code));
@@ -311,8 +272,8 @@ abstract class Ccsd_Oai_Server {
             $formats->appendChild($format);
         }
         $this->_oaipmh->appendChild($formats);
-        return true;
 	}
+
     /**
      * @return bool
      */
@@ -380,7 +341,7 @@ abstract class Ccsd_Oai_Server {
         $rec = $this->getId($identifier, $format);
         if ( is_array($rec) && isset($rec['header']) && isset($rec['metadata']) ) {
             try {
-                $gr = $this->_xml->createElement(self::OAI_VERB_GET_RECORD);
+                $gr = $this->_xml->createElement('GetRecord');
                 $record = $this->_xml->createElement('record');
                 $gr->appendChild($record);
                 $header = $this->_xml->createDocumentFragment();
@@ -407,24 +368,16 @@ abstract class Ccsd_Oai_Server {
             }
             return false;
         }
-        return true;
 	}
-    /**
-     * @return bool
-     */
-    private function listIdentifiers() {
+	
+	private function listIdentifiers() {
 		return $this->listIds('ListIdentifiers');
 	}
-    /**
-     * @return bool
-     */
+	
 	private function listRecords() {
 		return $this->listIds('ListRecords');
 	}
-    /**
-     * @param $method
-     * @return bool
-     */
+
 	private function listIds($method) {
 		$format = $until = $from = $set = $token = $error = null;
 		if ( count($this->_params) > 0 ) {
@@ -504,6 +457,9 @@ abstract class Ccsd_Oai_Server {
 				return false;
 			}
         }
+
+
+
         // pas de format spécifié ni de token dans lequel le format est stocké
         if ( null == $format && null == $token ) {
         	$error = new Ccsd_Oai_Error('missingArgument', 'metadataPrefix');
@@ -514,8 +470,13 @@ abstract class Ccsd_Oai_Server {
             }
         	return false;
         }
+
+
+
         // retourne les docid de documents
         $docids = $this->getIds($method, $format, $until, $from, $set, $token);
+
+
         if ( is_array($docids) && count($docids) ) {
             try {
                 // TODO faire plus propre c'est juste un hotfix parce que l'on perd le format quand on utilise un resumptionToken
@@ -546,7 +507,6 @@ abstract class Ccsd_Oai_Server {
                         $metadata->appendChild($data);
                         $record->appendChild($metadata);
                     } else if ( $document ) {
-                        // Juste une chaine XML (resumptionToken) ou XML deja serialise
                         $str = $this->_xml->createDocumentFragment();
                         $str->appendXML($document);
                         $resp->appendChild($str);
@@ -556,7 +516,7 @@ abstract class Ccsd_Oai_Server {
                 return false;
             }
         } else {
-            if ( $docids === 0 ) {
+            if ( $docids == 0 ) {
                 $error = new Ccsd_Oai_Error('noRecordsMatch');
             } else if ( $docids == 'token' ) {
                 $error = new Ccsd_Oai_Error('badResumptionToken', $token);
@@ -570,52 +530,32 @@ abstract class Ccsd_Oai_Server {
             }
             return false;
         }
-        return true;
 	}
-	/**
-     *@param string $url
-     */
+	
 	abstract protected function getIdentity($url);
-	/**  */
+	
 	abstract protected function getFormats();
-	/**  */
+	
 	abstract protected function getSets();
-	/**
-     * @param int $id
-     */
+	
 	abstract protected function existId($id);
-	/**
-     * @param string $format */
+	
 	abstract protected function existFormat($format);
-	/**
-     * @param string $set */
+	
 	abstract protected function existSet($set);
-	/**
-     * @param string $date */
+	
 	abstract protected function checkDateFormat($date);
-	/**
-     * @param int $identifier
-     * @param string $format
-     */
+	
 	abstract protected function getId($identifier, $format);
-	/**
-     * @param string $method
-     * @param string $format
-     * @param string $until
-     * @param string $from
-     * @param string $set
-     * @param string $token
-     */
+	
 	abstract protected function getIds($method, $format, $until, $from, $set, $token);
 	
-	/**
+	/*
 	 * feuille de style pour un affichage sympa des flux OAI
-     * @throws Exception
 	 */
     public static function getXsl() {
 		if ( is_file(__DIR__.'/oai2.xsl') ) {
 			return file_get_contents(__DIR__.'/oai2.xsl');
 		}
-		throw new Exception("File " . __DIR__.'/oai2.xsl non exists');
 	}
 }

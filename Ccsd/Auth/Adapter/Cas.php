@@ -1,4 +1,8 @@
 <?php
+
+if (!file_exists(APPROOT.'/vendor/autoload.php'))
+    require_once 'CAS.php';
+
 /**
  * Adapter Zend_Auth pour l'authentification via CAS
  *
@@ -7,7 +11,7 @@
  * @author ccsd
  *
  */
-class Ccsd_Auth_Adapter_Cas implements \Ccsd\Auth\Adapter\AdapterInterface {
+class Ccsd_Auth_Adapter_Cas implements Zend_Auth_Adapter_Interface , \Ccsd\Auth\Adapter\UserManager{
 
     /**
      * Nom par défaut de l'action pour le login
@@ -116,10 +120,6 @@ class Ccsd_Auth_Adapter_Cas implements \Ccsd\Auth\Adapter\AdapterInterface {
     protected $_identity = null;
 
     /**
-     * @var Ccsd_User_Models_User
-     */
-    protected $_identityStructure = null;
-    /**
      * @param string $env
      */
     public function __construct($env = APPLICATION_ENV) {
@@ -132,71 +132,9 @@ class Ccsd_Auth_Adapter_Cas implements \Ccsd\Auth\Adapter\AdapterInterface {
      * @param $identity
      */
     public function  setIdentityStructure($identity) {
-        // Par compat, on met la structure dans identity aussi
         $this->_identity = $identity;
-        $this->_identityStructure = $identity;
     }
 
-    /**
-     * @return Ccsd_User_Models_User
-     */
-    public function  getIdentityStructure() {
-        return $this->_identityStructure;
-    }
-    /**
-     * Nouvelle méthode d'authentification
-     * @see Zend_Auth_Adapter_Interface::authenticate()
-     */
-
-    public function authenticate2()
-    {
-
-        //initialisation du connecteur CAS
-        if (!isset($PHPCAS_CLIENT)) {
-            phpCAS::client($this->getCasVersion(), $this->getCasHostname(), $this->getCasPort(), $this->getCasUrl(), $this->getCasStartSessions());
-        }
-
-        /**
-         * @TODO extraire la partie de code ci dessous
-         * définition des emplacement de log à faire dans le paramétrage
-         * et dans la construction de l'ini
-         */
-        if (defined('APPLICATION_ENV')) {
-            if (APPLICATION_ENV == 'development') {
-                phpCAS::setDebug(realpath(sys_get_temp_dir()) . '/cas.log');
-            } elseif ((APPLICATION_ENV == 'testing')) {
-                phpCAS::setDebug('/sites/logs/phpCas_testing.log');
-            }
-        }
-
-        if ($this->getCasSslValidation() == false) {
-            // no SSL validation for the CAS server
-            phpCAS::setNoCasServerValidation();
-        } else {
-            phpCAS::setCasServerCACert($this->getCasCACert());
-        }
-        // Url de retour/service après authentification
-        if (null != $this->getServiceURL()) {
-            phpCAS::setFixedServiceURL($this->getServiceURL());
-        }
-
-        // force CAS authentication
-        try {
-            $resultOfAuth = phpCAS::forceAuthentication();
-        } catch (Exception $e) {
-            $resultOfAuth = false;
-        }
-
-        if ($resultOfAuth == true) {
-            // retour des informations d'authentification
-            $uid = phpCAS::getAttribute('UID');
-            return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $uid, array());
-        }
-        else {
-            return new Zend_Auth_Result(Zend_Auth_Result::FAILURE, new Ccsd_User_Models_User(), array("Échec de l'authentification depuis CAS"));
-        }
-
-    }
     /**
      * Authentification d'un utilisateur
      * @see Zend_Auth_Adapter_Interface::authenticate()
@@ -210,7 +148,7 @@ class Ccsd_Auth_Adapter_Cas implements \Ccsd\Auth\Adapter\AdapterInterface {
         if (defined('APPLICATION_ENV')) {
             if (APPLICATION_ENV == 'development') {
                 phpCAS::setDebug(realpath(sys_get_temp_dir()) . '/cas.log');
-            } elseif (APPLICATION_ENV == 'testing') {
+            } elseif ((APPLICATION_ENV == 'testing')) {
                 phpCAS::setDebug('/sites/logs/phpCas_testing.log');
             }
         }
@@ -281,19 +219,18 @@ class Ccsd_Auth_Adapter_Cas implements \Ccsd\Auth\Adapter\AdapterInterface {
      * Définit les options par défaut du serveur CAS
      * @param string $env
      * @return Ccsd_Auth_Adapter_Cas
-     * @throws Zend_Config_Exception
      */
     private function setCasOptions($env) {
         $casConfig = new Zend_Config_Ini(__DIR__.'/config/cas.ini', $env);
 
 
         $this->setCasVersion($casConfig->params->version)
-            ->setCasHostname($casConfig->params->hostname)
-            ->setCasPort($casConfig->params->port)
-            ->setCasUrl($casConfig->params->url)
-            ->setCasStartSessions($casConfig->params->startphpsessions)
-            ->setCasSslValidation($casConfig->params->sslvalidation)
-            ->setCasCACert($casConfig->params->sslcacert);
+                ->setCasHostname($casConfig->params->hostname)
+                ->setCasPort($casConfig->params->port)
+                ->setCasUrl($casConfig->params->url)
+                ->setCasStartSessions($casConfig->params->startphpsessions)
+                ->setCasSslValidation($casConfig->params->sslvalidation)
+                ->setCasCACert($casConfig->params->sslcacert);
         return $this;
     }
 
@@ -453,20 +390,15 @@ class Ccsd_Auth_Adapter_Cas implements \Ccsd\Auth\Adapter\AdapterInterface {
      * @return string Nom de l'hôte
      */
     static function getCurrentHostname() {
-        if ((isset($_SERVER['HTTPS'])) && ( $_SERVER['HTTPS'] != '')) {
+        if ((isset($_SERVER['HTTPS'])) and ( $_SERVER['HTTPS'] != '')) {
             $scheme = 'https://';
         } else {
             $scheme = 'http://';
         }
 
-        if (class_exists('Hal_Site') && Hal_Site::getCurrentPortail() != null) {
-            // Pour Les portail et collection: Pas pour aurehal, api...
-            $hostname = $scheme . parse_url(Hal_Site::getCurrentPortail()->getUrl(), PHP_URL_HOST);
-        } else {
-            $hostname = $scheme . $_SERVER['SERVER_NAME'];
-        }
+        $hostname = $scheme . $_SERVER['SERVER_NAME'];
 
-        if ((isset($_SERVER['SERVER_PORT'])) && ( $_SERVER['SERVER_PORT'] != '')) {
+        if ((isset($_SERVER['SERVER_PORT'])) and ( $_SERVER['SERVER_PORT'] != '')) {
             switch ($_SERVER['SERVER_PORT']) {
                 case '80':
                     break;
@@ -516,7 +448,7 @@ class Ccsd_Auth_Adapter_Cas implements \Ccsd\Auth\Adapter\AdapterInterface {
             // destination par défaut
             $uri .= '/forward-controller/user';
         } else {
-            if ($forwardAction) {
+            if (null != $params['forward-action']) {
 
                 $uri .= '/forward-controller/' . urlencode($forwardController);
                 $uri .= '/forward-action/' . urlencode($forwardAction);
@@ -545,6 +477,8 @@ class Ccsd_Auth_Adapter_Cas implements \Ccsd\Auth\Adapter\AdapterInterface {
                 $uri .= '/forward-controller/' . urlencode($forwardController);
             }
         }
+
+
         return $uri;
     }
 
@@ -612,84 +546,16 @@ class Ccsd_Auth_Adapter_Cas implements \Ccsd\Auth\Adapter\AdapterInterface {
     }
 
     /**
-     * fonction héritée de Ccsd_Auth_Adapter
-     * organise le préalable à l'authentification de l'utilisateur
-     * @param Hal_Controller_Action $controller
+     * Get user create form for this Adapter
+     * @return Ccsd_User_Form_Accountcreate
      */
-    public function pre_auth($controller)
-    {
-        $halUser = new Hal_User ();
-        /** @var  $request */
-        $request = $controller->getRequest();
-        $authAdapter = new Ccsd_Auth_Adapter_Cas ();
-        $authAdapter->setIdentityStructure($halUser);
-        $authAdapter->setServiceURL($request->getParams());
-        return true;
+    public function getUserCreateForm() {
+        return new Ccsd_User_Form_Accountcreate ([ 'ini' => 'Ccsd/User/configs/accountcreate.ini', 'section' => 'CAS']);
     }
 
     /**
-     * fonction héritée de Ccsd_Auth_Adapter
-     * organise le postérieur à l'authentification de l'utilisateur
-     * recuperation d'attributs par exemple
-     * @param \Zend_Controller_Action $controller
-     * @param Zend_Auth_Result $authinfo
-     * @return ArrayAccess (array of attribute)
+     * @param $user
      */
-    public function post_auth($controller, $authinfo)
-    {
-        $userMapper = new Ccsd_User_Models_UserMapper();
-        $attrs = $userMapper->find(phpCAS::getAttribute('UID'))->toArray();
-        return $attrs;
-    }
-
-    /**
-     * fonction héritée de Ccsd_Auth_Adapter
-     * organise le préalable à l'identification et instanciation de l'utilisateur
-     * Cherche le user correspondant dans l'application locale
-     * @param ArrayAccess $attrs
-     * @return string
-     */
-    public function pre_login($attrs)
-    {
-        if (isset($attrs['UID'])) {
-            $user = new \Ccsd_User_Models_User();
-            $refUser = new \Ccsd_User_Models_UserMapper();
-            $refUser->find($attrs['UID'],$user);
-            return $user;
-        } else {
-            Ccsd_Tools::panicMsg(__FILE__,__LINE__,'Authenticated user without username Attribute...');
-            return null;
-        }
-    }
-    /**
-     * fonction héritée de Ccsd_Auth_Adapter
-     * organise le postérieur à l'identification et instanciation de l'utilisateur
-     * @param \Ccsd_User_Models_User $user
-     * @param array $attrs
-     */
-    public function post_login($user, $attrs)
-    {
-    }
-
-    /**
-     * @param \Ccsd_User_Models_User $loginUser
-     * @param ArrayAccess $array_attr
-     * @return bool
-     */
-    public function alt_login($loginUser, $array_attr)
-    {
-        return true;
-    }
-
-    /**
-     * fonction permettant de forcer la creation d'un compte utilisateur
-     * à partir des informations du fournisseur d'identité
-     * @param array $array_attr tableau d'informations fournies par le fournisseur d'identité
-     * @param boolean $forceCreate
-     * @return bool
-     */
-    public function createUserFromAdapter($array_attr,$forceCreate)
-    {
-        return false;
+    public function completeUserInfoIfNeeded($user) {
     }
 }

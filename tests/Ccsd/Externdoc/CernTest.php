@@ -33,13 +33,13 @@ class Ccsd_Externdoc_CernTest extends PHPUnit\Framework\TestCase {
     public function testGetTitle()
     {
         $title = $this->_metas['metas']['title'];
-        self::assertEquals(['en' => "The Level-0 muon trigger for the LHCb experiment"] ,$title );
+        self::assertEquals(['en' => "The Level-0 muon trigger for the LHCb experiment"], $title);
     }
 
     public function testGetAbstract()
     {
         $abstract = $this->_metas['metas']['abstract'];
-        self::assertEquals(['en' => "The Level-0 Muon Trigger looks for straight tracks crossing the five muon stations of the LHCb muon detector and measures their transverse momentum. The tracking uses a road algorithm relying on the projectivity of the muon detector. The architecture of the Level-0 muon trigger is pipeline and massively parallel. Receiving 130 GBytes/s of input data, it reconstructs muon candidates for each bunch crossing (25 ns) in less than 1.2 μs. It relies on an intensive use of high speed multigigabit serial links where high speed serializers/deserializers are embedded in Field Programmable Gate Arrays (FPGAs)."], $abstract);
+        self::assertEquals($abstract, ['en' => "The Level-0 Muon Trigger looks for straight tracks crossing the five muon stations of the LHCb muon detector and measures their transverse momentum. The tracking uses a road algorithm relying on the projectivity of the muon detector. The architecture of the Level-0 muon trigger is pipeline and massively parallel. Receiving 130 GBytes/s of input data, it reconstructs muon candidates for each bunch crossing (25 ns) in less than 1.2 μs. It relies on an intensive use of high speed multigigabit serial links where high speed serializers/deserializers are embedded in Field Programmable Gate Arrays (FPGAs)."]);
     }
 
     public function testgetDate()

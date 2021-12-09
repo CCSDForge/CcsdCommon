@@ -22,11 +22,6 @@ class Ccsd_Externdoc_Crossref extends Ccsd_Externdoc
      */
     protected $_domXPath = null;
 
-
-    const REL_PERSON_FIRST = 'given_name';
-    const REL_PERSON_LAST  = 'surname';
-    const REL_PERSON_ORCID = 'ORCID';
-
     /**
      * Création d'un Doc Crossref à partir d'un XPATH
      * L'objet Crossref est seulement une factory pour un sous-type réel.
@@ -53,51 +48,7 @@ class Ccsd_Externdoc_Crossref extends Ccsd_Externdoc
 
         return null;
     }
-    /**
-     * @param string $pathAuthors   (Xpath  string)
-     * @return array
-     */
-    public function getAuthors($pathAuthors): array
-    {
-        $authors = [];
-        $xpathObject = $this->getDomPath();
-        $nodeAuthors = $xpathObject->query($pathAuthors);
-        foreach ($nodeAuthors as $node) {
-            $author = [];
-            $firstNames = $this->getNodesValue($xpathObject, self::REL_PERSON_FIRST, $node);
-            if (!empty($firstNames)) {
-                $author['firstname'] = self::cleanFirstname($firstNames);
-            }
-            $lastNames = $this->getNodesValue($xpathObject,  self::REL_PERSON_LAST, $node);
-            if (!empty($lastNames)) {
-                $author['lastname'] = $lastNames;
-            }
 
-            $orcIds = $this->getNodesValue($xpathObject,  self::REL_PERSON_ORCID, $node);
-            if (!empty($orcIds)) {
-                $author['orcid'] = $orcIds;
-            }
-            // $affiliationsNode = $domxpathAut->query(self::REL_ROOT_AUT . self::REL_XPATH_AUT_AFFILIATION);
-            // $affiliations = $this->getInraAffiliation($affiliationsNode);
-            // if (!empty($affiliations)) {
-            //    $author['affiliation'] = $affiliations;
-            //}
-            //$extAffiliationsNode = $domxpathAut->query(self::REL_ROOT_AUT . self::REL_XPATH_EXTAUT_EXTAFFILIATION);
-            //$extAffiliations = $this->getExtAffiliation($extAffiliationsNode);
-            //if (!empty($extAffiliations)) {
-            //    $author['affiliation externe'] = $extAffiliations;
-            //}
-
-            //$emails = $this->getValue(self::REL_ROOT_AUT . self::REL_XPATH_AUT_EMAIL, $domxpathAut);
-            //if (!empty($emails)) {
-            //    $author['email'] = $emails;
-            //}
-            if (!empty($author)) {
-                $authors[] = $author;
-            }
-        }
-        return $authors;
-    }
     /**
      * @param $year
      * @param $month

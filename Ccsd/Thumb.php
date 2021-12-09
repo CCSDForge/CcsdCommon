@@ -2,7 +2,7 @@
 
 class Ccsd_Thumb
 {
-    const THUMB_URL = 'http://thumb.ccsd.cnrs.fr/';
+    const THUMB_URL = 'https://thumb.ccsd.cnrs.fr/';
     const FORMAT_THUMB = 'thumb';
     const FORMAT_SMALL = 'small';
     const FORMAT_MEDIUM = 'medium';
@@ -10,7 +10,7 @@ class Ccsd_Thumb
     /**
      * IP de machines avec des accès particuliers aux document, par exemple voir un PDF sans sa page de garde pour générer la miniature
      */
-    static $THUMB_IP = ['193.48.96.4', '193.48.96.5', '193.48.96.6', '193.48.96.13', '193.48.96.14', '192.168.176.63','192.168.176.64','192.168.176.65','192.168.176.66'];
+    static $THUMB_IP = ['193.48.96.4', '193.48.96.5', '193.48.96.13', '193.48.96.14', '192.168.176.63','192.168.176.64','192.168.176.65','192.168.176.66'];
 
     /**
      * Retourne l'adresse de l'image dans le format demandé

@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Class Ccsd_Form_Element_MultiTextArea
- */
 class Ccsd_Form_Element_MultiTextArea extends Ccsd_Form_Element_MultiText
 {
     /**
@@ -15,7 +12,6 @@ class Ccsd_Form_Element_MultiTextArea extends Ccsd_Form_Element_MultiText
      * Load default decorators
      *
      * @return Zend_Form_Element
-     * @throws Zend_Form_Exception
      */
     public function loadDefaultDecorators()
     {

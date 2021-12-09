@@ -114,8 +114,6 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
             return null;
         }
 
-        // $helper = new Solarium\Core\Query\Helper ();
-
         $ndx->docid = $docObj->getDocid();
 
         /* ------ Citations & label_s */
@@ -161,10 +159,6 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
         //$d = new Hal_Document_Meta_Simple();
         //$d->getValue();
 
-        if ($docObj->getInstance() == 'hceres') {
-            $this->addHceresMetas($docObj);
-        }
-
 
         $meta = $this->indexListOrThesaurusMetadata($docObj->getHalMeta()->toArray());
         $meta = $this->indexLocalMetaData($meta);
@@ -172,13 +166,13 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
 
         /** TODO: ON devrait recuperer les object Meta et utiliser un fonction index pour cette meta */
         $this->indexTitles($meta['title'], $docObj->getMainTitle());
-        isset($meta['subTitle']) ? $this->indexSubTitles($meta['subTitle']) : false;
+        //SPM isset($meta['subTitle']) ? $this->indexSubTitles($meta['subTitle']) : false;
         isset($meta['keyword']) ? $this->indexKeywords($meta ['keyword']) : false;
         isset($meta['abstract']) ? $this->indexAbstract($meta ['abstract'], $meta ['language']) : false;
-        $this->indexConference($meta);
-        isset($meta['journal']) ? $this->indexJournal($meta ['journal']) : false;
-        isset($meta['europeanProject']) ? $this->indexEuropeanProject($meta ['europeanProject']) : false;
-        isset($meta['anrProject']) ? $this->indexAnrProject($meta ['anrProject']) : false;
+//SPM        $this->indexConference($meta);
+//SPM        isset($meta['journal']) ? $this->indexJournal($meta ['journal']) : false;
+//SPM        isset($meta['europeanProject']) ? $this->indexEuropeanProject($meta ['europeanProject']) : false;
+//SPM        isset($meta['anrProject']) ? $this->indexAnrProject($meta ['anrProject']) : false;
 
 
         $this->indexAuthors($docObj->getAuthors(), $docObj->getStructures());
@@ -197,7 +191,7 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
         /**
          * Country
          */
-        if (isset($meta ['country'])) {
+/* SPM        if (isset($meta ['country'])) {
             $countryUp = strtoupper($meta ['country']);
             $country [] = Zend_Locale::getTranslation($countryUp, 'country', 'fr');
             $country [] = Zend_Locale::getTranslation($countryUp, 'country', 'en');
@@ -207,6 +201,7 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
             $dataToIndex ['country_s'] = $meta ['country'];
             $dataToIndex ['country_t'] = array_unique($country);
         }
+*/
         /**
          * Traitement Langue
          */
@@ -265,57 +260,58 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
             'submitType_s' => $docObj->getFormat(),
             'inputType_s' => $docObj->getInputType(),
             'docType_s' => $docObj->getTypDoc(),
-            'otherType_s' => $this->existsValue($meta, 'otherType', ''),
+//SPM            'otherType_s' => $this->existsValue($meta, 'otherType', ''),
             'thumbId_i' => $docObj->getThumbid(),
             'selfArchiving_bool' => $docObj->getSelfArchiving(),
-            'authorityInstitution_s' => $this->existsValue($meta, 'authorityInstitution', ''),
-            'bookTitle_s' => $this->existsValue($meta, 'bookTitle', ''),
-            'classification_s' => $this->existsValue($meta, 'classification', ''),
-            'collaboration_s' => $this->existsValue($meta, 'collaboration', ''),
-            'comment_s' => $this->existsValue($meta, 'comment', ''),
-            'committee_s' => $this->existsValue($meta, 'committee', ''),
-            'city_s' => $this->existsValue($meta, 'city', ''),
+//SPM            'authorityInstitution_s' => $this->existsValue($meta, 'authorityInstitution', ''),
+//SPM            'bookTitle_s' => $this->existsValue($meta, 'bookTitle', ''),
+// SPM            'classification_s' => $this->existsValue($meta, 'classification', ''),
+// SPM              'collaboration_s' => $this->existsValue($meta, 'collaboration', ''),
+// SPM            'comment_s' => $this->existsValue($meta, 'comment', ''),
+// SPM            'committee_s' => $this->existsValue($meta, 'committee', ''),
+// SPM            'city_s' => $this->existsValue($meta, 'city', ''),
             'credit_s' => $this->existsValue($meta, 'credit', ''),
             'description_s' => $this->existsValue($meta, 'description', ''),
-            'director_s' => $this->existsValue($meta, 'director', ''),
+// SPM            'director_s' => $this->existsValue($meta, 'director', ''),
             // 'duration_s' => $meta ['duration'],
             // 'frequency_s' => $meta ['frequency'],
-            'funding_s' => $this->existsValue($meta, 'funding', ''),
-            'isbn_s' => $this->existsValue($meta, 'isbn', ''),
-            'issue_s' => $this->existsValue($meta, 'issue', ''),
-            'lectureName_s' => $this->existsValue($meta, 'lectureName', ''),
-            'length_i' => (int)$this->existsValue($meta, 'length', 0),
-            'localReference_s' => $this->existsValue($meta, 'localReference', ''),
-            'mesh_s' => $this->existsValue($meta, 'mesh', ''),
-            'number_s' => $this->existsValue($meta, 'number', ''),
-            'nntId_s' => $this->existsValue($meta, 'nnt', ''),
-            'page_s' => $this->existsValue($meta, 'page', ''),
-            'patentId_s' => $this->existsValue($meta, 'patentId', ''),
-            'publicationLocation_s' => $this->existsValue($meta, 'publicationLocation', ''),
-            'publisher_s' => $this->existsValue($meta, 'publisher', ''),
-            'publisherLink_s' => $this->existsValue($meta, 'publisherLink', ''),
-            'seeAlso_s' => $this->existsValue($meta, 'seeAlso', ''),
-            'seriesEditor_s' => $this->existsValue($meta, 'seriesEditor', ''),
-            'serie_s' => $this->existsValue($meta, 'serie', ''),
-            'scientificEditor_s' => $this->existsValue($meta, 'scientificEditor', ''),
-            'source_s' => $this->existsValue($meta, 'source', ''),
-            'thesisSchool_s' => $this->existsValue($meta, 'thesisSchool', ''),
-            'volume_s' => $this->existsValue($meta, 'volume', ''),
+// SPM            'funding_s' => $this->existsValue($meta, 'funding', ''),
+// SPM            'isbn_s' => $this->existsValue($meta, 'isbn', ''),
+// SPM            'issue_s' => $this->existsValue($meta, 'issue', ''),
+// SPM            'lectureName_s' => $this->existsValue($meta, 'lectureName', ''),
+// SPM            'length_i' => (int)$this->existsValue($meta, 'length', 0),
+// SPM            'localReference_s' => $this->existsValue($meta, 'localReference', ''),
+// SPM            'mesh_s' => $this->existsValue($meta, 'mesh', ''),
+// SPM            'number_s' => $this->existsValue($meta, 'number', ''),
+// SPM            'nntId_s' => $this->existsValue($meta, 'nnt', ''),
+// SPM            'page_s' => $this->existsValue($meta, 'page', ''),
+// SPM            'patentId_s' => $this->existsValue($meta, 'patentId', ''),
+// SPM            'publicationLocation_s' => $this->existsValue($meta, 'publicationLocation', ''),
+// SPM            'publisher_s' => $this->existsValue($meta, 'publisher', ''),
+// SPM            'publisherLink_s' => $this->existsValue($meta, 'publisherLink', ''),
+// SPM            'seeAlso_s' => $this->existsValue($meta, 'seeAlso', ''),
+// SPM            'seriesEditor_s' => $this->existsValue($meta, 'seriesEditor', ''),
+// SPM            'serie_s' => $this->existsValue($meta, 'serie', ''),
+// SPM            'scientificEditor_s' => $this->existsValue($meta, 'scientificEditor', ''),
+// SPM            'source_s' => $this->existsValue($meta, 'source', ''),
+// SPM            'speaker_s' => $this->existsValue($meta, 'speaker', ''),
+// SPM            'thesisSchool_s' => $this->existsValue($meta, 'thesisSchool', ''),
+// SPM            'volume_s' => $this->existsValue($meta, 'volume', ''),
 
-            'softProgrammingLanguage_s' => $this->existsValue($meta, 'programmingLanguage', ''),
-            'softCodeRepository_s' => $this->existsValue($meta, 'codeRepository', ''),
-            'softPlatform_s' => $this->existsValue($meta, 'platform', ''),
-            'softVersion_s' => $this->existsValue($meta, 'version', ''),
-            'softDevelopmentStatus_s' => $this->existsValue($meta, 'developmentStatus', ''),
-            'softRuntimePlatform_s' => $this->existsValue($meta, 'runtimePlatform', ''),
+// SPM            'softProgrammingLanguage_s' => $this->existsValue($meta, 'programmingLanguage', ''),
+// SPM            'softCodeRepository_s' => $this->existsValue($meta, 'codeRepository', ''),
+// SPM            'softPlatform_s' => $this->existsValue($meta, 'platform', ''),
+// SPM            'softVersion_s' => $this->existsValue($meta, 'version', ''),
+// SPM            'softDevelopmentStatus_s' => $this->existsValue($meta, 'developmentStatus', ''),
+// SPM            'softRuntimePlatform_s' => $this->existsValue($meta, 'runtimePlatform', ''),
         ];
 
-        /*if ($docObj->getInstance() == 'hceres') {
+/* SPM        if ($docObj->getInstance() == 'hceres') {
             $this->addHceresMetas($docObj);
         }
 */
         // boolean : true ou false est censé être rempli
-        if (isset($meta ['inPress'])) {
+/*SPM        if (isset($meta ['inPress'])) {
             if ($meta ['inPress'] == "0") {
                 $dataToIndex['inPress_bool'] = 'false';
             } else {
@@ -324,14 +320,15 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
         } else {
             $dataToIndex['inPress_bool'] = 'false';
         }
-
+*/
         /**
          * Coordonnées
          */
-        if (isset($meta ['latitude']) && ($meta ['latitude'] != '') && isset($meta ['longitude']) && ($meta ['longitude'] != '')) {
+/* SPM        if (isset($meta ['latitude']) && ($meta ['latitude'] != '') && isset($meta ['longitude']) && ($meta ['longitude'] != '')) {
             $dataToIndex ['location'] = $meta ['latitude'] . ',' . $meta ['longitude'];
             $dataToIndex ['coordinates_s'] = $dataToIndex ['location'];
         }
+*/
         /**
          * Identifiants: Attention, Bd incoherente, on verifie que les identifiant sont bien des choses que l'on veut
          */
@@ -342,6 +339,7 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
                 }
             }
         }
+
         $ndx = $this->addArrayOfMetaToDoc($dataToIndex, null, $ndx);
         unset($dataToIndex);
 
@@ -349,18 +347,17 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
          * dates
          */
         $this->setDoc($ndx);
-        if (($docObj->getTypDoc() == 'THESE') || ($docObj->getTypDoc() == 'HDR') || ($docObj->getTypDoc() == 'ETABTHESE')) {
+/* SPM        if (($docObj->getTypDoc() == 'THESE') || ($docObj->getTypDoc() == 'HDR')) {
             $this->indexDates($docObj->getHalMeta()->getMeta('date'), 'defenseDate', true);
         }
-
-        $this->indexDates($docObj->getHalMeta()->getMeta('writingDate'), 'writingDate', true);
-        $this->indexDates($docObj->getHalMeta()->getMeta('edate'), 'ePublicationDate', true);
+*/
+// SPM        $this->indexDates($docObj->getHalMeta()->getMeta('writingDate'), 'writingDate', true);
+// SPM        $this->indexDates($docObj->getHalMeta()->getMeta('edate'), 'ePublicationDate', true);
 
         $this->indexDates($docObj->getLastModifiedDate(), 'modifiedDate');
         $this->indexDates($docObj->getSubmittedDate(), 'submittedDate');
         $this->indexDates($docObj->getReleasedDate(), 'releasedDate');
         $this->indexDates($docObj->getProducedDate(), 'producedDate', true);
-        $this->indexDates($docObj->getPublicationDate(), 'publicationDate', true);
 
 
         $ndx = $this->getDoc();
@@ -423,43 +420,6 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
     }
 
     /**
-     * Ajoute les champs spécifiques HCERES
-     * @param Hal_Document $docObj
-     */
-    protected function addHceresMetas(Hal_Document $docObj)
-    {
-        // ajoute les champs de l'entite evaluee
-        $entity = $docObj->getHalMeta()->getMeta('hceres_entite_local');
-        //$entity = $docObj->getMetaObj('hceres_entite_local');
-        if ($entity instanceof Ccsd_Referentiels_Hceres) {
-            $dataToIndex = $entity->getIndexationData();
-            $this->addArrayOfMetaToDoc($dataToIndex, 'hceres_entity');
-            $docObj->delMeta('hceres_entite_local');
-
-            // recherche la (ou les) entite(s) fille(s)
-            $oChild = $entity->loadChild();
-            // ajoute les champs de(s) entité(s) fille(s)
-            if ($oChild instanceof Ccsd_Referentiels_Hceres) {
-                $dataToIndex = $oChild->getIndexationData();
-                $this->addArrayOfMetaToDoc($dataToIndex, 'hceres_etab');
-            }
-            // recherche la (ou les) entite(s) meres(s)
-            // ajoute les champs de(s) entité(s) mere(s)
-        }
-
-        // ajoute les champs de l'etablissement support
-        $aEtabsupports = $docObj->getHalMeta()->getMeta('hceres_etabsupport_local');
-
-        foreach ($aEtabsupports as $etabsupport) {
-            if ($etabsupport instanceof Ccsd_Referentiels_Hceres) {
-                $dataToIndex = $etabsupport->getIndexationData();
-                $this->addArrayOfMetaToDoc($dataToIndex, 'hceres_etab');
-            }
-        }
-        $docObj->delMeta('hceres_etabsupport_local');
-    }
-
-    /**
      * Indexe les metas de type liste et (thesaurus sauf les domaines)
      * @param $meta
      * @return mixed
@@ -489,26 +449,14 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
 
             //translate value in each language
             foreach ($languagesArray as $lang) {
-                //si metalist complex, la variable $metaValue est un array
-                if (!is_array($metaValue)) {
-                    $metasTranslated[$lang] = $t->translate($metaName . '_' . $metaValue, $lang);
-                    if ($metasTranslated[$lang] == $metaName . '_' . $metaValue) {
-                        unset($metasTranslated[$lang]); // rm strings not translated
-                    }
-                } else {
-                    foreach ($metaValue as $uniqValue) {
-                        $metaTranslat = $t->translate($metaName . '_' . $uniqValue, $lang);
-                        if ($metaTranslat != $metaName . '_' . $uniqValue) {
-                            $metasTranslated[$lang][] = $metaTranslat;
-                        }
-                    }
+                $metasTranslated[$lang] = $t->translate($metaName . '_' . $metaValue, $lang);
+                if ($metasTranslated[$lang] == $metaName . '_' . $metaValue) {
+                    unset($metasTranslated[$lang]); // rm strings not translated
                 }
             }
             // + value
             $metasTranslated['val'] = $metaValue;
-            if (!is_array($metaValue)) {
-                $metasTranslated = array_unique($metasTranslated);
-            }
+            $metasTranslated = array_unique($metasTranslated);
 
             $dataToIndex [$metaName . '_s'] = $metaValue;
             $dataToIndex [$metaName . '_t'] = array_values($metasTranslated);
@@ -587,8 +535,8 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
     /**
      * Determine si une chaine se termine pour une sous-chaine
      *
-     * @param string $phrase
-     * @param string|array $terms
+     * @param  string $phrase
+     * @param  string|array $terms
      * @return bool
      */
     public static function endsWith($phrase, $terms)
@@ -815,6 +763,32 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
     }
 
     /**
+     * Indexation des partenaires
+     * @param array $allPartners
+     * @return boolean
+     */
+    private function indexPartners($allPartners)
+    {
+
+        if ($allPartners == '') {
+            return false;
+        }
+        $ndx = $this->getDoc();
+             if (is_array($allPartners)) {
+                 foreach ($allPartners as $partner) {
+
+                     $partner = $this->cleanKeywords($partner);
+                     $partner = trim($partner);
+
+                     // cf schema pour partner_s et partner_t
+                     $ndx->addField('partner_s', $partner);
+                     $ndx->addField('partner_t', $partner);
+                 }
+             }
+        $this->setDoc($ndx);
+    }
+
+    /**
      * Nettoie les mots clefs
      *
      * @param string $inputString
@@ -908,8 +882,8 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
          * Comme les bases sont tres disparate, on prends pas le risque, on indexe ce qui est present!
          */
         $dataToIndex = [
-            'title_s' => $this->existsValue($meta, 'conferenceTitle', ''),
-            'organizer_s' => $this->existsValue($meta, 'conferenceOrganizer', '')
+            'title_s'     => $this->existsValue($meta ,'conferenceTitle', ''),
+            'organizer_s' => $this->existsValue($meta ,'conferenceOrganizer', '')
         ];
 
         if (isset($meta ['conferenceStartDate'])) {
@@ -1085,7 +1059,7 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
 
     /**
      * Indexation des auteurs
-     * @param array $authorsList
+     * @param Hal_Document_Author[] $authorsList
      * @param array $structuresList
      * @return bool
      */
@@ -1177,6 +1151,7 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
             }
 
             $this->addArrayOfMetaToDoc($dataToIndex, 'auth');
+
             $this->addArrayOfMetaToDoc(['structId_i' => $author->getStructid()], 'auth');
 
             if (is_array($structuresList)) {
@@ -1194,6 +1169,7 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
         }
         return true;
     }
+
 
     /** Retourne la première lettre du nom de famille
      * selon la forme valide si elle existe associée à un idhal
@@ -1633,6 +1609,73 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
     }
 
     /**
+     * Ajoute les champs spécifiques HCERES
+     * @param Hal_Document $docObj
+     */
+    protected function addHceresMetas(Hal_Document $docObj)
+    {
+        if ($obj = $docObj->getMetaObj('hceres_dom_local'))     { $this->indexHceresMeta($obj->getValue()); }
+        if ($obj = $docObj->getMetaObj('hceres_domsci_local'))  { $this->indexHceresMeta($obj->getValue()); }
+        if ($obj = $docObj->getMetaObj('hceres_domform_local')) { $this->indexHceresMeta($obj->getValue()); }
+        if ($obj = $docObj->getMetaObj('hceres_erc_local'))     { $this->indexHceresMeta(array('hceres_erc_local' => $obj->getValue())); }
+
+        // ajoute les champs de l'entite evaluee
+        $entity = $docObj->getHalMeta()->getMeta('hceres_entite_local');
+        //$entity = $docObj->getMetaObj('hceres_entite_local');
+        if ($entity instanceof Ccsd_Referentiels_Hceres) {
+            $dataToIndex = $entity->getIndexationData();
+            $this->addArrayOfMetaToDoc($dataToIndex, 'hceres_entity');
+
+            // recherche la (ou les) entite(s) fille(s)
+            $oChild = $entity->loadChild();
+            // ajoute les champs de(s) entité(s) fille(s)
+            if ($oChild instanceof Ccsd_Referentiels_Hceres) {
+                $dataToIndex = $oChild->getIndexationData();
+                $this->addArrayOfMetaToDoc($dataToIndex, 'hceres_entity');
+            }
+            // recherche la (ou les) entite(s) meres(s)
+            // ajoute les champs de(s) entité(s) mere(s)
+        }
+    }
+
+    /**
+     * Indexation des domaines applicatifs de l'HCERES
+     * @param array $metas
+     * @return boolean
+     */
+    private function indexHceresMeta($metas)
+    {
+        if (!is_array($metas)) {
+            $metas = array($metas);
+        }
+
+        foreach ($metas as $metaName => $metaValue) {
+            $metasTranslated = [];
+
+            //traduction meta
+            $languagesArray = Hal_Settings::getLanguages();
+            $translator = Zend_Registry::get('Zend_Translate');
+            //translate value in each language
+            foreach ($languagesArray as $lang) {
+                $metasTranslated[$lang] = $translator->translate($metaName . '_' . $metaValue, $lang);
+                if ($metasTranslated[$lang] == $metaName . '_' . $metaValue) {
+                    unset($metasTranslated[$lang]); // rm strings not translated
+                }
+            }
+            // + value
+            $metasTranslated['val'] = $metaValue;
+            $metasTranslated = array_unique($metasTranslated);
+
+            $dataToIndex [$metaName . '_s'] = $metaValue;
+            $dataToIndex [$metaName . '_t'] = array_values($metasTranslated);
+        }
+
+        $this->addArrayOfMetaToDoc($dataToIndex);
+
+        return true;
+    }
+
+    /**
      * Indexation de dates
      * @param string $date
      * @param string $solrFieldName
@@ -1732,6 +1775,7 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
      */
     private function indexFiles()
     {
+        $pdfFileList = [];
         $docObj = $this->getHalDocument();
 
         if ($docObj->getFiles() == '') {
@@ -1739,6 +1783,7 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
         }
         $ndx = $this->getDoc();
 
+        $fileTypes=[];
         foreach ($docObj->getFiles() as $file) {
             if (!$file instanceof Hal_Document_File) {
                 continue;
@@ -1796,6 +1841,7 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
 
 
         $this->setDoc($ndx);
+        return true;
     }
 
     /**
@@ -1881,44 +1927,8 @@ class Ccsd_Search_Solr_Indexer_Halv3 extends Ccsd_Search_Solr_Indexer
     private function cleanFulltextChars($inputString)
     {
         $inputString = Ccsd_Tools_String::stripCtrlChars($inputString, ' ');
-        return trim($inputString);
-    }
-
-    /**
-     * Indexation des domaines applicatifs de l'HCERES
-     * @param array $metas
-     * @return boolean
-     */
-    private function indexHceresMeta($metas)
-    {
-        if (!is_array($metas)) {
-            $metas = [$metas];
-        }
-
-        foreach ($metas as $metaName => $metaValue) {
-            $metasTranslated = [];
-
-            //traduction meta
-            $languagesArray = Hal_Settings::getLanguages();
-            $translator = Zend_Registry::get('Zend_Translate');
-            //translate value in each language
-            foreach ($languagesArray as $lang) {
-                $metasTranslated[$lang] = $translator->translate($metaName . '_' . $metaValue, $lang);
-                if ($metasTranslated[$lang] == $metaName . '_' . $metaValue) {
-                    unset($metasTranslated[$lang]); // rm strings not translated
-                }
-            }
-            // + value
-            $metasTranslated['val'] = $metaValue;
-            $metasTranslated = array_unique($metasTranslated);
-
-            $dataToIndex [$metaName . '_s'] = $metaValue . '-' . $metasTranslated;
-            //$dataToIndex [$metaName . '_t'] = array_values($metasTranslated);
-        }
-
-        $this->addArrayOfMetaToDoc($dataToIndex);
-
-        return true;
+        $inputString = trim($inputString);
+        return $inputString;
     }
 
 

@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Class Ccsd_Form_Element_Thesaurus
- */
 class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccsd_Form_Interface_Javascript, Ccsd_Form_Interface_Css
 {
 
@@ -31,8 +28,8 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
     protected $_list_title             = "Liste des domaines :";
     protected $_msg_no_result          = "Aucun résultat";
     protected $_list_values            = "Mes choix :";
-    protected $_option_collapse        = "<span class='glyphicon glyphicon-chevron-up'></span>";
-    protected $_option_expand          = "<span class='glyphicon glyphicon-chevron-down'></span>";
+    protected $_option_collapse        = "<i class='glyphicon glyphicon-chevron-up'></i>";
+    protected $_option_expand          = "<i class='glyphicon glyphicon-chevron-down'></i>";
     protected $_option_collapse_msg    = "Réduire la liste des domaines";
     protected $_option_expand_msg      = "Afficher la liste des domaines";
     protected $_is_modifying           = false;
@@ -60,7 +57,6 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
      */
     /**
      * @return bool : false if something wrong
-     * @throws Zend_Form_Exception
      */
     public function init ()
     {
@@ -76,64 +72,57 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
         return true;
     }
 
-    /**
-     * @return bool
-     */
     public function getParentNode ()
     {
     	return $this->_parentNode;
     }
 
-    /**
-     * @param bool $b
-     * @return $this
-     */
     public function setParentNode ($b = true)
     {
     	$this->_parentNode = $b;
     	return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getValueTip ()
     {
     	return $this->_valueTip;
     }
 
-    /**
-     * @param bool $b
-     * @return $this
-     */
     public function setValueTip ($b = true)
     {
     	$this->_valueTip = $b;
     	return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getFiltering()
     {
     	return $this->_filtering;
     }
 
-    /**
-     * @param bool $b
-     * @return $this
-     */
     public function setFiltering ($b = true)
     {
     	$this->_filtering = $b;
     	return $this;
     }
+
+    //Obsolete
+    /** @deprecated  */
+    public function getPrefixPath ()
+    {
+    	error_log('getPrefixPath ne devrait plus etre appele');
+		$prefixPath = (new ReflectionClass(get_class($this)))->getFileName();
+
+    	while (dirname ($prefixPath) && !is_dir($prefixPath . '/public')) {
+            $prefixPath = dirname($prefixPath);
+        }
+
+    	return $prefixPath;
+    }
+
     /**
      * Load default decorators
      *
      * @return Zend_Form_Element
-     * @throws Zend_Form_Exception
      */
     public function loadDefaultDecorators()
     {
@@ -152,47 +141,29 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getDelete ()
     {
         return $this->_delete;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setDelete ($is = true )
+    public function setDelete ( $is = true )
     {
         $this->_delete = $is;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getTypeahead ()
     {
         return $this->_typeahead;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setTypeahead ($is = true )
+    public function setTypeahead ( $is = true )
     {
         $this->_typeahead = $is;
         return $this;
     }
 
-    /**
-     * @param bool $inter
-     * @return string
-     */
-    public function getPrefix_translation ($inter = false )
+    public function getPrefix_translation ( $inter = false )
     {
         if ($inter) {
             return $this->_prefix_translation . $this->getPrefix_inter();
@@ -201,137 +172,84 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
         }
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setPrefix_translation ($str = "" )
+    public function setPrefix_translation ( $str = "" )
     {
         $this->_prefix_translation = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getMsg_no_result ()
     {
         return $this->_msg_no_result;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setMsg_no_result ($str = "" )
+    public function setMsg_no_result ( $str = "" )
     {
         $this->_msg_no_result = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getTypeahead_value ()
     {
         return $this->_typeahead_value;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setTypeahead_value ($str = "" )
+    public function setTypeahead_value ( $str = "" )
     {
         $this->_typeahead_value = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getTypeahead_label ()
     {
         return $this->_typeahead_label;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setTypeahead_label ($str = "")
+    public function setTypeahead_label ( $str = "")
     {
         $this->_typeahead_label = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getTypeahead_description ()
     {
         return $this->_typeahead_description;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setTypeahead_description ($str = "")
+    public function setTypeahead_description ( $str = "")
     {
         $this->_typeahead_description = $str;
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getTypeahead_height ()
     {
         return $this->_typeahead_height;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setTypeahead_height ($str = "")
+    public function setTypeahead_height ( $str = "")
     {
         $this->_typeahead_height = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getList_title ()
     {
         return $this->_list_title;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setList_title ($str = "")
+    public function setList_title ( $str = "")
     {
         $this->_list_title = $str;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getIs_modifying ()
     {
         return $this->_is_modifying;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setIs_modifying ($is = false )
+    public function setIs_modifying ( $is = false )
     {
         $this->_is_modifying = $is;
 
@@ -342,127 +260,78 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getOption_collapse ()
     {
         return $this->_option_collapse;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setOption_collapse ($str = "")
+    public function setOption_collapse ( $str = "")
     {
         $this->_option_collapse = addslashes($str);
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getOption_collapse_msg ()
     {
         return $this->_option_collapse_msg;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setOption_collapse_msg ($str = "")
+    public function setOption_collapse_msg ( $str = "")
     {
         $this->_option_collapse_msg = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getOption_expand_msg ()
     {
         return $this->_option_expand_msg;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setOption_expand_msg ($str = "")
+    public function setOption_expand_msg ( $str = "")
     {
         $this->_option_expand_msg = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getOption_collapse_inter_msg ()
     {
     	return $this->_option_collapse_inter_msg;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setOption_collapse_inter_msg ($str = "")
+    public function setOption_collapse_inter_msg ( $str = "")
     {
     	$this->_option_collapse_inter_msg = $str;
     	return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getOption_expand_inter_msg ()
     {
     	return $this->_option_expand_inter_msg;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setOption_expand_inter_msg ($str = "")
+    public function setOption_expand_inter_msg ( $str = "")
     {
     	$this->_option_expand_inter_msg = $str;
     	return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getCollapsable ()
     {
         return $this->_collapsable;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setCollapsable ($is = true )
+    public function setCollapsable ( $is = true )
     {
         $this->_collapsable = $is;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getOption_expand ()
     {
         return $this->_option_expand;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setOption_expand ($str = "")
+    public function setOption_expand ( $str = "")
     {
         $this->_option_expand = addslashes($str);
         return $this;
@@ -471,156 +340,94 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
     // S'il y a une locale, on la rend
     // Sinon on cherche la locale globale
     // Sinon on choisit le français
-    /**
-     * @return mixed|string
-     * @throws Zend_Exception
-     */
     public function getLocale ()
     {
         return empty($this->_locale) ? empty(Zend_Registry::get('Zend_Locale')) ? 'fr' : Zend_Registry::get('Zend_Locale') : $this->_locale;
     }
 
-    /**
-     * @param string $locale
-     * @return $this
-     */
-    public function setLocale ($locale = "")
+    public function setLocale ( $locale = "")
     {
     	$this->_locale = $locale;
     	return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getList_values ()
     {
         return $this->_list_values;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setList_values ($str = "")
+    public function setList_values ( $str = "")
     {
         $this->_list_values = $str;
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getReqitems ()
     {
         return $this->_reqitems;
     }
 
-    /**
-     * @param array $items
-     * @return $this
-     */
-    public function setReqitems ($items = array () )
+    public function setReqitems ( $items = array () )
     {
         $this->_reqitems = $items;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getSortable ()
     {
         return $this->_sortable && $this->_selectable;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setSortable ($is = true )
+    public function setSortable ( $is = true )
     {
         $this->_sortable = $is && $this->_selectable;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getClickable ()
     {
     	return $this->_clickable && $this->_selectable == FALSE;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setClickable ($is = true )
+    public function setClickable ( $is = true )
     {
     	$this->_clickable = $is;
     	return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getSelectable ()
     {
         return $this->_selectable;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setSelectable ($is = true )
+    public function setSelectable ( $is = true )
     {
         $this->_selectable = $is;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getMultilevel ()
     {
         return $this->_multilevel;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setMultilevel ($is = true )
+    public function setMultilevel ( $is = true )
     {
         $this->_multilevel = $is;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getData ()
     {
         return $this->_data;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     * @throws Zend_Form_Exception
-     * @throws Zend_Json_Exception
-     */
-    public function setData ($str = "" )
+    public function setData ( $str = "" )
     {
         $this->_data = $this->get ($str);
         return $this;
     }
 
-    /**
-     * @return bool|mixed
-     */
     public function getUse_display ()
     {
         try {
@@ -631,13 +438,7 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
 
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     * @throws Zend_Form_Exception
-     * @throws Zend_Json_Exception
-     */
-    public function setUse_display ($str = "" )
+    public function setUse_display ( $str = "" )
     {
         $this->_use_display = $this->get ($str);
         return $this;
@@ -729,266 +530,162 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
         return false;
     }
 
-    /**
-     * @param $code
-     * @return mixed
-     */
     public function getElementCode ($code)
     {
         return $this->_data[$code];
     }
 
-    /**
-     * @return bool
-     */
     public function getShowing_icon ()
     {
         return $this->_showing_icon;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setShowing_icon ($is = true )
+    public function setShowing_icon ( $is = true )
     {
         $this->_showing_icon = $is;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getShowing_caret ()
     {
         return $this->_showing_caret;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setShowing_caret ($is = true )
+    public function setShowing_caret ( $is = true )
     {
         $this->_showing_caret = $is;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getIcon_parent_close ()
     {
         return $this->_icon_parent_close;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setIcon_parent_close ($str = "glyphicon glyphicon-folder-close" )
+    public function setIcon_parent_close ( $str = "glyphicon glyphicon-folder-close" )
     {
         $this->_icon_parent_close = $str;
         $this->_icon_parent_hover = false;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getIcon_parent_open ()
     {
         return $this->_icon_parent_open;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setIcon_parent_open ($str = "glyphicon glyphicon-folder-open" )
+    public function setIcon_parent_open ( $str = "glyphicon glyphicon-folder-open" )
     {
         $this->_icon_parent_open = $str;
         $this->_icon_parent_hover = false;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getIcon_parent_hover ()
     {
         return $this->_icon_parent_hover;
     }
 
-    /**
-     * @param bool $is
-     * @return $this
-     */
-    public function setIcon_parent_hover ($is = true )
+    public function setIcon_parent_hover ( $is = true )
     {
         $this->_icon_parent_hover = $is;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getIcon_child ()
     {
         return $this->_icon_child;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setIcon_child ($str = "glyphicon glyphicon-file" )
+    public function setIcon_child ( $str = "glyphicon glyphicon-file" )
     {
         $this->_icon_child = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getIcon_move ()
     {
         return $this->_icon_move;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setIcon_move ($str = "glyphicon glyphicon-move" )
+    public function setIcon_move ( $str = "glyphicon glyphicon-move" )
     {
         $this->_icon_move = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getIcon_delete ()
     {
         return $this->_icon_delete;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setIcon_delete ($str = "glyphicon glyphicon-delete" )
+    public function setIcon_delete ( $str = "glyphicon glyphicon-delete" )
     {
         $this->_icon_delete = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getIcon_info ()
     {
         return $this->_icon_info;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setIcon_info ($str = "glyphicon glyphicon-info-sign" )
+    public function setIcon_info ( $str = "glyphicon glyphicon-info-sign" )
     {
         $this->_icon_info = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getIcon_handle ()
     {
         return $this->_icon_handle;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setIcon_handle ($str = "glyphicon-info-sign" )
+    public function setIcon_handle ( $str = "glyphicon-info-sign" )
     {
         $this->_icon_handle = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getEvent_on_click ()
     {
         return $this->_event_on_click;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setEvent_on_click ($str = "" )
+    public function setEvent_on_click ( $str = "" )
     {
         $this->_event_on_click = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getStatus_tree ()
     {
         return $this->_status_tree;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setStatus_tree ($str = "" )
+    public function setStatus_tree ( $str = "" )
     {
         $this->_status_tree = $str;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getInterdisciplinarite()
     {
     	return $this->_interdisciplinarite;
     }
 
-    /**
-     * @param string $path_to_default
-     * @return $this
-     * @throws Zend_Form_Exception
-     * @throws Zend_Json_Exception
-     */
     public function setInterdisciplinarite ($path_to_default = "")
     {
     	$this->_interdisciplinarite = $this->get ($path_to_default);
     	return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getPrefix_inter ( )
     {
         return $this->_prefix_inter;
     }
 
-    /**
-     * @param string $str
-     * @return $this
-     */
-    public function setPrefix_inter ($str = "" )
+    public function setPrefix_inter ( $str = "" )
     {
         $this->_prefix_inter = $str;
         return $this;
@@ -1001,6 +698,7 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
     protected function _create ()
     {
         if (!$this->_data) {
+            require_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception('Peut pas générer la liste sans données...');
         }
 
@@ -1011,6 +709,7 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
                 $return = Zend_Json::decode ($this->_data);
             }
         } catch (Exception $e) {
+            require_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception('Peut pas générer la liste...');
         }
 
@@ -1027,10 +726,6 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
         return $a;
     }
 
-    /**
-     * @param $code
-     * @return $this
-     */
     public function addStylesheets ($code)
     {
         if (!array_search ($code, $this->_css)) {
@@ -1041,29 +736,18 @@ class Ccsd_Form_Element_Thesaurus extends Zend_Form_Element_Xhtml implements Ccs
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getStylesheets ()
     {
         return $this->_css;
     }
 
-    /**
-     * @return $this
-     */
     public function clearStylesheets ()
     {
         $this->_css = array ();
         return $this;
     }
 
-    /**
-     * @param mixed $value
-     * @param null $context
-     * @return bool
-     */
-    public function isValid ($value, $context = null)
+	public function isValid ($value, $context = null)
 	{
 
 		if ($value) {

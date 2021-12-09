@@ -13,7 +13,7 @@ class Ccsd_Referentiels_Hceres_Equiv // extends Ccsd_Referentiels_Abstract
     const NEWHCERESID   = 'NEWHCERESID';
     const OLDHCERESID   = 'OLDHCERESID';
 
-    static protected $_table = self::TABLE;
+    protected $_table = self::TABLE;
     protected $_primary = self::EQUIVID;
 
     // Propriétés de l'objet
@@ -52,7 +52,7 @@ class Ccsd_Referentiels_Hceres_Equiv // extends Ccsd_Referentiels_Abstract
 
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
 
-        $sql = $db->select()->from(self::$_table)
+        $sql = $db->select()->from($this->_table)
             ->where(self::NEWHCERESID . ' = ?', (int)$iNewId);
         $row = $db->fetchRow($sql);
 

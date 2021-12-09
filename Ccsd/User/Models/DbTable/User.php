@@ -10,21 +10,11 @@ class Ccsd_User_Models_DbTable_User extends Zend_Db_Table_Abstract {
     protected $_name = 'T_UTILISATEURS';
     protected $_primary = 'UID';
 
-    /**
-     * Ccsd_User_Models_DbTable_User constructor.
-     * @param array|false|string $env
-     */
     public function __construct($env = APPLICATION_ENV) {
-        parent::__construct();
+
         $this->_setAdapter(Ccsd_Db_Adapter_Cas::getAdapter($env));
     }
 
-    /**
-     * @param $q
-     * @param int $limit
-     * @param bool $valid
-     * @return array
-     */
     public function search($q, $limit = 100, $valid = false) {
         $q = trim($q);
         $sql = $this->select()->from(['U' => $this->_name], ['UID', 'USERNAME', 'EMAIL', 'CIV', 'LASTNAME', 'FIRSTNAME', 'MIDDLENAME', 'TIME_REGISTERED', 'TIME_MODIFIED', 'VALID']);
@@ -51,8 +41,6 @@ class Ccsd_User_Models_DbTable_User extends Zend_Db_Table_Abstract {
 
     /**
      * Retourne la liste des UID associés à une adresse mail
-     * @deprecated : cette fonction devrait rendre l'ensenmble des champs de la table voire, mieux un objet user
-     *               utiliser cette fonction qui ne rends que des uid est contre productif!
      * @param $email
      * @return array
      */
@@ -63,43 +51,4 @@ class Ccsd_User_Models_DbTable_User extends Zend_Db_Table_Abstract {
         return $db->fetchCol($sql);
     }
 
-    /**
-     * Retourne le dernier compte Ccsd crée et valide en fonction de l'adresse email
-     *
-     * @param $email string
-     * @param $triDate string
-     * @param $triValid string
-     * @param bool $nullIFmoreThanOne
-     *
-     *@return Ccsd_User_Models_User | NULL
-     *
-     */
-    public function selectAccountByEmail($email,$triDate = 'DESC',$triValid = 'DESC', $nullIFmoreThanOne = false)
-    {
-        if (($triDate != 'DESC') || ($triDate != 'ASC')) {
-            $triDate = 'DESC';
-        }
-        if (($triValid != 'DESC') || ($triValid != 'ASC')) {
-            $triValid = 'DESC';
-        }
-
-        $db = $this->getAdapter();
-
-        $sql = $db->select()->from($this->_name, ['UID', 'USERNAME', 'EMAIL', 'CIV', 'LASTNAME', 'FIRSTNAME', 'MIDDLENAME', 'TIME_REGISTERED', 'TIME_MODIFIED', 'VALID'])
-            ->where('EMAIL = ?', $email)->order([ "VALID $triValid", "TIME_REGISTERED $triDate" ]);
-
-        if (! $nullIFmoreThanOne) {
-            $sql->limit(1);
-        }
-        $res = $db->fetchAll($sql);
-        if ($nullIFmoreThanOne && (count($res) > 1)) {
-            return null;
-        }
-        $array =  $res[0];   /* user datas */
-        if ($array) {
-            return new Ccsd_User_Models_User($array);
-        } else {
-            return NULL;
-        }
-    }
 }

@@ -10,9 +10,6 @@
 // @see https://wiki.epfl.ch/infoscience-historique/documents/crossref.pdf
 require_once "Ccsd/Externdoc/Crossref.php";
 
-/**
- * Class Ccsd_Externdoc_Crossref_Conference
- */
 class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
 {
     /**
@@ -26,10 +23,10 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
     const XPATH_PROCEEDINGSTITLE = '/doi_records/doi_record/crossref/conference/proceedings_metadata/proceedings_title';
     const XPATH_PUBLISHER = '/doi_records/doi_record/crossref/conference/proceedings_metadata/publisher/publisher_name';
     const XPATH_CONFISBN = '/doi_records/doi_record/crossref/conference/proceedings_metadata/isbn[@media_type="print"]';
-    const XPATH_CONFCONTRIBUTOR = '/doi_records/doi_record/crossref/conference/conference_paper/contributors/person_name[@contributor_role="author"]';
-    const REL_XPATH_FIRSTNAME = 'given_name';
-    const REL_XPATH_LASTNAME = 'surname';
-    const REL_XPATH_ORCID = 'ORCID';
+    const XPATH_CONFCONTRIBUTOR = '/doi_records/doi_record/crossref/conference/conference_paper/contributors/person_name';
+    const XPATH_CONFCONTRIBFIRST = '/doi_records/doi_record/crossref/conference/conference_paper/contributors/person_name/given_name';
+    const XPATH_CONFCONTRIBLAST = '/doi_records/doi_record/crossref/conference/conference_paper/contributors/person_name/surname';
+    const XPATH_CONFCONTRIORCID = '/doi_records/doi_record/crossref/conference/conference_paper/contributors/person_name/ORCID';
         //const XPATH_AFFILIATION => '/doi_records/doi_record/crossref/conference/conference_paper/contributors/person_name/affiliation';
     const XPATH_CONFSTARTYEAR = '/doi_records/doi_record/crossref/conference/event_metadata/conference_date/@start_year';
     const XPATH_CONFSTARTMONTH = '/doi_records/doi_record/crossref/conference/event_metadata/conference_date/@start_month';
@@ -49,7 +46,6 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
     /**
      * @param string $id
      * @param DOMDocument $xmlDom
-     * @return Ccsd_Externdoc_Crossref_Conference
      */
     static public function createFromXML($id, $xmlDom)
     {
@@ -121,40 +117,28 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
         // Ajout de la langue
         $this->_metas[self::META_LANG] = $this->formateLang('', $titleLang);
 
-        $this->_metas[self::META][self::META_IDENTIFIER]["doi"] = $this->_id;
-        $this->_metas[self::AUTHORS] = $this->getAuthors(self::XPATH_CONFCONTRIBUTOR);
+        $this->_metas[self::META_IDENTIFIER]["doi"] = $this->_id;
+        $this->_metas[self::AUTHORS] = $this->getAuthors();
 
         $this->_metas[self::DOC_TYPE] = $this->_type;
         return $this->_metas;
     }
 
-    /**
-     * @return string[]
-     */
     public function getConfTitle()
     {
         return $this->getValue(self::XPATH_CONFTITLE);
     }
 
-    /**
-     * @return string[]
-     */
     public function getProceedingsTitle()
     {
         return $this->getValue(self::XPATH_PROCEEDINGSTITLE);
     }
 
-    /**
-     * @return string[]
-     */
     public function getPublisher()
     {
         return $this->getValue(self::XPATH_PUBLISHER);
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getConfIsbn()
     {
         $isbns = $this->getValue(self::XPATH_CONFISBN);
@@ -162,6 +146,8 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
     }
 
     /**
+     * @param $interMetas
+     * @param $internames
      * @return string
      */
     public function getConferenceStartDate()
@@ -174,6 +160,8 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
     }
 
     /**
+     * @param $interMetas
+     * @param $internames
      * @return string
      */
     public function getConferenceEndDate()
@@ -186,6 +174,8 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
     }
 
     /**
+     * @param $interMetas
+     * @param $internames
      * @return string
      */
     public function getCity()
@@ -205,6 +195,8 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
     }
 
     /**
+     * @param $interMetas
+     * @param $internames
      * @return string
      */
     public function getCountry()
@@ -225,9 +217,6 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
         return '';
     }
 
-    /**
-     * @return string
-     */
     public function getPage()
     {
         $first = $this->getValue(self::XPATH_FIRSTPAGE);
@@ -240,8 +229,9 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
     }
 
     /**
-     * @param string $defaultLang
-     * @return string[]
+     * @param $interMetas
+     * @param $internames
+     * @return string
      */
     public function getTitle($defaultLang='en')
     {
@@ -251,6 +241,28 @@ class Ccsd_Externdoc_Crossref_Conference extends Ccsd_Externdoc_Crossref
         // Transformation du titre en tableau avec la clé comme langue
         $title = $this->metasToLangArray($title, $defaultLang);
         return $title;
+    }
+
+    /**
+     * @param $interMetas
+     * @param $internames
+     * @return array
+     */
+    public function getAuthors()
+    {
+        $fullNames = $this->getValue(self::XPATH_CONFCONTRIBUTOR);
+        $fullNames = is_array($fullNames) ? $fullNames : [$fullNames];
+
+        $firstNames = $this->getValue(self::XPATH_CONFCONTRIBFIRST);
+        $firstNames = is_array($firstNames) ? $firstNames : [$firstNames];
+
+        $lastNames = $this->getValue(self::XPATH_CONFCONTRIBLAST);
+        $lastNames = is_array($lastNames) ? $lastNames : [$lastNames];
+
+        $orcids = $this->getValue(self::XPATH_CONFCONTRIORCID);
+        $orcids = is_array($orcids) ? $orcids : [$orcids];
+
+        return $this->formateAuthors($fullNames, $firstNames, $lastNames, [], $orcids);
     }
 }
 

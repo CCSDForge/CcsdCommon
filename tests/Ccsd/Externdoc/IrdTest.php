@@ -28,7 +28,7 @@ class Ccsd_Externdoc_IrdTest extends PHPUnit\Framework\TestCase {
 
     public function testDocType()
     {
-        self::assertEquals("ART", $this->_doc->getType());
+        self::assertEquals("", $this->_doc->getType());
     }
 
     public function testGetTitle()
@@ -93,7 +93,7 @@ class Ccsd_Externdoc_IrdTest extends PHPUnit\Framework\TestCase {
         self::assertEquals($authors[0]['firstname'], 'Nicolas');
         self::assertEquals($authors[0]['lastname'], 'Gratiot');
 
-        self::assertEquals($authors[1]['firstname'], 'E.');
+        self::assertEquals($authors[1]['firstname'], 'J.');
         self::assertEquals($authors[1]['lastname'], 'Anthony');
 
         self::assertEquals($authors[2]['firstname'], 'A.');

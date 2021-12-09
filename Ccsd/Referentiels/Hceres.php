@@ -21,7 +21,7 @@ class Ccsd_Referentiels_Hceres extends Ccsd_Referentiels_Abstract
      * Table du référentiel
      * @var string
      */
-    static public $_table = 'REF_HCERES';
+    protected $_table = 'REF_HCERES';
 
     /**
      * Clé primaire de la table
@@ -140,7 +140,7 @@ class Ccsd_Referentiels_Hceres extends Ccsd_Referentiels_Abstract
 
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
 
-        $sql = $db->select()->from(self::$_table)
+        $sql = $db->select()->from($this->_table)
                 ->where($this->_primary . ' = ?', $id);
         $row = $db->fetchRow($sql);
 
@@ -158,7 +158,7 @@ class Ccsd_Referentiels_Hceres extends Ccsd_Referentiels_Abstract
     protected function _createBaseQuery($critere, $orderby, $filter, $nbResultPerPage, $valid)
     {
         /* @var $select Zend_Db_Select */
-        $select = Zend_Db_Table_Abstract::getDefaultAdapter()->select()->from(self::$_table);
+        $select = Zend_Db_Table_Abstract::getDefaultAdapter()->select()->from($this->_table);
 
         if ($critere != "*") {
             $select->orWhere("HCERESID = '?'",   $critere);
@@ -313,14 +313,14 @@ class Ccsd_Referentiels_Hceres extends Ccsd_Referentiels_Abstract
     }
 
     /**
-     * Récupération de données d'indexation SolR
+     * Récupration de données d'indexation SolR
      *
      * @return array : tableau des données à indexer pour l'Hceres
      */
     public function getIndexationData()
     {
         $dataToIndex = [
-            // hceres_entityName_s : nom de l'entité évaluée
+            // :xhceres_entityName_s : nom de l'entité évaluée
             'name_s' => $this->NOM,
             // hceres_entityCodeUai_s : code UAI
             'codeUai_s' => $this->CODE_UAI,
@@ -338,13 +338,13 @@ class Ccsd_Referentiels_Hceres extends Ccsd_Referentiels_Abstract
             'academy_s' => $this->ACADEMIE,
             // hceres_entityRegion_s : région
             'region_s' => $this->REGION,
-            // hceres_entityType_s : type de structure évaluée:x
+            // hceres_entityType_s : type de structure évaluée
             'type_s' => $this->TYPEHCERES,
         ];
         /**
          *  hceres_entityCountry_s : pays
          */
-        if ($this->PAYSID) {
+        if (isset($this->PAYSID)) {
             $countryUp = strtoupper($this->PAYSID);
             $country[] = Zend_Locale::getTranslation($countryUp, 'country', 'fr');
             $country[] = Zend_Locale::getTranslation($countryUp, 'country', 'en');
@@ -353,7 +353,7 @@ class Ccsd_Referentiels_Hceres extends Ccsd_Referentiels_Abstract
             $dataToIndex['country_t'] = array_unique($country);
         }
 
-        if (in_array($this->TYPEHCERES, ['FF', 'FE'])) {
+        if (in_array($this->TYPEHCERES, ['FF'])) {
             // hceres_entityFormationType_s :
             $dataToIndex['formationType_s'] = $this->STYPEHCERES;
         } else if (in_array($this->TYPEHCERES, ['ER'])) {
@@ -380,7 +380,7 @@ class Ccsd_Referentiels_Hceres extends Ccsd_Referentiels_Abstract
 
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
 
-        $sql = $db->select()->from(self::$_table)
+        $sql = $db->select()->from($this->_table)
             ->where($this->_primary . ' = ?', $this->NEW_HCERESID);
         $row = $db->fetchRow($sql);
         if ($row) {

@@ -39,7 +39,7 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
      * Table du référentiel
      * @var string
      */
-    static public $_table 			= 'REF_STRUCTURE';
+    protected $_table 			= 'REF_STRUCTURE';
 
     /**
      * Table du référentiel
@@ -101,12 +101,10 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
     /* @var $_locked boolean : Verrouillage ou non de la structure */
     protected $_locked 			= 0;
 
-    /* @var $_idExt string[] : Identfiants exterieurs de la structure
-     *         [ identifiant de serveur externe => identifiant externe ]
-     */
+    /* @var $_idExt array : Identfiants exterieurs de la structure*/
     protected $_idExt			= array();
 
-    /* @var string $_datemodif timestamp */
+    /* @var $_datemodif timestamp */
     protected $_datemodif;
 
     /* @var $_md5 string */
@@ -216,7 +214,7 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
 
         $sql = $db->select()
-            ->from(self::$_table, array ('STRUCTID', 'SIGLE', 'STRUCTNAME', 'ADDRESS', 'PAYSID', 'URL', 'SDATE', 'EDATE', 'TYPESTRUCT', new Zend_Db_Expr('HEX(MD5) AS MD5'), 'DATEMODIF', 'VALID', 'LOCKED'))
+            ->from($this->_table, array ('STRUCTID', 'SIGLE', 'STRUCTNAME', 'ADDRESS', 'PAYSID', 'URL', 'SDATE', 'EDATE', 'TYPESTRUCT', new Zend_Db_Expr('HEX(MD5) AS MD5'), 'DATEMODIF', 'VALID', 'LOCKED'))
             ->where('STRUCTID = ?', $id);
 
         $row = $db->fetchRow($sql);
@@ -299,7 +297,7 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
 
         $sql = $db->select()->from(array("ref" => $this->_table_ref), array('ref.STRUCTID', 'ref.CODE'))->where("ref.PARENTID = ?", $this->_structid, Zend_Db::INT_TYPE)
-            ->joinLeft(array("s" => self::$_table), "ref.STRUCTID = s.STRUCTID");
+            ->joinLeft(array("s" => $this->_table), "ref.STRUCTID = s.STRUCTID");
 
         if (($row = $db->fetchAll($sql)) !== false) {
             foreach ($row as $r) {
@@ -370,9 +368,6 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
         return $this->_parents;
     }
 
-    /**
-     * @return array[]
-     */
     public function getAllParents()
     {
         $res = array();
@@ -527,33 +522,21 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
 
         $this->_appendXMLProperties($xml);
 
-        $root = $this->getXMLNode($xml);
-        $xml->appendChild($root);
-
-        return ($header) ? $xml->saveXML() : $xml->saveXML($xml->documentElement) . PHP_EOL;
-    }
-
-    /**
-     * @param DOMDocument $xml
-     * @return mixed
-     */
-    public function getXMLNode($xml) {
         $root = $xml->createElement('org');
         $root->setAttribute('type', $this->_typestruct);
         $root->setAttribute('xml:id', 'struct-' . $this->_structid);
         $root->setAttribute('status', strtoupper($this->_valid));
+
+        $xml->appendChild($root);
+
         $this->_appendXMLStructnamePart	 ($xml, $root)
             ->_appendXMLSiglePart		 ($xml, $root)
             ->_appendXMLAdditionnalPart ($xml, $root)
             ->_appendXMLParentsPart	 ($xml, $root);
-        return $root;
 
+        return ($header) ? $xml->saveXML() : $xml->saveXML($xml->documentElement) . PHP_EOL;
     }
 
-    /**
-     * @param DOMDocument $xml
-     * @return $this
-     */
     protected function _appendXMLProperties (DOMDocument &$xml)
     {
         $xml->formatOutput = true;
@@ -562,11 +545,6 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
         return $this;
     }
 
-    /**
-     * @param DOMDocument $xml
-     * @param DOMElement $root
-     * @return $this
-     */
     protected function _appendXMLStructnamePart (DOMDocument &$xml, DOMElement &$root)
     {
         if ( is_array($this->_idExt) ) {
@@ -582,11 +560,6 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
         return $this;
     }
 
-    /**
-     * @param DOMDocument $xml
-     * @param DOMElement $root
-     * @return $this
-     */
     protected function _appendXMLSiglePart (DOMDocument &$xml, DOMElement &$root)
     {
         if ($this->_sigle) {
@@ -607,11 +580,6 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
         return $this;
     }
 
-    /**
-     * @param DOMDocument $xml
-     * @param DOMElement $root
-     * @return $this
-     */
     protected function _appendXMLAdditionnalPart (DOMDocument &$xml, DOMElement &$root)
     {
         if ($this->_address || $this->_paysid || $this->_url) {
@@ -638,10 +606,6 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
         return $this;
     }
 
-    /**
-     * @param DOMDocument $xml
-     * @param DOMElement $root
-     */
     protected function _appendXMLParentsPart (DOMDocument &$xml, DOMElement &$root)
     {
         if ($this->getParentCount()) {
@@ -650,32 +614,25 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
             // Integration de toute l'arborescence des parents : @type="direct" pour les parents directs
             // et type="indirect" pour les parents de parents
             foreach ($this->getAllParents() as $parent) {
-                /** @var Ccsd_Referentiels_Structure $structure */
-                $structure = $parent['struct'];
-                if ( !in_array(Ccsd_Tools::ifsetor($parent['code'], '').$structure->getStructid(), $uniq) ) {
+                if ( !in_array(Ccsd_Tools::ifsetor($parent['code'], '').$parent['struct']->getStructid(), $uniq) ) {
                     $r = $xml->createElement('relation');
                     if ($parent['code']) {
                         $r->setAttribute('name', $parent['code']);
                     }
-                    $r->setAttribute('active', '#struct-' . $structure->getStructid());
-                    if ( in_array($structure->getStructid(), $this->getParentsStructids(false)) ) {
+                    $r->setAttribute('active', '#struct-' . $parent['struct']->getStructid());
+                    if ( in_array($parent['struct']->getStructid(), $this->getParentsStructids(false)) ) {
                         $r->setAttribute('type', 'direct');
                     } else {
                         $r->setAttribute('type', 'indirect');
                     }
                     $lr->appendChild($r);
-                    $uniq[] = Ccsd_Tools::ifsetor($parent['code'], ''). $structure->getStructid();
+                    $uniq[] = Ccsd_Tools::ifsetor($parent['code'], '').$parent['struct']->getStructid();
                 }
             }
             $root->appendChild($lr);
         }
     }
 
-    /**
-     * @param int $structid
-     * @param bool $header
-     * @return string
-     */
     static public function getFullXml ($structid = null, $header = true)
     {
         if (null != $structid) {
@@ -683,9 +640,7 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
             $xml = $struct->getXML($header);
             if ($struct->getParentCount()) {
                 foreach ($struct->getParents() as $parent) {
-                    /** @var Ccsd_Referentiels_Structure $struct */
-                    $struct = $parent['struct'];
-                    $xml .= self::getFullXml($struct->getStructid(), false);
+                    $xml .= self::getFullXml($parent['struct']->getStructid(), false);
                 }
             }
             return $xml;
@@ -702,7 +657,7 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
         if ( is_array($id) || is_numeric($id) ) {
             $select = $db->select()
                 ->from(array('DA' => 'DOC_AUTHOR'), array( new Zend_Db_Expr('COUNT(DISTINCT DOCID)') ))
-                ->joinLeft(array('DAS' => Hal_Document_Author::TABLE_DOCAUTHSTRUCT),'DAS.DOCAUTHID = DA.DOCAUTHID');
+                ->joinLeft(array('DAS' => 'DOC_AUTSTRUCT'),'DAS.DOCAUTHID = DA.DOCAUTHID');
             if ( is_array($id) ) {
                 $select->where('DAS.STRUCTID IN (?)', $id);
             } else {
@@ -725,7 +680,7 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
             $select = $db->select()
                 ->distinct()
                 ->from(array('DA' => 'DOC_AUTHOR'), array('DOCID'))
-                ->joinLeft(array('DAS' => Hal_Document_Author::TABLE_DOCAUTHSTRUCT),'DAS.DOCAUTHID = DA.DOCAUTHID');
+                ->joinLeft(array('DAS' => 'DOC_AUTSTRUCT'),'DAS.DOCAUTHID = DA.DOCAUTHID');
 //            ->joinLeft(array('DAS' => 'DOC_AUTSTRUCT'),'DAS.DOCAUTHID = DA.DOCAUTHID', null);
             if ( is_array($id) ) {
                 $select->where('DAS.STRUCTID IN (?)', $id);
@@ -1007,8 +962,8 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
             if (! $this->getStructid() ) {
                 // Nouvelle structure
                 try {
-                    $adapter->insert(self::$_table, $bind);
-                    $this->setStructid($adapter->lastInsertId(self::$_table));
+                    $adapter->insert($this->_table, $bind);
+                    $this->setStructid($adapter->lastInsertId($this->_table));
                     //Log de l'insertion
                     $action_log = 'CREATED';
                 } catch (Exception $e) {
@@ -1033,17 +988,17 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
                     // Est-on en train de sauvegarder une structure qui a ete aliase / detruite entre temps ?
                     $exist = (bool) $adapter->fetchOne(
                         $adapter->select()
-                            ->from(self::$_table, "STRUCTID")
+                            ->from($this->_table, "STRUCTID")
                             ->where($this->_primary . ' = ' . $this->getStructid())
                     );
 
                     if ($exist) {
-                        $adapter->update(self::$_table, $bind,  $this->_primary . ' = ' . $this->getStructid());
+                        $adapter->update($this->_table, $bind,  $this->_primary . ' = ' . $this->getStructid());
                         $action_log = 'MODIFIED';
                     } else {
                         // On recree la structure avec le mem ID precemment supprimee ????
                         $bind['STRUCTID'] = $this->getStructid();
-                        $adapter->insert(self::$_table, $bind);
+                        $adapter->insert($this->_table, $bind);
                         $action_log = 'NOTHING';
                     }
 
@@ -1155,19 +1110,19 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
 
     public function restore (array $data = array())
     {
-        function array_filter_recursive($input)
+        function array_filter_recursive($input, $primary)
         {
             foreach ($input as &$value) {
                 if (array_key_exists('parents', $value)) {
-                    $value = array_filter_recursive($value['parents']);
+                    $value = array_filter_recursive($value['parents'], $primary);
                 }
             }
 
-            return array_diff_key(array($this->_primary => "", 'MD5' => ""), $input);
+            return array_diff_key(array($primary => "", 'MD5' => ""), $input);
         }
 
         if (array_key_exists('parents', $data)) {
-            $data['parents'] = array_filter_recursive($data['parents']);
+            $data['parents'] = array_filter_recursive($data['parents'], $this->_primary);
         }
 
         if (array_key_exists ($this->_primary, $data)) {
@@ -1204,7 +1159,7 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
         //Log de suppression
         Ccsd_Referentiels_Logs::log($this->getStructid(), static::$core, Hal_Auth::getUid(), "DELETED", Zend_Json::encode(array ($data)));
 
-        $nb = $db->delete(self::$_table, $condition);
+        $nb = $db->delete($this->_table, $condition);
         if ($nb == 1) {
             Ccsd_Search_Solr_Indexer::addToIndexQueue(array($this->getStructid()), SPACE_NAME, 'DELETE', static::$core, 10);
         }
@@ -1623,7 +1578,7 @@ class Ccsd_Referentiels_Structure extends Ccsd_Referentiels_Abstract
 
 
         if ($typeStructure != self::TYPE_RESEARCHTEAM) {
-            $sql->join(array('s' => self::$_table), 'r.STRUCTID=s.STRUCTID', null);
+            $sql->join(array('s' => $this->_table), 'r.STRUCTID=s.STRUCTID', null);
 
             //Pour un département les structures associées ne peuvent etre que des équipes de recherche
             $typeStructAccepted = [self::TYPE_RESEARCHTEAM];

@@ -42,16 +42,13 @@ class Ccsd_Tex_LanguageTest extends PHPUnit_Framework_TestCase
 ';
         $text .= '\\section{Japanese}' . "\n";
         $text .= '露の世は、露の世ながら、さりながら。' . "\n";
-        $text .= 'Об интонационных особенностях русского и французского слова и выражения: примеры просодических ошибок франкоговорящих студентов, изучающих русский язык' . "\n";
         $langZh = Ccsd_Tex_Language::getLanguage('Chinese');
         $langSa = Ccsd_Tex_Language::getLanguage('Sanskrit');
         $langAr = Ccsd_Tex_Language::getLanguage('Arabic');
         $langJa = Ccsd_Tex_Language::getLanguage('Japanese');
-        $langRu = Ccsd_Tex_Language::getLanguage('Russian');
 
         $this -> assertRegExp('/\\\\begin\\{sanskrit\\}/', $langSa -> addLanguageTags($text));
         $this -> assertRegExp('/\\\\begin\\{Arabic\\}/'  , $langAr -> addLanguageTags($text));
         $this -> assertRegExp('/\\{\\\\japanesefont /'   , $langJa -> addLanguageTags($text));
-        $this->assertRegExp('/russian/', $langRu->addLanguageTags($text));
 }
 }

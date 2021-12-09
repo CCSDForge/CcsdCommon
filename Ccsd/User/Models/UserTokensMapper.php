@@ -22,6 +22,10 @@ class Ccsd_User_Models_UserTokensMapper
         return $this;
     }
 
+    /**
+     * @return \Zend_Db_Table_Abstract
+     * @throws Exception
+     */
     public function getDbTable ()
     {
         if (null === $this->_dbTable) {

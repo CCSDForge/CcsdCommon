@@ -10,7 +10,7 @@
 class Ccsd_Dataprovider_Ird extends Ccsd_Dataprovider
 {
 
-    const IRD_URL = "http://www.documentation.ird.fr/hor/";
+    const IRD_URL = "http://www.documentation.ird.fr/fdi/noticehal.php";
 
     /**
      * @param $id
@@ -19,10 +19,9 @@ class Ccsd_Dataprovider_Ird extends Ccsd_Dataprovider
     public function getDocument($id)
     {
         $this->_id = $id;
-        $xmlDom = $this->requestXml(self::IRD_URL);
+        $xmlDom = $this->requestXml(NULL);
 
         if(!$xmlDom) {
-            $this->setError('library_meta_nourl');
             return null;
         }
 
@@ -46,6 +45,6 @@ class Ccsd_Dataprovider_Ird extends Ccsd_Dataprovider
 
     public function requestXml($url, $postfield = NULL, $timeout = 10)
     {
-        return parent::requestXml($url . $this->_id .'.mods');
+        return parent::requestXml(self::IRD_URL . '?ninv=' . $this->_id);
     }
 }

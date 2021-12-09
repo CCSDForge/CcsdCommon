@@ -39,7 +39,7 @@ class Ccsd_Externdoc_BibcodeTest extends PHPUnit\Framework\TestCase {
     public function testGetAbstract()
     {
         $abstract = $this->_metas['metas']['abstract'];
-        self::assertEquals(['en' => "Not Available"], $abstract);
+        self::assertEquals($abstract, ['en' => "Not Available"]);
     }
 
     public function testgetDate()

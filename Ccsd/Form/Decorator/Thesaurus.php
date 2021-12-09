@@ -46,20 +46,20 @@ class Ccsd_Form_Decorator_Thesaurus extends Zend_Form_Decorator_Abstract
         $this->_prefix = 'thesaurus/';
         
         /* @var Ccsd_Form_Element_Thesaurus $element */
-        $element   = $this->getElement();
+        $this->_element   = $this->getElement();
         
-        $view    = $element->getView();
+        $view    = $this->_element->getView();
         if (null === $view) {
             return $content;
         }
 
         /* Tableau JSON */
-        $this->items = $element->getData();
+        $this->items = $this->_element->getData();
         if (!is_array ($this->items)) {
             return $content;
         }
 
-        $this->values = $element->getValue();
+        $this->values = $this->_element->getValue();
         if (!(isset ($this->values) && $this->values)) {
             $this->values = array ();
         }
@@ -69,6 +69,14 @@ class Ccsd_Form_Decorator_Thesaurus extends Zend_Form_Decorator_Abstract
 
         /* Fonction à surcharger */
         $this->_initInternVariables ();
+        
+        /* Tableau JSON pour l'interdisciplinarité */
+//        if ($this->interdisciplinarite) {
+//        	$this->domain_inter = $this->_element->getInterdisciplinarite();
+//        	if (!is_array ($this->domain_inter)) {
+//        		return $content; /* TODO */
+//        	}
+//        }
 
         /* Uniquemet si l'élément permet la sélection d'items */
         if ($this->selectable) {
@@ -216,6 +224,24 @@ class Ccsd_Form_Decorator_Thesaurus extends Zend_Form_Decorator_Abstract
     
     protected function _renderInterdisciplinarite ()
     {
+//    	if ($this->interdisciplinarite) {
+//    		$this->_output .= "<div class='clearfix row' style='margin-top: 15px; ";
+//    		/* Uniquemet si l'élément permet la sélection d'items */
+//    		if ($this->selectable)
+//    			$this->_output .= $this->isBtnDisplayed ? "" : ($this->collapsable ? "display: none;" : "");
+//    		$this->_output .= "'>";
+//    		$this->_output .= "<div class='col-md-2'>";
+//    		$this->_output .= "<button type='button' class='btn btn-xs btn-sm btn-success' style='padding: 3px 10px;' ";
+//    		$this->_output .= "data-status='" . ($this->isBtnInterDisplayed ? "show" : "hide") . "' ";
+//    		$this->_output .= "data-hide='" . Ccsd_Form::getDefaultTranslator()->translate($this->_element->getOption_collapse_inter_msg()) . "' ";
+//    		$this->_output .= "data-show='" . Ccsd_Form::getDefaultTranslator()->translate($this->_element->getOption_expand_inter_msg()) . "' ";
+//    		$this->_output .= "onclick='$(\"#panel_" . $this->_element->getName() . "\").find(\".hal\").toggle(); if ($(this).attr(\"data-status\") == \"hide\") { $(this).html($(this).attr(\"data-hide\")); $(this).attr(\"data-status\", \"show\"); } else { $(this).html($(this).attr(\"data-show\")); $(this).attr(\"data-status\", \"hide\"); }' ";
+//    		$this->_output .= ">";
+//    		$this->_output .= $this->isBtnInterDisplayed ? Ccsd_Form::getDefaultTranslator()->translate($this->_element->getOption_collapse_inter_msg()) : Ccsd_Form::getDefaultTranslator()->translate($this->_element->getOption_expand_inter_msg());
+//    		$this->_output .= "</button>";
+//    		$this->_output .= "</div>";
+//    		$this->_output .= "</div>";
+//    	}
     }
     
     private function _addJavascript ()
@@ -311,10 +337,7 @@ class Ccsd_Form_Decorator_Thesaurus extends Zend_Form_Decorator_Abstract
         
         $this->_output .= "</div>";
     }
-
-    /**
-     * @return array
-     */
+    
     protected function _update ()
     {
         $aData = $this->items;
@@ -373,12 +396,7 @@ class Ccsd_Form_Decorator_Thesaurus extends Zend_Form_Decorator_Abstract
         $root				= $this->root_selectable;
 
         /* Function récursive pour le rendu d'items */
-        $render = function ($item, $code = null, $prefix = "") use (
-            &$render, &$output, $isBtnDisplayed, $use_display,
-            $displayed_status, &$indice, $typeahead_v, $isShowing_icons,
-            $icon_child, $display_tag, $icon_close_pa, $isShowing_caret,
-            &$endJavascript, $root) {
-
+        $render = function ($item, $code = null, $prefix = "") use (&$render, &$output, $isBtnDisplayed, $use_display, $displayed_status, &$indice, $typeahead_v, $isShowing_icons, $icon_child, $display_tag, $icon_close_pa, $isShowing_caret, &$endJavascript, $root) {
             $childrens = !empty($code);
 
             $style = "";
@@ -470,7 +488,54 @@ class Ccsd_Form_Decorator_Thesaurus extends Zend_Form_Decorator_Abstract
         foreach ($this->items as $item => $code) {
             $render ($item, $code);
         }
+//        if ($this->interdisciplinarite) {
+//        	$this->_output .= "</ul>";
+//        	$this->_output .= "</div>";
+//        	$this->_output .= "<div class='hal' style='max-height: ";
+//        	$this->_output .= $this->typeahead_h;
+//        	$this->_output .= "px; overflow: auto; ";
+//        	/* Uniquemet si l'élément permet la sélection d'items */
+//        	if ($this->selectable)
+//        		$this->_output .= $this->isBtnInterDisplayed ? "" : ($this->collapsable ? "display: none;" : "");
+//        	$this->_output .= "'>";
+//        	$this->_output .= "<ul class='tree' style='margin-top: 15px;'>";
 
+  
+//        	$flatten_previous = iterator_to_array (
+//        		new RecursiveIteratorIterator(
+//        			new RecursiveArrayIterator($this->items), 
+//        			RecursiveIteratorIterator::SELF_FIRST, 
+//        			true
+//        		)
+//           	);
+//
+//        	$o = new RecursiveIteratorIterator(new RecursiveArrayIterator($this->domain_inter), RecursiveIteratorIterator::CHILD_FIRST, true);
+//        	
+//        	// * @var $o RecursiveIteratorIterator * /
+//        	foreach ($o as $i => $v) {  
+//        		if (array_key_exists($i, $flatten_previous)) {
+//        			
+// 					if (empty ($v)) { 						 
+// 						$o->getSubIterator($o->getDepth())->offsetUnset($i);
+// 						for ($d = $o->getDepth()-1; $d>-1; $d--) {
+// 							$o->getSubIterator($d)->offsetSet($o->getSubIterator($d)->key(), $o->getSubIterator($d+1)->getArrayCopy());
+// 						}
+// 					}
+// 				}
+//        	}
+
+        	// Appel au rendu d'items 
+//        	foreach ($o->getArrayCopy() as $item => $code) {
+//        		$render ($item, $code, "hal_");
+//        	}
+        	
+//        	foreach ($this->domain_inter as $item => $code)
+//        		$render ($item, $code, "hal_");
+//        	
+//        	unset ($flatten_previous);
+//        	unset ($o);
+//        }
+      
         $this->ouput = $output;
         $this->endJavascript = $endJavascript;
     }
@@ -493,6 +558,7 @@ class Ccsd_Form_Decorator_Thesaurus extends Zend_Form_Decorator_Abstract
     {
         $this->_output .= "</ul>";
         $this->_output .= "</div>";
+//        $this->_renderInterdisciplinarite();
         $this->_output .= "</div>";
     }
     

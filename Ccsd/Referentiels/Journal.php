@@ -1,26 +1,11 @@
 <?php
 
-/**
- * Class Ccsd_Referentiels_Journal
- *
- * @property string $EISSN
- * @property string $ISSN
- * @property string $JNAME
- * @property string $JID
- * @property string $SHORTNAME
- * @property string $PUBLISHER
- * @property string ROOTDOI
- * @property string SHERPA_COLOR
- * @property string $URL
- * @property string $VALID
- *
- */
 class Ccsd_Referentiels_Journal extends Ccsd_Referentiels_Abstract
 {
 
     static public $core = 'ref_journal';
 
-    static public $_table = 'REF_JOURNAL';
+    protected $_table = 'REF_JOURNAL';
 
     protected $_primary = 'JID';
 
@@ -92,7 +77,7 @@ class Ccsd_Referentiels_Journal extends Ccsd_Referentiels_Abstract
     protected function _createBaseQuery($critere, $orderby, $filter, $nbResultPerPage, $valid) 
     {
      	/* @var $select Zend_Db_Select */
-    	$select = Zend_Db_Table_Abstract::getDefaultAdapter()->select()->from(self::$_table);
+    	$select = Zend_Db_Table_Abstract::getDefaultAdapter()->select()->from($this->_table);
     	 
     	if ($critere != "*") {
     		$select->orWhere("JID = '?'",            $critere);
@@ -149,13 +134,7 @@ class Ccsd_Referentiels_Journal extends Ccsd_Referentiels_Abstract
 
         return $this->_form;
     }
-
-    /**
-     * @deprecated : This fonction seems not to be used!!!  Creator.php don't use it!
-     * @param bool $header
-     * @return string
-     *
-     */
+    
     public function getXML($header = true) {
     
         $xml = new Ccsd_DOMDocument('1.0', 'utf-8');
@@ -246,26 +225,4 @@ class Ccsd_Referentiels_Journal extends Ccsd_Referentiels_Abstract
     {
         return $this->JNAME;
     }
-
-    /**
-     * @param $id
-     * @return Ccsd_Referentiels_Journal|null
-     */
-    public static function findById(int $id)
-    {
-
-        $db = Zend_Db_Table_Abstract::getDefaultAdapter();
-
-        $sql = $db->select()->from(static::$_table)->where('JID = ?', $id);
-
-        $row = $db->fetchRow($sql);
-
-        if ($row) {
-            return new Ccsd_Referentiels_Journal(0, $row);
-        }
-
-        return null;
-    }
-
-
 }

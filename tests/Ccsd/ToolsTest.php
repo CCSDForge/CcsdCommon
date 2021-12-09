@@ -96,11 +96,11 @@ class Ccsd_Tools_Test extends PHPUnit_Framework_TestCase
      * @param $res string
      * @param $success bool // indique si on doit tester l'egalite ou la non egalite
      */
-    public  function testHtmlToTex($text, $res, $success, $greek = true) {
+    public  function testHtmlToTex($text, $res, $success) {
         if ($success) {
-            $this->assertEquals($res, Ccsd_Tools::htmlToTex($text,$greek));
+            $this->assertEquals($res, Ccsd_Tools::htmlToTex($text));
         } else {
-            $this->assertNotEquals($res, Ccsd_Tools::htmlToTex($text,$greek));
+            $this->assertNotEquals($res, Ccsd_Tools::htmlToTex($text));
         }
         
     }
@@ -132,18 +132,8 @@ class Ccsd_Tools_Test extends PHPUnit_Framework_TestCase
                 'Un texte avec deux point : voire avec un point virgule ; mais des maths $f:x \right x^2$ et des entities &#234; et un <NNT>762354</NNT>',
                 'Un texte avec deux point\,: voire avec un point virgule\,; mais des maths $f:x \right x^2$ et des entities {\^e} et un <NNT>762354</NNT>',
                 true
-            ],
-            'Math Greek' => [
-                'Un text Λ ou β',
-                'Un text $\Lambda$ ou $\beta$',
-                true,
-            ],
-            'True Greek' => [
-                'Un text Λ ou β',
-                'Un text Λ ou β',
-                true,
-                false // Don't want rewrite greek letter
-            ],
+            ]
+
 
         ];
     }
@@ -264,9 +254,6 @@ class Ccsd_Tools_Test extends PHPUnit_Framework_TestCase
         $this -> assertEquals($result, Ccsd_Tools::getFromNormalized($fullname, $email));
     }
 
-    /**
-     * @return array
-     */
     public function provide_getFromNormalized() {
         return [
             1 => ["Jon Doe","Jon.Doe@labas.com",'"Jon Doe" <Jon.Doe@labas.com>' ],
@@ -276,40 +263,4 @@ class Ccsd_Tools_Test extends PHPUnit_Framework_TestCase
             5 => ["Jon-K. Doe","Jon.Doe@labas.com",'"Jon Doe" <Jon.Doe@labas.com>'],
         ];
     }
-
-    /**
-     * @dataProvider provide_upperWord
-     * @param bool $bool   // True si le test doit etre egal au resultat, False si il doit etre different
-     * @param string $fullname
-     * @param string $res
-     */
-    public function test_upperword($bool, $fullname, $res) {
-        if ($bool) {
-            $this->assertEquals($res, Ccsd_Tools::upperWord($fullname));
-        } else {
-            $this->assertNotEquals($res, Ccsd_Tools::upperWord($fullname));
-        }
-    }
-
-    /**
-     *
-     * @return array
-     */
-    public function provide_upperWord() {
-        return [
-            10 => [True, "Fred Van    Leuven",'Fred van Leuven' ],
-            20 => [True, ' Isabel  Van Der Auwera   ','Isabel van der Auwera'],
-            22 => [True, 'Van Der Boule', 'van der Boule'],
-            30 => [True, 'Christian','Christian'],
-            40 => [True, '   De Main    ','de Main'],
-            50 => [True, 'A ABORIA','a Aboria'],
-            60 => [True, 'De    LOS  playa    ','de los Playa'],
-            70 => [True, "DE L'Acompte","de l'Acompte"],
-            80 => [True, 'Bruno De zu VAN DEN dos','Bruno de zu van den Dos'],
-            90 => [True, "FaZU OFFEN BahnOf Bit'idy", "Fazu Offen Bahnof Bit'Idy"],
-            // Ce serai bien de corriger cela lors qu'on differentiera les auteurs anonymes (institutionnel)
-            100 => [False, 'Collectif OPENAIRE' ,'Collectif OPENAIRE'  ],
-        ];
-    }
-
 }

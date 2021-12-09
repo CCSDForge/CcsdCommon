@@ -229,9 +229,9 @@ class Ccsd_Search_Solr_Indexer_RefStructure extends Ccsd_Search_Solr_Indexer
 
     /**
      * Index Id ext eg rnsr, idref etc.
-     * @param Solarium\QueryType\Update\Query\Document\Document $ndx
-     * @param Ccsd_Referentiels_Structure $structure
-     * @return Solarium\QueryType\Update\Query\Document\Document
+     * @param $ndx
+     * @param $structure
+     * @return Ccsd_Referentiels_Idext
      */
     private function indexIdExt($ndx, $structure, $prefix = '')
     {

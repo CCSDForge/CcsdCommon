@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Class Ccsd_Form_Element_MultiTextLang
- */
 abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiText
 {
     use Ccsd_Form_Trait_Populate;
@@ -11,12 +8,6 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
     protected $_pluriValues = false;
     protected $_indice = "";
     protected $_stillChoice = true;
-    /**
-     * @var bool
-     * @deprecated because unused so certainly badly treated...
-     * @unused just set!
-     */
-    protected $hasShiftValue = false;
 
     const VALIDATOR_NOT_SAME = 'NotSame';
 
@@ -38,6 +29,8 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
 
     	if ($this->isPluriValues()) {
     		return parent::setValue(array_map(function ($v) { if (!is_array($v)) return $v; else return array_filter ($v); }, $value ? $value : array ()));
+    		//return parent::setValue(array_map('array_filter', $value ? $value : array ()));
+    		
     	}
     	if ($value == null) {
             $value = array();
@@ -45,9 +38,6 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
         return parent::setValue(array_filter($value));
     }
 
-    /**
-     * @return string
-     */
     public function getFullyQualifiedName() 
     {
         $name = $this->getName();
@@ -57,6 +47,7 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
         }
 
         if ($this->isArray()) {
+
             $name .= '[' . $this->_indice . ']';
             
             if ($this->isPluriValues()) {
@@ -66,10 +57,7 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
 
         return $name;
     }
-
-    /**
-     * @return bool
-     */
+    
     public function isPluriValues ()
     {
         return $this->_pluriValues;
@@ -92,10 +80,7 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
         $this->_indice = $indice;
         return $this;
     }
-
-    /**
-     * @return string
-     */
+    
     public function getIndice ()
     {
         return $this->_indice;
@@ -112,10 +97,7 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
             $this->_languages[$i] = Zend_Locale::getTranslation($libelle, 'language', $this->getTranslator()->getLocale());
         }
     }
-
-    /**
-     * @return mixed
-     */
+    
     public function getLanguages ()
     {
         return $this->_languages;
@@ -129,7 +111,6 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
      * @param bool $lastElement
      * @param string $subIndice
      * @return string
-     * @throws Zend_Form_Exception
      */
     protected function createFilledElement($val, $lang, $content, &$decorator, $lastElement = false, $subIndice = "none")
     {
@@ -166,7 +147,6 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
      * @param Ccsd_Form_Decorator_Group $decorator
      * @param string $content
      * @return string
-     * @throws Zend_Form_Exception
      */
     public function renderValues ($decorator, $content = '')
     {
@@ -192,9 +172,7 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
 	    }
 
         // On récupère le nombre de langues obligatoires
-        /** @var Ccsd_Form_Validate_RequiredLang $langValidator */
-        $langValidator = $this->getValidator('RequiredLang');
-        $nb = $langValidator ? $langValidator->getMin() : 1;
+	    $nb = $this->getValidator('RequiredLang') ? $this->getValidator('RequiredLang')->getMin() : 1;
 
     	// Si le nombre de langues obligatoires -1 est rempli, on ne passe pas par cette boucle
         // Sinon, on ajoute $nb-1 champs vides (le dernier sera ajouté en dehors de la boucle)
@@ -227,18 +205,12 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
     	$this->_stillChoice = $b;
     	return $this;
     }
-
-    /**
-     * @return bool
-     */
+    
     public function isStillChoice ()
     {
     	return $this->_stillChoice;
     }
-
-    /**
-     * @throws Zend_Loader_Exception
-     */
+    
     public function initValidators ()
     {
         if (!$this->isPluriValues() && !$this->getPluginLoader('validate')->isLoaded(self::VALIDATOR_NOT_SAME)) {
@@ -250,7 +222,7 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
     }
 
     /**
-     * @param Zend_Form_Element $validator  // Zend_Validate_Interface devrait suffire... Mais NON! Merci Zend
+     * @param $validator
      * @param array $value
      * @param $messages
      * @param $errors
@@ -357,9 +329,6 @@ abstract class Ccsd_Form_Element_MultiTextLang extends Ccsd_Form_Element_MultiTe
         $this->_conditionValidators = !$validator instanceof Ccsd_Form_Validate_NotSame && !$validator instanceof Ccsd_Form_Validate_RequiredLang;
     }
 
-    /**
-     * @return array
-     */
     public function getGroupErrors()
     {
         return $this->getErrors();

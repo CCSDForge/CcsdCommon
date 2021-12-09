@@ -98,9 +98,9 @@ abstract class Ccsd_Search_Solr_Indexer extends Ccsd_Search_Solr
         $this->selectIds($select);
 
         if ($whereCondition != null) {
-            $select->where($whereCondition);
             Ccsd_Log::message("Indexation des documents d'après la condition $whereCondition", $this->isDebugMode(), '', $this->getLogFilename());
             Ccsd_Log::message("SQL :  " . $select->__toString(), $this->isDebugMode(), '', $this->getLogFilename());
+            $select->where($whereCondition);
         }
 
         $stmt = $select->query();

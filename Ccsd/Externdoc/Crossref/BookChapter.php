@@ -7,14 +7,12 @@
  * Time: 16:19
  */
 
-require_once __DIR__ . "/../Crossref.php";
-require_once __DIR__ . "/Book.php";
+require_once "Ccsd/Externdoc/Crossref.php";
+require_once "Ccsd/Externdoc/Crossref/Book.php";
 
-/** @see https://wiki.epfl.ch/infoscience-historique/documents/crossref.pdf
- * */
+// @see https://wiki.epfl.ch/infoscience-historique/documents/crossref.pdf
 class Ccsd_Externdoc_Crossref_BookChapter extends Ccsd_Externdoc_Crossref_Book
 {
-    const XPATH_CONTRIBUTORS = "/doi_records/doi_record/crossref/book/content_item/contributors";
     /**
      * @var string
      */
@@ -22,8 +20,7 @@ class Ccsd_Externdoc_Crossref_BookChapter extends Ccsd_Externdoc_Crossref_Book
 
     /**
      * @param string $id
-     * @param DOMDocument $xmlDom
-     * @return Ccsd_Externdoc_Crossref_BookChapter
+     * @param string $xmlDom
      */
     static public function createFromXML($id, $xmlDom)
     {
@@ -32,26 +29,6 @@ class Ccsd_Externdoc_Crossref_BookChapter extends Ccsd_Externdoc_Crossref_Book
         return $doc;
     }
 
-    /**
-     * @param string $defaultLang
-     * @return array|string|string[]
-     */
-    public function getBookTitle($defaultLang='en')
-    {
-        $title = $this->getValue(self::XPATH_TITLES.self::REL_XPATH_TITLE);
-        $title = empty($title) ? "" : $title;
-        $subtitle = $this->getValue(self::XPATH_TITLES.self::REL_XPATH_SUBTITLE);
-        $subtitle = empty($subtitle) ? "" : ". " . $subtitle;
-
-        // Transformation du titre en tableau avec la clé comme langue
-        $title = $this->metasToLangArray($title . $subtitle, $defaultLang);
-        return $title;
-    }
-
-    /**
-     * @param string $defaultLang
-     * @return array|string|string[]
-     */
     public function getTitle($defaultLang='en')
     {
         $title = $this->getValue(self::XPATH_CONTENT_ITEM.self::REL_XPATH_TITLE);
@@ -62,9 +39,6 @@ class Ccsd_Externdoc_Crossref_BookChapter extends Ccsd_Externdoc_Crossref_Book
         return $title;
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getSubtitle()
     {
         $subtitle = $this->getValue(self::XPATH_CONTENT_ITEM.self::REL_XPATH_SUBTITLE);
@@ -72,17 +46,11 @@ class Ccsd_Externdoc_Crossref_BookChapter extends Ccsd_Externdoc_Crossref_Book
         return $subtitle;
     }
 
-    /**
-     * @return string|string[]
-     */
     public function getIdentifier()
     {
         return $this->getValue(self::XPATH_DOI_DATA.self::REL_XPATH_DOI);
     }
 
-    /**
-     * @return string
-     */
     public function getDate()
     {
         $yearconst = $this->getValue(self::XPATH_CONTENT_DATE.self::REL_XPATH_PUBLICATION_YEAR);
@@ -97,9 +65,6 @@ class Ccsd_Externdoc_Crossref_BookChapter extends Ccsd_Externdoc_Crossref_Book
         return $this->formateDate($yearconst, $monthconst, $dayconst);
     }
 
-    /**
-     * @return string
-     */
     public function getPage()
     {
         $first = $this->getValue(self::XPATH_CONTENT_PAGES . self::REL_XPATH_FIRSTPAGE);
@@ -111,11 +76,31 @@ class Ccsd_Externdoc_Crossref_BookChapter extends Ccsd_Externdoc_Crossref_Book
         return $this->formatePage($first, $last);
     }
 
-    // Refaire la fonction getMetaDatas spécifique
-
     /**
+     * @param $interMetas
+     * @param $internames
      * @return array
      */
+    public function getAuthors()
+    {
+        // TODO : prendre en compte les autres infos de l'auteur : affiliations, etc
+
+        $fullNames = $this->getValue(self::XPATH_CONTENT_CONTRIBUTORS.self::REL_XPATH_PERS);
+        $fullNames = is_array($fullNames) ? $fullNames : [$fullNames];
+
+        $firstNames = $this->getValue(self::XPATH_CONTENT_CONTRIBUTORS.self::REL_XPATH_FIRSTNAMES);
+        $firstNames = is_array($firstNames) ? $firstNames : [$firstNames];
+
+        $lastNames = $this->getValue(self::XPATH_CONTENT_CONTRIBUTORS.self::REL_XPATH_LASTNAMES);
+        $lastNames = is_array($lastNames) ? $lastNames : [$lastNames];
+
+        $orcids = $this->getValue(self::XPATH_CONTENT_CONTRIBUTORS.self::REL_XPATH_ORCID);
+        $orcids = is_array($orcids) ? $orcids : [$orcids];
+
+        return $this->formateAuthors($fullNames, $firstNames, $lastNames, [], $orcids);
+    }
+
+    // Refaire la fonction getMetaDatas spécifique
     public function getMetadatas()
     {
         if (!empty($this->_metas)) {
@@ -167,7 +152,8 @@ class Ccsd_Externdoc_Crossref_BookChapter extends Ccsd_Externdoc_Crossref_Book
                     $meta = $this->getEditor();
                     break;
                 case self::META_BOOKTITLE :
-                    $meta = $this->getBookTitle();
+                case self::META_ISSUE :
+                    // TODO
                     break;
                 default:
                     break;
@@ -183,8 +169,8 @@ class Ccsd_Externdoc_Crossref_BookChapter extends Ccsd_Externdoc_Crossref_Book
 
         // Ajout de la langue
         $this->_metas[self::META_LANG] = $this->formateLang($this->getDocLang(), $titleLang);
-        $this->_metas[self::META][self::META_IDENTIFIER]["doi"] = $this->_id;
-        $this->_metas[self::AUTHORS] = $this->getAuthors(self::XPATH_CONTENT_CONTRIBUTORS . self::REL_XPATH_PERS);
+        $this->_metas[self::META_IDENTIFIER]["doi"] = $this->_id;
+        $this->_metas[self::AUTHORS] = $this->getAuthors();
 
         $this->_metas[self::DOC_TYPE] = $this->_type;
         return $this->_metas;

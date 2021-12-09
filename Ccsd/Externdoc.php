@@ -75,11 +75,6 @@ abstract class Ccsd_Externdoc
     const META_CONFISBN         = "conferenceISBN";
     const META_PROCEEDINGSTITLE = "proceedingsTitle";
     const META_SERIESEDITOR     = "seriesEditor";
-    const META_CLASSIFICATION   = "classification";
-    const META_SEEALSO          = "seeAlso";
-    const META_FUNDING          = "funding";
-    const META_ANRPROJECT       = "anrProject";
-    const META_EUROPEANPROJECT  = "europeanProject";
     const META_ISBN          = "ISBN";
     const AUTHORS            = "authors";
     const CONFAUTHORS        = 'confAuthors';
@@ -88,7 +83,7 @@ abstract class Ccsd_Externdoc
     const AUTHORS_INITIALS   = "initials";
     const ERROR              = "iderror";
     const REFERENCES         = "references";
-    const STRUCTURES         = "structures";
+    const STRUCTURES = "structures";
 
     protected $_wantedTags = array(
         self::ERROR,
@@ -121,12 +116,7 @@ abstract class Ccsd_Externdoc
         self::META_CONFISBN,
         self::META_PROCEEDINGSTITLE,
         self::META_SERIESEDITOR,
-        self::META_ISBN,
-        self::META_CLASSIFICATION,
-        self::META_SEEALSO,
-        self::META_FUNDING,
-        self::META_ANRPROJECT,
-        self::META_EUROPEANPROJECT
+        self::META_ISBN
     );
 
     /**
@@ -170,69 +160,36 @@ abstract class Ccsd_Externdoc
     }
 
     /**
-     * @param DOMNodeList $nodes
-     * @return string[]|string
-     */
-    protected function getNodesListValue($nodes) {
-
-        if (! isset($nodes)) {
-            return [];
-        }
-        if ($nodes->length == 0) {
-            return '';
-        }
-        // Children : tableau de DOMElements
-        // Unique élément : l'élément est une string
-        if ($nodes->length == 1) {
-            return Ccsd_Tools::space_clean($nodes[0]->nodeValue);
-            // Multiple éléments : ajoutés dans un tableau
-        } else  {
-            $values = [];
-            foreach ($nodes as $child) {
-                $values[] = Ccsd_Tools::space_clean($child->nodeValue);
-            }
-            return $values;
-        }
-    }
-
-    /**
-     * @param DOMXPath $xpathContext
-     * @param string $value
-     * @param DOMNode $node
-     * @return string|string[]
-     */
-    protected function getNodesValue($xpathContext, $value, $node=null)
-    {
-        if ($node) {
-            $children = $xpathContext->query($value, $node);
-        } else {
-            $children = $xpathContext->query($value);
-        }
-        return $this->getNodesListValue($children);
-    }
-
-    /**
      * @param $value
-     * @param DOMNode $nodeXpath
-     * @return string|string[]
+     * @return DOMNodeList[]|DOMNodeList
      */
-    protected function getValue($value, $nodeXpath=null)
+    protected function getValue($value)
     {
-        if ($nodeXpath) {
-            $root = $nodeXpath;
-        } else {
-            $root = $this->getDomPath();
+        $children = $this->getDomPath()->query($value);
+
+        if (isset($children)) {
+            // Children : tableau de DOMElements
+            // Unique élément : l'élément est une string
+            if ($children->length == 1) {
+                return Ccsd_Tools::space_clean($children[0]->nodeValue);
+                // Multiple éléments : ajoutés dans un tableau
+            } else if ($children->length > 1) {
+                $values = [];
+                foreach ($children as $child) {
+                    $values[] = Ccsd_Tools::space_clean($child->nodeValue);
+                }
+                return $values;
+            }
         }
-        $children = $root->query($value);
-        return $this->getNodesListValue($children);
+
+        return [];
     }
 
     /**
      * Recherche si pour un identifiant donnée, il existe déjà cette valeur en base
      * @param Zend_Db_Adapter_Abstract $dbAdapter
-     * @param string $type
      * @param string $id : identifiant
-     * @return array
+     * @return mixed
      */
     static public function hasCopy($dbAdapter, $type, $id)
     {
@@ -243,16 +200,18 @@ abstract class Ccsd_Externdoc
 
     /**
      * Retourne l'e type'identifiant de la métadonnée
-     * @return string
+     * @return $type : string;
      */
+
     public function getID()
     {
         return $this->_id;
     }
 
     /**
-     * @param string $id
+     * @param string $type
      */
+
     public function setID($id)
     {
         $this->_id = $id;
@@ -260,7 +219,7 @@ abstract class Ccsd_Externdoc
 
     /**
      * Retourne les métadonnées sous la forme de tableau attendue par HAL
-     * @return array
+     * @return $metas : array
      */
     public function getMetadatas()
     {
@@ -308,8 +267,9 @@ abstract class Ccsd_Externdoc
      * @param $issn : string
      * @param $eissn : string
      *
-     * @return  Ccsd_Referentiels_Journal
+     * @return : Ccsd_Referentiels_Journal
      */
+
     protected function formateJournal($journaltitle, $shortname, $issn, $eissn)
     {
         if ( (!isset($journaltitle) || $journaltitle == '')
@@ -317,19 +277,7 @@ abstract class Ccsd_Externdoc
             && (!isset($issn) || $issn == '')
             && (!isset($eissn) || $eissn == ''))
             return null;
-        // Debug cas existant...
-        if (is_array($journaltitle)) {
-            Ccsd_Tools::panicMsg(__FILE__,__LINE__, "journaltitle is an array(first: " .  $journaltitle[0] . ")");
-        }
-        if (is_array($shortname)) {
-            Ccsd_Tools::panicMsg(__FILE__,__LINE__, "shortname is an array(first: " .  $shortname[0] . ")");
-        }
-        if (is_array($issn)) {
-            Ccsd_Tools::panicMsg(__FILE__,__LINE__, "issn is an array (first: " .  $issn[0] . ")");
-        }
-        if (is_array($eissn)) {
-            Ccsd_Tools::panicMsg(__FILE__,__LINE__, "eissn is an array (first: " .  $eissn[0] . ")");
-        }
+
         $param = 'title_t:"' . $journaltitle . '" OR issn_s:"' . $issn . '" OR eissn_s:"' . $eissn . '"';
 
         $solrResult = Ccsd_Referentiels_Journal::search($param, 1);
@@ -340,77 +288,12 @@ abstract class Ccsd_Externdoc
             return new Ccsd_Referentiels_Journal(0, ['VALID' => 'INCOMING', 'JID' => '', 'JNAME' => $journaltitle, 'SHORTNAME' => $shortname, 'ISSN' => $issn, 'EISSN' => $eissn, 'PUBLISHER' => '', 'URL' => '']);
     }
 
-    /** Création de la classe Ccsd_Referentiels_Anrproject ou Ccsd_Referentiels_Europeanproject ou Meta Funding simple
-     *
-     * @param $funding
-     * @param $fundingname
-     * @param $fundingdoi
-     * @param $fundingcode
-     *
-     * @return : Ccsd_Referentiels_Anrproject | Ccsd_Referentiels_Europeanproject | array
-     */
-
-    protected function formateFunding($funding, $fundingname, $fundingdoi, $fundingcode)
-    {
-        /** TODO : Funding à terminer */
-        if ( (!isset($funding) || $funding == '')
-            && (!isset($fundingname) || $fundingname == '')
-            && (!isset($fundingdoi) || $fundingdoi == '')
-            && (!isset($fundingcode) || $fundingcode == ''))
-            return null;
-
-
-        $finalFunding = [];
-
-
-        foreach ($funding as $i => $fund) {
-            $paramAnr = 'anrProjectTitle_t:"' . $fundingname[$i] . '" OR anrProjectReference_s:"' . $fundingcode[$i]. '"';
-            $paramEur = 'europeanProjectTitle_t:"' . $fundingname[$i] . '" OR europeanProjectCallId_s:"' . $fundingcode[$i]. '"';
-            $solrResultAnr = Ccsd_Referentiels_Anrproject::search($paramAnr, 1);
-            $solrResultEur = Ccsd_Referentiels_Europeanproject::search($paramEur, 1);
-
-            if (isset($solrResultAnr[0]['docid']))
-                return new Ccsd_Referentiels_Anrproject($solrResultAnr[0]['docid']);
-            else if (isset($solrResultEur[0]['docid'])){
-                return new Ccsd_Referentiels_Europeanproject($solrResultEur[0]['docid']);
-            }
-
-            foreach ($fundingname as $fundname) {
-                if (strpos($fund, $fundname) !== false) {
-                    $finalFunding[$i]['name'] = $fundname;
-                    break;
-                }
-            }
-
-            foreach ($fundingdoi as $funddoi) {
-                if (strpos($fund, $funddoi) !== false) {
-                    $finalFunding[$i]['doi'] = $funddoi;
-                    break;
-                }
-            }
-
-            foreach ($fundingcode as $fundcode) {
-                if (strpos($fund, $fundcode) !== false) {
-                    $finalFunding[$i]['code'] = $fundcode;
-                    break;
-                }
-            }
-
-        }
-
-
-        return $finalFunding;
-    }
-
     /**
      * On recrée les auteurs à partir des tableaux de Noms Complet / Prénoms / Noms
-     * @param string[] $fullNames
-     * @param string[] $firstNames
-     * @param string[] $lastNames
-     * @param string[] $affiliations
-     * @param string[] $orcids
+     * @param $fullNames
+     * @param $firstNames
+     * @param $lastNames
      * @return array
-     * @deprecated // TO DELETE  DON'T USE: BIG BUG!!!!
      */
     protected function formateAuthors($fullNames, $firstNames, $lastNames, $affiliations = [], $orcids = [])
     {
@@ -461,10 +344,10 @@ abstract class Ccsd_Externdoc
      * Formatage de la langue. Soit celle récupérée dans le XML du document, soit par détection de la langue du titre ou une langue par défaut
      * Et transformation en ISO1
      *
-     * @param string $lang
+     * @param $lang
      * @param string $titleLang
      * @param string $defaultLang
-     * @return string
+     * @return mixed|string
      */
     protected function formateLang($lang, $titleLang, $defaultLang = 'en')
     {
@@ -481,9 +364,9 @@ abstract class Ccsd_Externdoc
 
     /** Detection de la metadonnée "LANG" à partir de la metadonnee "TITLE" du document
      *
-     * @param  $title string
-     * @param  $defaultLang string
-     * @return  string
+     * @param $title : string
+     *
+     * @return $lang : string
      */
 
     static public function detectLangs($title, $defaultLang = 'en')
@@ -637,8 +520,8 @@ abstract class Ccsd_Externdoc
     }
 
     /**
-     * @param array $autToMerge
-     * @param array $autToKeep
+     * @param array $aut1
+     * @param array $aut2
      * @return  array
      */
     static public function merge2Authors($autToMerge, $autToKeep)
@@ -719,6 +602,9 @@ abstract class Ccsd_Externdoc
      * 2- Traduction du XML en métadonnées intermédiaires
      * 3- Traduction des métadonnées intermédiaires en métadonnées HAL
      *
+     * @param $url : string
+     * @param $postcontent : array
+     *
      * @return bool : si false, on peut récupérer l'erreur avec getError()
      */
     public function buildMetadatas()
@@ -737,9 +623,9 @@ abstract class Ccsd_Externdoc
     /**
      * 2- Traduction du XML en métadonnées intermédiaires grâce à un tableau de correspondance (NomMetaIntermediaire => XPath) défini dans la Classe Enfant
      *
-     * @param $xpath DOMXPath
+     * @param $xpath : DOMXPath
      *
-     * @return array
+     * @return $interMetas : array
      */
     protected function xmlToInterMetas($xpath)
     {
@@ -775,7 +661,7 @@ abstract class Ccsd_Externdoc
      *
      * @param $interMetas : array
      *
-     * @return array
+     * @return $finalMetas : array
      */
     public function interMetasToMetas($interMetas)
     {
@@ -877,12 +763,9 @@ abstract class Ccsd_Externdoc
         if (method_exists($this, 'treatauthors')) {
             $metas[self::AUTHORS] = $this->treatauthors($interMetas, $this->_interToAuthors[self::AUTHORS]);
 
-            // if (empty($metas[self::AUTHORS]) && !empty($this->_interToAuthors[self::CONFAUTHORS])) {
-                /** ARGH!!!  @var Ccsd_Externdoc_Crossref_Conference $this
-                 * This is oldies... can't be executed
-                 */
-            //      $metas[self::AUTHORS] = $this->treatconfauthors($interMetas, $this->_interToAuthors[self::CONFAUTHORS]);
-            // }
+            if (empty($metas[self::AUTHORS]) && !empty($this->_interToAuthors[self::CONFAUTHORS])) {
+                $metas[self::AUTHORS] = $this->treatconfauthors($interMetas, $this->_interToAuthors[self::CONFAUTHORS]);
+            }
         }
 
         if (isset($interMetas[self::STRUCTURES])) {
@@ -894,7 +777,7 @@ abstract class Ccsd_Externdoc
      *
      * @param $identifiers : array
      *
-     * @return string
+     * @return $doi : array
      */
     private function detectDOI($identifiers)
     {
@@ -907,15 +790,16 @@ abstract class Ccsd_Externdoc
         } else if (preg_match("/(10\..+)$/", $identifiers, $match)) {
             return $match[1];
         }
+
         return "";
     }
 
     /** Traduction du tableau des auteurs :
      * Séparation des noms et prénoms pour chaque auteur
      *
-     * @param $author  string
+     * @param $autor : string
      *
-     * @return array(firstname => "J.", lastname => "Doe")
+     * @return $autors: array(firstname => "J.", lastname => "Doe")
      */
     protected function separateFirstLastNames($author)
     {
@@ -934,9 +818,7 @@ abstract class Ccsd_Externdoc
      * $interMetas[$internames[$i]] => information triée par paramètre (firstname, lastname, etc)
      *
      * Il faut trier les informations par auteur pour coller au format HAL :
-     * @param array $interMetas
-     * @param array $internames
-     * @return array (
+     * @return $authors: array (
      *              0 => array(firstname => "J.", lastname => "Doe"),
      *              1 => array(firstname => "J.", lastname => "Smith"))
      */
@@ -955,19 +837,28 @@ abstract class Ccsd_Externdoc
         }
 
         $i = 0;
+
         // Boucle sur chaque 'auteur'
         while (isset($personnames[$i])) {
+
             $j = 1;
+
             // Boucle sur ses différentes informations (firstname, middlename, lastname, email, quality)
             while ($j < sizeof($internames)) {
+
                 if (isset($interMetas[$internames[$j]])) {
+
                     $authorParam = $interMetas[$internames[$j]];
+
                     if (!is_array($authorParam))
                         $authorParam = [$authorParam];
+
                     for ($k = 0; $k < sizeof($authorParam); $k++) {
+
                         if ($internames[$j] == self::AUTHORS_FIRST) {
                             $authorParam[$k] = self::cleanFirstname($authorParam[$k]);
                         }
+
                         // Chaque paramètre doit se trouver dans l'information complète de l'auteur
                         if (strpos($personnames[$i], $authorParam[$k]) !== false)
                             $finalAuthors[$i][$internames[$j]] = $authorParam[$k];
@@ -981,9 +872,10 @@ abstract class Ccsd_Externdoc
         return $finalAuthors;
     }
 
-    /** Traduction de la date
-     * @param array $interMetas
-     * @param array $internames
+    /** Traduction de la date :
+     *
+     * @param $date : string
+     *
      * @return string
      */
     public function treatdate($interMetas, $internames)

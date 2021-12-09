@@ -22,7 +22,7 @@ class Ccsd_Externdoc_Crossref_ConferenceTest extends PHPUnit\Framework\TestCase 
 
     public function testDocType()
     {
-        self::assertEquals("COMM", $this->_doc->getType());
+        self::assertEquals("CONF", $this->_doc->getType());
     }
 
     public function testgetConfTitle()
@@ -84,7 +84,7 @@ class Ccsd_Externdoc_Crossref_ConferenceTest extends PHPUnit\Framework\TestCase 
 
     public function testgetAuthors()
     {
-        $authors = $this->_doc->getAuthors(Ccsd_Externdoc_Crossref_Conference::XPATH_CONFCONTRIBUTOR);
+        $authors = $this->_doc->getAuthors();
 
         self::assertEquals($authors[0]['firstname'], 'H.');
         self::assertEquals($authors[0]['lastname'], 'Mouchere');

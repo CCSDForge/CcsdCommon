@@ -31,12 +31,6 @@ class Ccsd_Search_Solr_Indexer_Episciences extends Ccsd_Search_Solr_Indexer
         $select->from('PAPERS', 'DOCID')->where('STATUS = ?', Episciences_Paper::STATUS_PUBLISHED);
     }
 
-    /**
-     * @param $docId
-     * @param \Solarium\QueryType\Update\Query\Document\Document $ndx
-     * @return bool|mixed
-     * @throws Zend_Date_Exception
-     */
     protected function addMetadataToDoc($docId, $ndx)
     {
 

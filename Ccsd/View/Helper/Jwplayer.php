@@ -78,7 +78,9 @@ class Ccsd_View_Helper_Jwplayer // extends Zend_View_Helper_Abstract
     {
         /** @var Ccsd_View $view */
         $view = $this->view;
-        $view->jQuery()->addJavascriptFile(CCSDLIB . "/js/jwplayer/jwplayer.js");
+        //$view->jQuery()->addJavascriptFile(CCSDLIB . "/js/jwplayer/jwplayer.js");
+        $view->jQuery()->addJavascriptFile('https://cdn.jwplayer.com/libraries/jI7CRvpx.js');
+
 
         $render = '<div id="' . $this->_id . '">' . $view->translate('Chargement de la vidéo') . '...</div>';
         $render .= '<script type="text/javascript">' . "\n";

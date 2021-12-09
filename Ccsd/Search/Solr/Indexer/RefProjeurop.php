@@ -16,11 +16,29 @@ class Ccsd_Search_Solr_Indexer_RefProjeurop extends Ccsd_Search_Solr_Indexer
      *
      * @param array $options
      */
-    public function __construct(array $options)
+    public function __construct (array $options)
     {
         $options['core'] = self::$_coreName;
         parent::initHalEnv();
         parent::__construct($options);
+    }
+
+    protected function getDocidData ($docId)
+    {
+        $db = $this->getDb();
+        $select = $db->select();
+
+        $select->from(array(
+                'REF_PROJEUROP'
+        ));
+        $select->where('PROJEUROPID = ?', $docId);
+
+        $stmt = $select->query();
+        $res = $stmt->fetchAll();
+        if (count($res) == 0) {
+            return null;
+        }
+        return $res[0];
     }
 
     /**
@@ -28,7 +46,11 @@ class Ccsd_Search_Solr_Indexer_RefProjeurop extends Ccsd_Search_Solr_Indexer
      */
     protected function selectIds($select)
     {
-        $select->from([Ccsd_Referentiels_Europeanproject::$_table], ['PROJEUROPID'])->order('PROJEUROPID');
+        $select->from(array(
+                'REF_PROJEUROP'
+        ), array(
+                'PROJEUROPID'
+        ))->order('PROJEUROPID');
     }
 
     /**
@@ -36,71 +58,40 @@ class Ccsd_Search_Solr_Indexer_RefProjeurop extends Ccsd_Search_Solr_Indexer
      * @param \Solarium\QueryType\Update\Query\Document\Document $ndx
      * @return mixed
      */
-    protected function addMetadataToDoc($docId, $ndx)
+    protected function addMetadataToDoc ($docId, $ndx)
     {
-        $projeurop = self::getDocidData($docId);
+        $row = self::getDocidData($docId);
 
-        if ($projeurop == null) {
+        if ($row == null) {
             Ccsd_Log::message('Pas de données pour ce DOCID ' . $docId . ', le document ne sera pas indexé.', true, 'ERR', $this->getLogFilename());
             return null;
         }
 
-        $projectRow = $projeurop->getData();
+		$row = array_map('Ccsd_Tools_String::stripCtrlChars', $row);
 
-        $projectRow = array_map('Ccsd_Tools_String::stripCtrlChars', $projectRow);
-        $projectRow = array_map('trim', $projectRow);
+        $ndx->docid = $row['PROJEUROPID'];
 
-        $ndx->docid = (int)$projectRow['PROJEUROPID'];
-
-        $tabRefAlias = Ccsd_Referentiels_Alias::getAllAlias($docId, 'REF_PROJEUROP');
-        foreach ($tabRefAlias as $ligne) {
+        $tabRefAlias =  Ccsd_Referentiels_Alias::getAllAlias($docId, 'REF_PROJEUROP');
+        foreach($tabRefAlias as $ligne) {
             $ndx->addField('aliasDocid_i', $ligne['OLDREFID']);
         }
 
-        $dataToIndex = [
-            'title_s' => $projectRow['TITRE'],
-            'label_s' => self::getLabel_s($projectRow),
-            'label_html' => self::getLabel_html($projectRow),
-            'acronym_s' => $projectRow['ACRONYME'],
-            'reference_s' => $projectRow['NUMERO'],
-            'financing_s' => $projectRow['FUNDEDBY'],
-            'callId_s' => $projectRow['CALLID'],
-            'valid_s' => $projectRow['VALID'],
-            'openaireId_s' => self::getOpenaireId($projectRow),
-            'startDate_s' => self::getProjectDate($projectRow['SDATE']),
-            'endDate_s' => self::getProjectDate($projectRow['EDATE']),
-            'startDate_tdate' => self::getProjectDate($projectRow['SDATE'], 'ISO8601'),
-            'endDate_tdate' => self::getProjectDate($projectRow['EDATE'], 'ISO8601'),
-
-        ];
+        $dataToIndex = array(
+                'title_s' => $row['TITRE'],
+                'acronym_s' => $row['ACRONYME'],
+                'reference_s' => $row['NUMERO'],
+                'financing_s' => $row['FUNDEDBY'],
+                'callId_s' => $row['CALLID'],
+                'valid_s' => $row['VALID']
+        );
 
         foreach ($dataToIndex as $fieldName => $fieldValue) {
 
             if ($fieldValue != '') {
-                $ndx->addField($fieldName, $fieldValue);
+                $ndx->addField($fieldName, trim($fieldValue));
             }
         }
 
-
-        return $ndx;
-    }
-
-    /**
-     * @param int $docId
-     * @return Ccsd_Referentiels_Europeanproject|null
-     */
-    protected function getDocidData($docId)
-    {
-        return Ccsd_Referentiels_Europeanproject::findById($docId);
-
-    }
-
-    /**
-     * @param array $row
-     * @return mixed|string
-     */
-    private static function getLabel_s(array $row)
-    {
         $label = '';
 
         if ($row['TITRE'] != '') {
@@ -118,15 +109,11 @@ class Ccsd_Search_Solr_Indexer_RefProjeurop extends Ccsd_Search_Solr_Indexer
         if ($row['CALLID'] != '') {
             $label .= ' [' . $row['CALLID'] . ']';
         }
-        return $label;
-    }
 
-    /**
-     * @param array $row
-     * @return string
-     */
-    private static function getLabel_html(array $row): string
-    {
+        if ($label != '') {
+            $ndx->label_s = trim($label);
+        }
+
         $label = '';
 
         if ($row['TITRE'] != '') {
@@ -146,44 +133,21 @@ class Ccsd_Search_Solr_Indexer_RefProjeurop extends Ccsd_Search_Solr_Indexer
         }
 
         if ($label != '') {
-            $label_html = '<span class="' . strtolower($row['VALID']) . '">' . $label . '</span>';
-        }
-        return $label_html;
-    }
-
-    /** Calcul de l'Id openaire du projet
-     * @param array $projectRow
-     * @return string
-     * @see Hal/Document/xsl/dc.xsl template: <xsl:template match="tei:org[@type='europeanProject']">
-     */
-    private static function getOpenaireId($projectRow)
-    {
-        $openaireId = 'info:eu-repo/grantAgreement/';
-        $program = $projectRow['FUNDEDBY'];
-        $matches = [];
-        $match = preg_match("/^([^:]+):([^:]+)/", $program, $matches);
-        if ($match) {
-            $openaireId .= $matches[1] . '/' . $matches[2] . '/';
+            $ndx->label_html = '<span class="'. strtolower($row['VALID']) . '">' . trim($label) . '</span>';
         }
 
-        return $openaireId . $projectRow['NUMERO'] . "/EU/" . $projectRow['TITRE'] . "/" . $projectRow['ACRONYME'];
-    }
-
-    /**
-     * @param string $date
-     * @param string $format
-     * @return string
-     */
-    private static function getProjectDate(string $date, string $format = 'ISO8601'): string
-    {
-        if (($date != '') && ($date != '0000-00-00')) {
-            if ($format == 'ISO8601') {
-                $date = Ccsd_Tools_String::stringToIso8601($date);
-            }
-            return $date;
-        } else {
-            return '';
+        if ( ($row['SDATE'] != '') && ($row['SDATE'] != '0000-00-00') ) {
+            // 2006-00-00 =====> 2006-01-01
+            $ndx->startDate_s = $row['SDATE'];
+            $ndx->startDate_tdate = Ccsd_Tools_String::stringToIso8601($row['SDATE']);
         }
 
+        if ( ($row['EDATE'] != '') && ($row['EDATE'] != '0000-00-00') ) {
+            // 2006-00-00 =====> 2006-01-01
+            $ndx->endDate_s = $row['EDATE'];
+            $ndx->endDate_tdate = Ccsd_Tools_String::stringToIso8601($row['EDATE']);
+        }
+
+        return $ndx;
     }
 }//end class

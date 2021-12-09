@@ -863,14 +863,7 @@ class Ccsd_Upload
         return $success && $image->writeImage($new_file_path);
     }
 
-    /**
-     * @param string $file_name
-     * @param int $version
-     * @param array $options
-     * @return bool
-     */
     protected function imagemagick_create_scaled_image($file_name, $version, $options) {
-        setlocale(LC_CTYPE, "fr_FR.UTF-8"); // escapeshellarg strip les lettres accentuees si on n'est pas dans une locale Utf8
         list($file_path, $new_file_path) =
             $this->get_scaled_image_file_paths($file_name, $version);
         $resize = @$options['max_width']

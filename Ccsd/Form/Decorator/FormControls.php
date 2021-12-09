@@ -1,22 +1,16 @@
 <?php
 
-/**
- * Class Ccsd_Form_Decorator_FormControls
- */
 class Ccsd_Form_Decorator_FormControls extends Zend_Form_Decorator_HtmlTag
 {
-
-    /**
-     * @param string $content
-     * @return string
-     */
+    
+    
     public function render($content)
     {
         $form    = $this->getElement();
         if (!$form instanceof Ccsd_Form) {
             return $content;
         }
-        /** @var Hal_View $view */
+        
         $view    = $form->getView();
         if (null === $view) {
             return $content;
@@ -43,9 +37,9 @@ JAVASCRIPT;
         }
         
         if ($founded) {
-            $view->jQuery()->addJavascriptFile(CCSDLIB ."/js/tinymce/jquery.tinymce.min.js")
-                           ->addJavascriptFile(CCSDLIB ."/js/tinymce/tinymce.min.js")
-                           ->addJavascriptFile(CCSDLIB ."/js/tinymce_patch.js");
+            $view->jQuery()->addJavascriptFile(CCSDLIB ."/js/tinymce5/jquery.tinymce.min.js")
+                           ->addJavascriptFile(CCSDLIB ."/js/tinymce5/tinymce.min.js")
+                           ->addJavascriptFile(CCSDLIB ."/js/tinymce5_patch.js");
         }
         
         return $content;

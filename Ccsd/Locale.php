@@ -11,9 +11,6 @@ class Ccsd_Locale
     // (voir en fin de fichier)
     static $_topListLanguages = array('en', 'fr', 'de', 'it', 'es');
 
-    static protected $_accepted3lettersLanguage = [
-        'sah' => 'Yakoute languages'
-    ];
     protected $_conversionTable = array(
         "aar" => "aa",
         "abk" => "ab",
@@ -229,35 +226,26 @@ class Ccsd_Locale
      * Else use $locale as is
      * Then setlocale with the value
      *
-     * TODO: cette fonction devrait s'appeller setFullLocale voir setFullLocaleMaybe, pas GET
-     *
      * The return value is the return value of setLocale
      * @param $locale string
-     * @return string|null (@see man setlocale)
+     * @return string
      */
     public static function getFullLocale($locale) {
         if (strlen($locale) == 2) {
-            // On essaye de completer par xx_XX.utf8
-            $localeFormatted= strtolower($locale) . '_' . strtoupper($locale);
-            $localeFormattedUtf8 = $localeFormatted . '.UTF-8';
-            $resLocale = setlocale (LC_COLLATE, $localeFormattedUtf8, $localeFormatted, $locale);
-            if ($resLocale) {
-                return $resLocale;
-            }
+                $localeFormatted= strtolower($locale) . '_' . strtoupper($locale);
+                $localeFormattedUtf8 = $localeFormatted . '.UTF-8';
+                $resLocale = setlocale (LC_COLLATE, $localeFormattedUtf8, $localeFormatted, $locale);
+        } else {
+                $resLocale = setlocale (LC_COLLATE, $locale);
         }
-        // Can't have a xx_XX, so try just xx
-        $resLocale = setlocale (LC_COLLATE, $locale);
-        // Can return null if locale not set
         return $resLocale;
     }
     /**
      * Retourne une liste des pays
      * @param Zend_Locale $locale langue par défaut de l'application
      * @param bool $orderList  affichage des pays les plus utilisés en tête de liste
-     * @param bool $separator  affichage d'un séparateur entre les pays de la tête de liste et les autres
-     * @throws Zend_Exception
+     * @param bool $separator  affichage un séparateur entre les pays de la tête de liste et les autres
      * @return array
-     * NOTE: This function CHANGE the locale setting  (call to getFullLocale) !!!
      */
     public static function getCountry($locale = null, $orderList = false, $separator = false)
     {
@@ -289,31 +277,11 @@ class Ccsd_Locale
     }
 
     /**
-     * @param string $code : 2 or 3 letters language code
-     * @return bool
-     *
-     * Return an array of all languages accepted
-     * accept only 2 letters codes plus some 3 letters codes listed in a config array
-     */
-    public static function isAcceptedLanguage($code) {
-
-        // Peut-on accepter qq langue a 3 caracteres?
-        // Demande: sah (Yakoute)
-        if (array_key_exists($code, self::$_accepted3lettersLanguage)) {
-            return true;
-        }
-        if (strlen($code) > 2) {
-            return true;
-        }
-        return false;
-    }
-    /**
      * Retourne une liste des langues (code => libelle)
-     *    Le libelle est dans la langue spécifiée ou par défaut dans la langue de l'application
+     *    Le libelle est dans la langue specifier ou par défaut dans la langue de l'application
      *    La liste est triée dans l'ordre de la langue par défaut
      *    Certaines langues  $_topListLanguages sont mise en haut de la liste
      * @param Zend_Locale $locale langue par défaut de l'application
-     * @throws Zend_Exception
      * @return array
      */
     public static function getLanguage($locale = null)
@@ -323,9 +291,9 @@ class Ccsd_Locale
         }
 
         $languages = Zend_Locale::getTranslationList('language', $locale, 2);
-        /** @noinspection PhpUnusedLocalVariableInspection */
+
         foreach ($languages as $code => &$label) {
-            if (self::isAcceptedLanguage($code)) {
+            if (strlen($code) > 2) {
                 unset($languages[$code]);
             }
         }
@@ -347,14 +315,14 @@ class Ccsd_Locale
 
 
     /**
-     * Conversion d'une langue au format Iso2 à son équivalent Iso1 s'il existe
-     * @param string $iso1Lang
-     * @return string
+     * Conversion d'une langue au format Iso2 à son équivalent Iso1
+     * @param $iso1Lang
+     * @return mixed
      */
     public function convertIso2ToIso1($iso1Lang) {
-        $iso1Lang = strtolower($iso1Lang);
-        if (isset($this->_conversionTable[$iso1Lang]))
-            return $this->_conversionTable[$iso1Lang];
+
+        if (isset($this->_conversionTable[strtolower($iso1Lang)]))
+            return $this->_conversionTable[strtolower($iso1Lang)];
         else
             return $iso1Lang;
     }
@@ -365,18 +333,19 @@ class Ccsd_Locale
      * @return bool
      */
     public function langExists($lang) {
-        return in_array(strtolower($lang), array_values($this->_conversionTable));
+
+        if (in_array(strtolower($lang), array_values($this->_conversionTable)))
+            return true;
+        else
+            return false;
     }
 }
 
 // modification de la liste des premières langues de dépôt par lecture du fichier de configuration toplang.json
-if (defined('SPACE') && defined('CONFIG')) {
-    $filename = SPACE . CONFIG . 'toplang.json';
-
-    if (file_exists($filename)) {
-        $liste = json_decode(file_get_contents($filename), true);
-        if (is_array($liste)) {
-            Ccsd_Locale::$_topListLanguages = $liste;
-        }
+$filename = SPACE . CONFIG . 'toplang.json';
+if (file_exists($filename)) {
+    $liste = json_decode(file_get_contents($filename), true);
+    if (is_array($liste)) {
+        Ccsd_Locale::$_topListLanguages = $liste;
     }
 }

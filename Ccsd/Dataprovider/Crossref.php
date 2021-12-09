@@ -1,13 +1,21 @@
 <?php
 
-/**
+/*
  * La classe Ccsd_Dataprovider_Crossref permet de récupérer le XML de Crossref correspondant à un identifiant
+ *
  *
  * @author S. Denoux
  */
 
 class Ccsd_Dataprovider_Crossref extends Ccsd_Dataprovider
 {
+
+    const DOI_NAME = "inria";
+    const DOI_PWD = "inria518";
+    const DOI_URL = "https://www.crossref.org/openurl";
+
+    public $_URL = "http://dx.doi.org";
+
     /**
      * @param $id
      * @return null
@@ -16,12 +24,12 @@ class Ccsd_Dataprovider_Crossref extends Ccsd_Dataprovider
     {
         //-----------
         $var_post = array();
-        $var_post["pid"] = CROSSREF_USER . ":" . CROSSREF_PWD;
+        $var_post["pid"] = self::DOI_NAME . ":" . self::DOI_PWD;
         $var_post["format"] = "unixref";
         $var_post["id"] = ("doi:" . urlencode($id));
         $var_post["noredirect"] = "true";
 
-        $url = CROSSREF_URL . "?";
+        $url = self::DOI_URL . "?";
 
         foreach ($var_post as $key => $val) {
             $url .= "$key=$val&";

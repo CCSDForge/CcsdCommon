@@ -28,8 +28,6 @@ class Ccsd_Externdoc_Crossref_BookChapterTest extends PHPUnit\Framework\TestCase
     {
         $title = $this->_doc->getTitle();
         self::assertEquals(['en' => "Developing a New ECMO Program"], $title);
-        $booktitle = $this->_doc->getBookTitle();
-        self::assertEquals(['en' => "ECMO-Extracorporeal Life Support in Adults"], $booktitle);
     }
 
     public function testGetSubtitle()
@@ -106,13 +104,13 @@ class Ccsd_Externdoc_Crossref_BookChapterTest extends PHPUnit\Framework\TestCase
 
     public function testgetAuthors()
     {
-        $authors = $this->_doc->getAuthors(Ccsd_Externdoc_Crossref_BookChapter::XPATH_CONTENT_CONTRIBUTORS . Ccsd_Externdoc_Crossref_BookChapter::REL_XPATH_PERS);
+        $authors = $this->_doc->getAuthors();
 
-        self::assertEquals('Antonio', $authors[0]['firstname']);
-        self::assertEquals( 'Arcadipane', $authors[0]['lastname']);
-        self::assertEquals('http://orcid.org/0000-0002-0396-3190', $authors[0]['orcid']);
+        self::assertEquals($authors[0]['firstname'], 'Antonio');
+        self::assertEquals($authors[0]['lastname'], 'Arcadipane');
+        self::assertEquals($authors[0]['orcid'], 'http://orcid.org/0000-0002-0396-3190');
 
-        self::assertEquals('Giovanna', $authors[1]['firstname'] );
-        self::assertEquals('Panarello', $authors[1]['lastname'] );
+        self::assertEquals($authors[1]['firstname'], 'Giovanna');
+        self::assertEquals($authors[1]['lastname'], 'Panarello');
     }
 }

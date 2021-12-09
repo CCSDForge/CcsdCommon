@@ -438,11 +438,11 @@ class Ccsd_User_Models_UserMapper {
             throw new InvalidArgumentException('Le UID utilisateur doit être supérieur à 0.');
         }
 
-        if (!defined('Ccsd_User_Models_User::CCSD_FTP_PATH')) {
-            throw new Exception('La constante Ccsd_User_Models_User::CCSD_FTP_PATH doit être définie.');
+        if (!defined('FTP_DIR')) {
+            throw new Exception('La constante FTP_DIR doit être définie.');
         }
 
-        $pathName = Ccsd_User_Models_User::CCSD_FTP_PATH . $uid;
+        $pathName = FTP_DIR . $uid;
 
         if (!file_exists($pathName)) {
             return null;

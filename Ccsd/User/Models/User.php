@@ -66,13 +66,6 @@ class Ccsd_User_Models_User
      *      utilisateur
      */
     const CCSD_USER_PHOTO_PATH_LENGHT = 10;
-
-    /**
-     *
-     * @var string // chemin vers le répertoire FTP des utilisateurs
-     */
-    const CCSD_FTP_PATH = '/ftp/';
-
     const PASSWORD_HASH_SIZE = 128; // sha512
     const INVALID_TOKEN = "Le jeton n'est pas valide";
 
@@ -646,7 +639,7 @@ class Ccsd_User_Models_User
     public function setFtp_home($_ftp_home = null)
     {
         if (null == $_ftp_home) {
-            $_ftp_home = self::CCSD_FTP_PATH . $this->getUid();
+            $_ftp_home = FTP_DIR . $this->getUid();
         }
 
         $this->_ftp_home = $_ftp_home;

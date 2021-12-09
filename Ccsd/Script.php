@@ -53,8 +53,7 @@ abstract class Ccsd_Script extends Ccsd_Runable
         'debug|d'     => 'enable debug mode (nothing will be modified)',
         'verbose|v'   => 'enable verbose mode (display a lot of stuff)',
         'nocolor'     => 'Affichage des messages sans la couleur',
-        'logPath|l-s'   => '(optional) Path where to gzwrite logs, default= "."'
-    ];
+        ];
 
     /**
      * user defined parameters
@@ -102,11 +101,6 @@ abstract class Ccsd_Script extends Ccsd_Runable
     protected $_init_time = null;
     protected $_progress_bar = null;
     public $environment = 'development';
-
-    /** @var resource */
-    protected $_logFile = null;
-    /** @var string  */
-    protected $_logFilename = '';
 
      /**
      */
@@ -168,11 +162,6 @@ abstract class Ccsd_Script extends Ccsd_Runable
         if (!defined('APPLICATION_ENV') ) {
             define('APPLICATION_ENV', $this->environment);
         }
-        if (isset($opts->logPath)) {
-            $this->setLogFilename($opts->logPath);
-            $this->initLog();
-            $this->enableLogs();
-        }
         $this->setupApp();
     }
 
@@ -216,7 +205,6 @@ abstract class Ccsd_Script extends Ccsd_Runable
         $this->debug("Script ended");
         $endTiming = $this->getScriptTiming(microtime(true));
         $this->debug($endTiming."s");
-        $this->closeLog();
     }
 
     public function getScriptTiming(float $timePick) {
@@ -297,84 +285,24 @@ abstract class Ccsd_Script extends Ccsd_Runable
     {
         return "\033[2K";
     }
-
-    /**
-     * @param string $logPath
-     */
-    public function setLogFilename(string $logPath)
-    {
-        $path = (substr($logPath, -1, 1) === "/") ? substr($logPath, 0, -1) : $logPath;
-        $path = realpath($path);
-        $this->_logFilename = $path . "/" . strtolower(get_class($this)) . '_' . date("Y-m-dTHis") . Ccsd_Log::LOG_FILENAME_SUFFIX;
-    }
-
-    /**
-     * @param resource $logFile
-     */
-    public function setLogFile($logFile)
-    {
-        $this->_logFile = $logFile;
-    }
-
-
-    public function setRegistryLogger()
-    {
-        $logger = new Zend_Log();
-        try {
-            $logger->addWriter(new Zend_Log_Writer_Stream($this->_logFile));
-        } catch (Zend_Log_Exception $e) {
-            $this->log("Cannot write in $this->_logFilename: logging the old-fashioned way...");
-        }
-        Zend_Registry::set(Ccsd_Log::REGISTRY_LOGGER_NAME, $logger);
-    }
-
-    /**
-     * @param string $logPath
-     */
-    protected function initLog()
-    {
-        $logResource = gzopen($this->_logFilename . ".gz",'ab');
-        if ($logResource === false) {
-            $this->log("Cannot write in " . $this->_getopt->logPath . ": logging the old-fashioned way...");
-        } else {
-            $this->setLogFile($logResource);
-            $this->setRegistryLogger();
-        }
-    }
-
-
-    protected function closeLog()
-    {
-        if ($this->_logFile !== null) {
-            gzclose($this->_logFile);
-        }
-    }
-
-    protected function formatLogMessage ($message)
-    {
-        return  '[' . date("Y-m-d H:i:s") . '] '
-            . preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $message);
-    }
-
     /**
      * @param $message
      * @return bool
      */
-    public function log($message, $print = true, $level = '')
+    public function log($message)
     {
         if (!$this->_log_enabled) {
             return false;
         }
 
-        $message = $this->formatLogMessage($message);
-        if ($this->_logFile === null) {
-            $filename = strtolower(get_class($this)) . '_' . date("Y-m-d") . '.log';
-            $file = fopen($filename, 'ab');
-            fwrite($file, $message);
-            fclose($file);
-        } else {
-            Ccsd_Log::message($message, $print, $level, $this->_logFilename);
-        }
+        $filename = strtolower(get_class($this)) . '_' . date("Y-m-d") . '.log';
+
+        $file = fopen($filename, 'ab');
+        $message = '[' . date("Y-m-d H:i:s") . '] '
+            . preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $message);
+        fwrite($file, $message);
+        fclose($file);
+
         return true;
     }
 

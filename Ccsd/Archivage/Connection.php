@@ -7,9 +7,9 @@
 Class Ccsd_Archivage_Connection
 {
     /**
-     * @var string
+     * @var array
      */
-    private $_server;
+    private $_server = [];
     /**
      * @var int
      */
@@ -114,17 +114,17 @@ Class Ccsd_Archivage_Connection
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getServer() :string
+    public function getServer()
     {
         return $this->_server;
     }
 
     /**
-     * @param array string
+     * @param array $server
      */
-    public function setServer(string $server)
+    public function setServer($server)
     {
         $this->_server = $server;
     }

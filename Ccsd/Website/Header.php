@@ -280,8 +280,14 @@ class Ccsd_Website_Header
 			foreach ($this->_logos as $logo) {
 				$content .= "<td align=\"" . $logo['align'] . "\">";
 				if ($logo['type'] == self::LOGO_IMG) {
-					if ($logo['img_href'] != "") {
-						$content .= "<a href=\"" . $logo['img_href'] . "\" border=\"0\" target=\"_blank\">";
+                    $img_href = $logo['img_href'];
+                    if ($img_href != "") {
+                        $targetAttr = '';
+                        if (preg_match( '/^http/', $img_href)) {
+                            // Si url externe (absolue) alors ouverture dans un autre onglet.
+                            $targetAttr = 'target="_blank"';
+                        }
+						$content .= "<a href=\"$img_href\" border=\"0\" $targetAttr>";
 					}
                     if (substr($logo['img'], 0, 4) != "/img") {
                         $logo['img'] = $this->_publicUrl . $logo['img'];
@@ -298,7 +304,7 @@ class Ccsd_Website_Header
 						$content .= " alt=\"" . $logo['img_alt'] . "\"";
 					}
 					$content .= " />";
-					if ($logo['img_href'] != "") {
+					if ($img_href != "") {
 						$content .= "</a>";
 					}
 				} else {
